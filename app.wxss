@@ -31,6 +31,13 @@ a, a:visited {
   border: 0;
   -webkit-appearance: none;
 }
+.clearfix:after { 
+  content: "." ; 
+  display: block ;
+  height: 0 ;
+  clear: both ;
+  visibility: hidden ;
+  }
 
 /*盒子布局基本属性  start*/
 

@@ -49,7 +49,7 @@ Page({
   selectCity(e){
     var ticketType = e.currentTarget.dataset.tickettype;
     wx.navigateTo({
-      url: '../dwcs/dwcs',
+      url: '../dwcs/dwcs?ticketType='+ticketType,
     })
   },
   //选择时间

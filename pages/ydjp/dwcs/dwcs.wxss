@@ -77,3 +77,20 @@ ul li.city:last-child{
   border-bottom:1px solid #eee;
   padding: 20rpx 0rpx 20rpx 20rpx;
 }
+.hot-city-item{
+  width: 25%;
+  display: inline-block;
+  font-size: 0;
+  text-align: center;
+  padding: 20rpx 0rpx 20rpx 0;
+}
+.flex-wrap-wrap{
+  flex-wrap: wrap;
+}
+.clearfix:after { 
+  content: "." ; 
+  display: block ;
+  height: 0 ;
+  clear: both ;
+  visibility: hidden ;
+  }

@@ -1,155 +1,17 @@
 // pages/dwcs/dwcs.js
 var app = getApp();
-var httpRequst = require("../../utils/requst.js");
+var httpRequst = require("../../../utils/requst.js");
+import {FlightCityList} from '../../../utils/city.js';
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    hotCity:
-    [
-      { data_id: "SZX", data_type: "sz", data_value: "深圳宝安国际机场", city:"深圳"},
-      { data_id: "PVG", data_type: "sh", data_value: "上海浦东国际机场", city: "上海浦东" },
-      { data_id: "CAN", data_type: "gz", data_value: "广州白云国际机场", city: "广州" },
-      { data_id: "TNA", data_type: "jn", data_value: "济南遥墙国际机场", city: "济南" },
-      { data_id: "URC", data_type: "wlmq", data_value: "乌鲁木齐地窝堡国际机场", city: "乌鲁木齐" },
-      { data_id: "NGB", data_type: "nb", data_value: "宁波栎社国际机场", city: "宁波" },
-      { data_id: "CGO", data_type: "zz", data_value: "郑州新郑国际机场", city: "郑州" },
-      { data_id: "HGH", data_type: "hz", data_value: "杭州萧山国际机场", city: "杭州" },
-      { data_id: "XIY", data_type: "xa", data_value: "西安咸阳国际机场", city: "西安" },
-      { data_id: "WNZ", data_type: "wz", data_value: "温州国际机场", city: "温州" } 
-    ],
-    characterCity:
-    [
-      { 
-        data_text: "C-start-list", 
-        data_title:"C",
-        city_information:
-        [
-          { data_id: "CSX", data_type: "cs", data_value: "长沙黄花国际机场", city: "长沙" },
-          { data_id: "CZX", data_type: "cz", data_value: "常州国际机场", city: "常州" }
-        ]
-      },
-      {
-        data_text: "D-start-list",
-        data_title: "D",
-        city_information:
-        [
-          { data_id: "DLC", data_type: "dl", data_value: "大连金洲湾国际机场", city: "大连" },
-        ]
-      },
-      {
-        data_text: "G-start-list",
-        data_title: "G",
-        city_information:
-        [
-          { data_id: "CAN", data_type: "gz", data_value: "广州白云国际机场", city: "广州" },
-          { data_id: "KWE", data_type: "gy", data_value: "贵阳龙洞堡国际机场", city: "贵阳" },
-        ]
-      },
-      {
-        data_text: "H-start-list",
-        data_title: "H",
-        city_information:
-        [
-          { data_id: "HGH", data_type: "hz", data_value: "杭州萧山国际机场", city: "杭州" },
-          { data_id: "HFE", data_type: "hf", data_value: "合肥新桥国际机场", city: "合肥" },
-        ]
-      },
-      {
-        data_text: "J-start-list",
-        data_title: "J",
-        city_information:
-        [
-          { data_id: "TNA", data_type: "jn", data_value: "济南遥墙国际机场", city: "济南" },
-          { data_id: "JZH", data_type: "jzg", data_value: "九寨沟黄龙国际机场", city: "九寨沟" },
-        ]
-      },
-      {
-        data_text: "L-start-list",
-        data_title: "L",
-        city_information:
-        [
-          { data_id: "LXA", data_type: "ls", data_value: "拉萨贡嘎国际机场", city: "拉萨" },
-          { data_id: "LJG", data_type: "lj", data_value: "丽江三义国际机场", city: "丽江" },
-        ]
-      },
-      {
-        data_text: "N-start-list",
-        data_title: "N",
-        city_information:
-        [
-          { data_id: "KHN", data_type: "nc", data_value: "南昌昌北国际机场", city: "南昌" },
-          { data_id: "NNG", data_type: "nn", data_value: "南宁吴圩国际机场", city: "南宁" },
-          { data_id: "NGB", data_type: "nb", data_value: "宁波栎社国际机场", city: "宁波" },
-        ]
-      },
-      {
-        data_text: "Q-start-list",
-        data_title: "Q",
-        city_information:
-        [
-          { data_id: "TAO", data_type: "qd", data_value: "青岛胶东国际机场  ", city: "青岛" },
-        ]
-      },
-      {
-        data_text: "S-start-list",
-        data_title: "S",
-        city_information:
-        [
-          { data_id: "PVG", data_type: "sh", data_value: "上海浦东国际机场", city: "上海浦东" },
-          { data_id: "SZX", data_type: "sz", data_value: "深圳宝安国际机场", city: "深圳" },
-          { data_id: "SJW", data_type: "sjz", data_value: "石家庄正定国际机场", city: "石家庄" },
-        ]
-      },
-      {
-        data_text: "T-start-list",
-        data_title: "T",
-        city_information:
-        [
-          { data_id: "TYN", data_type: "ty", data_value: "太原武宿国际机场  ", city: "太原" },
-        ]
-      },
-      {
-        data_text: "W-start-list",
-        data_title: "W",
-        city_information:
-        [
-          { data_id: "WNZ", data_type: "wz", data_value: "温州国际机场", city: "温州" },
-          { data_id: "URC", data_type: "wlmq", data_value: "乌鲁木齐地窝堡国际机场", city: "乌鲁木齐" },
-        ]
-      },
-      {
-        data_text: "X-start-list",
-        data_title: "X",
-        city_information:
-        [
-          { data_id: "XIY", data_type: "xa", data_value: "西安咸阳国际机场", city: "西安" },
-          { data_id: "XMN", data_type: "xm", data_value: "厦门高崎国际机场", city: "厦门" },
-          { data_id: "XIC", data_type: "xc", data_value: "西昌青山国际机场", city: "西昌" },
-          { data_id: "XUZ", data_type: "xz", data_value: "徐州观音国际机场", city: "徐州" },
-        ]
-      },
-      {
-        data_text: "Y-start-list",
-        data_title: "Y",
-        city_information:
-        [
-          { data_id: "INC", data_type: "yc", data_value: "银川河东国际机场  ", city: "银川" },
-        ]
-      },
-      {
-        data_text: "Z-start-list",
-        data_title: "Z",
-        city_information:
-        [
-          { data_id: "CGO", data_type: "zz", data_value: "郑州新郑国际机场", city: "郑州" },
-          { data_id: "ZUH", data_type: "zh", data_value: "珠海金湾国际机场", city: "珠海" },
-        ]
-      },
-    ],
+    characterCity:[],
     recentList: [],
+    d_r: [],
     currentCityName:"",
+    ticketType:''
   },
   bindBackChange:function(){
     wx.navigateBack({
@@ -251,6 +113,34 @@ Page({
       }
      })
   },
+  //载入航空城市
+  loadAirCity(){
+    var characterCity = [];
+    var d_r = [];
+    for (var key in FlightCityList) {
+      d_r.push({
+        key:key
+      });
+      var city_information = [];
+      for (var  index = 0; index < FlightCityList[key].length; index++) {
+        var city = FlightCityList[key][index];
+        city_information.push({
+          data_id: city["CityThreeSign"],
+          data_type: city["CityNameSimpleEn"],
+          city: city["CityName"],
+        });
+      }
+      characterCity.push({
+        data_text: key+"-start-list",
+        data_title: key,
+        city_information:city_information
+      });
+      this.setData({
+        d_r,
+        characterCity
+      })
+    }
+  },
   //是否存在搜索历史城市
   isCityInRecent(recentCity) {
     var recentList = this.data.recentList;
@@ -279,12 +169,26 @@ Page({
   },
   //点击选择城市并返回首页
   doReturn: function(e){
+    debugger
+    var ticketType = this.data.ticketType;
     var airportCode = e.currentTarget.dataset.id;
     var airportName = e.currentTarget.dataset.value;
     var type = e.currentTarget.dataset.type;
     var city = e.currentTarget.dataset.city;
     app.globalData.airportCode = airportCode;
     app.globalData.airportName = airportName;
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1]; //当前页
+    var prevPage = pages[pages.length - 2]; //上一个页面
+    if(ticketType == "depCity"){
+      prevPage.setData({
+        depCityName: city,
+      });
+    }else if(ticketType == "arrCity"){
+      prevPage.setData({
+        arrCityName: city,
+      });
+    }
     var recentCity = {
       data_id: airportCode,
       data_type: type,
@@ -306,10 +210,18 @@ Page({
       recentList: recentList
     });
   },
+  //初始化数据
+  initData(options){
+    var ticketType = options.ticketType;
+    this.setData({
+      ticketType
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.initData(options);
   },
 
   /**
@@ -324,6 +236,8 @@ Page({
    */
   onShow: function () {
     this.getUserLocation();
+    //载入航空城市
+    this.loadAirCity();
     this.getStorageRecentList();
   },
 
