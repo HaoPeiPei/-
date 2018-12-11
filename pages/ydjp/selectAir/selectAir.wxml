@@ -1,0 +1,66 @@
+<!--pages/ydjp/selectAir/selectAir.wxml-->
+<import src="../../../wxParse/wxParse.wxml"/> 
+<import src="../template/template.wxml" />
+<view class="wrap">
+    <view class="header flex font-size-18 b-line c-bg-fff">
+        <i class="back icon-arror-l"></i>
+        <view class="col-1 cityName_wrap c-align">
+            <text class="depCityName">{{carrier.DepCityName}}</text>
+            <text class="icon-airArror"></text>
+            <text class="arrCityName">{{carrier.ArrCityName}}</text>
+        </view>
+        <i class="icon-phone"></i>
+    </view>
+    <view class="main">
+        <view class="flight-wrap">
+            <view class="flight-title">{{carrier.CarrierName}} {{carrier.FlightNo}}</view>
+            <view class="flight-info flex ">
+                <view class="col-1 c-align">
+                    <text class="font-size-27" data-bind="text: BeginTime">{{carrier.BeginTime}}</text>
+                    <text class="font-size-24 c-999" data-bind="text: DepCityName + BeginTerm">{{carrier.DepCityName}}({{carrier.BeginTerm}})</text>
+                    <text class="font-size-20 c-999" data-bind="text: DepCityName + BeginTerm">{{depDate}} {{depWeek}}</text>
+                </view>
+                <view class="c-align search-arror r_position">
+                    <i class="icon-lineArror c-999 "></i>
+                    <text class="stop c-f4393c font-size-18" data-bind="text: parseInt(Stop) > 0?'经停':''">{{Stop>0?'经停':''}}</text>
+                </view>
+                <view class="col-1 c-align">
+                    <text class="font-size-27" data-bind="text: EndTime">{{carrier.EndTime}}</text>
+                    <text class="font-size-24 c-999" data-bind="text: ArrCityName + EndTerm">{{carrier.ArrCityName}}({{carrier.EndTerm}})</text>
+                    <text class="font-size-20 c-999" data-bind="text: ArrCityName + EndTerm">{{arrDate}} {{arrWeek}}</text>
+                </view>
+            </view>
+        </view>
+        <view id="flyData" class="cabInfo-list" data-model="flightModel" wx:key="index"  wx:for="{{carrier.CabInfos}}" wx:for-item="cabInfo">
+            <view class="flex cabInfo-item " data-bind="click:$root.select">
+                <view class="cabInfo-left l-align">
+                    <view>
+                        <text class="c-f4393c font-size-20">¥</text>
+                        <text class="font-size-28 c-f4393c" >{{cabInfo.FlightLowestPrice}}</text>
+                    </view>
+                    <view class="cabInfo-type font-size-22 font-weight-bold" >{{cabInfo.ClassName}}</view>
+                </view>
+                <view class="cabInfo-right flex col-1">
+                    <view class="col-1">
+                        <text class="residue font-size-22 {{cabInfo.Num<9?'cf4393c':'c999'}}">剩余：{{cabInfo.Num}}张</text>
+                        <text class="endorse c-3eabff font-size-24" data-class="{{cabInfo.Class}}" catchtap="showEndorseModal">退改详情<i class="icon-arror-r font-size-24 c-3eabff"></i></text>
+                    </view>
+                    <view class="predetermine-btn" data-class="{{cabInfo.Class}}" catchtap="book">预定</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="endorseModal c-bg-000 flex {{endorseModalShow?'':'none'}}">
+    <view class="pop-full font-size-30">
+        <view class="pop-full-close" catchtap="hideEndorseModal"><i></i></view>
+        <view class="pop-content">
+            <view class="title">退改签说明</view>
+            <view class="content ">
+                <template is="wxParse" data="{{wxParseData:endorseModalContent.nodes}}"/>
+            </view>
+        </view>
+    </view>    
+</view>
+    

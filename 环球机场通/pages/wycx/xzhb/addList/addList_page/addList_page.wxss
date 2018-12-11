@@ -1,0 +1,5 @@
+/* pages/wycx/addList/addList_page/addList_page.wxss */
+@import "../../../../../template/template.wxss";
+page{
+  background: #fff;
+}

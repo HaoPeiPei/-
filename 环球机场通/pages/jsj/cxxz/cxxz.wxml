@@ -1,0 +1,31 @@
+<!--pages/jsj/cxxz/cxxz.wxml-->
+<import src="../../../template/template.wxml" />
+
+<template is="header_content_noBackod" data="{{...header_text}}" />
+
+<block wx:for="{{carModel}}">
+  <view class='box box-f1 backgd-f margin-t-1 padding-1'>
+    <view class='' style=''>
+      <image src='{{item.imagUrl}}' style='width:360rpx;' mode='widthFix'></image>
+    </view>
+    <view class='box box-f1 box-ver margin-l-1'>
+      <view class='box box-f1 font-16'>
+        <view class='box box-f1 color-3'>{{item.scopeOfUse}}</view>
+        <view class='box box-pe color-f4'>￥{{item.price}}</view>
+      </view>
+      <view class='box box-f1 font-12'>
+        <view class='box box-f1 box-as color-9'>{{item.tk_scopeOfUse}}</view>
+      </view>
+      <view class='box box-f1'>
+        <block wx:for="{{item.keyWord}}" wx:for-item="it">
+          <view class='box font-12 box-ae'>
+            <text class='adtext'>{{it}}</text>
+          </view>
+        </block>
+        <view class='box box-pe font-18 box-ae box-f1'>
+          <text class='yytext' bindtap='bindYyChage'>预约</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>

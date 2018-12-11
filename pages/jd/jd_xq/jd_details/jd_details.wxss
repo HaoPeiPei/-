@@ -1,0 +1,17 @@
+/* pages/jd/jd_xq/jd_details/jd_details.wxss */
+@import "../../../../template/template.wxss";
+
+.padding-tb-30{
+  padding: 30rpx 0rpx;
+}
+.float-text{
+  padding: 20rpx 0rpx;
+  width: 100%;
+}
+.float-l{
+  float: left;
+  width: 25%;
+}
+.color-3e{
+  color: #3eabff;
+}

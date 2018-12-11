@@ -1,0 +1,9 @@
+
+@import "../../../../../template/template.wxss";  
+.padding-tb-3{
+  padding: 30rpx 0rpx;
+}
+.xz-border{
+  border-bottom: 4rpx solid #f4393c;
+  color: #333333;
+}

@@ -1,0 +1,118 @@
+<!--
+  imgUrls:array,
+  icon_left:url,
+  icon_right:url,
+  title_text:string
+  -->
+<template name="header_swiper">
+  <view class='header-content'>
+    <view class='header-back-img'>
+      <swiper indicator-dots='true' autoplay='false' indicator-active-color="rgb(225,225,225)" style='height:100%;'>
+        <block wx:for="{{imgUrls}}" wx:for-item="it" wx:key="*this">
+          <swiper-item>
+            <image src='{{it}}' style='width:100%;height:450rpx;' />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='' style='position:absolute;width:100%;top:20rpx;left:0;'>
+        <view class='box box-f1 box-hor padding-1 margin-lr-1'>
+          <view class='box box-apc'>
+            <view style='background:url({{icon_left}}) no-repeat center center;background-size:cover;width:30rpx;height:30rpx;'></view>
+          </view>
+          <view class='box box-f1 box-apc color-f font'>{{title_text}}</view>
+          <view style='background:url({{icon_right}}) no-repeat center center;background-size:cover;width:36rpx;height:36rpx;' catchtap='catchDh' data-key="0"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--
+  title_text:string,
+  right_text:string
+  -->
+<template name="title_content_1">
+  <view class='box box-f1 margin-lr-1 padding-tb-1 border-b' style='position:relative'>
+    <view class='height-1'></view>
+    <view class='box box-f1 box-ac color-f4 font-13'>{{title_text}}</view>
+    <view class='box box-f1 box-ac box-pe' catchtap='bindChageTk' data-key="1">
+      <view class='font-11 color-45 box box-ac margin-r-2 '>{{right_text}}</view>
+      <view style='background:url(../images/arrow_r.png) no-repeat center center;background-size:cover;width:20rpx;height:20rpx'></view>
+    </view>
+  </view>
+</template>
+<template name="title_content_2">
+  <view class='box box-f1 margin-lr-1 padding-tb-1 border-b' style='position:relative'>
+    <view class='height-1'></view>
+    <view class='box box-f1 box-ac color-f4 font-13'>{{title_text}}</view>
+  </view>
+</template>
+<!--
+  套餐内容模板
+  setMeal_icon:url,
+  setMeal_title:string,
+  setMeal_cont:string
+-->
+<template name="setMealPage">
+  <view class='float-left' style='width:50%;'>
+    <view class='box box-f1 box-hor font-13 padding-tb-1'>
+      <view class='box padding-tb-2'>
+        <view style='background:url({{setMeal_icon}}) no-repeat center center;background-size:cover;width:25rpx;height:25rpx;margin-top:6rpx;'></view>
+      </view>
+      <view class='box box-f1 box-ver margin-l-1'>
+        <view class='box box-f1 color-3 padding-tb-2 box-ac '>
+          <view>{{setMeal_title}}</view>
+        </view>
+        <view class='box box-f1 color-9 '>{{setMeal_cont}}</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<template name="setMealPage_1">
+  <view class='float-left' style='width:100%;'>
+    <view class='box box-f1 box-hor font-13 padding-tb-1 margin-l-1'>
+      <view class='box padding-tb-2'>
+        <view style='background:url({{setMeal_icon}}) no-repeat center center;background-size:cover;width:25rpx;height:25rpx;margin-top:6rpx;'></view>
+      </view>
+      <view class='box box-f1 box-ver margin-l-1'>
+        <view class='box box-f1 color-3 padding-tb-2 box-ac '>
+          <view>{{setMeal_title}}</view>
+        </view>
+        <view class='box box-f1 color-9 '>{{setMeal_cont}}</view>
+      </view>
+    </view>
+  </view>
+</template>
+<!--
+  购买须知
+  title_text:"使用方法"
+  content_text:"深圳宝安国际机场四楼C岛岛尾西部航空柜台凭有效证件享受服务"
+  -->
+<template name="purchaseNotice">
+  <view class='box box-f1 font-13 padding-tb-1 margin-l-1'>
+    <view class='box color-3'>{{title_text}}</view>
+    <view class='box box-f1 box-ac margin-l-6 color-9'>{{content_text}}</view>
+  </view>
+</template>
+
+<!--
+  添加乘机人
+  
+
+  -->
+<template name="addList_cjr">
+  <view class='box box-f1 margin-l-5 font-13 border-b-1 padding-tb-1 box-ac {{inCaTch?"none":""}}'>
+    <view style='background:url(../../images/back-y.png) no-repeat center center;background-size:cover;width:48rpx;height:48rpx;' catchtap='catchRemove'></view>
+    <view class='box box-f1 box-ver'>
+      <view class='box box-f1 box-hor margin-l-1 padding-tb-2'>
+        <view class='left-title-1 color-9'>姓名：</view>
+        <view class='box box-f1 color-3'>{{uesr_name}}</view>
+      </view>
+      <view class='box box-f1 box-hor margin-l-1 padding-tb-2'>
+        <view class='left-title-1 color-9'>身份证：</view>
+        <view class='box box-f1 color-3'>{certificate}}</view>
+      </view>
+    </view>
+  </view>
+</template>

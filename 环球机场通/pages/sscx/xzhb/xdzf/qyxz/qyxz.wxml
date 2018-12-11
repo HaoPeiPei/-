@@ -1,0 +1,118 @@
+<!--pages/wycx/xzhb/xdzf/qyxz/qyxz.wxml-->
+<import src="../../../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+<!-- 选择位置 -->
+<view class='box box-f1 backgd-f box-ver'>
+  <view class='box box-f1 box-ac padding-tb-40'>
+    <view class='height-1'></view>
+    <view class='box box-f1 margin-lr-20 '>
+      <view class='box box-f1 font-15'>选择位置</view>
+    </view>
+  </view>
+  <view style='width:100%;padding-bottom:40rpx;'>
+    <view class='float-text'>
+      <view class='box box-f1 box-apc'>
+        <view class='selepos {{key==0?"select":""}}' data-key="0" data-text="随机" bindtap='bindTapChange'>随机</view>
+      </view>
+    </view>
+    <view class='float-text'>
+      <view class='box box-f1 box-apc'>
+        <view class='selepos {{key==1?"select":""}}' data-key="1" data-text="靠窗" bindtap='bindTapChange'>靠窗</view>
+      </view>
+    </view>
+    <view class='float-text'>
+      <view class='box box-f1 box-apc'>
+        <view class='selepos {{key==2?"select":""}}' data-key="2" data-text="过道" bindtap='bindTapChange'>过道</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 选择区域 -->
+<view class='box box-f1 backgd-f box-ver margin-t-10'>
+  <view class='box box-f1 box-ac padding-tb-40'>
+    <view class='height-1'></view>
+    <view class='box box-f1 margin-lr-20 '>
+      <view class='box box-f1 font-15'>选择区域</view>
+    </view>
+  </view>
+  <view class='box box-f1 box-hor' style='padding-bottom:160rpx;'>
+    <view class='box box-f1 box-ver font-13 margin-l-30'>
+      <view class='box box-f1 box-ac'>
+        <text class='types {{types==0?"select":""}}' data-types="0" data-text="左侧前方" bindtap='bindTapqyChange'>左侧前方</text>
+      </view>
+      <view class='box box-f1 box-ac'>
+        <text class='types {{types==1?"select":""}}' data-types="1" data-text="左侧中方" bindtap='bindTapqyChange'>左侧中方</text>
+      </view>
+      <view class='box box-f1 box-ac'>
+        <text class='types {{types==2?"select":""}}' data-types="2" data-text="左侧下方" bindtap='bindTapqyChange'>左侧下方</text>
+      </view>
+    </view>
+    <view style='margin:10rpx 40rpx;background:url(../../../../images/area11.png) no-repeat center center;background-size:100% 100%;width:160rpx;height:655rpx;'>
+      <view class='' style='width:160rpx;height:500rpx;margin-top:105rpx;'>
+        <view class='box box-f1'>
+          <view class='box box-f1 margin-l-10'>
+            <image src='{{types==0?"../../../../images/selected-seat-1.png":"../../../../images/select-seat-1.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==0?"../../../../images/selected-seat-1.png":"../../../../images/select-seat-1.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==0?"../../../../images/selected-seat-1.png":"../../../../images/select-seat-1.png"}}' style='width:14rpx;margin-right:0rpx;' mode='widthFix'></image>
+          </view>
+          <view class='box box-f1 box-pe margin-r-10'>
+            <image src='{{types==3?"../../../../images/selected-seat-1.png":"../../../../images/select-seat-1.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==3?"../../../../images/selected-seat-1.png":"../../../../images/select-seat-1.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==3?"../../../../images/selected-seat-1.png":"../../../../images/select-seat-1.png"}}' style='width:14rpx;margin-right:0rpx;' mode='widthFix'></image>
+          </view>
+        </view>
+        <view class='box box-f1 margin-t-20'>
+          <view class='box box-f1 margin-l-10'>
+            <image src='{{types==1?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==1?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==1?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:0rpx;' mode='widthFix'></image>
+          </view>
+          <view class='box box-f1 box-pe margin-r-10'>
+            <image src='{{types==4?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==4?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==4?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:0rpx;' mode='widthFix'></image>
+          </view>
+        </view>
+        <view class='box box-f1 margin-t-20'>
+          <view class='box box-f1 margin-l-10'>
+            <image src='{{types==2?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==2?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==2?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:0rpx;' mode='widthFix'></image>
+          </view>
+          <view class='box box-f1 box-pe margin-r-10'>
+            <image src='{{types==5?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==5?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:8rpx;' mode='widthFix'></image>
+            <image src='{{types==5?"../../../../images/selected-seat.png":"../../../../images/select-seat.png"}}' style='width:14rpx;margin-right:0rpx;' mode='widthFix'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='box box-f1 box-ver font-13 margin-r-30'>
+      <view class='box box-f1 box-ac box-pe'>
+        <text class='types {{types==3?"select":""}}' data-types="3" data-text="右侧前方"  bindtap='bindTapqyChange'>右侧前方</text>
+      </view>
+      <view class='box box-f1 box-ac box-pe'>
+        <text class='types {{types==4?"select":""}}' data-types="4" data-text="右侧中方" bindtap='bindTapqyChange'>右侧中方</text>
+      </view>
+      <view class='box box-f1 box-ac box-pe'>
+        <text class='types {{types==5?"select":""}}' data-types="5" data-text="右侧下方" bindtap='bindTapqyChange'>右侧下方</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view style='position:fixed;bottom:0;width:100%;'>
+  <view class='box box-f1 box-ac backod-2'>
+    <view class='box box-f1 box-ver backod-1 padding-tb-2'>
+      <view class='box box-f1 font-11 color-f4 margin-l-1'>
+        座位区域
+      </view>
+      <view class='box box-f1 font-13 color-f  margin-l-1'>
+        <text>{{wz}}</text>
+        <text class='margin-l-20'>{{qy}}</text>
+      </view>
+    </view>
+    <view style='font-size:30rpx;color:#ffffff;padding:0rpx 100rpx;' bindtap='bindQrChange'>确认选择</view>
+  </view>
+</view>

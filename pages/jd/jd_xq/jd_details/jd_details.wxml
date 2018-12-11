@@ -1,0 +1,55 @@
+<!--pages/jd/jd_xq/jd_details/jd_details.wxml-->
+<import src="../../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+
+<view class='box box-f1 backgd-f'>
+  <view class='box box-f1 margin-lr-20 box-ver'>
+  <!-- 酒店设施 -->
+    <view class='box box-f1 box-ver padding-tb-30 border-b-1'>
+      <view class='box font-15 font-bolder'>酒店设施</view>
+      <view class='box box-f1'>
+        <view class='float-text'>
+          <block wx:for="{{hotel_facilities}}">
+            <view class='float-l'>
+              <view class='box box-f1 box-hor'>
+                <view style='background:url({{item.fac_icon}}) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
+                <view class='font-12 margin-l-20 color-3e'>{{item.fac_name}}</view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class='box box-f1 font-13 color-9' style='line-height:46rpx;'>24小时热水、停车场、吹风机、有线上网、免费WiFi、餐厅、免费洗漱品、免费瓶装水、行李寄存、叫醒服务、接送机服务。</view>
+    </view>
+    <!-- 酒店介绍 -->
+    <view class='box box-f1 box-ver padding-tb-30 border-b-1'>
+      <view class='box font-15 font-bolder'>酒店介绍</view>
+      <view class='box box-f1 font-13 color-3e margin-t-20'>24小时免费接送机</view>
+      <view class='box box-f1 font-13 color-9 margin-t-10' style='line-height:46rpx;'>深圳机场大酒店位于宝安机场6道，是一家按国际高级酒店标准设计装修，集宿舍、餐饮、休闲为一体的多功能商务酒店。毗邻广深高速入口处，紧挨宝安大道、福永码头、航港高尔夫球场仅5分钟车程，距皇岗口岸、世界之窗、欢乐谷、锦绣中华、民俗文化村等旅游区只需25分钟车程。</view>
+    </view>
+    <!-- 酒店政策 -->
+    <view class='box box-f1 box-ver padding-tb-30 border-b-1'>
+      <view class='box font-15 font-bolder'>酒店政策</view>
+      <view class='box box-f1 font-13 color-3e margin-t-20'>
+        <view class='box'>入住时间：14：00以后</view>
+        <view class='box' style='margin-left:40rpx;'>离店时间：12：00以前</view>
+      </view>
+      <view class='box box-f1 font-13 color-9 margin-t-10 box-ver' style='line-height:46rpx;'>
+        <view class='box'>不接受18岁以下客人单独入住。</view>
+        <view class='box'>膳食安排</view>
+        <view class='box'>自助早餐：RMB 20.00</view>
+        <view class='box'>不可携带宠物入住</view>
+      </view>
+    </view>
+    <!-- 交通信息 -->
+    <view class='box box-f1 box-ver padding-tb-30 border-b-1'>
+      <view class='box font-15 font-bolder'>交通信息</view>
+      <view class='box box-f1 font-13 color-9 margin-t-10 box-ver' style='line-height:46rpx;'>
+        <view class='box'>地铁1号线，机场东：D出口步行约300米。</view>
+        <view class='box'>深圳宝安国际机场：驾车约8.0公里。（约13分钟）</view>
+        <view class='box'>深圳北站：驾车约28.2公里。（约63分钟）</view>
+        <view class='box'>深圳火车站：驾车约37.9公里。（约57分钟）</view>
+      </view>
+    </view>
+  </view>
+</view>

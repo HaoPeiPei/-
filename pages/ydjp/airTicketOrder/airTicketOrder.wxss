@@ -1,0 +1,211 @@
+@import '../template/template.wxss';
+.font-size-32{
+    font-size: 32rpx;
+}
+.font-size-38{
+    font-size: 38rpx;
+}
+.font-size-36{
+    font-size: 36rpx;
+}
+.font-size-28{
+    font-size: 28rpx;
+}
+.font-size-24{
+    font-size: 24rpx;
+}
+.font-size-40{
+    font-size: 40rpx;
+}
+.marginL20{
+    margin-left: 20rpx;
+}
+.marginR70{
+    margin-right: 70rpx;
+}
+.marginL10{
+    margin-left: 10rpx;
+}
+.padding0{
+    padding: 0 !important;
+}
+.airTicketOrder{
+    height: auto;
+    background-color: #f4f5f7;
+    position: relative;
+    padding-bottom: 100rpx;
+}
+.header{
+    height: 90rpx;
+    line-height: 90rpx;  
+    padding: 0 20rpx;
+    align-items: center; 
+    font-size: 34rpx;
+    background-color: #fff;
+    border-bottom: 1rpx solid #d7d7d7;
+}
+.airTicketOrder .header .back{
+    font-size: 32rpx;
+}
+.airTicketOrder .header .cityName_wrap{
+     font-size: 32rpx;
+}
+.airTicketOrder .header .icon-phone{
+    margin: 20rpx 25rpx 0 0;
+    font-size: 35rpx;
+}
+.airTicketOrder .main{
+    
+}
+.airTicketOrder .main .flight-info .single-line .t-title{
+    font-size: 26rpx;
+}
+.airTicketOrder .main .flight-info .single-line .t-title text:nth-of-type(1){
+    margin-right: 10rpx;
+}
+.airTicketOrder .main .flight-info .single-line .t-title .line{
+    width: 5rpx;
+    display: inline-block;
+    height: 20rpx;
+    background-color: #f4393c;
+    margin-right: 10rpx;
+}
+.airTicketOrder .main .flight-info .single-line .div-flight .col-1 view:nth-of-type(1){
+    font-size: 60rpx;
+    margin-bottom: 5rpx;
+}
+.airTicketOrder .main .flight-info .single-line .div-flight .col-1 view:nth-of-type(2){
+    font-size: 30rpx;
+    margin-bottom: 10rpx;
+}
+.airTicketOrder .main .flight-info .single-line .div-flight .col-1 view:nth-of-type(3){
+    font-size: 26rpx;
+    padding-bottom: 25rpx;
+}
+.airTicketOrder .main .flight-info .single-line .icon-toArror{
+    width: 130rpx;
+}
+.airTicketOrder .main .flight-info .single-line .air-detail{
+    border-top:  1rpx solid #d7d7d7;
+    padding-top: 20rpx;
+}
+.airTicketOrder .main .flight-info .single-line .air-detail .col-1:nth-of-type(1){
+    width: 180rpx;
+    font-size: 26rpx;
+}
+.airTicketOrder .main .flight-info .single-line .air-detail .col-1:nth-of-type(2){
+    font-size: 26rpx;
+}
+.airTicketOrder .main .flight-info .single-line .air-detail .col-1 .price{
+    margin-left: 20rpx;
+}
+.airTicketOrder .main .flight-info .single-line .air-detail .endorse{
+    font-size: 24rpx;
+    justify-content: center;
+    align-items: center;
+}
+.airTicketOrder .main .flight-info .single-line .air-detail .endorse .icon-arror-r{
+    margin-left: 12rpx;
+}
+.airTicketOrder .main .main-con {
+    background-color: #fff;
+    padding: 0 30rpx;
+    margin-bottom: 20rpx;
+}
+.airTicketOrder .main .main-con .t-title{
+    padding: 30rpx 0;
+}
+.airTicketOrder .main .main-con .t-title .icon{
+    margin-right: 10rpx;
+    vertical-align:middle;
+}
+.airTicketOrder .main .main-con .t-title .icon-hint{
+    margin-left: 20rpx;
+}
+.airTicketOrder .main .main-con .t-title input{
+    padding-left: 30rpx;
+} 
+.airTicketOrder .main .contact {
+    padding: 0 30rpx;
+} 
+.airTicketOrder .main .contact .t-title{
+    padding: 30rpx 0; 
+}
+.airTicketOrder .main .contact .t-title:nth-of-type(1){
+    border-bottom: 1rpx solid #d7d7d7;  
+}
+.airTicketOrder .main .passengers{
+    padding: 0 30rpx;
+}
+.airTicketOrder .main .passengers .t-title{
+    padding: 15rpx 0;
+    justify-content: space-between;
+} 
+.airTicketOrder .main .passengers .t-title .luckyMan{
+    align-items: flex-end;
+}
+.airTicketOrder .main .passengers .t-title .luckyMan text:nth-of-type(1){
+    margin-right: 35rpx;
+}
+.airTicketOrder .main .passengers .t-title .sp-add{
+    width: 160rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    text-align: center;
+    border: 1rpx dashed #3eabff;
+    font-size: 24rpx;
+}
+.airTicketOrder .main .passengers .passengerInfo{
+    border-top:  1rpx solid #d7d7d7;
+    background-color: #fff;
+    padding-left: 40rpx;
+}
+.airTicketOrder .main .passengers .passengerInfo .text-item{
+    padding: 30rpx 0 30rpx 0;
+    border-bottom: 1rpx solid #d7d7d7;
+    justify-content: space-between;
+}
+.airTicketOrder .main .passengers .passengerInfo .text-item:last-of-type{
+    border-bottom: none;
+}
+.airTicketOrder .main .passengers .passengerInfo .row-con{
+    padding-left: 35rpx;
+    font-size: 28rpx;
+}
+.airTicketOrder .main .passengers .passengerInfo .row-con .row-con-group:nth-of-type(1){
+    margin-bottom: 20rpx;
+}
+.airTicketOrder .main .passengers .passengerInfo .row-con .col-content{
+    color: #000;
+    padding-left: 30rpx;
+}
+.airTicketOrder .main .singleService{
+    padding: 30rpx 0 30rpx 40rpx;
+    border-top: 1rpx solid #d7d7d7;
+}
+.airTicketOrder .footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 100rpx;
+    z-index: 999;
+}
+.airTicketOrder .footer .price{
+    flex-direction: column;
+    padding-left: 28rpx;
+}
+.airTicketOrder .footer .show-con{
+    background-color: #3b3636;
+}
+.airTicketOrder .footer .detail{
+    padding-right: 70rpx;
+    line-height: 100rpx;
+}
+.airTicketOrder .footer .p-assur{
+    width: 300rpx;
+    background-color: #f4393c;
+    color: #fff;
+    line-height: 100rpx;
+    text-align: center;
+}

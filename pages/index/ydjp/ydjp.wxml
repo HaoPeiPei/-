@@ -1,0 +1,3 @@
+<!--pages/index/ydjp/ydjp.wxml-->
+<import src='../../../template/template.wxml' />
+<template is='header_content_backod' data='{{...header_text}}' />

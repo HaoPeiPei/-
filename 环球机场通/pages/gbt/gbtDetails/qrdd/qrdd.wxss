@@ -1,0 +1,42 @@
+/* pages/gbt/gbtDetails/qrdd/qrdd.wxss */
+@import "../../../../template/template.wxss";  
+
+.margin-l-35{
+  margin-left: 35rpx;
+}
+.padding-tb-15{
+  padding: 15rpx 0rpx;
+}
+/*swtich整体大小*/
+.wx-switch-input{
+  width:82rpx !important;
+  height:50rpx !important;
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before{
+  width:80rpx !important;
+  height: 46rpx !important;
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after{
+  width: 40rpx !important;
+  height: 46rpx !important;
+}
+
+.backod-1{
+  background: #3b3636;
+}
+.backod-2{
+  background: #f4393c;
+}
+
+.yhj-back{
+  padding:5rpx 30rpx;
+  border-radius:10rpx;
+  font-size:26rpx;
+  background:#cccccc;
+  color:#ffffff;
+}
+.yhj-back.yy{
+  background:#f4393c;
+}

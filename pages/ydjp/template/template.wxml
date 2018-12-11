@@ -1,0 +1,220 @@
+<import src="../../../template/template.wxml" />
+<template name="filterModal">
+    <view class="c-bg-000 filterModal {{filterModalShow?'':'none'}}" >
+        <view class="air-dialog">
+            <view class="dialog-title">
+                <view class="f_left font-size-34">航空公司</view>
+                <view class="f_right cancel-filter font-size-24" catchtap="removeAllFilterModal" >清空筛选</view>
+            </view>
+            <view class="dialog-con c-fff" data-model="carrierModel"  >
+                <view class="flex width-50 {{index%2!=0?'f_right justify-content-end':'f_left justify-content-start'}}" wx:key="index"  wx:for="{{carriers}}" wx:for-item="carrier">
+                    <view class="carrier font-size-28 {{carrier.active?'c-bg-f4393c':'c-bg-ccc'}}" data-carriername='{{carrier.CarrierName}}' catchtap="selectFilterCarrier">{{carrier.CarrierName}}</view>
+                </view>
+            </view>    
+            <view class="dialog-bottom font-size-15 c-fff">
+                <view class="flex">
+                    <view class="flex justify-content-start width-50">
+                        <view class="c-bg-ccc bottom-btn" catchtap="cancelFilterModal">取消</view>
+                    </view>
+                    <view class="flex justify-content-end width-50">
+                        <view class="c-bg-f4393c bg-color-f4393c bottom-btn" catchtap="confirmFilterModal">确认</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 报销凭证 -->
+<template name="exprerss"> 
+    <view class="exprerss" wx-if="{{buyExpress==1}}" >
+        <view class="flex align-center text-item c-000 ">
+            <text class="col-title c-999">姓名</text>
+            <input type="text" class="col-1" value="" id="linkName" name="linkName" placeholder="请填写收件人姓名" />
+        </view>
+        <view class="flex align-center text-item c-000 ">
+            <text class="col-title c-999">联系电话</text>
+            <input type="text" class="col-1" value="" id="linkphone" name="linkphone" placeholder="请填写收件人联系电话" />         
+        </view>
+        <view class="flex align-center text-item c-000 ">
+            <text class="col-title c-999">所在地区</text>
+            <picker class="col-1" bindchange="pasTypePickerChange" value="{{pasTypePicker.index}}" range="{{pasTypePicker.data}}" mode='selector' placeholder="省/市/区">
+                <view class='box box-f1 box-ac font-13'>
+                    <view style='width:140rpx;' class='color-3'>乘客类型</view>
+                    <view class='box box-f1 box-ac'>
+                        <view>{{pasTypePicker.data[pasTypePicker.index]}}</view>
+                        <input type='text' value="{{pasTypePicker.index}}" class="none" data-key="type" name='type'/>
+                    </view>
+                    <view class='box bxo-ac'>
+                        <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
+                    </view>
+                </view>
+            </picker>
+        </view>
+        <view class="flex align-center text-item c-000 ">
+            <text class="col-title c-999">详细地址</text>
+            <input type="text" class=" col-1" value="" id="linkAddress" name="linkAddress" placeholder="请填写详细地址" />
+        </view>
+    </view>
+</template>
+
+<!-- 价格明细 -->
+<template name="priceDetail" >
+    <view class="priceDetail-wrap {{priceDetailShow?'':'none'}}">
+        <view class="mark"></view>
+        <view class="priceDetail">
+            <view class="flex b-line adult-price price-group">
+                <view class="col-1">成人票价</view>
+                <view class="c-f4393c"><text>¥{{ticketAdultPrice}}</text><text class="c-999">X{{adultCount}}</text></view>
+            </view>
+            <view class="flex b-line child-price price-group">
+                <view class="col-1">儿童票价</view>
+                <view class="c-f4393c"><text>¥{{ticketChildPrice}}</text><text class="c-999">X{{childCount}}</text></view>
+            </view>
+            <view class="flex b-line baby-price price-group">
+                <view class="col-1">婴儿票价</view>
+                <view class="c-f4393c"><text>¥{{ticketBabyPrice}}</text><text class="c-999">X{{babyCount}}</text></view>
+            </view>
+            <view class="flex b-line fee price-group">
+                <view class="col-1">机建+燃油</view>
+                <view class="c-f4393c">¥<text>{{tax}}</text><text class="c-999">X{{adultCount}}</text></view>
+            </view>
+            <view class="flex b-line insurance price-group">
+                <view class="col-1">保险</view>
+                <view class="c-f4393c"><text>¥{{insurancePrice}}</text><text class="c-999">X{{insuranceCount}}</text></view>
+            </view>
+            <view class="flex b-line express price-group">
+                <view class="col-1">快递</view>
+                <view class="c-f4393c"><text>¥{{expressPrice}}</text><text class="c-999">X{{expressCount}}</text></view>
+            </view>
+            <view class="flex b-line refund price-group">
+                <view class="col-1">现返</view>
+                <view class="c-f4393c"><text>¥{{refund}}</text><text class="c-999">X{{adultCount}}</text></view>
+            </view>
+            <view class="flex service price-group">
+                <view class="col-1">无忧出行</view>
+                <view class="c-f4393c"><text>¥{{servicePrice}}</text><text class="c-999">X{{serviceCount}}</text></view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 选择旅客 -->
+<template name="selectPassenger">
+    <view class='selectPassenger' wx:if="{{selectPassengerShow}}"> 
+        <view class='header'>
+        <view class='header_noBackod border-b-1'>
+            <view class='header-con'>
+            <view class='box box-f1 box-hor'>
+                <view class='header-left' bindtap='showPassengerDetailModal'>
+                <image src='../../images/back-b.png' style='width:16rpx;' mode='widthFix' />
+                </view>
+                <view class='box box-f1 box-apc font-15'>选择旅客</view>
+                <view class='header-right'>
+                <!-- <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;' mode='widthFix' wx:if="{{right_icon.length!=0}}"/> -->
+                </view>
+            </view>
+            </view>
+        </view>
+        </view>
+        <view class='box box-f1 box-ver padding-tb-10 backgd-f' bindtap='showPassengerDetailModal'>
+        <view class='box box-f1 box-apc '>
+            <view style='background:url(../../images/addList.png) no-repeat center center;background-size:cover;width:80rpx;height:80rpx;' ></view>
+        </view>
+        <view class='box box-f1 box-apc font-13'>添加</view>
+        </view>
+        <view class='{{passeners.length==0?"none":""}}'>
+        <view class='height-10'></view>
+        <block wx:for="{{passeners}}" wx:key="*this">
+            <view class='box box-f1 box-hor margin-lr-1 padding-tb-1 box-ac'>
+            <view class="icon-yes {{item.active? 'c-f4393c':''}} font-size-10" data-passenerid='{{item.id}}' data-index="{{index}}" catchtap='onSelectPassener'></view>
+            <view class='box box-f1 box-ver font-13 color-9 margin-lr-1'>
+                <view class='box box-f1 padding-tb-2'>
+                <view style='width:140rpx'>姓名：</view>
+                <view class='box box-f1'>{{item.name}}</view>
+                </view>
+                <view class='box box-f1 padding-tb-2'>
+                <view style='width:140rpx'>身份证：</view>
+                <view class='box box-f1'>{{item.cert_no}}</view>
+                </view>
+            </view>
+            <view class="icon-edit  font-size-10" data-passenerid="{{item.id}}" catchtap='editPassener'></view>
+            </view>
+            <view class='height-10'></view>
+        </block>
+        </view>
+        <template is="pos_fixed_b" data="{{text:'确认'}}" />
+    </view>
+</template>
+      
+<!-- 添加乘机人 -->
+<template name="passengerDetail">
+    <view class='add-edit-passenger backgd-f' wx:if="{{passengerDetailShow}}">
+        <view class='header'>
+            <view class='header_noBackod border-b-1'>
+                <view class='header-con'>
+                    <view class='box box-f1 box-hor '>
+                        <view class='header-left' bindtap='hidePassengerDetailModal'>
+                            <image src='../../images/back-b.png' style='width:16rpx;' mode='widthFix' />
+                        </view>
+                        <view class='box box-f1 box-apc font-15'>{{!editPassener.id?"新增乘机人":"编辑乘机人"}}</view>
+                        <view class='header-right flex align-center'>
+                            <view class="icon-dustbin btn-delete font-size-10" data-passenerid="{{editPassener.id}}" catchtap='deletePassener'></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <form bindsubmit='submitPassener' report-submit='true'>
+            <input type='text' value='{{!editPassener.id?"add":"update"}}' class="none"  name='action'/>
+            <input type='text' value="{{editPassener.id}}" class="none"  name='psgId'/>
+            <view class='box box-f1 margin-lr-1 box-ver'>
+            <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
+                <view style='width:140rpx;' class='color-3'>姓名</view>
+                <view class='box box-f1 box-ac'>
+                <input type='text' placeholder='请输入姓名' value='{{editPassener.name}}' data-key="name" name='name'/>
+                </view>
+            </view>
+            <picker bindchange="pasTypePickerChange" value="{{pasTypePicker.index}}" range="{{pasTypePicker.data}}" mode='selector'>
+                <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
+                <view style='width:140rpx;' class='color-3'>乘客类型</view>
+                <view class='box box-f1 box-ac'>
+                    <view>{{pasTypePicker.data[pasTypePicker.index]}}</view>
+                    <input type='text' value="{{pasTypePicker.index}}" class="none" data-key="type" name='type'/>
+                </view>
+                <view class='box bxo-ac'>
+                    <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
+                </view>
+                </view>
+            </picker>
+            <picker bindchange="pasCerPickerChange" value="{{pasCerPicker.index}}" range="{{pasCerPicker.data}}" mode='selector'>
+                <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
+                <view style='width:140rpx;' class='color-3'>证件类型</view>
+                <view class='box box-f1 box-ac'>
+                    <view>{{pasCerPicker.data[pasCerPicker.index]}}</view>
+                    <input type='text' value="{{pasCerPicker.index}}" class="none" data-key="cert_type" name='cert_type'/>
+                </view>
+                <view class='box bxo-ac'>
+                    <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
+                </view>
+                </view>
+            </picker>
+            <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
+                <view style='width:140rpx;' class='color-3'>证件号</view>
+                <view class='box box-f1 box-ac'>
+                    <input type='text' placeholder='请输入证件号' data-certType='{{pasCerPicker.index}}' value='{{editPassener.cert_no}}' data-key="cert_no" name='cert_no' />
+                </view>
+            </view>
+            <view class='box box-f1 box-ac font-13 padding-tb-1 '>
+                <view style='width:140rpx;' class='color-3'>手机号</view>
+                <view class='box box-f1 box-ac'>
+                <input type='text' placeholder='请输入手机号' value='{{editPassener.tel}}' data-key="tel" name='tel'/>
+                </view>
+            </view>
+            </view>
+            <button form-type='submit' style='background:red;position:fixed;bottom:0;width:100%;line-height:2;border:none;color:#ffffff;'>确定</button>
+        </form>
+    </view>
+</template>
+
+  

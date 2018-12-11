@@ -1,0 +1,101 @@
+/* pages/ydjp/selectAir/selectAir.wxss */
+@import "../../../wxParse/wxParse.wxss";
+@import "../template/template.wxss";
+.font-size-28{
+    font-size: 28rpx;
+    font-weight: bold;
+}
+.font-size-24{
+    font-size: 24rpx;
+}
+.font-size-22{
+    font-size: 22rpx;
+}
+.font-size-20{
+    font-size: 20rpx;
+}
+.font-size-18{
+    font-size: 18rpx;
+}
+.wrap{
+    height: 100vh;
+    overflow: auto;
+    background-color: #f4f5f7;
+    position: relative;
+    padding-bottom: 130rpx;
+}
+.header{
+    height: 90rpx;
+    position: relative;
+    border-bottom: 1rpx solid #d7d7d7;
+    font-size: 30rpx;
+    background-color: #fff;
+}
+.header .back{
+    font-size: 35rpx;
+    margin: 25rpx 0 0 25rpx;
+}
+.header .cityName_wrap{
+     margin-top: 24rpx;
+     font-size: 30rpx;
+}
+.header .icon-phone{
+    margin: 20rpx 25rpx 0 0;
+    font-size: 35rpx;
+}
+.main .flight-wrap{
+    padding-bottom: 15rpx;
+    background-color: #fff;
+}
+.main .flight-wrap .flight-title{
+    font-size: 29rpx;
+    margin: 0 0 15rpx 30rpx;
+    padding-top: 25rpx;
+}
+.main .flight-wrap .flight-info{
+    padding: 0 35rpx;
+}
+.main .flight-wrap .flight-info text{
+    height: 40rpx;
+    line-height: 40rpx;
+    display: block;
+} 
+.main .flight-wrap .flight-info .icon-lineArror{
+    font-size: 75rpx;
+    margin: 0 75rpx;
+} 
+
+
+.main .cabInfo-list .cabInfo-item{
+    margin-top: 20rpx;
+    background-color: #fff;
+    padding: 12rpx 25rpx 12rpx 25rpx;
+} 
+.main .cabInfo-list .cabInfo-item .cabInfo-left{
+    width: 195rpx;
+    border-right: 1rpx dashed #d6d6d6;
+}
+.main .cabInfo-list .cabInfo-item .cabInfo-type{
+    margin-top: 20rpx;
+}
+.main .cabInfo-list .cabInfo-right .predetermine-btn{
+    width: 100rpx;
+    height: 55rpx;
+    line-height: 55rpx;
+    text-align: center;
+    color: #fff;
+    border-radius: 8rpx; 
+    background-color: #f3393c;
+    font-size: 24rpx;
+}
+.main .cabInfo-list .cabInfo-item .cabInfo-right{
+    padding: 0 0 0 25rpx;
+} 
+.main .cabInfo-list .cabInfo-item .cabInfo-right .residue{
+    width: 155rpx;
+    display: inline-block;
+}
+.main .cabInfo-list .cabInfo-item .cabInfo-right .icon-arror-r{
+    margin: 0 0 0 10rpx;
+    display: inline-block;
+}

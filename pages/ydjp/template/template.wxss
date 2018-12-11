@@ -1,0 +1,205 @@
+.font-size-34{
+    font-size: 34rpx;
+}
+.font-size-30{
+    font-size: 30rpx;
+}
+.font-size-24{
+    font-size: 24rpx;
+}
+.width-50{
+    width: 50%;
+}
+.bg-color-f4393c{
+    background: #f4393c;
+}
+.filterModal{
+    position: fixed;
+    top: 0rpx;
+    bottom: 0rpx;
+    background-color: #3f3a3a;
+    width: 100%;
+    z-index: 999;
+}
+.filterModal .air-dialog{
+    background-color: #fff;
+    border-radius: 15rpx;
+    margin:auto;
+    width:500rpx;
+    position: relative;
+    height: 650rpx;
+    margin-top: 105rpx;
+}
+.filterModal .dialog-title{
+    overflow: hidden;
+    border-bottom: 20rpx solid #f3f5f7;
+    padding: 40rpx 30rpx;
+}
+.filterModal .dialog-title .cancel-filter{
+    margin-top: 10rpx;
+}
+.filterModal .dialog-con {
+    padding: 0 30rpx;
+    overflow: hidden;
+}
+.filterModal .dialog-con  .carrier{
+    width: 160rpx;
+    border-radius: 10rpx;
+    height: 55rpx;
+    line-height: 55rpx;
+    text-align: center; 
+    margin-top: 40rpx;
+    color: #fff;
+}
+.filterModal .dialog-bottom{
+    padding: 0 30rpx;
+    position:absolute;
+    left: 0rpx;
+    right: 0rpx;
+    bottom: 30rpx;
+}
+.filterModal .dialog-bottom .bottom-btn{
+    width: 145rpx;
+    border-radius: 10rpx;
+    height: 55rpx;
+    line-height: 55rpx;
+    text-align: center; 
+    font-size: 28rpx;
+}
+.filterModal .dialog-bottom .bottom_btn{
+    background-color: #f4393c;
+}
+
+.endorseModal{
+    position: fixed;
+    top: 0rpx;
+    bottom: 0rpx;
+    background-color: #3f3a3a;
+    width: 100%;
+    z-index: 999;
+}
+.endorseModal .pop-full {
+    background-color: #fff;
+    border-radius: 15rpx;
+    margin:auto;
+    width:70%;
+    position: relative;
+    overflow: visible;
+}
+.endorseModal .pop-full-close {
+    position: absolute;
+    top: -60rpx;
+    right: 47%;
+    width: 40rpx;
+    height: 40rpx;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-color: transparent;
+    overflow: visible;
+}
+.endorseModal .pop-full-close:after {
+    content: '';
+    position: absolute;
+    top: 40rpx;
+    left: 50%;
+    width: 1rpx;
+    height: 20rpx;
+    background-color: #fff;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+} 
+.endorseModal .pop-full-close i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+.endorseModal .pop-full-close i:before {
+    -webkit-transform: translate(-50%,-50%) rotate(45deg);
+    transform: translate(-50%,-50%) rotate(45deg);
+}
+.endorseModal .pop-full-close i:after {
+    -webkit-transform: translate(-50%,-50%) rotate(-45deg);
+    transform: translate(-50%,-50%) rotate(-45deg);
+}
+.endorseModal .pop-full-close i:after, .pop-full-close i:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 20rpx;
+    height: 1rpx;
+    background-color: #fff;
+    left: 50%;
+}
+.endorseModal .pop-full .pop-content {
+    overflow: auto;
+    background-color: #fff;
+    border-radius: 15rpx;
+    -webkit-overflow-scrolling: touch;
+}
+.endorseModal .pop-full .pop-content .title{
+    margin: 0rem;
+    padding: 30rpx 0rem;
+    text-align: center;
+    border-bottom: 1rpx solid #d7d7d7;
+}
+.endorseModal .pop-full .pop-content .title p.active{
+    border-bottom: solid 1 #f4393c;
+}
+.endorseModal .pop-full .pop-content .content {
+    padding:1.5rem 0rem;
+    margin: 0rem;
+}
+.endorseModal .pop-full .pop-content .content {
+    padding:30rpx 20rpx;
+    color:#333;
+}
+.endorseModal .pop-full .pop-content .content .wxParse-p {
+    overflow:hidden;
+}
+
+.priceDetail-wrap{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    bottom: 100rpx;
+    z-index: 100000;
+    font-size: 30rpx;
+}
+.mark{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: .5;
+}
+.priceDetail {
+    background-color: #fff;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+.priceDetail .price-group{
+    padding:  30rpx 30rpx;
+    border-bottom: 1rpx solid #d7d7d7;
+}
+.exprerss{
+    background-color: #fff;
+    padding-left:  40rpx;
+    border-top: 1rpx solid #d7d7d7;
+}
+.exprerss .text-item{
+    padding:30rpx 0;
+    border-bottom: 1rpx solid #d7d7d7;
+}
+.exprerss .text-item .col-title{
+    font-size: 28rpx;
+    width: 150rpx;
+}
+.exprerss .text-item input{
+    font-size: 28rpx;
+    color: #000;
+}

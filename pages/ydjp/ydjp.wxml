@@ -1,0 +1,52 @@
+<!--pages/ydjp/ydjp.wxml-->
+<view class="wrap">
+    <view class="header-top">
+        <view class="header-title flex">
+            <i class="icon-arror-l"></i>
+            <text class="col-1 title"> 国内机票</text>
+            <i class="icon-phone"></i>
+        </view>
+    </view>
+    <view class="main main-space">
+        <view class="ticket-type flex c-align">
+            <text class="col-1 ticket-type-single text {{ticketType==0?'active':''}}" data-tickettype="0" catchtap="changeTicketType">单程</text> 
+            <text class="col-1 ticket-type-double text {{ticketType==1?'active':''}}" data-tickettype="1" catchtap="changeTicketType">往返</text>
+        </view>
+        <view class="ticket-city flex align-center font-size-17" data-tickettype="depCity" catchtap="selectCity">
+            <view class="col-1">
+                <text>{{depCityName}}</text>
+            </view>
+            <view class="i-arror c-align" catchtap="cityExchange">
+                <i class="icon-exchange c-f4393c "></i>
+            </view>
+            <view class="col-1 r-align" data-tickettype="arrCity" catchtap="selectCity">
+                <text>{{arrCityName}}</text>
+            </view>
+        </view>
+        <view class="ticket-date ticket-date-single flex align-center {{ticketType==0?'':'none'}}" >
+            <view class="col-1 date_wrap">
+                <picker  bindchange='bindqcDateChange' data-name='depDate' mode="date" start='{{startDate}}' end='{{endDate}}' >
+                    <text>{{depDate}}</text>
+                    <text>{{depWeek}}</text>
+                </picker>
+            </view>
+        </view>
+        <view class="ticket-date ticket-date-double flex align-center justify-content-space-between {{ticketType==1?'':'none'}}" >
+            <view class="date_wrap ">
+                <picker bindchange='bindqcDateChange' data-name='flyDate' mode="date" start='{{startDate}}' end='{{endDate}}' >
+                    <text>{{depDate}}</text>
+                    <text>{{depWeek}}</text>
+                </picker>
+            </view>
+            <view class="date_wrap flex justify-content-end">
+                <picker bindchange='bindqcDateChange' data-name='arrDate' mode="date" start='{{startDate}}' end='{{endDate}}' >
+                    <text>{{arrDate}}</text>
+                    <text>{{arrWeek}}</text>
+                </picker>            
+            </view>
+        </view>
+        <view class="ticket-find" catchtap="goTicket">
+            <view>搜索</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,85 @@
+/* pages/sscx/sscx.wxss */
+@import "../../template/template.wxss";
+.header-content{
+  width: 100%;
+  
+}
+.header-back-img{
+  position: relative;
+  width: 100%;
+  height: 450rpx;
+}
+.color-f4{
+  color: #f4393c;
+}
+.color-45{
+  color: #47aefe;
+}
+.height-1{
+  position: absolute;
+  left: -20rpx;
+  top: 50%;
+  margin-top: -12rpx;
+  height: 24rpx;
+  width: 8rpx;
+  background: #f4393c;
+}
+.height-10{
+  width: 100%;
+  height: 20rpx;
+  background: #f3f5f7;
+}
+.border-b{
+  border-bottom: 1px solid #e1e1e1;
+}
+.margin-l-3{
+  margin-left: 30rpx;
+}
+.margin-l-4{
+  margin-left: 40rpx;
+}
+.margin-l-6{
+  margin-left: 60rpx;
+}
+.padding-tb-3{
+  padding: 40rpx 0rpx;
+}
+.margin-b-10{
+  margin-bottom: 100rpx;
+}
+
+.modal-content{
+  width: 80%;
+  margin: 55% auto;
+  background: #fff;
+  font-size: 30rpx;
+  font-family: "微软雅黑";
+  padding: 20rpx;
+  border-radius: 5px;
+}
+
+
+.header{
+  width: 100%;
+}
+.header-swiper{
+  width: 100%;
+  position: relative;
+}
+.header-swiper .header-con {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10rpx 0rpx;
+  z-index: 9;
+}
+
+.header-swiper .header-con .header-left {
+  width: 60rpx;
+}
+
+.header-swiper .header-con .header-right {
+  width: 60rpx;
+  text-align: right;
+}

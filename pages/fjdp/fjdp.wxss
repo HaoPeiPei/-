@@ -1,0 +1,39 @@
+/* pages/fjdp/fjdp.wxss */
+@import "../../template/template.wxss";
+
+.mr-btn{
+  background:#979596;
+  color: #fff;
+}
+.xz-btn{
+  border-top:1px solid #f4393c;
+   color: #333;
+}
+.icon-1{
+  width: 100rpx;
+  height: 80rpx;
+  margin: 0rpx 30rpx;
+}
+.icon-1 image{
+  width: 100%;
+  height: 100%;
+}
+.margin-t-5{
+  margin-top: 60rpx;
+}
+.margin-b-5{
+  margin-bottom: 40rpx;
+}
+.border-b{
+  border-bottom: 1px solid #e1e1e1;
+}
+.margin-1{
+  margin:20rpx 20rpx 0rpx 20rpx;
+}
+.font-xq{
+  font-size: 20rpx;
+}
+.seek-btn{
+  background: #f4393c;
+  color: #fff;
+}

@@ -1,0 +1,65 @@
+/* pages/wycx/xzhb/xdzf/xdzf.wxss */
+
+@import "../../../../template/template.wxss";
+
+.icon-hb{
+  width: 26rpx;
+  height: 26rpx;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-hb.enlarge-1{
+  width: 30rpx;
+  height: 30rpx;
+}
+.icon-hb.enlarge-2{
+  width: 40rpx;
+  height: 40rpx;
+}
+.margin-lr-30{
+  margin: 0rpx 30rpx;
+}
+.tjcjr{
+  font-size: 24rpx;
+  padding: 15rpx 30rpx;
+  border: 1px #3eabff dashed;
+  color: #3eabff;
+  margin-left: 40rpx;
+}
+/*swtich整体大小*/
+.wx-switch-input{
+  width:82rpx !important;
+  height:50rpx !important;
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before{
+  width:80rpx !important;
+  height: 46rpx !important;
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after{
+  width: 40rpx !important;
+  height: 46rpx !important;
+}
+
+.yhj-back{
+  padding:5rpx 30rpx;
+  border-radius:10rpx;
+  font-size:26rpx;
+  background:#cccccc;
+  color:#ffffff;
+}
+.yhj-back.yy{
+  background:#f4393c;
+}
+
+.backod-1{
+  background: #3b3636;
+}
+.backod-2{
+  background: #f4393c;
+}
+.border-t-1{
+  border-top: 1px solid #dbdbdb;
+}

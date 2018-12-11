@@ -1,0 +1,44 @@
+<template name="header_content_backod">
+  <view class='header'>
+    <view class='header_backod'>
+      <view class='header-con'>
+        <view class='box box-f1 box-hor color-f margin-lr-1'>
+          <view class='header-left'>
+            <image src='{{left_icon}}' style='width:16rpx;' mode='widthFix' />
+          </view>
+          <view class='box box-f1 box-apc font-13'>{{title_text}}</view>
+          <view class='header-right'>
+            <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;' mode='widthFix' />
+          </view>
+        </view>
+      </view>
+      <view class='img-con'>
+        <image src='{{background_url}}' class='img' mode='widthFix' />
+      </view>
+    </view>
+  </view>
+</template>
+
+<template name="header_content_noBackod">
+  <view class='header'>
+    <view class='header_noBackod'>
+      <view class='header-con'>
+        <view class='box box-f1 box-hor  margin-lr-1'>
+          <view class='header-left'>
+            <image src='{{left_icon}}' style='width:30rpx;' mode='widthFix' />
+          </view>
+          <view class='box box-f1 box-apc font-13'>{{title_text}}</view>
+          <view class='header-right'>
+            <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;' mode='widthFix' />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+
+<!-- <image src='{{left_icon}}'></image>
+ {{title_text}}
+ <image src='{{right_icon}}' ></image>
+ <image src='{{background_url}}'></image> -->

@@ -1,0 +1,28 @@
+/* pages/jsj/jsj.wxss */
+ @import "../../template/template.wxss"; 
+
+ .aa{
+   position: relative;
+   top: -110rpx;
+ }
+ .border-b-1{
+   border-bottom: 1px solid #dadada;
+ }
+.height-10{
+  width: 100%;
+  height: 20rpx;
+  background: #f3f5f7;
+}
+.color-4c{
+  color:#4cb0ff;
+}
+.backod-f4{
+  background: #f4393c;
+}
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}

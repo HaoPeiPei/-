@@ -1,0 +1,98 @@
+<!--pages/gbt/gbtDetails/qrdd/qrdd.wxml-->
+<import src="../../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+
+<!--订单详情  -->
+<view class='box box-f1 backgd-f margin-t-10'>
+  <view class='box box-f1 box-ver margin-lr-20'>
+    <view class='box box-f1 box-ac padding-tb-20 border-b-1'>
+      <view style='background:url(../../../images/ddxq_icon_b.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
+      <view class='box box-f1 box-ac font-15 margin-l-10'>订单详情</view>
+    </view>
+    <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15 border-b-1'>
+      <view class='color-9' style='width:160rpx;'>服务项目</view>
+      <view class='box box-f1 box-ac'>
+        <input type='text' value='卓怿头等舱休息室' />
+      </view>
+    </view>
+    <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15 border-b-1'>
+      <view class='color-9' style='width:160rpx;'>起飞机场</view>
+      <view class='box box-f1 box-ac'>
+        <input type='text' value='深圳宝安机场' />
+      </view>
+    </view>
+    <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15'>
+      <view class='color-9' style='width:160rpx;'>使用日期</view>
+      <picker mode="date" start="2018-01-01" end="2018-12-30" value='{{valueString}}' bindchange='bindDateChange'>
+        <view class='box box-f1 box-ac'>
+          <input type='text' value='{{valueString}}' placeholder='请选择使用日期' placeholder-style="color:#dddddd;" />
+        </view>
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class='box box-f1 backgd-f margin-t-10'>
+  <view class='box box-f1 box-ver margin-lr-20'>
+    <view class='box box-f1 box-ac padding-tb-15 border-b-1'>
+      <view style='background:url(../../../images/lxr_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
+      <view class='box box-f1 box-ac font-15 margin-l-10'>
+        <view class='color-9' style='width:120rpx;'>联系人</view>
+        <view class='box box-f1 box-ac'>
+          <input type='text' value='周琦' />
+        </view>
+      </view>
+    </view>
+    <view class='box box-f1 font-15 margin-l-35 box-ac padding-tb-15'>
+      <view class='color-9' style='width:120rpx;'>手机号</view>
+      <view class='box box-f1 box-ac'>
+        <input type='text' value='15988762000' />
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='box box-f1 backgd-f margin-t-10'>
+  <view class='box box-f1 box-ver margin-lr-20'>
+    <view class='box box-f1 box-ac padding-tb-15'>
+      <view style='background:url(../../../images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
+      <view class='box box-f1 box-ac font-15 margin-l-10' bindtap='bindYhjChange'>
+        <view class='color-9' style='width:120rpx;'>优惠券</view>
+        <view class='yhj-back {{yhi_gs > 0?"yy":""}}'>{{yhi_gs}}</view>
+        
+      </view>
+      <view class='box box-pe box-ac'>
+          <switch checked=''></switch>
+        </view>
+    </view>
+  </view>
+</view>
+
+<view class='box box-f1 backgd-f margin-t-10'>
+  <view class='box box-f1 box-ver margin-lr-20'>
+    <view class='box box-f1 box-ac padding-tb-20 border-b-1'>
+      <view style='background:url(../../../images/zffs_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
+      <view class='box box-f1 box-ac font-15 margin-l-10'>
+        <view class='color-9' style='width:120rpx;'>支付方式</view>
+      </view>
+    </view>
+    <view class='box box-f1 font-15 margin-l-35 box-ac padding-tb-15'>
+      <view class='color-9' style='width:120rpx;'>微信支付</view>
+       <view class='box box-f1 box-ac box-pe'>
+        <view style='background:url(../../../images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:50rpx;height:50rpx;'></view>
+      </view> 
+    </view>
+  </view>
+</view>
+
+<view style='position:fixed;bottom:0;width:100%;'>
+  <view class='box box-f1 box-ac backod-2'>
+    <view class='box box-f1 box-ver backod-1 padding-tb-2'>
+      <view class='box box-f1 font-13 color-f4 margin-l-1'>￥:
+        <text class='font-18'>210</text>
+      </view>
+      <view class='box box-f1 font-13 color-f  margin-l-1'>应付金额</view>
+    </view>
+    <view style='font-size:30rpx;color:#ffffff;padding:0rpx 100rpx;' bindtap='bindZfChange'>去支付</view>
+  </view>
+</view>

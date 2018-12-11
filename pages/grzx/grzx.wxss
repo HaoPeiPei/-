@@ -1,0 +1,103 @@
+/* pages/grzx/grzx.wxss */
+@import "../../template/template.wxss";
+.view-grzx {
+  height: 80rpx;
+  background-color: #000;
+  color: #fff;
+}
+.grxx{
+  height: 200rpx;
+  padding: 0rpx 30rpx;
+  background-color: #000;
+  color: #fff;
+}
+.tuoxiang{
+  position: relative;
+  width: 200rpx;
+  
+}
+.tuoxiang image{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -70rpx;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+}
+.tuichu{
+  width: 120rpx;
+  height: 100%;
+}
+.tuichu image{
+  width: 85rpx;
+  height: 85rpx;
+}
+
+.lines-1{
+  width: 4rpx;
+  height: 150rpx;
+  background-color: #d7d7d7;
+}
+.lines-2{
+  width: 100%;
+  height:20rpx;
+  background-color: #d7d7d7;
+}
+
+ul {
+  display: block;
+  width: 100%;
+
+}
+
+ul li {
+  display: block;
+  width: 100%;
+  line-height: 100rpx;
+}
+
+ul li .li-view {
+  border-bottom: 1px solid #d7d7d7;
+  margin: 0rpx 30rpx;
+  color: #333;
+}
+ul li:last-child .li-view{
+  border-bottom: 0px solid #d7d7d7;
+}
+.image-1 {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.image-2 {
+  width: 20rpx;
+  height: 25rpx;
+}
+.submit-but{
+  padding: 10rpx 40rpx;
+  color: #ffffff;
+  background: #4f4a4a;
+}
+
+.erm-cont{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.5);
+}
+.erm-text{
+  width: 80%;
+}
+.back-0{
+  background: rgba(255,255,255,0.8);
+  border-radius: 10rpx;
+}
+.padding-tb-50{
+  padding: 60rpx 0rpx;
+}
+.color-eb{
+  color: #eb9b00;
+}

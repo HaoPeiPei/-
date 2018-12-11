@@ -1,0 +1,99 @@
+<!--pages/jd/jd_xq/jd_payment/jd_payment.wxml-->
+<import src="../../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+
+<view class='box box-f1 box-ver'>
+  <form>
+    <view class='box box-f1 box-ver backgd-f'>
+      <view class='box box-f1 margin-lr-20 border-b-1 padding-tb-30'>
+        <view style='width:160rpx;' class='font-15'>豪华双人间</view>
+        <view class='box box-f1 box-ac box-pe font-13 color-9'>2~8层</view>
+      </view>
+    </view>
+    <view class='box box-f1 box-ver backgd-f'>
+      <view class='box box-f1 margin-lr-20 border-b-1 padding-tb-30'>
+        <view style='width:160rpx;' class='font-14'>
+          <view class='box box-f1 box-hor box-ac'>
+            <view style='background:url(../../../images/data_icon_1.png) no-repeat center center;background-size:100% 100%;width:26rpx;height:26rpx;'></view>
+            <view class='box margin-l-10'>入住时间</view>
+          </view>
+        </view>
+        <view class='box box-f1  box-pe font-13 color-9'>
+          <picker mode="date" style='width:100%' start="2018-06-20" end="2018-12-30" bindchange='bindDateChange_1'>
+            <view class='box box-f1 box-hor box-ac'>
+              <view class='box box-f1 box-ac box-pe margin-r-10 color-3'>{{values_1}}</view>
+              <view style='background:url(../../../images/arrow_r_1.png) no-repeat center center;background-size:100% 100%;width:14rpx;height:24rpx;'></view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='box box-f1 margin-lr-20 padding-tb-30'>
+        <view style='width:160rpx;' class='font-14'>
+          <view class='box box-f1 box-hor box-ac'>
+            <view style='background:url(../../../images/data_icon_1.png) no-repeat center center;background-size:100% 100%;width:26rpx;height:26rpx;'></view>
+            <view class='box margin-l-10'>离店时间</view>
+          </view>
+        </view>
+        <view class='box box-f1  box-pe font-13 color-9'>
+          <picker mode="date" style='width:100%' start="2018-06-20" end="2018-12-30" bindchange='bindDateChange_2'>
+            <view class='box box-f1 box-hor box-ac'>
+              <view class='box box-f1 box-ac box-pe margin-r-10 color-3'>{{values_2}}</view>
+              <view style='background:url(../../../images/arrow_r_1.png) no-repeat center center;background-size:100% 100%;width:14rpx;height:24rpx;'></view>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class='box box-f1 margin-t-10 backgd-f'>
+      <view class='box box-f1 margin-lr-20 box-ver'>
+        <view class='box box-f1 box-hor padding-tb-30 font-13 box-ac border-b-1'>
+          <view style='width:120rpx' class='color-9'>房间数</view>
+          <view class='box box-f1'>
+            <text>{{indexs}}</text> 间</view>
+          <view style='padding:10rpx 20rpx;' bindtap='bindListChange'>
+            <view style='background:url(../../../images/xl_icon.png) no-repeat center center;background-size:100% 100%;width:24rpx;height:14rpx;' ></view>
+          </view>
+        </view>
+        <view class='box box-f1 box-hor padding-tb-30 font-13 box-ac border-b-1 {{inBind?"":"none"}}'>
+          <view class='float-text'>
+            <block wx:for="{{number_rooms}}" wx-index="index">
+              <view class='float-l {{index>4?"margin_30":""}}'>
+                <view class='box box-f1 box-apc'>
+                  <view class=' font-14 {{indexs==index+1?"back-1":"back-2"}}' bindtap='bindLengChange' data-indexs="{{item}}">{{item}}</view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+        
+        <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1'>
+          <view style='width:120rpx;' >入住人</view>
+          <view class='box box-f1 box-ac'>
+            <input type='text' placeholder='每间需要填写一人姓名' style='line-height:40rpx;height:40rpx;min-height:40rpx;width:100%' placeholder-style="color:#cccccc;"></input>
+          </view>
+          <view style='background:url(../../../images/add_icon_1.png) no-repeat center center;background-size:100% 100%;width:40rpx;height:40rpx;'></view>
+        </view>
+
+        <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1'>
+          <view style='width:120rpx;' >联系人</view>
+          <view class='box box-f1 box-ac box-pe color-3'>周琦</view>
+        </view>
+        <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 '>
+          <view style='width:120rpx;' >联系电话</view>
+          <view class='box box-f1 box-ac box-pe color-3'>18506327792</view>
+        </view>
+      </view>
+    </view>
+    <view style='position:fixed;bottom:0;width:100%;'>
+  <view class='box box-f1 box-ac backod-2'>
+    <view class='box box-f1 box-ver backod-1 padding-tb-2'>
+      <view class='box box-f1 font-13 color-f4 margin-l-1'>￥:
+        <text class='font-18'>44</text>
+      </view>
+      <view class='box box-f1 font-13 color-f  margin-l-1'>应付金额</view>
+    </view>
+    <view style='font-size:30rpx;color:#ffffff;padding:0rpx 100rpx;'>去支付</view>
+  </view>
+</view>
+  </form>
+</view>

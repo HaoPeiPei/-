@@ -1,0 +1,79 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wx9766d9666a9dd73d",
+	"projectname": "%E7%8E%AF%E7%90%83%E6%9C%BA%E5%9C%BA%E9%80%9A1.2",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "ydjp",
+					"pathName": "pages/ydjp/ydjp",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "ticket",
+					"pathName": "pages/ydjp/ticket/ticket",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "selectAir",
+					"pathName": "pages/ydjp/selectAir/selectAir",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "airTicketOrder",
+					"pathName": "pages/ydjp/airTicketOrder/airTicketOrder",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "xzhb",
+					"pathName": "pages/wycx/xzhb/xzhb",
+					"query": ""
+				},
+				{
+					"id": 5,
+					"name": "region",
+					"pathName": "pages/ydjp/region/region",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "xdzf",
+					"pathName": "pages/wycx/xzhb/xdzf/xdzf",
+					"query": ""
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,79 @@
+/* pages/dwcs/dwcs.wxss */
+page{
+  background: #eee;
+  height: 100%;
+  position: relative;
+}
+.src{
+  height: 100%;
+}
+.rques-city{
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 100rpx 20rpx 20rpx 20rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  color: #333;
+}
+ul.cc{
+  display: block;
+  width: 100%;
+}
+ul.cc li{
+  display: inline-block;
+  float: left;
+  width: 25%;
+  margin:10rpx 0rpx;
+  
+}
+ul li .li-view{
+  /* width:165rpx; */
+  height: 58rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  text-align: center;
+  color: #333;
+  line-height: 58rpx;
+  margin: 0rpx 20rpx;
+}
+.aa{
+  font-size: 27rpx;
+}
+ul li .li-view.bb{
+  padding: 0rpx 8rpx;
+}
+ul li.city{
+  display: inline-block;
+  margin:10rpx 0rpx;
+  float: none;
+  width: 100%;
+   
+}
+ul li.city:last-child{
+  
+  margin:10rpx 0rpx 0rpx 0rpx;
+}
+.city-list{
+  position: fixed;
+  height:1024rpx;
+  top:180rpx;
+  right:0rpx;
+  z-index:999;
+  margin-right:18rpx;
+}
+.alphabet{
+  display:block;
+  width:50rpx;
+  font-size:23rpx;
+  color:#0099ff;
+}
+.alphabet-text{
+  display:block;
+  text-align:center;
+  padding:10rpx 0rpx;
+}
+.city-back{
+  background:#fff;
+  border-bottom:1px solid #eee;
+  padding: 20rpx 0rpx 20rpx 20rpx;
+}

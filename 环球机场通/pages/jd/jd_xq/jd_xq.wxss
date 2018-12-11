@@ -1,0 +1,29 @@
+/* pages/jd/jd_xq/jd_xq.wxss */
+@import "../../../template/template.wxss";
+.back-e{
+  background: #3eabff;
+  padding: 0rpx 5rpx;
+  color: #ffffff;
+  border-radius: 5rpx;
+  margin-right: 20rpx;
+}
+.color-3e{
+  color: #3eabff;
+}
+.float-l{
+  float: left;
+  width: 25%;
+}
+.padding-tb-40{
+  padding: 40rpx 0rpx;
+}
+.padding-tb-30{
+  padding: 30rpx 0rpx;
+}
+.back-2{
+  background: #f4393c;
+  padding: 8rpx 28rpx;
+  color: #ffffff;
+  border-radius: 5rpx;
+  font-size: 30rpx;
+}

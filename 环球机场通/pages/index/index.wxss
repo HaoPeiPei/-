@@ -1,0 +1,174 @@
+/*index.wxss  */
+
+ul, li {
+  outline: none;
+}
+
+/*轮播start */
+
+.swiper-content {
+  width: 100%;
+  height: 400rpx;
+  position: relative;
+}
+
+.swiper {
+  height: 100%;
+}
+
+swiper {
+  height: 100%;
+}
+
+.lcoation-bottom {
+  width: 100%;
+  height: 80rpx;
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+}
+
+.location-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0rpx 10rpx;
+}
+
+.location-icon image {
+  width: 100%;
+  height: 100%;
+}
+
+.location-icon.ss {
+  position: relative;
+  width: 100%;
+  height: 50rpx;
+}
+
+.location-icon.ss text {
+  height: 40rpx;
+  line-height: 50rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 28rpx;
+  text-indent: 10rpx;
+}
+
+.location-icon.bottoms{
+  width:50rpx;
+  height: 50rpx;
+  margin: 0rpx 80rpx 0rpx 20rpx;
+}
+/* .bottoms {
+  margin: 0rpx 80rpx 0rpx 20rpx;
+} */
+
+.inputs {
+  margin-left: 20rpx;
+  width: 90%;
+  line-height: 60rpx;
+  /* border: 1px solid #333; */
+}
+
+.placeholdes {
+  font-size: 28rpx;
+  padding-left: 20rpx;
+}
+
+/*轮播end */
+
+/*服务start  */
+
+.main {
+  width: 100%;
+}
+
+.service {
+  display: block;
+  padding: 30rpx 25rpx;
+  overflow: hidden;
+  font-size: 28rpx;
+}
+
+.service li {
+  float: left;
+  width: 25%;
+  margin: 20rpx 0rpx;
+}
+
+.colors {
+  color: #dedede;
+}
+
+.color-3{
+  color: #333333;
+}
+.flex {
+  width: 100%;
+  height: 200rpx;
+  background-color: #eee;
+  padding: 30rpx 0rpx;
+  overflow: hidden;
+}
+
+.advert-line {
+  width: 20rpx;
+  height: 100%;
+  background-color: #eee;
+  display: inline-block;
+}
+
+.padding-1 {
+  padding: 30rpx 0rpx 25rpx 0rpx;
+}
+
+.rmfu {
+  line-height: 40rpx;
+  height: 40rpx;
+  margin: 0rpx 10rpx;
+}
+
+.view-1 {
+  height: 100%;
+}
+ .view-2{
+  height: 70rpx;
+ }
+.image-1 {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.image-2 {
+  width: 100%;
+  height: 250rpx;
+}
+
+.image-3 {
+  width: 16rpx;
+  height: 26rpx;
+  
+}
+
+.back-1 {
+  display: inline-block;
+  width: 48.6%;
+  height: 100%;
+}
+
+.back-2 {
+  display: inline-block;
+  width: 5rpx;
+  height: 40rpx;
+}
+
+.back-3 {
+  display: inline-block;
+  width: 8rpx;
+  height: 31rpx;
+}
+
+/*服务end  */
+
+

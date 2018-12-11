@@ -1,0 +1,88 @@
+/* pages/ydjp/ydjp.wxss */
+/* header */
+.wrap{
+    height: 100vh;
+    background-color: #fff; 
+}
+.header-top{
+    width: 100%;
+    height: 385rpx;
+    position: relative;
+    top: 0rpx;
+    left: 0rpx;
+    background-color: #f5f5f5;
+}
+.header-top .header-title{
+    height: 80rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 35rpx;
+}
+.header-top .header-title .icon-arror-l{
+    margin: 37rpx 0 0 24rpx;
+}
+.header-top .header-title  .title{
+    margin-top: 30rpx;
+}
+.header-top .header-title .icon-phone{
+    margin: 30rpx 25rpx 0 0 ;
+}
+.main{
+    padding: 0 25rpx;
+}
+.main .ticket-type{
+    background-color: #979596;
+    color: #fff;
+    height: 95rpx;
+    line-height: 95rpx;
+    font-size: 30rpx;
+    background-color: #fff;
+}
+.main .ticket-type .text{
+    border-top: 8rpx solid #979596;
+    background-color: #979596;
+}
+.main .ticket-type .text.active{
+    background-color: #FFF;
+    color: #000;
+    border-top: 8rpx solid #f4393c;
+    opacity: 1 !important;
+}
+.main .ticket-city{
+    padding: 80rpx 15rpx;
+    font-size: 35rpx;
+}
+.main .ticket-city .i-arror{
+    width: 50rpx;
+}
+.main .ticket-city .i-arror i{
+    font-size: 50rpx;
+}
+.ticket-date .date_wrap text:nth-child(1){
+    font-size: 34rpx;
+    margin-right: 20rpx;
+}
+.ticket-date .date_wrap text:nth-child(2){
+    font-size: 20rpx;
+}
+.ticket-date-single .date_wrap{
+    width: 100%;
+    height: 65rpx;
+    border-bottom: 1rpx solid #d7d7d7;
+    padding: 0 0 30rpx 15rpx;
+}
+.ticket-date-double .date_wrap{
+    width: 290rpx;
+    height: 65rpx;
+    border-bottom: 1rpx solid #d7d7d7;
+    padding: 0 15rpx 30rpx 15rpx;
+}
+.ticket-find{
+    margin-top: 72rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    color: #fff;
+    background-color: #f4393c;
+    font-size: 32rpx;
+}

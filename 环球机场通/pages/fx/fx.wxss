@@ -1,0 +1,33 @@
+/* pages/fx/fx.wxss */
+
+page {
+  background-color: #eee;
+}
+
+.view-fx {
+  height: 100rpx;
+  background-color: #fff;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.view-imag {
+  height: 500rpx;
+  padding: 30rpx;
+}
+
+.view-2 {
+  width: 100%;
+  height: 380rpx;
+}
+
+.view-1 {
+  height: 100rpx;
+}
+
+.backgr-w {
+  background-color: #fff;
+}
+
+.color-90 {
+  color: #999;
+}

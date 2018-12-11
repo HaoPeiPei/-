@@ -1,0 +1,65 @@
+<!--pages/jsj/map/map.wxml-->
+<import src="../../../template/template.wxml" />
+
+<template is="header_content_noBackod" data="{{...header_text}}" />
+
+<view class='dt-map'>
+  <map longitude="113.819126" latitude="22.631878" scale="15"></map>
+</view>
+<view class='seek-con'>
+  <view class='seek-text'>
+    <view class='box box-f1 box-ac' style='height:100%'>
+      <view class='box box-ac' style='height:100%;margin-left:40rpx;'>
+        <image src='../../images/seek_f.png' style='width:40rpx;' mode='widthFix'></image>
+      </view>
+      <view class='box box-ac box-f1 margin-l-1'>
+        <view class='seek-input'>
+          <view class='box box-f1 height-100 box-hor'>
+            <view class='padding-lr-1 font-16 color-3 height-100 ' style='line-height:60rpx;'>深圳</view>
+            <view class='box box-as height-100'>
+              <image src='../../images/yjt_3.png' style='width:16rpx;' mode='widthFix'></image>
+            </view>
+            <view class='box box-f1 box-ac margin-l-1 font-14'>
+              <input type='text' placeholder='请输入地址...' style='width:90%;'></input>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='seek-list'>
+    <view class='box box-f1 padding-tb-1 margin-lr-1 border-b-1'>
+      <view class='box box-f1 margin-lr-1 box-ver '>
+        <view class='box box-f1 font-15'>盐田2区</view>
+        <view class='box box-f1 font-13 color-9'>
+          <view class='box box-ac'>
+            <image src='../../images/dw_icon.png' style='width:15rpx;' mode='widthFix'></image>
+          </view>
+          <view class='box box-f1 margin-l-1'>福永镇怀德村</view>
+        </view>
+      </view>
+    </view>
+    <view class='box box-f1 padding-tb-1 margin-lr-1 border-b-1'>
+      <view class='box box-f1 margin-lr-1 box-ver '>
+        <view class='box box-f1 font-15'>盐田2区</view>
+        <view class='box box-f1 font-13 color-9'>
+          <view class='box box-ac'>
+            <image src='../../images/dw_icon.png' style='width:15rpx;' mode='widthFix'></image>
+          </view>
+          <view class='box box-f1 margin-l-1'>福永镇怀德村</view>
+        </view>
+      </view>
+    </view>
+    <view class='box box-f1 padding-tb-1 margin-lr-1 border-b-1'>
+      <view class='box box-f1 margin-lr-1 box-ver '>
+        <view class='box box-f1 font-15'>盐田2区</view>
+        <view class='box box-f1 font-13 color-9'>
+          <view class='box box-ac'>
+            <image src='../../images/dw_icon.png' style='width:15rpx;' mode='widthFix'></image>
+          </view>
+          <view class='box box-f1 margin-l-1'>福永镇怀德村</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

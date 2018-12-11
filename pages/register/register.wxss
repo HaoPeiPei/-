@@ -1,0 +1,33 @@
+/* pages/register/register.wxss */
+@import "../../template/template.wxss";
+page{
+  background: #ffffff;
+}
+.margin-lr-30{
+  margin: 0rpx 30rpx;
+}
+.checkd-colo{
+  color: #cccccc;
+}
+.color-9b{
+  color: #9b9b9b;
+}
+.yzm-btn{
+  padding: 10rpx 20rpx;
+  color: #ffffff;
+  background: #f4393c;
+  border-radius: 10rpx;
+}
+.submit-btn{
+  width: 100%;
+  background: #f43931;
+  color: #ffffff;
+  border:0px solid #ffffff;
+  border-radius: 10rpx;
+  line-height: 2;
+  margin-top: 60rpx;
+}
+button{
+  -webkit-appearance:none;
+
+}

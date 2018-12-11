@@ -1,0 +1,11 @@
+/* pages/jd/jd.wxss */
+@import "../../template/template.wxss";
+.height-1{
+  position: absolute;
+  left: 0rpx;
+  top: 0;
+  margin-top: 28rpx; 
+  height: 28rpx;
+  width: 8rpx;
+  background: #f4393c;
+}

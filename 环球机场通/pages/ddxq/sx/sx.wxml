@@ -1,0 +1,41 @@
+<!--pages/ddxq/sx/sx.wxml-->
+<view class="container" style="padding:0rpx">
+  <!--垂直滚动，这里必须设置高度-->
+  <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+    <view class="item" wx:for="{{list}}">
+          <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
+            <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
+              <view class='box box-f1 box-ac'>{{item.service_name}}</view>
+              <view class='dcx-btn' wx:if="{{item.state==1}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
+            </view>
+            <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
+              <view class='box box-f1 font-12 color-9 margin-b-10'>
+                <view style='width:150rpx;'>订单号</view>
+                <view class='box box-f1'>{{item.order_id}}</view>
+              </view>
+              <view class='box box-f1 font-12 color-9 margin-b-10'>
+                <view style='width:150rpx;'>航班号</view>
+                <view class='box box-f1 color-3'>{{item.short_name}}</view>
+              </view>
+              <view class='box box-f1 font-12 color-9 margin-b-10'>
+                <view style='width:150rpx;'>起飞时间</view>
+                <view class='box box-f1 color-3'>{{item.use_date}}</view>
+              </view>
+            </view>
+            <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.state==1}}">
+              <view class='box box-f1 box-ac color-f480'>￥{{item.amount_payment}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-title="{{item.service_title}}" data-state="{{item.state}}">去支付</view>
+            </view>
+            <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
+              <view class='box box-f1 box-ac color-f480'>￥{{item.amount_payment}}</view>
+              <view class='ckxq-btn' bindtap='bianGetChange' data-title="{{item.service_title}}" data-state="{{item.state}}">查看详情</view>
+            </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="body-view">
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+  </view>
+</view>

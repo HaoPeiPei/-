@@ -1,0 +1,144 @@
+/* pages/ddxq/jpdd/ticket_details/ticket_details.wxss */
+@import "../../../../template/template.wxss";
+
+.prompt-btn{
+  padding: 2rpx 10rpx;
+  background: #3eabff;
+  color: #ffffff;
+  border-radius: 5rpx;
+  
+}
+.dzf-btn{
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 130rpx;
+  height: 40rpx;
+  color: #ffffff;
+  line-height: 40rpx;
+  text-align: center;
+}
+.dcx-btn{
+   background-position: center;
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+   width: 130rpx;
+   height: 40rpx;
+   color: #ffffff;
+   line-height: 40rpx;
+   text-align: center;
+}
+.tk-btn{
+   background-position: center;
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+   width: 130rpx;
+   height: 40rpx;
+   color: #ffffff;
+   line-height: 40rpx;
+   text-align: center;
+}
+.border-t-1{
+  border-top: 1px solid #dbdbdb;
+}
+.background-icon{
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 26rpx;
+  height: 26rpx;
+}
+.background-icon-1{
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 5rpx;
+  height: 20rpx;
+}
+.background-icon-2{
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 200rpx;
+  height: 20rpx;
+}
+.background-icon-3{
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 20rpx;
+  height: 18rpx;
+}
+.background-icon-4{
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 18rpx;
+  height: 20rpx;
+}
+.background-icon-5{
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 40rpx;
+  height: 40rpx;
+}
+.background-icon-6{
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 38rpx;
+  height: 38rpx;
+}
+.color-3e{
+  color: #3eabff;
+}
+.margin-l-38{
+  margin-left: 38rpx;
+}
+.margin-l-62{
+  margin-left: 62rpx;
+}
+.footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.submit-btn-1{
+  padding: 25rpx 0rpx;
+  color: #ffffff;
+  font-size: 30rpx;
+}
+.lxkf-btn{
+  background: #f4393c;
+}
+.qxdd-btn{
+  background: #cccccc;
+}
+
+.popup-class{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.popup-content{
+  width: 85%;
+  background: #ffffff;
+  border-radius: 10rpx;
+}
+.margin-40{
+  margin: 40rpx 20rpx;
+}
+.margin-tb-40{
+  margin: 40rpx 0rpx;
+}
+.padding-tb-40{
+  padding: 40rpx 0rpx;
+}
+.padding-b-40{
+  padding-bottom: 40rpx;
+}

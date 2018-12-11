@@ -1,0 +1,529 @@
+<import src="../template/template.wxml" />
+<view class="airTicketOrder" wx-if="{{airTicketOrderShow}}">
+    <view class="header flex font-size-18 b-line c-bg-fff">
+        <i class="back icon-arror-l"></i>
+        <view class="col-1 c-align">
+            国内机票下单
+        </view>
+        <a href="tel:400-700-7355"><i class="icon-phone"></i></a>
+    </view>
+    <view class="main">
+        <view class="flight-info" data-model="flightInfoModel">
+            <!-- ko if:$root.isSingle($data) -->
+            <view class="single-line" wx-if="{{flightInfos&&flightInfos.length == 1}}" wx:for="{{flightInfos}}" wx:key-index="index" wx:for-item="flight">
+                <view class="main-con " >
+                    <view class="flex t-title align-center c-000">
+                        <i  class="airsmall_{{flight.FlightNoIcon}}"></i>
+                        <text data-bind="text: CarrierName + ' ' + FlightNo">{{flight.CarrierName}} {{flight.FlightNo}}</text>
+                        <i class="line"></i>
+                        <text data-bind="text: CabInfos.ClassName + '(' + CabInfos.Class + ')'">{{flight.CabInfos.ClassName}}({{flight.CabInfos.Class}})</text>
+                    </view>
+                    <view class="div-flight flex font-size-13 c-999 c-align align-center">
+                        <view class="col-1">
+                            <view class="c-000" data-bind="text: BeginTime">{{flight.BeginTime}}</view>
+                            <view data-bind="text: DepCityName + '(' + BeginTerm + ')'">{{flight.DepCityName}}({{flight.BeginTerm}})</view>
+                            <view data-bind="text: getMD(DepDate) + ' ' + GetWeek(DepDate)">{{flight.depDate}} {{flight.depWeek}}</view>
+                        </view>
+                        <i class="icon-toArror"></i>
+                        <view class="col-1">
+                            <view class="c-000" data-bind="text: EndTime">{{flight.EndTime}}</view>
+                            <view data-bind="text: ArrCityName + '(' + EndTerm + ')'">{{flight.ArrCityName}}({{flight.EndTerm}})</view>
+                            <view data-bind="text: getMD(ArrDate) + ' ' + GetWeek(ArrDate)">{{flight.arrDate}} {{flight.arrWeek}}</view>
+                        </view>
+                    </view>
+                    <view class="t-line flex align-items air-detail">
+                        <view class="col-1">
+                            <text class="c-999">票价</text>
+                            <text class="c-f4393c price" data-bind="text: '¥' + (parseInt(CabInfos.SalePrice) - parseInt(CabInfos.Promotion))">¥{{flight.FlightLowestPrice}}</text>
+                        </view>
+                        <view class="col-1">
+                            <text class="c-999">机建+燃油</text>
+                            <text class="c-f4393c price" data-bind="text: '¥' + (parseInt(AduOil) + parseInt(Tax))">¥{{flight.aduOilTax}}</text>
+                        </view>
+                        <view class="endorse c-align c-3eabff flex" catchtap="showEndorseModal">
+                            <view>退改详情</view>
+                            <view class="icon-arror-r"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- /ko -->
+            <!-- ko ifnot:$root.isSingle($data) -->
+            <view class="mul-line main-con none" data-bind="FlightInfos">
+                <view class="row-item font-size-15 mul-line">
+                    <view class="flex align-center">
+                        <view class="line-type c-fff c-bg-3eabff font-size-10">去程</view>
+                        <view class="line-info col-1">
+                            <text data-bind="text: getMD(FlightInfos()[0].DepDate)">08-03</text>
+                            <text data-bind="text: FlightInfos()[0].BeginTime">07:25</text>
+                            <text data-bind="text: FlightInfos()[0].FlightNo">HU7706</text>
+                        </view>
+                        <view class="line-arror c-fff font-size-10 c-bg-f4393c" data-bind="click: $root.showDetail"><i class="icon-arror-r"></i></view>
+                    </view>
+                    <view class="flex align-center">
+                        <view class="line-type c-fff c-bg-3eabff font-size-10">回程</view>
+                        <view class="line-info col-1">
+                            <text data-bind="text: getMD(FlightInfos()[1].DepDate)">08-03</text>
+                            <text data-bind="text: FlightInfos()[1].BeginTime">07:25</text>
+                            <text data-bind="text: FlightInfos()[1].FlightNo">HU7706</text>
+                        </view>
+                    </view>
+                    <view class="t-line flex align-items mul-price">
+                        <view class="col-1">
+                            <view class="c-999 font-size-10">票价</view>
+                            <view class="c-f4393c" data-bind="text: '¥' + ((parseInt(FlightInfos()[0].CabInfos.SalePrice) - parseInt(FlightInfos()[0].CabInfos.Promotion)) + (parseInt(FlightInfos()[1].CabInfos.SalePrice) - parseInt(FlightInfos()[1].CabInfos.Promotion)))">¥3500</view>
+                        </view>
+                        <view class="col-1">
+                            <view class="c-999 font-size-10">机建+燃油</view>
+                            <view class="c-f4393c" data-bind="text: '¥' + ((parseInt(FlightInfos()[0].AduOil) + parseInt(FlightInfos()[0].Tax)) + (parseInt(FlightInfos()[1].AduOil) + parseInt(FlightInfos()[1].Tax)))">¥100</view>
+                        </view>
+                        <view class="endorse c-align c-3eabff font-size-10" catchtap="showEndorseModal" >
+                            <view>退改详情</view>
+                            <view class="icon-arror-d"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- /ko -->
+            <view class="main-con  passengers">
+                <view class="flex t-title align-center b-line c-999 font-size-32">
+                    <view class="luckyMan col-1 flex">
+                        <i class="icon-luckyMan icon font-size-38"></i>
+                        乘机人<text class="font-size-24">已选乘客：0人</text>
+                    </view>
+                    <text class="sp-add c-3eabff" catchtap="showAddPassengerModal">+ 添加乘机人</text>
+                </view>
+                <view class="passengerInfo" data-model="passengerModel" data-bind="foreach: SelectedPassengers">
+                    <view class="flex align-center text-item b-line c-999 selectedPassenger-info">
+                        <i class="icon-del c-f4393c font-size-40" bindsubmit="Del(this)"></i>
+                        <view class="col-1 row-con">
+                            <view class="row-con-group">
+                                <text class="col-title">姓名:</text>
+                                <text class="col-content" data-bind="text: name">13231</text>
+                            </view>
+                            <view class="row-con-group">
+                                <text class="col-title" data-bind="text: $root.getCertType($data)">身份证:</text>
+                                <text class="col-content" data-bind="text: $root.getCertNo($data)">1313131</text>
+                            </view>
+                        </view>
+                        <i class="icon-edit c-ededed font-size-40" bindsubmit="Del(this)"></i>
+                    </view>
+                </view>
+            </view>
+            <view class="main-con font-size-32 c-999 contact">
+                <view class="flex t-title align-center">
+                    <i class="icon-contacts icon font-size-38"></i>
+                    联系人
+                    <input type="text" class=" col-1" id="contactor" name="contactor" value="" data-value="<%=user.realName %>" placeholder="请输入联系人" />
+                </view>
+                <view class="flex t-title align-center">
+                    <i class="icon-phone icon ico-spac font-size-38"></i>
+                    手机号
+                    <input type="text" class=" col-1" id="contactTel" name="contactTel" value="" data-value="<%=user.mobile %>" placeholder="请输入联系方式" />
+                </view>
+            </view>
+            <view class="main-con font-size-32">
+                <view class="flex t-title align-center justify-content-space-between">
+                    <view>
+                        <i class="icon-vipMoon icon ico-spac c-3eabff font-size-38"></i>
+                        <text>航班意外险</text>
+                        <i class="i-spac icon-hint c-f4393c bx"></i>
+                    </view>
+                    <view>
+                        <text class="c-999 marginR70">¥40/人</text>
+                        <text class="switch {{buyInsurance==1?'on':''}}" data-buyinsurance="{{buyInsurance}}" catchtap="insuranceSelect">
+                            <text class="switch-node"></text>
+                        </text>
+                    </view>
+                </view>
+            </view>
+            <view data-model="flightInfoModel">
+                <!-- ko if:$root.isSingle($data) -->
+                <view class="main-con font-size-32">
+                    <view class="flex t-title c-999 align-center justify-content-space-between">
+                        <view>
+                            <i class="icon-worryFree ico-spac icon font-size-38"></i>
+                            <text>无忧出行</text>
+                            <i class="i-spac icon-hint c-f4393c" bindsubmit="showWorryFree('0')"></i>
+                        </view>
+                        <view>
+                            <text class="c-999 ">¥</text>
+                            <text class="singleServicePrice marginR70">/人</text>
+                            <text class="switch {{buySingleService==1?'on':''}}" data-buysingleservice="{{buySingleService}}" catchtap="singleServiceSelect">
+                                <text class="switch-node"></text>
+                            </text>
+                        </view>
+                    </view>
+                    <view id="region_single" class="flex align-center singleService" data-type="singleService" wx-if="{{buySingleService==1}}" catchtap="selectArea">
+                        <view class="col-1 col-title row-data">
+                            {{singlePosition}} {{singleArea}}
+                        </view>
+                        <i class="icon-arror-r"></i>
+                    </view>
+                </view>
+                <!-- /ko -->
+                <!-- ko ifnot:$root.isSingle($data) -->
+                <view class="main-con font-size-32 none">
+                    <view class="flex t-title align-center">
+                        <i class="icon-worryFree ico-spac icon font-size-38"></i>
+                        <view class="col-1">去程无忧出行<i class="i-spac icon-hint c-f4393c" bindsubmit="showWorryFree('0')"></i></view>
+                        <view class="col-1 c-999">¥<font class="singleServicePrice"></font>/人</view>
+                        <i class="close1" id="singleServiceSelect"><i class="close2"></i></i>
+                    </view>
+                    <view id="region_single" class="flex align-center singleService" style="display: none">
+                        <view class="col-1 row-item row-data" >
+                            {{roundPosition}} {{roundArea}}
+                        </view>
+                        <i class="icon-arror-r"></i>
+                    </view>
+                </view>
+                <view class="main-con font-size-32 none">
+                    <view class="flex t-title c-999 align-center">
+                        <i class="icon-worryFree ico-spac icon font-size-38"></i>
+                        <view class="col-1">回程无忧出行<i class="i-spac icon-hint c-f4393c" bindsubmit="showWorryFree('1')"></i></view>
+                        <view class="col-1 c-999">¥<font class="roundServicePrice"></font>/人</view>
+                        <i class="close1" id="roundServiceSelect"><i class="close2"></i></i>
+                    </view>
+                    <view id="region_round" class="flex align-center roundService" style="display: none">
+                        <view class="col-1 row-item row-data">
+                            {{roundPostion}} {{roundArea}}
+                        </view>
+                        <i class="icon-arror-r"></i>
+                    </view>
+                </view>
+                <!-- /ko -->
+            </view>
+            <view class="main-con font-size-32">
+                <view class="flex t-title c-999 align-center justify-content-space-between">
+                    <view>
+                        <i class="icon-information icon font-size-38"></i>
+                        <text>报销凭任</text>
+                        <text class="c-999 font-size-24 marginL20">行程单、报销发票</text>
+                    </view>
+                    <view>
+                        <text class="col-1 c-999 c-align marginR70">¥15</text>
+                        <text class="switch {{buyExpress==1?'on':''}}" data-buyexpress="{{buyExpress}}" catchtap="expressSelect">
+                            <text class="switch-node"></text>
+                        </text>
+                    </view>
+                </view>
+                <template is="exprerss" data="{{buyExpress}}"></template>
+            </view>
+        </view>
+    </view>
+    <view class="footer flex c-fff font-size-24">
+        <view class="col-1 show-con price flex ">
+            <view class="c-f4393c">¥:<text class="font-size-40 total-price">0</text></view>
+            <view>应付金额</view>
+        </view>
+        <view class="detail show-con c-fff" data-pricedetailshow="{{priceDetailShow}}" catchtap="showPriceDetail">
+            <view>明细<i class="icon-arror-u c-999 marginL10"></i></view>
+        </view>
+        <view class="p-assur font-size-36">去支付</view>
+    </view>   
+    <template is="priceDetail" data="{{...price,insurancePrice,expressPrice,priceDetailShow}}" />
+</view>
+
+<template is="selectPassenger" data="{{selectPassengerShow}}" />
+
+<template is="passengerDetail" data="{{pasTypePicker,pasCerPicker,passengerDetailShow}}" />
+
+<!--
+<view id="div_endorse" class="bg-div c-bg-000 flex" style="display: none">
+    <view class="pop-full">
+        <text class="pop-full-close" bindsubmit="hideEndorse()"><i></i></text>
+        <view class="pop-content">
+            <view class="title flex b-line">
+                <view class="col-1 first c-align font-size-15" data-value="">去程退改签</view>
+                <view class="col-1 second c-align font-size-15" data-value="">回程退改签</view>
+            </view>
+            <view class="content font-size-15">
+                <view>退票：退票费¥450/人</view>
+                <view>改期：同舱不得改期</view>
+                <view>改签：不得签转</view>
+            </view>
+        </view>
+    </view>
+</view> -->
+<!--
+<view id="div_hint" class="bg-div c-bg-000 flex" style="display: none">
+	<view class="pop-full">
+		<text class="pop-full-close" bindsubmit="hideEndorse()"><i></i></text>
+		<view class="pop-content">
+			<view class="title b-line">
+				<view class="c-align font-size-15">去程退改签</view>
+			</view>
+			<view class="content font-size-15">
+				<view>退票：退票费¥450/人</view>
+				<view>改期：同舱不得改期</view>
+				<view>改签：不得签转</view>
+			</view>
+		</view>
+	</view>
+</view>
+<view id="div_mulLine" class="bg-div c-bg-000 flex" style="display: none">
+    <view class="pop-full" data-model="flightInfoModel" data-bind="foreach: FlightInfos">
+        <text class="pop-full-close" bindsubmit="hideEndorse()"><i></i></text>
+        <view class="pop-content font-size-13">
+            <view class="main-con">
+                <view class="flex t-title align-center c-000">
+                    <i data-bind="css: 'airsmall_' + FlightNo.substring(0, 2)"></i>
+                    <font data-bind="text: CarrierName + ' ' + FlightNo">海南航空 HU7710</font><b class="h-line c-bg-f4393c"></b>
+                    <label data-bind="text: CabInfos.ClassName + '(' + CabInfos.Class + ')'">经济舱(H)</label>
+                    <text class="line-type c-bg-3eabff c-fff font-size-10" data-bind="text: $index() == 0 ? '去程' : '回程'">去程</text>
+                </view>
+                <view class="div-flight flex font-size-13 c-999 c-align align-center">
+                    <view class="col-1">
+                        <view class="font-size-18 c-000"><b data-bind="text: BeginTime">07:25</b></view>
+                        <view data-bind="text: DepCityName + '(' + BeginTerm + ')'">宝安(T3)</view>
+                        <view data-bind="text: getMD(DepDate) + ' ' + GetWeek(DepDate)">09-17 星期天</view>
+                    </view>
+                    <i class="icon-toArror font-size-18"></i>
+                    <view class="col-1">
+                        <view class="font-size-18 c-000"><b data-bind="text: EndTime">10:30</b></view>
+                        <view data-bind="text: ArrCityName + '(' + EndTerm + ')'">首都(T1)</view>
+                        <view data-bind="text: getMD(ArrDate) + ' ' + GetWeek(ArrDate)">09-17 星期天</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+    <view id="js-alert-box" class="bg-div c-bg-000 flex" style="display:none">
+		<view class="alert-box">
+			<view id="alert_head" class="alert-head">
+				<svg class="alert-circle" width="104" height="104">
+					<circle cx="52" cy="52" r="45" fill="#FFF" stroke="rgb(240,57,41)" stroke-width="12"></circle>
+					<circle id="js-sec-circle" class="alert-sec-circle" cx="52" cy="52" r="45" fill="transparent" stroke="#F4F1F1" stroke-width="18" transform="rotate(-90 52 52)"></circle>
+					<text class="alert-sec-unit" x="44" y="78" fill="#BDBDBD">秒</text>
+				</svg>
+				<view id="js-sec-text" class="alert-sec-text"></view>
+			</view>
+			<view class="alert-body">
+				<view id="js-alert-head" class="alert-head"></view>
+				<view class="alert-concent">
+					<view>为了不影响您的出行，订单需客服确认有票才可支付</view>
+				</view>
+				<a id="js-alert-btn" class="alert-btn" href="../orderManager/orderType.aspx">立即前往订单页</a>
+			</view>
+		</view>
+	</view>
+</view>
+
+-->
+<!--去程区域选择-->
+<!--<view id="singleRegion" class="page div-hide">
+    <view class="header flex font-size-18 b-line">
+        <i class="icon-arror-l back"></i>
+        <view class="col-1 c-align">
+            区域选择
+        </view>
+        <a href="tel:400-700-7355"><i class="icon-phone"></i></a>
+    </view>
+    <view class="main region">
+        <view class="title">
+            <text class="line"><text>
+            <view class="font-size-15 clean-line">选择位置</view>
+        </view>
+        <view class="seatSelect row-item flex font-size-15 c-fff">
+            <view class="col-1 active">
+                <view>随机</view>
+            </view>
+            <view class="col-1 c-align">
+                <view>靠窗</view>
+            </view>
+            <view class="col-1 r-align">
+                <view>过道</view>
+            </view>
+        </view>
+        <view class="hr3"></view>
+        <view class="title">
+            <text class="line"><text>
+            <view class="font-size-15 clean-line">选择区域</view>
+        </view>
+        <view class="area">
+            <view class="area-info-left area-info">
+                <view>
+                    <view><text class="active">左侧前方<text></view>
+                    <view><text>左侧中方<text></view>
+                    <view><text>左侧下方<text></view>
+                </view>
+            </view>
+            <view class="area-seat">
+                <view style="margin-top: 650rpx">
+                    <view class="area-seat-info1 area-seat1">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info2 area-seat4">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info1 area-seat2">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info2 area-seat5">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info1 area-seat3">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info2 area-seat6">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="area-info-right area-info">
+                <view>
+                    <view><text>右侧前方</text></view>
+                    <view><text>右侧中方</text></view>
+                    <view><text>右侧下方</text></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="footer flex c-fff">
+        <view class="col-1 show-con">
+            <view class="c-f4393c r-speace">座位区域</view>
+            <view id="region" class="font-size-15">随机 左侧中方</view>
+        </view>
+        <view class="p-assur font-size-18">确认选择</view>
+    </view>
+</view>-->
+<!--回程区域选择-->
+<!--<view id="roundRegion" class="page div-hide">
+    <view class="header flex font-size-18 b-line">
+        <i class="icon-arror-l back"></i>
+        <view class="col-1 c-align">
+            区域选择
+        </view>
+        <a href="tel:400-700-7355"><i class="icon-phone"></i></a>
+    </view>
+    <view class="main region">
+        <view class="title">
+            <text class="line"></text>
+            <view class="font-size-15 clean-line">选择位置</view>
+        </view>
+        <view class="seatSelect row-item flex font-size-15 c-fff">
+            <view class="col-1 active">
+                <view>随机</view>
+            </view>
+            <view class="col-1 c-align">
+                <view>靠窗</view>
+            </view>
+            <view class="col-1 r-align">
+                <view>过道</view>
+            </view>
+        </view>
+        <view class="hr3"></view>
+        <view class="title">
+            <text class="line"></text>
+            <view class="font-size-15 clean-line">选择区域</view>
+        </view>
+        <view class="area">
+            <view class="area-info-left area-info">
+                <view>
+                    <view><text class="active">左侧前方<text></view>
+                    <view><text>左侧中方</text></view>
+                    <view><text>左侧下方</text></view>
+                </view>
+            </view>
+            <view class="area-seat">
+                <view style="margin-top: 650rpx">
+                    <view class="area-seat-info1 area-seat1">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info2 area-seat4">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info1 area-seat2">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info2 area-seat5">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info1 area-seat3">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                    <view class="area-seat-info2 area-seat6">
+                        <view>
+                            <text class="left"></text>
+                            <text class="mid"></text>
+                            <text class="right"></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="area-info-right area-info">
+                <view>
+                    <view><text>右侧前方</text></view>
+                    <view><text>右侧中方</text></view>
+                    <view><text>右侧下方</text></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="footer flex c-fff">
+        <view class="col-1 show-con">
+            <view class="c-f4393c r-speace">座位区域</view>
+            <view id="region" class="font-size-15">随机 左侧中方</view>
+        </view>
+        <view class="p-assur font-size-18">确认选择</view>
+    </view>
+</view>
+-->
+<view class="endorseModal c-bg-000 flex {{endorseModalShow?'':'none'}}">
+    <view class="pop-full font-size-30">
+        <view class="pop-full-close" catchtap="hideEndorseModal"><i></i></view>
+        <view class="pop-content">
+            <view class="title">退改签说明</view>
+            <view class="content ">
+                <template is="wxParse" data="{{wxParseData:endorseModalContent.nodes}}"/>
+            </view>
+        </view>
+    </view>    
+</view>

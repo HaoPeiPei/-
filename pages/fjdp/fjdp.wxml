@@ -1,0 +1,61 @@
+<import src="../../template/template.wxml" />
+<template is="header-content-2" data="{{...header_text}}" />
+<view>
+  <view class='box box-f1 margin-lr-1 backgd-f box-ver {{key == 0?"":"none"}}'>
+    <view class='box box-f1'>
+      <view class='box box-f1 box-apc font-14 padding-tb-1 {{key == 0?"xz-btn":"mr-btn"}}' bindtap='bindChage' data-key="0">单程</view>
+      <view class='box box-f1 box-apc font-14 padding-tb-1 {{key == 1?"xz-btn":"mr-btn"}}' bindtap='bindChage' data-key="1">往返</view>
+    </view>
+    <view class='box box-f1 margin-t-5'>
+      <view class='box box-f1 box-ac border-b margin-lr-1'>
+        <text>深圳</text>
+      </view>
+      <view class='icon-1'>
+        <image src='../images/dc_jt.png' />
+      </view>
+      <view class='box box-f1 box-pe box-ac border-b margin-lr-1'>
+        <text>上海</text>
+      </view>
+    </view>
+    <view class='box box-f1 margin-1 border-b box-ac' style='height:80rpx'>
+      <view class='box'>08月03日</view>
+      <view class='margin-l-2 font-xq box box-ae'>星期四</view>
+    </view>
+    <view class='box box-f1 margin-t-5 margin-lr-1 margin-b-5 '>
+      <view class='box box-f1 box-apc seek-btn padding-tb-1 font-14'>搜索</view>
+    </view>
+  </view>
+  <view class='box box-f1 margin-lr-1 backgd-f box-ver {{key == 1?"":"none"}}' >
+    <view class='box box-f1'>
+      <view class='box box-f1 box-apc font-14 padding-tb-1 {{key == 0?"xz-btn":"mr-btn"}}' bindtap='bindChage' data-key="0">单程</view>
+      <view class='box box-f1 box-apc font-14 padding-tb-1 {{key == 1?"xz-btn":"mr-btn"}}' bindtap='bindChage' data-key="1">往返</view>
+    </view>
+    <view class='box box-f1 margin-t-5'>
+      <view class='box box-f1 box-ac border-b margin-lr-1'>
+        <text>深圳</text>
+      </view>
+      <view class='icon-1'>
+        <image src='../images/wf_jt.png' />
+      </view>
+      <view class='box box-f1 box-pe box-ac border-b margin-lr-1'>
+        <text>上海</text>
+      </view>
+    </view>
+    <view class='box box-f1 margin-t-1  '>
+      <view class='box box-f1 border-b margin-lr-1 box-ac'>
+        <view class=' font-14 box box-ae'>08月03日</view>
+        <view class='margin-l-2 font-xq box box-as'>星期四</view>
+      </view>
+      <view class='icon-1'>
+
+      </view>
+      <view class='box box-f1 border-b margin-lr-1 box-ac box-pe'>
+        <view class='font-14 box box-ae'>08月03日</view>
+        <view class='margin-l-2 font-xq box box-ae'>星期四</view>
+      </view>
+    </view>
+    <view class='box box-f1 margin-t-5 margin-lr-1 margin-b-5 '>
+      <view class='box box-f1 box-apc seek-btn padding-tb-1 font-14'>搜索</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,54 @@
+<!--pages/sscx/xzhb/xzhb.wxml-->
+<import src="../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+<view class='box box-f1 backgd-f box-ver'>
+  <view class='box box-f1 border-b-1 margin-lr-1 box-ac padding-tb-1'>
+    <view class='' style='background:url(../../images/hbxx_icon.png) no-repeat center center;background-size:cover;width:30rpx;height:30rpx;'></view>
+    <view class='box box-f1 font-15 margin-l-1 color-9'>航班信息</view>
+  </view>
+  <view class='box box-f1 margin-lr-1'>
+    <view class='box box-f1 margin-l-5 font-13 border-b-1 padding-tb-1'>
+      <view class='color-9 left-title'>航班号</view>
+      <view class='box box-f1 color-3'>HU7706</view>
+    </view>
+  </view>
+  <view class='box box-f1 margin-lr-1'>
+    <view class='box box-f1 margin-l-5 font-13 border-b-1 padding-tb-1'>
+      <view class='color-9 left-title'>起飞时间</view>
+      <view class='box box-f1 color-3'>2017-19-17 17:45:00</view>
+    </view>
+  </view>
+  <view class='box box-f1 margin-lr-1'>
+    <view class='box box-f1 margin-l-5 font-13 padding-tb-1'>
+      <view class='color-9 left-title'>预约航程</view>
+      <view class='box box-f1 color-3'>
+        <view>深圳</view>
+        <view>---</view>
+        <view>北京(首都)</view>
+      </view>
+    </view>
+  </view>
+  <view class='height-10'></view>
+  <view class='box box-f1 border-b-1 margin-lr-1 box-ac padding-tb-1'>
+    <view class='' style='background:url(../../images/hbxx_icon.png) no-repeat center center;background-size:cover;width:30rpx;height:30rpx;'></view>
+    <view class='box font-15 margin-l-1 color-9'>乘机人</view>
+    <view class='box font-11 color-9 box-ae margin-l-1'>已选乘客：<text>0</text>人</view>
+    <view class='box box-pe box-f1 font-13 '><text class='border-2'  bindtap='bindNavChange'>+添加乘机人</text></view>
+  </view>
+  <view class='box box-f1 margin-lr-1'>
+    <view class='box box-f1 margin-l-5 font-13 border-b-1 padding-tb-1 box-ac'>
+      <view style='background:url(../../images/back-y.png) no-repeat center center;background-size:cover;width:48rpx;height:48rpx;'></view>
+      <view class='box box-f1 box-ver'>
+        <view class='box box-f1 box-hor margin-l-1 padding-tb-2'>
+          <view class='left-title-1 color-9'>姓名：</view>
+          <view class='box box-f1 color-3'>周琦</view>
+        </view>
+        <view class='box box-f1 box-hor margin-l-1 padding-tb-2'>
+          <view class='left-title-1 color-9'>身份证：</view>
+          <view class='box box-f1 color-3'>429336 19920912 5896</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<template is="pos_fixed_b" data="{{text:'确定'}}" />

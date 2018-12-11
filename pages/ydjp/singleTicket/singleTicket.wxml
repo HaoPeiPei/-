@@ -1,0 +1,78 @@
+<!--pages/ydjp/ticket/ticket.wxml-->
+<import src="../template/template.wxml" />
+<view class="wrap">
+    <view class="header flex font-size-18 b-line c-bg-fff">
+        <i class="back icon-arror-l"></i>
+        <view class="col-1 cityName_wrap c-align">
+            <text class="depCityName" data-scityname="{{sCityName}}">{{sCityName}}</text>
+            <text class="icon-airArror" ></text>
+            <text class="arrCityName" data-ecityname="{{eCity}}">{{eCityName}}</text>
+        </view>
+        <i class="icon-phone"></i>
+    </view>
+    <view class="main">
+        <view class="search-title flex align-center">
+            <i class="icon-arror-l"></i>
+            <view class="search-date pre" catchtap="preSearch">
+                <text>前一天</text>
+                <text>{{prevDate}}</text>
+            </view>
+            <view class="search-cur  col-1 flex">
+                <text>{{nowDate}} {{nowWeek}}</text>
+            </view>
+            <view class="search-date r-align next" catchtap="nextSearch">
+                <text>后一天</text>
+                <text>{{nextDate}}</text>
+            </view>
+            <i class="icon-arror-r"></i>
+        </view>
+        <view id="flyData" class="displayFliInfo-list" wx:key="index"  wx:for="{{displayFlightInfos}}" wx:for-item="flightInfo">
+            <view class="flex displayFliInfo-item " data-flightno="{{flightInfo.FlightNo}}" data-begintime="{{flightInfo.BeginTime}}" data-depdate="{{flightInfo.DepDate}}" catchtap="viewDetail">
+                <view class="displayFliInfo-left">
+                    <view class="displayFliInfo-top flex col-1 align-center">
+                        <view>
+                            <text class="font-size-22 font-weight-bold" data-bind="text: BeginTime">{{flightInfo.BeginTime}}</text>
+                            <text class="font-size-20 c-999" data-bind="text: DepCityName + BeginTerm">{{flightInfo.DepCityName+flightInfo.BeginTerm}}</text>
+                        </view>
+                        <view class="c-align search-arror r_position">
+                            <i class="icon-lineArror c-999 "></i>
+                            <text class="stop c-f4393c font-size-18" data-bind="text: parseInt(Stop) > 0?'经停':''">{{flightInfo.Stop>0?'经停':''}}</text>
+                        </view>
+                        <view class="r-align ">
+                            <text class="font-size-22 font-weight-bold" data-bind="text: EndTime">{{flightInfo.EndTime}}</text>
+                            <text class="font-size-20 c-999" data-bind="text: ArrCityName + EndTerm">{{flightInfo.ArrCityName+flightInfo.EndTerm}}</text>
+                        </view>
+                    </view>
+                    <view class="displayFliInfo-fot flex col-1 align-center c-999">
+                        <i class="airsmall_{{flightInfo.FlightNoIcon}}"></i>
+                        <text class="font-size-20 flightNo" data-bind="text: CarrierName + ' ' + FlightNo">{{flightInfo.CarrierName+flightInfo.FlightNo}}</text>
+                        <text class="font-size-18" data-bind="text: PlaneType ">{{flightInfo.PlaneType}}</text>
+                    </view>
+                </view>
+                <view class="displayFliInfo-right col-1 r-align">
+                    <view>
+                        <text class="c-f4393c font-size-20">¥:</text>
+                        <text class="font-size-28 c-f4393c" data-bind="text: $root.getFlightLowestPrice($data)">{{flightInfo.FlightLowestPrice}}</text>
+                    </view>
+                    <view class="discount c-999 font-size-22" data-bind="text: $root.getFlightLowestDiscount($data)">{{flightInfo.Discount}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="filter flex align-center c-align">
+        <view class="col-1 c-fff div-filter font-size-20 {{filterActive?'c-f4393c':'c-fff'}}" catchtap="showFilterModal">
+            <i class="icon-filter"></i>
+            <view>筛选</view>
+        </view>
+        <view class="col-1 div-time font-size-20 {{timeActive?'c-f4393c':'c-fff'}}" data-timetype="{{timeType}}" catchtap="onOrderByTime">
+            <i class="icon-time"></i>
+            <view>时间</view>
+        </view>
+        <view class="col-1 div-price font-size-20 {{priceActive?'c-f4393c':'c-fff'}}" data-pricetype="{{priceType}}" catchtap="onOrderByPrice">
+            <i class="icon-price"></i>
+            <view>价格</view>
+        </view>
+    </view>
+</view>
+
+<template is="filterModal" data="{{filterModalShow,carriers}}" />

@@ -1,0 +1,128 @@
+{
+  "pages": [
+
+    "pages/index/index",
+
+    "pages/wycx/xzhb/xzhb",
+    "pages/wycx/xzhb/xdzf/xdzf",
+    "pages/wycx/xzhb/xdzf/yhj/yhj",
+    "pages/wycx/xzhb/xdzf/qyxz/qyxz",
+    "pages/wycx/xzhb/addList/addList",
+    "pages/wycx/xzhb/addList/addList_page/addList_page",
+
+    
+    "pages/index/ydjp/ydjp",
+    "pages/grzx/grzx",
+    "pages/grzx/yhj_details/yhj_details",
+    "pages/grzx/gnjs_details/gnjs_details",
+    "pages/grzx/sysc_details/sysc_details",
+    "pages/grzx/yqm_details/yqm_details",
+    "pages/grzx/yqm_details/yqm_hdgz/yqm_hdgz",
+    
+    "pages/register/register",
+    "pages/ddxq/ddxq",
+    "pages/ddxq/jsjdd/jsjdd",
+    "pages/ddxq/sx/sx",
+    "pages/ddxq/jsjdd/jsjdd_details/jsjdd_details",
+    "pages/ddxq/dbcdd/dbcdd",
+    "pages/ddxq/dbcdd/dbcdd_details/dbcdd_details",
+    "pages/ddxq/fwdd/fwdd",
+    "pages/ddxq/fwdd/fwdd_details/fwdd_details",
+    "pages/ddxq/fwdd/gbt_orderDetails/gbt_orderDetails",
+    "pages/ddxq/jpdd/jpdd",
+    "pages/ddxq/jpdd/ticket_details/ticket_details",
+    
+    "pages/logIndex/logIndex",
+    
+    "pages/gbt/gbt",
+    "pages/gbt/gbtDetails/gbtDetails",
+    "pages/gbt/gbtDetails/qrdd/qrdd",
+    "pages/gbt/gbtDetails/qrdd/yhj/yhj",
+   
+    "pages/dwcs/dwcs",
+    
+    "pages/wycx/wycx",
+    
+
+    "pages/login/login",
+
+    "pages/jd/jd",
+    "pages/jd/jd_xq/jd_xq",
+    "pages/jd/jd_xq/jd_payment/jd_payment",
+    "pages/jd/jd_xq/jd_details/jd_details",
+  
+    "pages/sscx/sscx",
+    "pages/sscx/xzhb/xzhb",
+    "pages/sscx/xzhb/xdzf/xdzf",
+    "pages/sscx/xzhb/xdzf/yhj/yhj",
+    "pages/sscx/xzhb/xdzf/qyxz/qyxz",
+    "pages/sscx/xzhb/addList/addList",
+    "pages/sscx/xzhb/addList/addList_page/addList_page",
+
+    "pages/jsj/jsj",
+    "pages/jsj/map/map",
+    "pages/jsj/cxxz/cxxz",
+    "pages/jsj/cxxz/ddxq/ddxq",
+    "pages/jsj/cxxz/ddxq/yhj/yhj",
+    
+
+    
+    
+   
+    "pages/fjdp/fjdp",
+    
+    "pages/dpc/dpc",
+    "pages/dpc/dpc_qzf/dpc_qzf",
+    "pages/dpc/dpc_qcxx/dpc_qcxx",
+    
+    
+    "pages/fx/fx",
+    
+
+    "pages/ydjp/ydjp",
+    "pages/gbtd/gbtd",
+    
+    
+    "pages/logs/logs"
+    
+  ],
+  
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#3f3a3a",
+    "navigationBarTitleText": "环球机场通",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#fff",
+    "selectedColor": "#f4393c",
+    "backgroundColor": "#3f3a3a",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "pages/images/sy.png",
+        "selectedIconPath": "pages/images/sy-s.png"
+      },
+      {
+        "pagePath": "pages/ddxq/ddxq",
+        "text": "订单管理",
+        "iconPath": "pages/images/ddxq.png",
+        "selectedIconPath": "pages/images/ddxq-s.png"
+      },
+      {
+        "pagePath": "pages/fx/fx",
+        "text": "发现",
+        "iconPath": "pages/images/fx.png",
+        "selectedIconPath": "pages/images/fx-s.png"
+      },
+      {
+        "pagePath": "pages/grzx/grzx",
+        "text": "个人中心",
+        "iconPath": "pages/images/wd.png",
+        "selectedIconPath": "pages/images/wd-s.png"
+      }
+    ]
+  }
+}
