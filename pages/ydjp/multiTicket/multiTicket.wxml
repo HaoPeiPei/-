@@ -1,6 +1,6 @@
 <!--pages/ydjp/ticket/ticket.wxml-->
 <import src="../template/template.wxml" />
-<view class="singleTicket {{singleTicketShow?'':'none'}}"  >
+<view class="multiTicket">
     <view class="header flex font-size-18 b-line c-bg-fff">
         <i class="back icon-arror-l"></i>
         <view class="col-1 cityName_wrap c-align">
@@ -75,6 +75,6 @@
     </view>
 </view>
 
-<template is="selectAir" data="{{selectAirlShow,carrier}}"></template>
+<template is="selectAir" data="{{selectAirlShow,carriers}}"></template>
 
 <template is="filterModal" data="{{filterModalShow,carriers}}" />

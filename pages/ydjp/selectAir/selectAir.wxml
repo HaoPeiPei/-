@@ -1,7 +1,7 @@
 <!--pages/ydjp/selectAir/selectAir.wxml-->
 <import src="../../../wxParse/wxParse.wxml"/> 
 <import src="../template/template.wxml" />
-<view class="wrap">
+<view class="wrap selectAir">
     <view class="header flex font-size-18 b-line c-bg-fff">
         <i class="back icon-arror-l"></i>
         <view class="col-1 cityName_wrap c-align">

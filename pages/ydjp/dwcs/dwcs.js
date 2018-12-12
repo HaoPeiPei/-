@@ -169,7 +169,6 @@ Page({
   },
   //点击选择城市并返回首页
   doReturn: function(e){
-    debugger
     var ticketType = this.data.ticketType;
     var airportCode = e.currentTarget.dataset.id;
     var airportName = e.currentTarget.dataset.value;

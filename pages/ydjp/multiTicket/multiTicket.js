@@ -25,10 +25,10 @@ Page({
       priceType: 0,
       priceActive: false,
       filterModalShow: false,
-      filterActive: false,
       selectAirlShow: false,
-      singleTicketShow: true,
+      multiTicketShow: true,
       carrier: {},
+      filterActive: false,
       flightInfos: [],
       displayFlightInfos: [],
       carriers: [],
@@ -36,7 +36,6 @@ Page({
     //初始化数据
     initData(options){
       var strAir = options.strAir;
-      var ticketType = options.ticketType;
       if (strAir != null) {
         var searchArr = strAir.split("@");
         var sCityName = searchArr[0];
@@ -60,7 +59,6 @@ Page({
           nowDate,
           nowWeek,
           nextDate,
-          ticketType
         });
         this.search();
       } else {
@@ -302,7 +300,6 @@ Page({
     },
     //查看详情
     viewDetail(e){
-      debugger
       var carriers = this.data.flightInfos;
       var flightNo =  e.currentTarget.dataset.flightno;
       var beginTime =  e.currentTarget.dataset.begintime;
@@ -312,35 +309,12 @@ Page({
           return item
         }
       })[0];
-
+      
       this.setData({
         singleTicketShow: false,
         selectAirlShow: true,
         carrier: carrier,
       });
-      /* if ($("#hd_airType").val() == "0" && eDate != "") {//还在查去程
-        var city = sCity;
-        var cityName = sName;
-        var flyDate = sDate;
-        sCity = eCity;
-        eCity = city;
-        sName = eName;
-        eName = cityName;
-        sDate = eDate;
-        eDate = flyDate;//保存去程日期，以便返回时能返回
-        $("#hd_airType").val("1");
-        $(".wrap").show();
-        $(".select-air").hide();
-        flightModel.search();
-        this.setData({
-          carrier
-        })
-        return false;
-      } 
-      
-      wx.navigateTo({
-        url: '../selectAir/selectAir?carrier='+JSON.stringify(carrier)
-      })*/
     },
      //显示退改详情
      showEndorseModal(e){
@@ -405,9 +379,20 @@ Page({
       var bookInfo = {};
       bookInfo.FlightInfos = [];
       bookInfo.FlightInfos.push(selectedFlightInfo);
-      wx.navigateTo({
-        url: '../airTicketOrder/airTicketOrder?bookInfo='+JSON.stringify(bookInfo)
-      });
+      if(ticketType == 0 && eDate != ""){
+        ticketType = 1;
+        this.search();
+        this.setData({
+          multiTicketShow: false,
+          selectAirlShow: true,
+          carrier: carrier,
+          ticketType: ticketType
+        });
+      }else if(ticketType == 1){
+        wx.navigateTo({
+          url: '../airTicketOrder/airTicketOrder?carrier='+JSON.stringify(carrier)
+        })
+      }
     },
     /**
      * 生命周期函数--监听页面加载

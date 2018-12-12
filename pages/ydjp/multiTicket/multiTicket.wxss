@@ -13,111 +13,111 @@
 .font-size-18{
     font-size: 22rpx;
 }
-.singleTicket{
+.multiTicket{
     height: 100vh;
     overflow: auto;
     background-color: #f4f5f7;
     position: relative;
     padding-bottom: 130rpx;
 }
-.singleTicket .header{
+.multiTicket .header{
     height: 90rpx;
     position: relative;
     border-bottom: 1rpx solid #d7d7d7;
     font-size: 36.6rpx;
     background-color: #fff;
 }
-.singleTicket .header .back{
+.multiTicket .header .back{
     font-size: 42.7rpx;
     margin: 25rpx 0 0 25rpx;
 }
-.singleTicket .header .cityName_wrap{
+.multiTicket .header .cityName_wrap{
      margin-top: 24rpx;
      font-size: 36.6rpx;
 }
-.singleTicket .header .icon-phone{
+.multiTicket .header .icon-phone{
     margin: 20rpx 25rpx 0 0;
     font-size: 42.7rpx;
 }
-.singleTicket .main .search-title{
+.multiTicket .main .search-title{
     height: 75rpx;
     background-color: #fff;
 }
-.singleTicket .main .icon-arror-l{
+.multiTicket .main .icon-arror-l{
     margin: 0 20rpx 0 25rpx;
 }
-.singleTicket .main .icon-arror-r{
+.multiTicket .main .icon-arror-r{
     margin: 0 25rpx 0 20rpx;
 }
-.singleTicket .main .search-date{
+.main .search-date{
     width: 210rpx;
 }
-.singleTicket .search-date text:nth-child(1){
+.multiTicket .search-date text:nth-child(1){
     font-size: 26.84rpx;
     display: block;
 }
-.singleTicket .search-date text:nth-child(2){
+.multiTicket .search-date text:nth-child(2){
     font-size: 24.4rpx;
     display: block;
     
 }
-.singleTicket .main .search-cur{
+.multiTicket.main .search-cur{
     align-self: stretch;
     color: #fff;
     background-color: #f4393c;
     align-items: center;
     justify-content: center;
 }
-.singleTicket .main .search-cur text{
+.multiTicket .main .search-cur text{
     font-size: 26.84rpx;
     color: #fff;
 }
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item{
     margin-top: 20rpx;
     background-color: #fff;
     padding: 12rpx 0 12rpx 25rpx;
 } 
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left{
     width: 510rpx;
     border-right: 1rpx dashed #d6d6d6;
 }
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-top{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-top{
     height: 70rpx;
 }
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-top text{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-top text{
     display: block;
 } 
-.singleTicket .r_position{
+.multiTicket .r_position{
     position: relative;
 }
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .icon-lineArror{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .icon-lineArror{
     font-size: 79.3rpx;
 } 
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .stop{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .stop{
     position: absolute;
     top: 4rpx;
     width: 100%;
     text-align: center;
 } 
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .displayFliInfo-fot{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .displayFliInfo-fot{
     height: 40rpx;
 }
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .flightNo{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .flightNo{
     padding-right: 23rpx;
     border-right: 5rpx solid #f5383c;
     margin-right: 21rpx;
 }
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .search-arror{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-left .search-arror{
     margin:  0 50rpx;
 } 
 
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-right{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-right{
     padding-right: 25rpx;
 } 
-.singleTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-right .discount{
+.multiTicket .main .displayFliInfo-list .displayFliInfo-item .displayFliInfo-right .discount{
     margin-top: 45rpx;
 }
-.singleTicket .filter{
+.multiTicket .filter{
     position: fixed;
     bottom: 0;
     left: 0;

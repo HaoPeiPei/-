@@ -203,3 +203,84 @@
     font-size: 28rpx;
     color: #000;
 }
+
+.selectAir{
+    height: 100vh;
+    overflow: auto;
+    background-color: #f4f5f7;
+    position: relative;
+    padding-bottom: 130rpx;
+}
+.selectAir .header{
+    height: 90rpx;
+    position: relative;
+    border-bottom: 1rpx solid #d7d7d7;
+    font-size: 30rpx;
+    background-color: #fff;
+}
+.selectAir .header .back{
+    font-size: 35rpx;
+    margin: 25rpx 0 0 25rpx;
+}
+.selectAir .header .cityName_wrap{
+     margin-top: 24rpx;
+     font-size: 30rpx;
+}
+.selectAir .header .icon-phone{
+    margin: 20rpx 25rpx 0 0;
+    font-size: 35rpx;
+}
+.selectAir .main .flight-wrap{
+    padding-bottom: 15rpx;
+    background-color: #fff;
+}
+.selectAir .main .flight-wrap .flight-title{
+    font-size: 29rpx;
+    margin: 0 0 15rpx 30rpx;
+    padding-top: 25rpx;
+}
+.selectAir .main .flight-wrap .flight-info{
+    padding: 0 35rpx;
+}
+.selectAir .main .flight-wrap .flight-info text{
+    height: 40rpx;
+    line-height: 40rpx;
+    display: block;
+} 
+.selectAir .main .flight-wrap .flight-info .icon-lineArror{
+    font-size: 75rpx;
+    margin: 0 75rpx;
+} 
+.selectAir .main .cabInfo-list .cabInfo-item{
+    margin-top: 20rpx;
+    background-color: #fff;
+    padding: 12rpx 25rpx 12rpx 25rpx;
+} 
+.selectAir .main .cabInfo-list .cabInfo-item .cabInfo-left{
+    width: 195rpx;
+    border-right: 1rpx dashed #d6d6d6;
+}
+.selectAir .main .cabInfo-list .cabInfo-item .cabInfo-type{
+    margin-top: 20rpx;
+}
+.selectAir .main .cabInfo-list .cabInfo-right .predetermine-btn{
+    width: 100rpx;
+    height: 55rpx;
+    line-height: 55rpx;
+    text-align: center;
+    color: #fff;
+    border-radius: 8rpx; 
+    background-color: #f3393c;
+    font-size: 24rpx;
+}
+.selectAir .main .cabInfo-list .cabInfo-item .cabInfo-right{
+    padding: 0 0 0 25rpx;
+} 
+.selectAir .main .cabInfo-list .cabInfo-item .cabInfo-right .residue{
+    width: 155rpx;
+    display: inline-block;
+}
+.selectAir .main .cabInfo-list .cabInfo-item .cabInfo-right .icon-arror-r{
+    margin: 0 0 0 10rpx;
+    display: inline-block;
+}

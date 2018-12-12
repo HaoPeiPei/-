@@ -49,8 +49,8 @@ Page({
   selectCity(e){
     var ticketType = e.currentTarget.dataset.tickettype;
     wx.navigateTo({
-      url: '../dwcs/dwcs?ticketType='+ticketType,
-    })
+      url: 'dwcs/dwcs?ticketType='+ticketType,
+    });
   },
   //选择时间
   bindqcDateChange(e){
@@ -97,9 +97,16 @@ Page({
       wx.setStorageSync('flyBackDate', eDate);
     }
     wx.setStorageSync("ticketType", ticketType);//存储数据 
-    wx.navigateTo({
-      url: "/pages/ydjp/singleTicket/singleTicket?strAir=" + sCityName + "@" + sCity + "@" + eCityName + "@" + eCity + "@" + sDate + "@" + eDate
-    })
+    if(ticketType == 0){
+        wx.navigateTo({
+          url: "/pages/ydjp/singleTicket/singleTicket?ticketType="+ticketType+"&strAir=" + sCityName + "@" + sCity + "@" + eCityName + "@" + eCity + "@" + sDate + "@" + eDate
+        })
+    }else if(ticketType == 1){
+      var ticketType = 0;
+      wx.navigateTo({
+        url: "/pages/ydjp/multiTicket/multiTicket?ticketType="+ticketType+"&strAir=" + sCityName + "@" + sCity + "@" + eCityName + "@" + eCity + "@" + sDate + "@" + eDate
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
