@@ -1,7 +1,7 @@
 // pages/ydjp/ydjp.js
 var app = getApp();
 var httpRequst = require("../../utils/requst.js");
-var {getWeek, getChineseFormatDate, getFormatDate, addDate} = require("../../utils/util.js");
+var {getWeek, getChineseFormatDate, compareDate, addDate, returnDate} = require("../../utils/util.js");
 Page({
 
   /**
@@ -60,11 +60,13 @@ Page({
     var name = e.currentTarget.dataset.name;
     if(name == 'depDate'){
       this.setData({
+        depDateStr: dataStr,
         depDate: date,
         depWeek: week,
       });
     }else if(name == 'arrDate'){
       this.setData({
+        arrDateStr: dataStr,
         arrDate: date,
         arrWeek: week,
       });
@@ -79,8 +81,62 @@ Page({
       arrCityName: depCityName
     });
   },
+  //验证
+  check(){
+    if (this.data.depCityName == '') {
+      wx.showToast({
+        title: '出发城市不能为空!',
+        icon: 'none'
+      });
+      return false;
+    }
+    if (this.data.depCityCode == '') {
+        wx.showToast({
+          title: '出发城市不能为空!',
+          icon: 'none'
+        });
+        return false;
+    }
+    if (this.data.arrCityName == '') {
+      wx.showToast({
+        title: '目的城市不能为空!',
+        icon: 'none'
+      });
+      return false;
+    }
+    if (this.data.arrCityCode == '') {
+      wx.showToast({
+        title: '目的城市不能为空!',
+        icon: 'none'
+      });
+      return false;
+    }
+    if (this.data.depCityCode ==this.data.arrCityCode) {
+      wx.showToast({
+        title: '出发城市,目的城市不能相同!',
+        icon: 'none'
+      });
+      return false;
+    }
+    if (this.data.ticketType== 1) {
+      var depDateStr = this.data.depDateStr;
+      var arrDateStr = this.data.arrDateStr;
+      if (compareDate(returnDate(depDateStr), returnDate(arrDateStr)) >= 0) {
+        wx.showToast({
+          title: '回程日期不能小于去程日期!',
+          icon: 'none'
+        });
+        return false;
+      }
+
+    }
+    return true;
+  },
   //去搜索机票
   goTicket(){
+    if(!this.check()){
+      return
+    };
     var sCityName = this.data.depCityName;
     var sCity = this.data.depCityCode;
     var eCityName = this.data.arrCityName;

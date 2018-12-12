@@ -33,7 +33,7 @@
         </view>
         <view class="ticket-date ticket-date-double flex align-center justify-content-space-between {{ticketType==1?'':'none'}}" >
             <view class="date_wrap ">
-                <picker bindchange='bindqcDateChange' data-name='flyDate' mode="date" start='{{startDate}}' end='{{endDate}}' >
+                <picker bindchange='bindqcDateChange' data-name='depDate' mode="date" start='{{startDate}}' end='{{endDate}}' >
                     <text>{{depDate}}</text>
                     <text>{{depWeek}}</text>
                 </picker>

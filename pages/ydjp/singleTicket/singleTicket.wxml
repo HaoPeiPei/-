@@ -52,12 +52,13 @@
                 <view class="displayFliInfo-right col-1 r-align">
                     <view>
                         <text class="c-f4393c font-size-20">¥:</text>
-                        <text class="font-size-28 c-f4393c" data-bind="text: $root.getFlightLowestPrice($data)">{{flightInfo.FlightLowestPrice}}</text>
+                        <text class="font-size-28 c-f4393c" data-bind="text: $root.getFlightLowestPrice($data)">{{flightInfo.CabInfos[0].FlightLowestPrice}}</text>
                     </view>
                     <view class="discount c-999 font-size-22" data-bind="text: $root.getFlightLowestDiscount($data)">{{flightInfo.Discount}}</view>
                 </view>
             </view>
         </view>
+        <template is="noDate" data="{{noDateShow}}" ></template>
     </view>
     <view class="filter flex align-center c-align">
         <view class="col-1 c-fff div-filter font-size-20 {{filterActive?'c-f4393c':'c-fff'}}" catchtap="showFilterModal">
@@ -77,4 +78,7 @@
 
 <template is="selectAir" data="{{selectAirlShow,carrier}}"></template>
 
-<template is="filterModal" data="{{filterModalShow,carriers}}" />
+<template is="filterModal" data="{{filterModalShow,carriers}}" ></template>
+
+<template is="wait" data="{{waitShow}}" ></template>
+

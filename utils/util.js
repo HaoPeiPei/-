@@ -220,6 +220,19 @@ const request = (m) => {
     return sValue ? sValue[1] : sValue;
 }
 
+const compareDate = (dateA, dateB) => {
+    if (getType(dateA) == 'date' && getType(dateB) == 'date') {
+        if (dateA < dateB)
+            return -1;
+        else if (dateA > dateB)
+            return 1;
+        else
+            return 0;
+    }
+    else
+        return null;
+}
+
  module.exports = {
     isCardNo: isCardNo,
     getNowFormatDate: getNowFormatDate,
@@ -232,4 +245,5 @@ const request = (m) => {
     dateAddValue: dateAddValue,
     getMD: getMD,
     request: request,
+    compareDate: compareDate,
 }

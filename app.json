@@ -84,6 +84,7 @@
     "pages/ydjp/singleTicket/singleTicket",
     "pages/ydjp/selectAir/selectAir",
     "pages/ydjp/airTicketOrder/airTicketOrder",
+    "pages/ydjp/multiTicket/multiTicket",
     "pages/ydjp/region/region",
     "pages/gbtd/gbtd",
     

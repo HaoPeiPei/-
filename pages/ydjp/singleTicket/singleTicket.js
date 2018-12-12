@@ -28,6 +28,8 @@ Page({
       filterActive: false,
       selectAirlShow: false,
       singleTicketShow: true,
+      waitShow: false,
+      noDateShow: false,
       carrier: {},
       flightInfos: [],
       displayFlightInfos: [],
@@ -74,9 +76,10 @@ Page({
       var that = this;
       var openid = 'oZDU-wVTjVXuwwKYWsD4f1RuOXYc';
       if (openid != null && openid != "") {
-        wx.showLoading({
-          title: '数据加载中...',
-        });
+        this.setData({
+          waitShow: true,
+          noDateShow: false
+        })
         var param = {
           action: "av", 
           scity: this.data.sCity, 
@@ -84,27 +87,31 @@ Page({
           sdate: this.data.sDate, 
           openId: openid
         }
-        httpRequst.HttpRequst(true, "/weixin/jctnew/ashx/airTicket.ashx", param , "POST",function(res){
-          wx.hideLoading();
+        httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/airTicket.ashx", param , "POST",function(res){
           if (res.Status == 1) {
             var flightInfos = res.FlightInfos.filter(function(item){
-              if(item.CabInfos.length>0){
-                var Discount = item.CabInfos[0].Discount;
-                var FlightLowestPrice = parseInt(item.CabInfos[0].SalePrice) - parseInt(item.CabInfos[0].Promotion);
-                var FlightNoIcon = item.FlightNo.substring(0, 2);
-                return Object.assign(item,{Discount,FlightLowestPrice,FlightNoIcon});
-              }
+              if(item.CabInfos.length > 0){
+                var CabInfos = item.CabInfos.map(function(cabInfo){
+                  var FlightLowestPrice = parseInt(cabInfo.SalePrice) - parseInt(cabInfo.Promotion);
+                  return Object.assign(cabInfo,{FlightLowestPrice});
+                });
+              };
+              var Discount = item.CabInfos[0].Discount;
+              var FlightNoIcon = item.FlightNo.substring(0, 2);
+              return Object.assign(item,{CabInfos,Discount,FlightNoIcon});
             });
             that.setData({
               flightInfos: flightInfos,
-              displayFlightInfos: flightInfos
+              displayFlightInfos: flightInfos,
+              waitShow: false,
             });
             that.filterByCarrier(res.FlightInfos);
             that.orderByTime(0);
           } else {
-              /* $("#flyData").html("<div class='jp-data'>\
-                  <p class='cl_darkGray' style='margin:0px;text-align:center;padding:1rem'>没有找到符合条件的结果</p>\
-              </div>"); */
+            that.setData({
+              noDateShow: true,
+              waitShow: false,
+             });
           }
         });
       }
@@ -318,29 +325,6 @@ Page({
         selectAirlShow: true,
         carrier: carrier,
       });
-      /* if ($("#hd_airType").val() == "0" && eDate != "") {//还在查去程
-        var city = sCity;
-        var cityName = sName;
-        var flyDate = sDate;
-        sCity = eCity;
-        eCity = city;
-        sName = eName;
-        eName = cityName;
-        sDate = eDate;
-        eDate = flyDate;//保存去程日期，以便返回时能返回
-        $("#hd_airType").val("1");
-        $(".wrap").show();
-        $(".select-air").hide();
-        flightModel.search();
-        this.setData({
-          carrier
-        })
-        return false;
-      } 
-      
-      wx.navigateTo({
-        url: '../selectAir/selectAir?carrier='+JSON.stringify(carrier)
-      })*/
     },
      //显示退改详情
      showEndorseModal(e){

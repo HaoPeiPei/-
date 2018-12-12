@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
@@ -76,7 +76,8 @@
 				{
 					"id": -1,
 					"name": "dwcs",
-					"pathName": "pages/ydjp/dwcs/dwcs"
+					"pathName": "pages/ydjp/dwcs/dwcs",
+					"query": ""
 				}
 			]
 		}

@@ -284,3 +284,50 @@
     margin: 0 0 0 10rpx;
     display: inline-block;
 }
+
+/*等待图样式*/
+.wait {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    background-color: #dadcdb;
+    opacity: 0.5;
+    height: 100%;
+    z-index: 1000;
+    width: 100%;
+}
+
+.wait_logo {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 1001;
+}
+.wait_logo .absolute-Center {
+    margin: auto;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 128rpx;
+    width: 128rpx;
+}
+
+.wait_logo .absolute-Center image {
+    width: 128rpx;
+    height: 128rpx;
+    margin: 0px auto;
+    background-size: 100%;
+    background: transparent;
+}
+.jp-data{
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size:  27rpx;
+    color: #7c7c7c;
+    text-align: center;
+}

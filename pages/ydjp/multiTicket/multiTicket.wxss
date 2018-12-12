@@ -61,7 +61,7 @@
     display: block;
     
 }
-.multiTicket.main .search-cur{
+.multiTicket .main .search-cur{
     align-self: stretch;
     color: #fff;
     background-color: #f4393c;

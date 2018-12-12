@@ -10,74 +10,76 @@
     <view class="main">
         <view class="flight-info" data-model="flightInfoModel">
             <!-- ko if:$root.isSingle($data) -->
-            <view class="single-line" wx-if="{{flightInfos&&flightInfos.length == 1}}" wx:for="{{flightInfos}}" wx:key-index="index" wx:for-item="flight">
-                <view class="main-con " >
-                    <view class="flex t-title align-center c-000">
-                        <i  class="airsmall_{{flight.FlightNoIcon}}"></i>
-                        <text data-bind="text: CarrierName + ' ' + FlightNo">{{flight.CarrierName}} {{flight.FlightNo}}</text>
-                        <i class="line"></i>
-                        <text data-bind="text: CabInfos.ClassName + '(' + CabInfos.Class + ')'">{{flight.CabInfos.ClassName}}({{flight.CabInfos.Class}})</text>
+            <view class="single-line main-con " wx-if="{{flightInfos&&flightInfos.length == 1}}" wx:for="{{flightInfos}}" wx:key-index="index" wx:for-item="flight">
+                <view class="flex t-title align-center c-000">
+                    <i  class="airsmall_{{flight.FlightNoIcon}}"></i>
+                    <text data-bind="text: CarrierName + ' ' + FlightNo">{{flight.CarrierName}} {{flight.FlightNo}}</text>
+                    <i class="line"></i>
+                    <text data-bind="text: CabInfos.ClassName + '(' + CabInfos.Class + ')'">{{flight.CabInfos.ClassName}}({{flight.CabInfos.Class}})</text>
+                </view>
+                <view class="div-flight flex font-size-13 c-999 c-align align-center">
+                    <view class="col-1">
+                        <view class="c-000" data-bind="text: BeginTime">{{flight.BeginTime}}</view>
+                        <view data-bind="text: DepCityName + '(' + BeginTerm + ')'">{{flight.DepCityName}}({{flight.BeginTerm}})</view>
+                        <view data-bind="text: getMD(DepDate) + ' ' + GetWeek(DepDate)">{{flight.depDate}} {{flight.depWeek}}</view>
                     </view>
-                    <view class="div-flight flex font-size-13 c-999 c-align align-center">
-                        <view class="col-1">
-                            <view class="c-000" data-bind="text: BeginTime">{{flight.BeginTime}}</view>
-                            <view data-bind="text: DepCityName + '(' + BeginTerm + ')'">{{flight.DepCityName}}({{flight.BeginTerm}})</view>
-                            <view data-bind="text: getMD(DepDate) + ' ' + GetWeek(DepDate)">{{flight.depDate}} {{flight.depWeek}}</view>
-                        </view>
-                        <i class="icon-toArror"></i>
-                        <view class="col-1">
-                            <view class="c-000" data-bind="text: EndTime">{{flight.EndTime}}</view>
-                            <view data-bind="text: ArrCityName + '(' + EndTerm + ')'">{{flight.ArrCityName}}({{flight.EndTerm}})</view>
-                            <view data-bind="text: getMD(ArrDate) + ' ' + GetWeek(ArrDate)">{{flight.arrDate}} {{flight.arrWeek}}</view>
-                        </view>
+                    <i class="icon-toArror"></i>
+                    <view class="col-1">
+                        <view class="c-000" data-bind="text: EndTime">{{flight.EndTime}}</view>
+                        <view data-bind="text: ArrCityName + '(' + EndTerm + ')'">{{flight.ArrCityName}}({{flight.EndTerm}})</view>
+                        <view data-bind="text: getMD(ArrDate) + ' ' + GetWeek(ArrDate)">{{flight.arrDate}} {{flight.arrWeek}}</view>
                     </view>
-                    <view class="t-line flex align-items air-detail">
-                        <view class="col-1">
-                            <text class="c-999">票价</text>
-                            <text class="c-f4393c price" data-bind="text: '¥' + (parseInt(CabInfos.SalePrice) - parseInt(CabInfos.Promotion))">¥{{flight.FlightLowestPrice}}</text>
-                        </view>
-                        <view class="col-1">
-                            <text class="c-999">机建+燃油</text>
-                            <text class="c-f4393c price" data-bind="text: '¥' + (parseInt(AduOil) + parseInt(Tax))">¥{{flight.aduOilTax}}</text>
-                        </view>
-                        <view class="endorse c-align c-3eabff flex" catchtap="showEndorseModal">
-                            <view>退改详情</view>
-                            <view class="icon-arror-r"></view>
-                        </view>
+                </view>
+                <view class="t-line flex align-items single-price">
+                    <view class="col-1">
+                        <view class="c-999 font-size-24 title">票价</view>
+                        <view class="c-f4393c font-size-34" >¥{{flight.FlightLowestPrice}}</view>
+                    </view>
+                    <view class="col-1">
+                        <view class="c-999 font-size-24">机建+燃油</view>
+                        <view class="c-f4393c font-size-34" >¥{{flight.aduOilTax}}</view>
+                    </view>
+                    <view class="endorse c-align c-3eabff font-size-24 " catchtap="showEndorseModal" >
+                        <view>退改详情</view>
+                        <view class="icon-arror-d"></view>
                     </view>
                 </view>
             </view>
             <!-- /ko -->
-            <!-- ko ifnot:$root.isSingle($data) -->
-            <view class="mul-line main-con none" data-bind="FlightInfos">
-                <view class="row-item font-size-15 mul-line">
-                    <view class="flex align-center">
-                        <view class="line-type c-fff c-bg-3eabff font-size-10">去程</view>
-                        <view class="line-info col-1">
-                            <text data-bind="text: getMD(FlightInfos()[0].DepDate)">08-03</text>
-                            <text data-bind="text: FlightInfos()[0].BeginTime">07:25</text>
-                            <text data-bind="text: FlightInfos()[0].FlightNo">HU7706</text>
+            <!-- ko ifnot:$root.isSingle($data) "-->
+            <view class="mul-line main-con"  wx-if="{{flightInfos&&flightInfos.length == 2}}" wx:for="{{flightInfos}}" wx:key-index="index" wx:for-item="flight">
+                <view class="row-item  ">
+                    <view class="flex align-center mul-come justify-content-space-between">
+                        <view class="flex">
+                            <view class="line-type c-fff c-bg-3eabff ">去程</view>
+                            <view class="line-info ">
+                                <text data-bind="text: getMD(FlightInfos()[0].DepDate)">{{flight.depDate}}</text>
+                                <text data-bind="text: FlightInfos()[0].BeginTime">{{flight.BeginTime}}</text>
+                                <text data-bind="text: FlightInfos()[0].FlightNo">{{flight.FlightNo}}</text>
+                            </view>
                         </view>
-                        <view class="line-arror c-fff font-size-10 c-bg-f4393c" data-bind="click: $root.showDetail"><i class="icon-arror-r"></i></view>
+                        <image src="../../images/wfxq_icon_1.png" class="arrow"></image>
                     </view>
-                    <view class="flex align-center">
-                        <view class="line-type c-fff c-bg-3eabff font-size-10">回程</view>
-                        <view class="line-info col-1">
-                            <text data-bind="text: getMD(FlightInfos()[1].DepDate)">08-03</text>
-                            <text data-bind="text: FlightInfos()[1].BeginTime">07:25</text>
-                            <text data-bind="text: FlightInfos()[1].FlightNo">HU7706</text>
+                    <view class="flex align-center mul-back">
+                        <view class="flex">
+                            <view class="line-type c-fff c-bg-3eabff ">回程</view>
+                            <view class="line-info col-1">
+                                <text data-bind="text: getMD(FlightInfos()[1].DepDate)">{{flight.arrDate}}</text>
+                                <text data-bind="text: FlightInfos()[1].BeginTime">{{flight.EndTime}}</text>
+                                <text data-bind="text: FlightInfos()[1].FlightNo">{{flight.FlightNo}}</text>
+                            </view>
                         </view>
                     </view>
                     <view class="t-line flex align-items mul-price">
                         <view class="col-1">
-                            <view class="c-999 font-size-10">票价</view>
-                            <view class="c-f4393c" data-bind="text: '¥' + ((parseInt(FlightInfos()[0].CabInfos.SalePrice) - parseInt(FlightInfos()[0].CabInfos.Promotion)) + (parseInt(FlightInfos()[1].CabInfos.SalePrice) - parseInt(FlightInfos()[1].CabInfos.Promotion)))">¥3500</view>
+                            <view class="c-999 font-size-24 title">票价</view>
+                            <view class="c-f4393c font-size-34" data-bind="text: '¥' + ((parseInt(FlightInfos()[0].CabInfos.SalePrice) - parseInt(FlightInfos()[0].CabInfos.Promotion)) + (parseInt(FlightInfos()[1].CabInfos.SalePrice) - parseInt(FlightInfos()[1].CabInfos.Promotion)))">¥3500</view>
                         </view>
                         <view class="col-1">
-                            <view class="c-999 font-size-10">机建+燃油</view>
-                            <view class="c-f4393c" data-bind="text: '¥' + ((parseInt(FlightInfos()[0].AduOil) + parseInt(FlightInfos()[0].Tax)) + (parseInt(FlightInfos()[1].AduOil) + parseInt(FlightInfos()[1].Tax)))">¥100</view>
+                            <view class="c-999 font-size-24">机建+燃油</view>
+                            <view class="c-f4393c font-size-34" data-bind="text: '¥' + ((parseInt(FlightInfos()[0].AduOil) + parseInt(FlightInfos()[0].Tax)) + (parseInt(FlightInfos()[1].AduOil) + parseInt(FlightInfos()[1].Tax)))">¥100</view>
                         </view>
-                        <view class="endorse c-align c-3eabff font-size-10" catchtap="showEndorseModal" >
+                        <view class="endorse c-align c-3eabff font-size-24 " catchtap="showEndorseModal" >
                             <view>退改详情</view>
                             <view class="icon-arror-d"></view>
                         </view>

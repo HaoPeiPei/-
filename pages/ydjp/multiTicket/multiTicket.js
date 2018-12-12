@@ -27,11 +27,14 @@ Page({
       filterModalShow: false,
       selectAirlShow: false,
       multiTicketShow: true,
+      waitShow: false,
+      noDateShow: false,
       carrier: {},
       filterActive: false,
       flightInfos: [],
       displayFlightInfos: [],
       carriers: [],
+      bookInfo: {}
     },
     //初始化数据
     initData(options){
@@ -72,9 +75,10 @@ Page({
       var that = this;
       var openid = 'oZDU-wVTjVXuwwKYWsD4f1RuOXYc';
       if (openid != null && openid != "") {
-        wx.showLoading({
-          title: '数据加载中...',
-        });
+        this.setData({
+          waitShow: true,
+          noDateShow: false,
+        })
         var param = {
           action: "av", 
           scity: this.data.sCity, 
@@ -82,24 +86,32 @@ Page({
           sdate: this.data.sDate, 
           openId: openid
         }
-        httpRequst.HttpRequst(true, "/weixin/jctnew/ashx/airTicket.ashx", param , "POST",function(res){
+        httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/airTicket.ashx", param , "POST",function(res){
           wx.hideLoading();
           if (res.Status == 1) {
             var flightInfos = res.FlightInfos.filter(function(item){
-              if(item.CabInfos.length>0){
-                var Discount = item.CabInfos[0].Discount;
-                var FlightLowestPrice = parseInt(item.CabInfos[0].SalePrice) - parseInt(item.CabInfos[0].Promotion);
-                var FlightNoIcon = item.FlightNo.substring(0, 2);
-                return Object.assign(item,{Discount,FlightLowestPrice,FlightNoIcon});
-              }
-            });
+              if(item.CabInfos.length > 0){
+                var CabInfos = item.CabInfos.map(function(cabInfo){
+                  var FlightLowestPrice = parseInt(cabInfo.SalePrice) - parseInt(cabInfo.Promotion);
+                  return Object.assign(cabInfo,{FlightLowestPrice});
+                });
+              };
+              var Discount = item.CabInfos[0].Discount;
+              var FlightNoIcon = item.FlightNo.substring(0, 2);
+              return Object.assign(item,{CabInfos,Discount,FlightNoIcon});
+              });
             that.setData({
               flightInfos: flightInfos,
-              displayFlightInfos: flightInfos
+              displayFlightInfos: flightInfos,
+              waitShow: false,
             });
             that.filterByCarrier(res.FlightInfos);
             that.orderByTime(0);
           } else {
+            that.setData({
+              waitShow: false,
+              noDateShow: true,
+            })
               /* $("#flyData").html("<div class='jp-data'>\
                   <p class='cl_darkGray' style='margin:0px;text-align:center;padding:1rem'>没有找到符合条件的结果</p>\
               </div>"); */
@@ -311,7 +323,7 @@ Page({
       })[0];
       
       this.setData({
-        singleTicketShow: false,
+        multiTicketShow: false,
         selectAirlShow: true,
         carrier: carrier,
       });
@@ -359,13 +371,13 @@ Page({
       var flyTime = carrier.DepDate + " " + carrier.BeginTime + ":00";
       var currNow = getNowFormatDate();
       var datediff = getDateDiff(currNow, flyTime, "minute");
-      if (datediff <= 120) { //从深圳出发的在一个小时内预约无忧出行，得电话联系，其它城市需要3小时
+      /* if (datediff <= 120) { //从深圳出发的在一个小时内预约无忧出行，得电话联系，其它城市需要3小时
         wx.showToast({
           title: '抱歉,您选择的航班起飞时间距现在不足2小时,请通过电话进行预订!客服电话:400-700-7355',
           icon: 'none',
         })
         return false;
-      }
+      } */
       var selectedFlightInfo = Object.assign({},carrier);             //保存当前选择的航班信息
       var _class = e.currentTarget.dataset.class;
       var cabInfos = carrier.CabInfos;
@@ -376,21 +388,45 @@ Page({
        }
       }
       selectedFlightInfo.CabInfos = cabInfo;           //保存当前选择的舱位信息
-      var bookInfo = {};
-      bookInfo.FlightInfos = [];
+      var bookInfo = this.data.bookInfo;
+      var ticketType = this.data.ticketType;
+      if (typeof (bookInfo.FlightInfos) === "undefined") {
+        bookInfo.FlightInfos = [];
+      }
+      if (ticketType == 0  && bookInfo.FlightInfos.length > 0) {
+          bookInfo.FlightInfos.pop();
+      }
+      else if (ticketType == 1 && bookInfo.FlightInfos.length > 1) {
+          bookInfo.FlightInfos.pop();
+      }
       bookInfo.FlightInfos.push(selectedFlightInfo);
-      if(ticketType == 0 && eDate != ""){
+      if(ticketType == 0 && this.data.eDate != ""){
+        var city = this.data.sCity;
+        var cityName = this.data.sCityName;
+        var flyData = this.data.sDate;
+        var sCity = this.data.eCity;
+        var eCity = city;
+        var sCityName = this.data.eCityName;
+        var eCityName = cityName;
+        var sDate = this.data.eDate;
+        var eDate = flyData;
         ticketType = 1;
         this.search();
         this.setData({
-          multiTicketShow: false,
-          selectAirlShow: true,
+          multiTicketShow: true,
+          selectAirlShow: false,
           carrier: carrier,
+          sCity: sCity,
+          eCity: eCity,
+          sCityName: sCityName,
+          eCityName: eCityName,
+          sDate: sDate,
+          eDate: eDate,
           ticketType: ticketType
         });
       }else if(ticketType == 1){
         wx.navigateTo({
-          url: '../airTicketOrder/airTicketOrder?carrier='+JSON.stringify(carrier)
+          url: '../airTicketOrder/airTicketOrder?bookInfo='+JSON.stringify(bookInfo)
         })
       }
     },

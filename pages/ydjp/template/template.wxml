@@ -271,4 +271,21 @@
     </view>
 </template>
 
+<template name="wait">
+    <view class="{{waitShow?'':'none'}}">
+        <view class="wait"></view>
+        <view class="wait_logo">
+            <view class="absolute-Center">
+                <image src="../../images/animatedEllipse.gif" alt="" ></image>
+            </view>
+        </view>
+    </view>
+</template>
+
+<template name="noDate">
+    <view class="{{noDateShow?'':'none'}}">
+        <view class='jp-data'>没有找到符合条件的结果</view>
+    </view>
+</template>
+
   
