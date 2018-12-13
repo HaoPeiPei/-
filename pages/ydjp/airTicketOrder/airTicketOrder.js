@@ -29,6 +29,12 @@ Page({
         singleArea: "左侧前方",
         roundPosition: "随机",
         roundArea: "左侧前方",
+        linkName: "",
+        linkPhone: "",
+        linkRegion: "",
+        linkAddress: "",
+        contactor: "",
+        contactTel: "",
         ticketPrice: {},
         passenger: {},
         passeners: [],
@@ -216,9 +222,18 @@ Page({
             })
         });
     },
+    //显示单程退改详情
+    showSingleEndorse(){
+
+    },
+    //显示往返退改详情
+    showMultiEndorse(){
+        
+    },
     //显示退改详情
-    showEndorseModal(e){
+    showEndorseModal(carrier, sType){
         var that = this;
+        var endorseType = e.currentTarget.dataset.endorsetype;
         var _class = e.currentTarget.dataset.class;
         var carrier = this.data.carrier;
         that.setData({
@@ -237,16 +252,16 @@ Page({
           res=> {
             var endorseModalContent = '';
             if (res.Success) {
-              endorseModalContent ="<p>" + res.Data.replace(/\r\n/g, '</p><p>') + "</p>";
+                endorseModalContent ="<p>" + res.Data.replace(/\r\n/g, '</p><p>') + "</p>";
             }
             else {
-              endorseModalContent ="<p>暂无此舱位退改签信息,请致电客服进行了解</p>";
+                endorseModalContent ="<p>暂无此舱位退改签信息,请致电客服进行了解</p>";
             };
             that.setData({
-              endorseModalContent: WxParse.wxParse('endorseModalContent', 'html', endorseModalContent, that, 5)
-            })
-          }); 
-      },
+                endorseModalContent: WxParse.wxParse('endorseModalContent', 'html', endorseModalContent, that, 5)
+            });
+        }); 
+    },
     //隐藏退改详情
     hideEndorseModal(e){
         this.setData({
@@ -270,16 +285,23 @@ Page({
         this.caculatePirce();
     },
     //切换无忧服务
-    singleServiceSelect(e){
-        var buySingleService = (e.currentTarget.dataset.buysingleservice == 1 ? 0: 1);
-        this.setData({
-            buySingleService
-        });
+    serviceSelect(e){
+        var serviceType = e.currentTarget.dataset.servicetype;
+        var servicevalue = (e.currentTarget.dataset.servicevalue == 1 ? 0: 1);
+        if(serviceType == 'singleService'){
+            this.setData({
+                buySingleService: servicevalue
+            });
+        }else if(serviceType == 'roundService'){
+            this.setData({
+                buyRoundService: servicevalue
+            });
+        }
         this.caculatePirce();
     },
     //选择区域
     selectArea(e){
-        var serviceType = e.currentTarget.dataset.type;
+        var serviceType = e.currentTarget.dataset.servicetype;
         this.setData({
             serviceType
         });
@@ -333,8 +355,7 @@ Page({
             selectPasseners = selectPasseners.concat(data[j]);
             data[j]['active'] = true;
             }
-        }
-        
+        };
         that.setData({
             passeners: data,
             selectPasseners: selectPasseners
@@ -481,6 +502,326 @@ Page({
             }
         });
         }
+    },
+    //验证
+    check(){
+        var selectPasseners = this.data.selectPasseners;
+        var flightInfos = this.data.flightInfos;
+        var contactor = this.data.contactor;
+        var contactTel = this.data.contactTel;
+        var buyExpress = this.data.buyExpress;
+        var linkName = this.data.linkName;
+        var linkPhone = this.data.linkPhone;
+        var linkRegion = this.data.linkRegion;
+        var linkAddress = this.data.linkAddress;
+        var buySingleService = this.data.buySingleService;
+        var buyRoundService = this.data.buyRoundService;
+        if (this.data.selectPasseners.length == 0) {
+            wx.showToast({
+                title: '请选择乘机人!',
+                icon: 'none'
+            });
+            return false;
+        }
+        if (contactor == "") {
+            wx.showToast({
+                title: '请填写姓名',
+                icon: 'none'
+            });
+            return false;
+        }
+        else {
+            if (!nameReg.test(contactor)) {
+                wx.showToast({
+                    title: '请按照登机所持证件填写中文或英文姓名!',
+                    icon: 'none'
+                });
+                return false;
+            }
+        }
+        if (contactTel == "") {
+            wx.showToast({
+                title: '请填写手机号码!',
+                icon: 'none'
+            });
+            return false;
+        }
+        else {
+            if (!mobileReg.test(contactTel)) {
+                wx.showToast({
+                    title: '请输入有效的手机号码!',
+                    icon: 'none'
+                });
+                return false;
+            }
+        }
+        for (var i = 0; i < flightInfos.length; i++) {
+            if (parseInt(selectPasseners.length) > parseInt(flightInfos[i].CabInfos.Num)) {
+                wx.showToast({
+                    title: flightInfos[i].FlightNo + "航班," + flightInfos[i].CabInfos.Class + "舱仅剩余" + flightInfos[i].CabInfos.Num + "张,请预订其他舱位,或修改乘机人数",
+                    icon: 'none'
+                });
+                return false;
+            }
+        }
+        if (buyExpress == 1) {//表示需要行程单
+            if (linkName == "") {
+                wx.showToast({
+                    title: '请填写收件人姓名!',
+                    icon: 'none'
+                });
+                return false;
+            } else {
+                if (!nameReg.test(linkName)) {
+                    wx.showToast({
+                        title: '收件人姓名只能填中文或英文字母！!',
+                        icon: 'none'
+                    });
+                    return false;
+                }
+            }
+            if (linkPhone == "") {
+                wx.showToast({
+                    title: '请填写联系手机!',
+                    icon: 'none'
+                });
+                return false;
+            } else {
+                if (!mobileReg.test(linkPhone)) {
+                    wx.showToast({
+                        title: '请输入有效的手机号码！!',
+                        icon: 'none'
+                    });
+                    return false;
+                }
+            }
+            if (linkRegion == "") {
+                wx.showToast({
+                    title: '请填写所在地区!',
+                    icon: 'none'
+                });
+                return false;
+            }
+            if (linkAddress == "") {
+                wx.showToast({
+                    title: '请填写详细地址!',
+                    icon: 'none'
+                });
+                return false;
+            }
+        }
+        //购买服务条件判断
+        if (buySingleService == 1 || buyRoundService == 1) {
+            var now = new Date(), hour = now.getHours();
+            if (hour < 8 && hour > 22) {
+                wx.showToast({
+                    title: '抱歉,为保证服务质量,请在8:00--22:00预定服务,请通过电话进行无忧出行预约服务!',
+                    icon: 'none'
+                });
+                return false;
+            } else {
+                for (var i = 0; i < flightInfos.length; i++) {
+                    var currNow = getNowFormatDate();
+                    var datediff = GetDateDiff(currNow, flightInfos[i].DepDate + " " + flightInfos[i].BeginTime + ":00", "minute");
+                    if (datediff <= 60 && flightInfos[i].DepCity == "SZX") { //从深圳出发的在一个小时内预约无忧出行，得电话联系，其它城市需要3小时
+                        wx.showToast({
+                            title: '抱歉,您选择的' + flightInfos[i].FlightNo + '航班,起飞时间距现在不足1小时,请通过电话预约无忧出行服务！',
+                            icon: 'none'
+                        });
+                        return false;
+                    } else if (datediff <= 180 && flightInfoModel.FlightInfos()[i].DepCity != "SZX") {
+                        wx.showToast({
+                            title: '抱歉,您选择的' + flightInfoModel.FlightInfos()[i].FlightNo + '航班,起飞时间距现在不足3小时,请通过电话预约无忧出行服务！',
+                            icon: 'none'
+                        });
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    },
+    //创建订单
+    createOrder(){
+        if (this.Check()) {
+            var orderModel = {};
+            var flightInfos = this.data.flightInfos;
+            var selectPasseners = this.data.selectPasseners;
+            orderModel.FlightInfo = flightInfos;
+            orderModel.PassengerInfo = selectPasseners;
+            //一名成人最多携带两名儿童或者一名婴儿和一名儿童
+            var adlut = 0;
+            var child = 0;
+            var boby = 0;
+            for (var i = 0; i < orderModel.PassengerInfo.length; i++) {
+                var pass = orderModel.PassengerInfo[i];
+                if (pass.type == "0") {
+                    adlut = adlut + 1;
+                } else if (pass.type == "1") {
+                    child = child + 1;
+                } else {
+                    boby = boby + 1;
+                }
+            }
+            if (boby > adlut) {
+                wx.showToast({
+                    title: '一名成人只能带一个婴儿',
+                    icon: 'none'
+                });
+                return false;
+            } else if ((child + boby) / 2 > adlut) {
+                wx.showToast({
+                    title: '一名成人只能带两个儿童或一个儿童和一个婴儿',
+                    icon: 'none'
+                });
+                return false;
+            }
+            var insuranceModel = {};
+            insuranceModel.Count = this.data.buyInsurance == 1 ? selectPasseners.length : 0;
+            insuranceModel.Price = this.data.insurancePrice;
+            orderModel.InsuranceInfo = insuranceModel;
+            var expressModel = {};
+            expressModel.Is_Delivery = this.data.buyExpress;
+            expressModel.linkName = this.data.linkName;
+            expressModel.linkPhone = this.data.linkPhone;
+            expressModel.linkRegion = this.data.linkRegion;
+            expressModel.linkAddress = this.data.linkAddress;
+            orderModel.ExpressInfo = expressModel;
+            orderModel.Contactor = this.data.contactor;
+            orderModel.ContactTel = this.data.contactTel;
+            orderModel.MemberId = app.globalData.memberId;
+            orderModel.TotalPrice = this.data.totalPrice;
+            var serviceModel = {};
+            var temp = [];
+            if (this.buySingleService == 1) {
+                serviceModel.ServiceId = this.data.singleServiceId;
+                serviceModel.Price = this.data.singleServicePrice;
+                serviceModel.AirportCode = flightInfos[0].DepCity;
+                serviceModel.UseDate = flightInfos[0].DepDate +" " + flightInfos[0].BeginTime + ":00";
+                serviceModel.Region = this.data.singlePosition + ' '+this.data.singleArea;
+                serviceModel.FlightNo = flightInfos[0].FlightNo;
+                serviceModel.DepCity = flightInfos.DepCity;
+                serviceModel.DepCityName = flightInfos[0].DepCityName;
+                serviceModel.ArrCity = flightInfos[0].ArrCity;
+                serviceModel.ArrCityName = flightInfos[0].ArrCityName;
+                serviceModel.DepDate = flightInfos[0].DepDate;
+                serviceModel.ArrDate = flightInfos[0].ArrDate;
+                serviceModel.BeginTime = flightInfos[0].BeginTime;
+                serviceModel.EndTime = flightInfos[0].EndTime;
+                serviceModel.SalePrice = this.data.singleServiceSalePrice;
+                temp.push(serviceModel);
+            }
+            if (tjhs.data.buyRoundService == 1) {
+                serviceModel = {};
+                serviceModel.ServiceId = this.data.roundServiceId;
+                serviceModel.Price = this.data.roundServicePrice;
+                serviceModel.AirportCode = flightInfos[1].DepCity;
+                serviceModel.UseDate = flightInfos[1].DepDate + " " + flightInfos[1].BeginTime + ":00";
+                serviceModel.Region = this.data.roundPosition + '' + this.data.roundarea ;
+                serviceModel.FlightNo = flightInfos[1].FlightNo;
+                serviceModel.DepCity = flightInfos[1].DepCity;
+                serviceModel.DepCityName = flightInfos[1].DepCityName;
+                serviceModel.ArrCity = flightInfos[1].ArrCity;
+                serviceModel.ArrCityName = flightInfos[1].ArrCityName;
+                serviceModel.DepDate = flightInfos[1].DepDate;
+                serviceModel.ArrDate = flightInfos[1].ArrDate;
+                serviceModel.BeginTime = flightInfos[1].BeginTime;
+                serviceModel.EndTime = flightInfos[1].EndTime;
+                serviceModel.SalePrice = roundServiceSalePrice;
+                temp.push(serviceModel);
+            }
+            orderModel.ServiceInfo = temp;
+            wx.showLoading({
+                title: '数据加载中...',
+            });
+            httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createOrder", orderModel: JSON.stringify(orderModel) }, "POST",function(res){
+                wx.hideLoading()
+                if (res.Success == 1) {
+                    this.sendSignalR(res.Data);
+                } else {
+    
+                }
+            });
+        }
+    },
+    //生成微信支付参数
+    createPayPara(orderId) {
+        var that = this;
+        if (orderId != null && orderId != "") {
+            wx.showLoading({
+                title: '数据加载中...',
+            });
+            httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
+                wx.hideLoading()
+                if (res.Success) {
+                    var parameObj = JSON.parse(res.Data);
+                    that.jsApiCall(parameObj, orderId);
+                } else {
+                    wx.showToast({
+                        title: '创建支付参数失败,请联系客服',
+                        icon: 'none'
+                    });
+                }
+            });
+        }
+    },
+    //调用微信JS api 支付
+    jsApiCall(params, orderId) {
+        wx.requestPayment(
+            {
+            'timeStamp': params.timeStamp,
+            'nonceStr': params.nonceStr,
+            'package': params.package,
+            'signType': params.signType,
+            'paySign': params.paySign ,
+            'success':function(res){
+                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    payOrder(orderId);
+                }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                    wx.showModal({
+                        title: "温馨提示", 
+                        content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+                        success(res) {
+                          if (res.confirm) {
+                          } else if (res.cancel) {
+                            jsApiCall(params, orderId);
+                          }
+                        }
+                    });
+                }else {
+                    wx.showToast({
+                        title: '支付失败!',
+                        icon: 'none'
+                    });
+                }
+            },
+            'fail':function(res){
+                wx.showToast({
+                    title: '支付失败!',
+                    icon: 'none'
+                });
+            }
+        });
+    },
+    //支付的订单
+    payOrder(){
+        wx.showLoading({
+            title: '数据加载中...',
+        });
+        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "pay", orderId: orderId, status: "1" }, "POST",function(res){
+            wx.hideLoading()
+            if (res.Success) {
+                wx.showToast({
+                    title: res.Message || '支付成功',
+                    icon: 'none'
+                });
+            } else {
+                wx.showToast({
+                    title: res.Message,
+                    icon: 'none'
+                });
+            }
+        });
     },
     onLoad:function(options){
         // 生命周期函数--监听页面加载

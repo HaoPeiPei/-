@@ -39,7 +39,7 @@
                         <view class="c-999 font-size-24">机建+燃油</view>
                         <view class="c-f4393c font-size-34" >¥{{flight.aduOilTax}}</view>
                     </view>
-                    <view class="endorse c-align c-3eabff font-size-24 " catchtap="showEndorseModal" >
+                    <view class="endorse c-align c-3eabff font-size-24 " catchtap="showSingleEndorse" >
                         <view>退改详情</view>
                         <view class="icon-arror-d"></view>
                     </view>
@@ -47,15 +47,15 @@
             </view>
             <!-- /ko -->
             <!-- ko ifnot:$root.isSingle($data) "-->
-            <view class="mul-line main-con"  wx-if="{{flightInfos&&flightInfos.length == 2}}" wx:for="{{flightInfos}}" wx:key-index="index" wx:for-item="flight">
+            <view class="mul-line main-con"  wx-if="{{flightInfos&&flightInfos.length == 2}}">
                 <view class="row-item  ">
                     <view class="flex align-center mul-come justify-content-space-between">
                         <view class="flex">
                             <view class="line-type c-fff c-bg-3eabff ">去程</view>
                             <view class="line-info ">
-                                <text data-bind="text: getMD(FlightInfos()[0].DepDate)">{{flight.depDate}}</text>
-                                <text data-bind="text: FlightInfos()[0].BeginTime">{{flight.BeginTime}}</text>
-                                <text data-bind="text: FlightInfos()[0].FlightNo">{{flight.FlightNo}}</text>
+                                <text data-bind="text: getMD(FlightInfos()[0].DepDate)">{{flightInfos[0].depDate}}</text>
+                                <text data-bind="text: FlightInfos()[0].BeginTime">{{flightInfos[0].BeginTime}}</text>
+                                <text data-bind="text: FlightInfos()[0].FlightNo">{{flightInfos[0].FlightNo}}</text>
                             </view>
                         </view>
                         <image src="../../images/wfxq_icon_1.png" class="arrow"></image>
@@ -64,22 +64,22 @@
                         <view class="flex">
                             <view class="line-type c-fff c-bg-3eabff ">回程</view>
                             <view class="line-info col-1">
-                                <text data-bind="text: getMD(FlightInfos()[1].DepDate)">{{flight.arrDate}}</text>
-                                <text data-bind="text: FlightInfos()[1].BeginTime">{{flight.EndTime}}</text>
-                                <text data-bind="text: FlightInfos()[1].FlightNo">{{flight.FlightNo}}</text>
+                                <text data-bind="text: getMD(FlightInfos()[1].DepDate)">{{flightInfos[1].arrDate}}</text>
+                                <text data-bind="text: FlightInfos()[1].BeginTime">{{flightInfos[1].EndTime}}</text>
+                                <text data-bind="text: FlightInfos()[1].FlightNo">{{flightInfos[1].FlightNo}}</text>
                             </view>
                         </view>
                     </view>
                     <view class="t-line flex align-items mul-price">
                         <view class="col-1">
                             <view class="c-999 font-size-24 title">票价</view>
-                            <view class="c-f4393c font-size-34" data-bind="text: '¥' + ((parseInt(FlightInfos()[0].CabInfos.SalePrice) - parseInt(FlightInfos()[0].CabInfos.Promotion)) + (parseInt(FlightInfos()[1].CabInfos.SalePrice) - parseInt(FlightInfos()[1].CabInfos.Promotion)))">¥3500</view>
+                            <view class="c-f4393c font-size-34" >¥{{flightInfos[0].FlightLowestPrice+flightInfos[1].FlightLowestPrice}}}}</view>
                         </view>
                         <view class="col-1">
                             <view class="c-999 font-size-24">机建+燃油</view>
-                            <view class="c-f4393c font-size-34" data-bind="text: '¥' + ((parseInt(FlightInfos()[0].AduOil) + parseInt(FlightInfos()[0].Tax)) + (parseInt(FlightInfos()[1].AduOil) + parseInt(FlightInfos()[1].Tax)))">¥100</view>
+                            <view class="c-f4393c font-size-34" >¥{{flightInfos[0].aduOilTax+flightInfos[1].aduOilTax}}}</view>
                         </view>
-                        <view class="endorse c-align c-3eabff font-size-24 " catchtap="showEndorseModal" >
+                        <view class="endorse c-align c-3eabff font-size-24 "  catchtap="showMultiEndorse" >
                             <view>退改详情</view>
                             <view class="icon-arror-d"></view>
                         </view>
@@ -115,13 +115,12 @@
             <view class="main-con font-size-32 c-999 contact">
                 <view class="flex t-title align-center">
                     <i class="icon-contacts icon font-size-38"></i>
-                    联系人
-                    <input type="text" class=" col-1" id="contactor" name="contactor" value="" data-value="<%=user.realName %>" placeholder="请输入联系人" />
+                    <input type="text" class=" col-1" id="contactor" name="contactor" value="{{contactor}}"  placeholder="请输入联系人" />
                 </view>
                 <view class="flex t-title align-center">
                     <i class="icon-phone icon ico-spac font-size-38"></i>
                     手机号
-                    <input type="text" class=" col-1" id="contactTel" name="contactTel" value="" data-value="<%=user.mobile %>" placeholder="请输入联系方式" />
+                    <input type="text" class=" col-1" id="contactTel" name="contactTel" value="{{contactTel}}"  placeholder="请输入联系方式" />
                 </view>
             </view>
             <view class="main-con font-size-32">
@@ -132,7 +131,7 @@
                         <i class="i-spac icon-hint c-f4393c bx"></i>
                     </view>
                     <view>
-                        <text class="c-999 marginR70">¥40/人</text>
+                        <text class="c-999 marginR70">¥/人</text>
                         <text class="switch {{buyInsurance==1?'on':''}}" data-buyinsurance="{{buyInsurance}}" catchtap="insuranceSelect">
                             <text class="switch-node"></text>
                         </text>
@@ -141,22 +140,22 @@
             </view>
             <view data-model="flightInfoModel">
                 <!-- ko if:$root.isSingle($data) -->
-                <view class="main-con font-size-32">
-                    <view class="flex t-title c-999 align-center justify-content-space-between">
+                <view class="main-con font-size-32" wx-if="{{flightInfos&&flightInfos.length == 1}}">
+                    <view class="flex t-title c-999 align-center justify-content-space-between" >
                         <view>
                             <i class="icon-worryFree ico-spac icon font-size-38"></i>
                             <text>无忧出行</text>
-                            <i class="i-spac icon-hint c-f4393c" bindsubmit="showWorryFree('0')"></i>
+                            <i class="i-spac icon-hint c-f4393c" data-worryfreetype="0" catchtap="showWorryFree"></i>
                         </view>
                         <view>
-                            <text class="c-999 ">¥</text>
+                            <text class="c-999 ">¥{{singleServicePrice}}</text>
                             <text class="singleServicePrice marginR70">/人</text>
-                            <text class="switch {{buySingleService==1?'on':''}}" data-buysingleservice="{{buySingleService}}" catchtap="singleServiceSelect">
+                            <text class="switch {{buySingleService==1?'on':''}}" data-servicetype="singleSevice" data-servicevalue="{{buySingleService}}" catchtap="serviceSelect">
                                 <text class="switch-node"></text>
                             </text>
                         </view>
                     </view>
-                    <view id="region_single" class="flex align-center singleService" data-type="singleService" wx-if="{{buySingleService==1}}" catchtap="selectArea">
+                    <view id="region_single" class="flex align-center singleService" data-servicetype="singleService" wx-if="{{buySingleService==1}}" catchtap="selectArea">
                         <view class="col-1 col-title row-data">
                             {{singlePosition}} {{singleArea}}
                         </view>
@@ -165,30 +164,44 @@
                 </view>
                 <!-- /ko -->
                 <!-- ko ifnot:$root.isSingle($data) -->
-                <view class="main-con font-size-32 none">
-                    <view class="flex t-title align-center">
-                        <i class="icon-worryFree ico-spac icon font-size-38"></i>
-                        <view class="col-1">去程无忧出行<i class="i-spac icon-hint c-f4393c" bindsubmit="showWorryFree('0')"></i></view>
-                        <view class="col-1 c-999">¥<font class="singleServicePrice"></font>/人</view>
-                        <i class="close1" id="singleServiceSelect"><i class="close2"></i></i>
+                <view class="main-con font-size-32 " wx-if="{{flightInfos&&flightInfos.length == 2}}">
+                    <view class="flex t-title c-999 align-center justify-content-space-between" >
+                        <view>
+                            <i class="icon-worryFree ico-spac icon font-size-38"></i>
+                            <text>去程无忧出行</text>
+                            <i class="i-spac icon-hint c-f4393c" data-worryfreetype="0" catchtap="showWorryFree"></i>
+                        </view>
+                        <view>
+                            <text class="c-999 ">¥{{singleServicePrice}}</text>
+                            <text class="singleServicePrice marginR70">/人</text>
+                            <text class="switch {{buySingleService==1?'on':''}}" data-servicetype="singleSevice" data-servicevalue="{{buySingleService}}" catchtap="serviceSelect">
+                                <text class="switch-node"></text>
+                            </text>
+                        </view>
                     </view>
-                    <view id="region_single" class="flex align-center singleService" style="display: none">
-                        <view class="col-1 row-item row-data" >
-                            {{roundPosition}} {{roundArea}}
+                    <view id="region_single" class="flex align-center singleService" data-servicetype="singleService" wx-if="{{buySingleService==1}}" catchtap="selectArea">
+                        <view class="col-1 col-title row-data">
+                            {{singlePosition}} {{singleArea}}
                         </view>
                         <i class="icon-arror-r"></i>
                     </view>
-                </view>
-                <view class="main-con font-size-32 none">
-                    <view class="flex t-title c-999 align-center">
-                        <i class="icon-worryFree ico-spac icon font-size-38"></i>
-                        <view class="col-1">回程无忧出行<i class="i-spac icon-hint c-f4393c" bindsubmit="showWorryFree('1')"></i></view>
-                        <view class="col-1 c-999">¥<font class="roundServicePrice"></font>/人</view>
-                        <i class="close1" id="roundServiceSelect"><i class="close2"></i></i>
+                    <view class="flex t-title c-999 align-center justify-content-space-between" >
+                        <view>
+                            <i class="icon-worryFree ico-spac icon font-size-38"></i>
+                            <text>回程无忧出行</text>
+                            <i class="i-spac icon-hint c-f4393c" data-worryfreetype="1"  bindsubmit="showWorryFree"></i>
+                        </view>
+                        <view>
+                            <text class="c-999 ">¥{{roundServicePrice}}</text>
+                            <text class="singleServicePrice marginR70">/人</text>
+                            <text class="switch {{buyRoundService==1?'on':''}}" data-servicetype="roundSevice" data-servicevalue="{{buyRoundService}}" catchtap="serviceSelect">
+                                <text class="switch-node"></text>
+                            </text>
+                        </view>
                     </view>
-                    <view id="region_round" class="flex align-center roundService" style="display: none">
-                        <view class="col-1 row-item row-data">
-                            {{roundPostion}} {{roundArea}}
+                    <view id="region_single" class="flex align-center singleService" data-servicetype="roundService" wx-if="{{buyRoundService==1}}" catchtap="selectArea">
+                        <view class="col-1 col-title row-data">
+                                {{roundPostion}} {{roundArea}}
                         </view>
                         <i class="icon-arror-r"></i>
                     </view>
@@ -209,7 +222,7 @@
                         </text>
                     </view>
                 </view>
-                <template is="exprerss" data="{{buyExpress}}"></template>
+                <template is="exprerss" data="{{buyExpress,linkName,linkPhone,linkRegion,linkAddress}}"></template>
             </view>
         </view>
     </view>

@@ -30,11 +30,11 @@
     <view class="exprerss" wx-if="{{buyExpress==1}}" >
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">姓名</text>
-            <input type="text" class="col-1" value="" id="linkName" name="linkName" placeholder="请填写收件人姓名" />
+            <input type="text" class="col-1" value="{{linkName}}" id="linkName" name="linkName" placeholder="请填写收件人姓名" />
         </view>
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">联系电话</text>
-            <input type="text" class="col-1" value="" id="linkphone" name="linkphone" placeholder="请填写收件人联系电话" />         
+            <input type="text" class="col-1" value="{{linkPhone}}" id="linkPhone" name="linkPhone" placeholder="请填写收件人联系电话" />         
         </view>
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">所在地区</text>
@@ -43,7 +43,7 @@
                     <view style='width:140rpx;' class='color-3'>乘客类型</view>
                     <view class='box box-f1 box-ac'>
                         <view>{{pasTypePicker.data[pasTypePicker.index]}}</view>
-                        <input type='text' value="{{pasTypePicker.index}}" class="none" data-key="type" name='type'/>
+                        <input type='text' value="{{pasTypePicker.index}}" class="none" data-key="type" name="linkRegion" name='linkRegion'/>
                     </view>
                     <view class='box bxo-ac'>
                         <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
@@ -53,7 +53,7 @@
         </view>
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">详细地址</text>
-            <input type="text" class=" col-1" value="" id="linkAddress" name="linkAddress" placeholder="请填写详细地址" />
+            <input type="text" class=" col-1" value="{{linkAddress}}" id="linkAddress" name="linkAddress" placeholder="请填写详细地址" />
         </view>
     </view>
 </template>
