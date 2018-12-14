@@ -1,4 +1,6 @@
 // pages/wycx/xzhb/xdzf/xdzf.js
+var app = getApp();
+var httpRequst = require("../../utils/requst.js");
 var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo} = require("../../../utils/util.js");
 Page({
 
@@ -54,11 +56,28 @@ Page({
             element['arrDate'] = getMD(element.ArrDate);
             element['arrWeek'] = getWeek(element.ArrDate);
             element['aduOilTax'] = (parseInt(element.AduOil) + parseInt(element.Tax));
-        }
+        };
+        this.getService(carrier.ServiceId);
         this.setData({
             flightInfos
         });
     }
+  },
+  //载入服务
+  getService(serviceId){
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getservicebyid", id: serviceId } , "POST",function(res){
+      wx.hideLoading();
+      if (res.Success) {
+        var serviceModel = JSON.parse(res.Data);
+        var sevicePrice = serviceModel.price;
+          CaculatePrice();
+      } else {
+
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面加载

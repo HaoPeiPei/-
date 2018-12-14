@@ -1,6 +1,5 @@
 // pages/ydjp/ydjp.js
 var app = getApp();
-var httpRequst = require("../../utils/requst.js");
 var {getWeek, getChineseFormatDate, compareDate, addDate, returnDate} = require("../../utils/util.js");
 Page({
 

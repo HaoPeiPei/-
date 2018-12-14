@@ -354,7 +354,7 @@ Page({
       that.setData({
         endorseModalShow: true
       });
-      HttpRequst(
+      httpRequst.HttpRequst(
         true,
         '/weixin/jctnew/ashx/airTicket.ashx',
         {
