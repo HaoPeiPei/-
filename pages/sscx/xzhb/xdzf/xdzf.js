@@ -40,7 +40,7 @@ Page({
   bindQyxzChange:function(){
     wx.navigateTo({
       url: 'qyxz/qyxz',
-    })
+    });
   },
   //初始化数据
   initDate(options){
