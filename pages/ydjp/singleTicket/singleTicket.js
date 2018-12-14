@@ -71,6 +71,26 @@ Page({
           })
       }
     },
+    //返回
+    catchBackChange: function () {
+      wx.navigateBack({
+        delta: 1
+      })
+    }, 
+    //拨打电话
+    telephone(e){
+      var phoneNumber = e.currentTarget.dataset.phonenumber;
+      wx.makePhoneCall({
+        phoneNumber: phoneNumber
+      });
+    },
+    //隐藏航班详情显示搜索页面
+    hideSelectAir(){
+      this.setData({
+        selectAirlShow: false,
+        singleTicketShow: true,
+      });
+    },
     //获取乘机人列表
     search(){
       var that = this;

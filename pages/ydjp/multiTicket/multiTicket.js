@@ -70,6 +70,26 @@ Page({
           })
       }
     },
+     //返回
+     catchBackChange: function () {
+      wx.navigateBack({
+        delta: 1
+      })
+    }, 
+    //拨打电话
+    telephone(e){
+      var phoneNumber = e.currentTarget.dataset.phonenumber;
+      wx.makePhoneCall({
+        phoneNumber: phoneNumber
+      });
+    },
+    //隐藏航班详情显示搜索页面
+    hideSelectAir(){
+      this.setData({
+        selectAirlShow: false,
+        multiTicketShow: true,
+      });
+    },
     //获取乘机人列表
     search(){
       var that = this;
@@ -111,10 +131,7 @@ Page({
             that.setData({
               waitShow: false,
               noDateShow: true,
-            })
-              /* $("#flyData").html("<div class='jp-data'>\
-                  <p class='cl_darkGray' style='margin:0px;text-align:center;padding:1rem'>没有找到符合条件的结果</p>\
-              </div>"); */
+            });
           }
         });
       }

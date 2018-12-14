@@ -70,7 +70,7 @@
     background-color: #f4393c;
 }
 
-.endorseModal{
+.endorseModal, .hintModal, .div_mulLine, .worryFreeModal{
     position: fixed;
     top: 0rpx;
     bottom: 0rpx;
@@ -78,7 +78,7 @@
     width: 100%;
     z-index: 999;
 }
-.endorseModal .pop-full {
+.pop-full {
     background-color: #fff;
     border-radius: 15rpx;
     margin:auto;
@@ -86,7 +86,7 @@
     position: relative;
     overflow: visible;
 }
-.endorseModal .pop-full-close {
+.pop-full-close {
     position: absolute;
     top: -60rpx;
     right: 47%;
@@ -97,7 +97,7 @@
     background-color: transparent;
     overflow: visible;
 }
-.endorseModal .pop-full-close:after {
+.pop-full-close:after {
     content: '';
     position: absolute;
     top: 40rpx;
@@ -108,22 +108,22 @@
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
 } 
-.endorseModal .pop-full-close i {
+.pop-full-close i {
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 }
-.endorseModal .pop-full-close i:before {
+.pop-full-close i:before {
     -webkit-transform: translate(-50%,-50%) rotate(45deg);
     transform: translate(-50%,-50%) rotate(45deg);
 }
-.endorseModal .pop-full-close i:after {
+.pop-full-close i:after {
     -webkit-transform: translate(-50%,-50%) rotate(-45deg);
     transform: translate(-50%,-50%) rotate(-45deg);
 }
-.endorseModal .pop-full-close i:after, .pop-full-close i:before {
+.pop-full-close i:after, .pop-full-close i:before {
     content: '';
     position: absolute;
     top: 50%;
@@ -132,30 +132,30 @@
     background-color: #fff;
     left: 50%;
 }
-.endorseModal .pop-full .pop-content {
+.pop-full .pop-content {
     overflow: auto;
     background-color: #fff;
     border-radius: 15rpx;
     -webkit-overflow-scrolling: touch;
 }
-.endorseModal .pop-full .pop-content .title{
+.pop-full .pop-content .title{
     margin: 0rem;
     padding: 30rpx 0rem;
     text-align: center;
     border-bottom: 1rpx solid #d7d7d7;
 }
-.endorseModal .pop-full .pop-content .title p.active{
+.pop-full .pop-content .title p.active{
     border-bottom: solid 1 #f4393c;
 }
-.endorseModal .pop-full .pop-content .content {
+.pop-full .pop-content .content {
     padding:1.5rem 0rem;
     margin: 0rem;
 }
-.endorseModal .pop-full .pop-content .content {
+.pop-full .pop-content .content {
     padding:30rpx 20rpx;
     color:#333;
 }
-.endorseModal .pop-full .pop-content .content .wxParse-p {
+.pop-full .pop-content .content .wxParse-p {
     overflow:hidden;
 }
 

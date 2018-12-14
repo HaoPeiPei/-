@@ -95,17 +95,16 @@
                     </view>
                     <text class="sp-add c-3eabff" catchtap="showAddPassengerModal">+ 添加乘机人</text>
                 </view>
-                <view class="passengerInfo" data-model="passengerModel" data-bind="foreach: SelectedPassengers">
+                <view class="passengerInfo {{selectPasseners.length==0?'none':''}}"  wx:for="{{selectPasseners}}" wx:key="*this">
                     <view class="flex align-center text-item b-line c-999 selectedPassenger-info">
                         <i class="icon-del c-f4393c font-size-40" bindsubmit="Del(this)"></i>
                         <view class="col-1 row-con">
                             <view class="row-con-group">
                                 <text class="col-title">姓名:</text>
-                                <text class="col-content" data-bind="text: name">13231</text>
+                                <text class="col-content" data-bind="text: name">{{item.name}}</text>
                             </view>
                             <view class="row-con-group">
-                                <text class="col-title" data-bind="text: $root.getCertType($data)">身份证:</text>
-                                <text class="col-content" data-bind="text: $root.getCertNo($data)">1313131</text>
+                                <text class="col-content" data-bind="text: $root.getCertNo($data)">{{item.cert_no}}</text>
                             </view>
                         </view>
                         <i class="icon-edit c-ededed font-size-40" bindsubmit="Del(this)"></i>
@@ -189,7 +188,7 @@
                         <view>
                             <i class="icon-worryFree ico-spac icon font-size-38"></i>
                             <text>回程无忧出行</text>
-                            <i class="i-spac icon-hint c-f4393c" data-worryfreetype="1"  bindsubmit="showWorryFree"></i>
+                            <i class="i-spac icon-hint c-f4393c" data-worryfreetype="1"  catchtap="showWorryFree"></i>
                         </view>
                         <view>
                             <text class="c-999 ">¥{{roundServicePrice}}</text>
@@ -243,299 +242,20 @@
 
 <template is="passengerDetail" data="{{pasTypePicker,pasCerPicker,passengerDetailShow}}" />
 
-<!--
-<view id="div_endorse" class="bg-div c-bg-000 flex" style="display: none">
-    <view class="pop-full">
-        <text class="pop-full-close" bindsubmit="hideEndorse()"><i></i></text>
-        <view class="pop-content">
-            <view class="title flex b-line">
-                <view class="col-1 first c-align font-size-15" data-value="">去程退改签</view>
-                <view class="col-1 second c-align font-size-15" data-value="">回程退改签</view>
-            </view>
-            <view class="content font-size-15">
-                <view>退票：退票费¥450/人</view>
-                <view>改期：同舱不得改期</view>
-                <view>改签：不得签转</view>
-            </view>
-        </view>
-    </view>
-</view> -->
-<!--
-<view id="div_hint" class="bg-div c-bg-000 flex" style="display: none">
-	<view class="pop-full">
-		<text class="pop-full-close" bindsubmit="hideEndorse()"><i></i></text>
-		<view class="pop-content">
-			<view class="title b-line">
-				<view class="c-align font-size-15">去程退改签</view>
-			</view>
-			<view class="content font-size-15">
-				<view>退票：退票费¥450/人</view>
-				<view>改期：同舱不得改期</view>
-				<view>改签：不得签转</view>
-			</view>
-		</view>
-	</view>
-</view>
-<view id="div_mulLine" class="bg-div c-bg-000 flex" style="display: none">
-    <view class="pop-full" data-model="flightInfoModel" data-bind="foreach: FlightInfos">
-        <text class="pop-full-close" bindsubmit="hideEndorse()"><i></i></text>
-        <view class="pop-content font-size-13">
-            <view class="main-con">
-                <view class="flex t-title align-center c-000">
-                    <i data-bind="css: 'airsmall_' + FlightNo.substring(0, 2)"></i>
-                    <font data-bind="text: CarrierName + ' ' + FlightNo">海南航空 HU7710</font><b class="h-line c-bg-f4393c"></b>
-                    <label data-bind="text: CabInfos.ClassName + '(' + CabInfos.Class + ')'">经济舱(H)</label>
-                    <text class="line-type c-bg-3eabff c-fff font-size-10" data-bind="text: $index() == 0 ? '去程' : '回程'">去程</text>
-                </view>
-                <view class="div-flight flex font-size-13 c-999 c-align align-center">
-                    <view class="col-1">
-                        <view class="font-size-18 c-000"><b data-bind="text: BeginTime">07:25</b></view>
-                        <view data-bind="text: DepCityName + '(' + BeginTerm + ')'">宝安(T3)</view>
-                        <view data-bind="text: getMD(DepDate) + ' ' + GetWeek(DepDate)">09-17 星期天</view>
-                    </view>
-                    <i class="icon-toArror font-size-18"></i>
-                    <view class="col-1">
-                        <view class="font-size-18 c-000"><b data-bind="text: EndTime">10:30</b></view>
-                        <view data-bind="text: ArrCityName + '(' + EndTerm + ')'">首都(T1)</view>
-                        <view data-bind="text: getMD(ArrDate) + ' ' + GetWeek(ArrDate)">09-17 星期天</view>
-                    </view>
-                </view>
-            </view>
-        </view>
-    </view>
-</view>
-    <view id="js-alert-box" class="bg-div c-bg-000 flex" style="display:none">
-		<view class="alert-box">
-			<view id="alert_head" class="alert-head">
-				<svg class="alert-circle" width="104" height="104">
-					<circle cx="52" cy="52" r="45" fill="#FFF" stroke="rgb(240,57,41)" stroke-width="12"></circle>
-					<circle id="js-sec-circle" class="alert-sec-circle" cx="52" cy="52" r="45" fill="transparent" stroke="#F4F1F1" stroke-width="18" transform="rotate(-90 52 52)"></circle>
-					<text class="alert-sec-unit" x="44" y="78" fill="#BDBDBD">秒</text>
-				</svg>
-				<view id="js-sec-text" class="alert-sec-text"></view>
-			</view>
-			<view class="alert-body">
-				<view id="js-alert-head" class="alert-head"></view>
-				<view class="alert-concent">
-					<view>为了不影响您的出行，订单需客服确认有票才可支付</view>
-				</view>
-				<a id="js-alert-btn" class="alert-btn" href="../orderManager/orderType.aspx">立即前往订单页</a>
-			</view>
-		</view>
-	</view>
-</view>
+<template is="hintModal" data="{{hintModalShow}}" />
 
--->
-<!--去程区域选择-->
-<!--<view id="singleRegion" class="page div-hide">
-    <view class="header flex font-size-18 b-line">
-        <i class="icon-arror-l back"></i>
-        <view class="col-1 c-align">
-            区域选择
-        </view>
-        <a href="tel:400-700-7355"><i class="icon-phone"></i></a>
-    </view>
-    <view class="main region">
-        <view class="title">
-            <text class="line"><text>
-            <view class="font-size-15 clean-line">选择位置</view>
-        </view>
-        <view class="seatSelect row-item flex font-size-15 c-fff">
-            <view class="col-1 active">
-                <view>随机</view>
-            </view>
-            <view class="col-1 c-align">
-                <view>靠窗</view>
-            </view>
-            <view class="col-1 r-align">
-                <view>过道</view>
-            </view>
-        </view>
-        <view class="hr3"></view>
-        <view class="title">
-            <text class="line"><text>
-            <view class="font-size-15 clean-line">选择区域</view>
-        </view>
-        <view class="area">
-            <view class="area-info-left area-info">
-                <view>
-                    <view><text class="active">左侧前方<text></view>
-                    <view><text>左侧中方<text></view>
-                    <view><text>左侧下方<text></view>
-                </view>
-            </view>
-            <view class="area-seat">
-                <view style="margin-top: 650rpx">
-                    <view class="area-seat-info1 area-seat1">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info2 area-seat4">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info1 area-seat2">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info2 area-seat5">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info1 area-seat3">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info2 area-seat6">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                </view>
-            </view>
+<template is="worryFreeModal" data="{{worryFreeModalShow,worryFreeType,...ser}}" />
 
-            <view class="area-info-right area-info">
-                <view>
-                    <view><text>右侧前方</text></view>
-                    <view><text>右侧中方</text></view>
-                    <view><text>右侧下方</text></view>
-                </view>
-            </view>
-        </view>
-    </view>
-    <view class="footer flex c-fff">
-        <view class="col-1 show-con">
-            <view class="c-f4393c r-speace">座位区域</view>
-            <view id="region" class="font-size-15">随机 左侧中方</view>
-        </view>
-        <view class="p-assur font-size-18">确认选择</view>
-    </view>
-</view>-->
-<!--回程区域选择-->
-<!--<view id="roundRegion" class="page div-hide">
-    <view class="header flex font-size-18 b-line">
-        <i class="icon-arror-l back"></i>
-        <view class="col-1 c-align">
-            区域选择
-        </view>
-        <a href="tel:400-700-7355"><i class="icon-phone"></i></a>
-    </view>
-    <view class="main region">
-        <view class="title">
-            <text class="line"></text>
-            <view class="font-size-15 clean-line">选择位置</view>
-        </view>
-        <view class="seatSelect row-item flex font-size-15 c-fff">
-            <view class="col-1 active">
-                <view>随机</view>
-            </view>
-            <view class="col-1 c-align">
-                <view>靠窗</view>
-            </view>
-            <view class="col-1 r-align">
-                <view>过道</view>
-            </view>
-        </view>
-        <view class="hr3"></view>
-        <view class="title">
-            <text class="line"></text>
-            <view class="font-size-15 clean-line">选择区域</view>
-        </view>
-        <view class="area">
-            <view class="area-info-left area-info">
-                <view>
-                    <view><text class="active">左侧前方<text></view>
-                    <view><text>左侧中方</text></view>
-                    <view><text>左侧下方</text></view>
-                </view>
-            </view>
-            <view class="area-seat">
-                <view style="margin-top: 650rpx">
-                    <view class="area-seat-info1 area-seat1">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info2 area-seat4">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info1 area-seat2">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info2 area-seat5">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info1 area-seat3">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                    <view class="area-seat-info2 area-seat6">
-                        <view>
-                            <text class="left"></text>
-                            <text class="mid"></text>
-                            <text class="right"></text>
-                        </view>
-                    </view>
-                </view>
-            </view>
+<template is="mulLineModal" data="{{mulLineModalShow,flightInfos}}" />
 
-            <view class="area-info-right area-info">
-                <view>
-                    <view><text>右侧前方</text></view>
-                    <view><text>右侧中方</text></view>
-                    <view><text>右侧下方</text></view>
-                </view>
-            </view>
-        </view>
-    </view>
-    <view class="footer flex c-fff">
-        <view class="col-1 show-con">
-            <view class="c-f4393c r-speace">座位区域</view>
-            <view id="region" class="font-size-15">随机 左侧中方</view>
-        </view>
-        <view class="p-assur font-size-18">确认选择</view>
-    </view>
-</view>
--->
 <view class="endorseModal c-bg-000 flex {{endorseModalShow?'':'none'}}">
     <view class="pop-full font-size-30">
         <view class="pop-full-close" catchtap="hideEndorseModal"><i></i></view>
         <view class="pop-content">
-            <view class="title">退改签说明</view>
+            <view class="title flex">
+                <view class="{{endorseType==0?'active':''}}" data-endorsetype="0" catchtap="endorseTypeChange">{{comeEndorseTitle}}</view>
+                <view class="{{endorseType==1?'active':''}}" data-endorsetype="1" wx-if="{{flightInfos&&flightInfos.length == 2}}" catchtap="endorseTypeChange">{{backEndorseContent}}</view>
+            </view>
             <view class="content ">
                 <template is="wxParse" data="{{wxParseData:endorseModalContent.nodes}}"/>
             </view>

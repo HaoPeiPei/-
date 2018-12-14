@@ -2,7 +2,7 @@
 // pages/ydjp/airTicketOrder/airTicketOrder.js
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
-var {returnDate, getWeek, dateAddValue, getMD, getNowFormatDate, getDateDiff, isCardNo} = require("../../../utils/util.js");
+var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo} = require("../../../utils/util.js");
 Page({
     data:{
         airTicketOrderShow: true,
@@ -10,6 +10,9 @@ Page({
         priceDetailShow: false,
         selectPassengerShow: false,
         passengerDetailShow: false,
+        hintModalShow: false,
+        worryFreeModalShow: false,
+        jsAlertModalShow: false,
         buyInsurance: 1,
         buySingleService: 0,
         buyRoundService: 0,
@@ -40,6 +43,12 @@ Page({
         passeners: [],
         flightInfos: [],
         selectPasseners: [],
+        comeEndorseTitle: '',
+        backEndorseTitle: '',
+        endorseModalContent: '',
+        endorseType: 0,
+        ser: {},
+        worryFreeType: 0,
         pasTypePicker:{
             data: ["成人", "儿童", "婴儿"],
             index: 0,
@@ -224,21 +233,29 @@ Page({
     },
     //显示单程退改详情
     showSingleEndorse(){
-
+        this.setData({
+            endorseModalShow: true,
+            comeEndorseTitle: '退改签详情',
+        });
+        if (this.data.comeEndorseContent == "") {
+            showEndorse(this.data.flightInfos[0], "0");
+        }
     },
     //显示往返退改详情
     showMultiEndorse(){
-        
+        this.setData({
+            endorseType: 0,
+            endorseModalShow: true,
+            comeEndorseTitle: '去程退改签',
+            backEndorseTitle: '回程退改签',
+        });
+        if (this.data.comeEndorseContent == "") {
+            showEndorse(this.data.flightInfos[0], "0");
+        }
     },
     //显示退改详情
     showEndorseModal(carrier, sType){
         var that = this;
-        var endorseType = e.currentTarget.dataset.endorsetype;
-        var _class = e.currentTarget.dataset.class;
-        var carrier = this.data.carrier;
-        that.setData({
-          endorseModalShow: true
-        });
         httpRequst.HttpRequst(
           true,
           '/weixin/jctnew/ashx/airTicket.ashx',
@@ -262,10 +279,66 @@ Page({
             });
         }); 
     },
+    //切换去回程改签详情
+    endorseTypeChange(e){
+        var endorseType = e.currentTarget.dataset.endorstype;
+        this.setData({
+            endorseType: endorseType,
+            endorseModalShow: true,
+            comeEndorseTitle: '去程退改签',
+            backEndorseTitle: '回程退改签',
+        });
+        if(endorseType == 0){
+            if(this.data.endorseModalContent == ''){
+                showEndorse(this.data.flightInfos[0], "0");
+            }
+        }else if(endorseType == 1){
+            if(this.data.endorseModalContent == ''){
+                showEndorse(this.data.flightInfos[1], "1");
+            }
+        }
+    },
+    //显示订购无忧出行须知
+    showWorryFree(e){
+        var that = this;
+        var worryFreeType = e.currentTarget.dataset.worryfreetype;
+        var id = this.data.singleServiceId;
+        var region = this.data.singleCityCode;
+        if (stype == "1") {
+            id = this.data.roundServiceId;
+            region = this.data.roundCityCode;
+        };
+        httpRequst.HttpRequst(
+            true,
+            '/weixin/jctnew/ashx/airTicket.ashx',
+            {
+                "id": id,
+                "cityCode": region,
+                "action": "getAddProductDetail"
+            },
+            "POST",
+            res=> {
+                that.setData({
+                    ser: res,
+                    worryFreeModalShow: true
+                });
+          }); 
+    },
+    //切换订购无忧出行须知详情
+    worryFreeTypeChange(e){
+        var worryFreeType = e.currentTarget.dataset.worryfreetype;
+        this.setData({
+            worryFreeType: worryFreeType,
+            worryFreeModalShow: true
+        });
+    },
     //隐藏退改详情
     hideEndorseModal(e){
         this.setData({
-            endorseModalShow: false
+            endorseModalShow: false,
+            hintModalShow: false,
+            worryFreeModalShow: false,
+            jsAlertModalShow: false,
         });
     },
     //切换航班意外险
@@ -341,25 +414,25 @@ Page({
         var selectPasseners = that.data.selectPasseners;
         var selectPassenerIds = [];
         for (var i = 0; i < selectPasseners.length; i++) {
-        selectPassenerIds = selectPassenerIds.concat(selectPasseners[i]['id']);
+            selectPassenerIds = selectPassenerIds.concat(selectPasseners[i]['id']);
         }
         wx.showLoading({
-        title: '数据加载中...',
+            title: '数据加载中...',
         });
         httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/passenger.ashx', {action: "get", memberId: memberId}, "POST",function(res){
-        wx.hideLoading();
-        var data = JSON.parse(res.Data);
-        selectPasseners = [];
-        for (var j = 0; j < data.length; j++) {
-            if(selectPassenerIds.indexOf(data[j]['id'])!=-1){
-            selectPasseners = selectPasseners.concat(data[j]);
-            data[j]['active'] = true;
-            }
-        };
-        that.setData({
-            passeners: data,
-            selectPasseners: selectPasseners
-        });
+            wx.hideLoading();
+            var data = JSON.parse(res.Data);
+            selectPasseners = [];
+            for (var j = 0; j < data.length; j++) {
+                if(selectPassenerIds.indexOf(data[j]['id'])!=-1){
+                selectPasseners = selectPasseners.concat(data[j]);
+                data[j]['active'] = true;
+                }
+            };
+            that.setData({
+                passeners: data,
+                selectPasseners: selectPasseners
+            });
         }); 
     },
     //选择旅客页面选择乘机人
@@ -622,7 +695,7 @@ Page({
             } else {
                 for (var i = 0; i < flightInfos.length; i++) {
                     var currNow = getNowFormatDate();
-                    var datediff = GetDateDiff(currNow, flightInfos[i].DepDate + " " + flightInfos[i].BeginTime + ":00", "minute");
+                    var datediff = getDateDiff(currNow, flightInfos[i].DepDate + " " + flightInfos[i].BeginTime + ":00", "minute");
                     if (datediff <= 60 && flightInfos[i].DepCity == "SZX") { //从深圳出发的在一个小时内预约无忧出行，得电话联系，其它城市需要3小时
                         wx.showToast({
                             title: '抱歉,您选择的' + flightInfos[i].FlightNo + '航班,起飞时间距现在不足1小时,请通过电话预约无忧出行服务！',
@@ -857,4 +930,4 @@ Page({
         // 用户点击右上角分享
         
     }
-})
+});

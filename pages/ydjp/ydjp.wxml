@@ -2,9 +2,9 @@
 <view class="wrap">
     <view class="header-top">
         <view class="header-title flex">
-            <i class="icon-arror-l"></i>
+            <i class="icon-arror-l" catchtap="catchBackChange"></i>
             <text class="col-1 title"> 国内机票</text>
-            <i class="icon-phone"></i>
+            <i class="icon-phone"  data-phonenumber="400-700-7355" catchtap="telephone"></i>
         </view>
     </view>
     <view class="main main-space">

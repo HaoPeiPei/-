@@ -38,6 +38,19 @@ Page({
       arrWeek: arrWeek,
     });
   },
+  //返回
+  catchBackChange: function () {
+    wx.navigateBack({
+      delta: 1
+    })
+  }, 
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
+  },
   //切换单程或者往返
   changeTicketType(e){
     var ticketType = e.currentTarget.dataset.tickettype;

@@ -1,4 +1,5 @@
 // pages/wycx/xzhb/xdzf/xdzf.js
+var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo} = require("../../../utils/util.js");
 Page({
 
   /**
@@ -13,7 +14,8 @@ Page({
     },
     yhi_gs: 0,
     obj:"",
-    price:""
+    price:"",
+    flightInfos:"",
   },
   bindBackChange: function () {
     wx.showModal({
@@ -40,11 +42,29 @@ Page({
       url: 'qyxz/qyxz',
     })
   },
+  //初始化数据
+  initDate(options){
+    var carrier = JSON.parse(options.bookInfo);
+    if(JSON.stringify(carrier) != {}){
+        var flightInfos = carrier.FlightInfos;
+        for (let index = 0; index < flightInfos.length; index++) {
+            const element = flightInfos[index];
+            element['depDate'] = getMD(element.DepDate);
+            element['depWeek'] = getWeek(element.DepDate);
+            element['arrDate'] = getMD(element.ArrDate);
+            element['arrWeek'] = getWeek(element.ArrDate);
+            element['aduOilTax'] = (parseInt(element.AduOil) + parseInt(element.Tax));
+        }
+        this.setData({
+            flightInfos
+        });
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) { 
-    
+    this.initDate(options);
   },
 
   /**

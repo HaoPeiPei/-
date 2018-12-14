@@ -37,7 +37,6 @@ Page({
     wx.navigateBack({
       delta: 1
     })
-    console.log(1);
   }, 
   bindChageTk:function(e){
     var key = e.currentTarget.dataset.key

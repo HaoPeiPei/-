@@ -221,7 +221,7 @@
 <template name="selectAir" >
     <view class="selectAir {{selectAirlShow?'':'none'}}">
         <view class="header flex font-size-18 b-line c-bg-fff">
-            <i class="back icon-arror-l"></i>
+            <i class="back icon-arror-l" catchtap="hideSelectAir"></i>
             <view class="col-1 cityName_wrap c-align">
                 <text class="depCityName">{{carrier.DepCityName}}</text>
                 <text class="icon-airArror"></text>
@@ -271,6 +271,7 @@
     </view>
 </template>
 
+<!-- 航班搜索页面加载状态 -->
 <template name="wait">
     <view class="{{waitShow?'':'none'}}">
         <view class="wait"></view>
@@ -282,10 +283,117 @@
     </view>
 </template>
 
+<!-- 航班搜索页面没有数据 -->
 <template name="noDate">
     <view class="{{noDateShow?'':'none'}}">
         <view class='jp-data'>没有找到符合条件的结果</view>
     </view>
 </template>
+
+<!-- 保险提示信息 -->
+<template name="hintModal">
+    <view class="c-bg-000 flex hintModal {{hintModalShow?'':'none'}}">
+        <view class="pop-full">
+            <text class="pop-full-close" ctachtap="hideEndorse"><i></i><text>
+            <view class="pop-content">
+                <view class="title b-line">
+                    <view class="c-align font-size-15">航空意外险</view>
+                </view>
+                <view class="content font-size-15">
+                    <view>1、保险责任：航空意外伤害保险责任320万元/航段（国航直销产品120万元/航段），指被保险人持有效机票检票并进入保单载明的合法商业运营的客运飞机客舱时起至抵达机票载明的终点离开客运飞机客舱的期间内遭受意外伤害所导致的保险责任</view>
+                    <view>2、保险费：30元/航段，计划起飞时间之前退票可退保</view>
+                    <view>3、本产品由中国人寿、新华人寿、太平洋寿险、太平养老、众安在线、阳光人寿、天安财险、华夏人寿、国华人寿、泰康在线等保险公司承保，销售服务方为携程保险代理有限公司、深圳众诚泰保险经纪公司</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 订购无忧出行须知 -->
+<template name="worryFreeModal">
+    <view class="c-bg-000 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
+        <view class="pop-full">
+            <text class="pop-full-close" ctachtap="hideEndorse"><i></i><text>
+            <view class="pop-content">
+                <view class="title b-line">
+                    <view class="c-align font-size-15">订购无忧出行须知</view>
+                </view>
+                <view class="content font-size-15">
+                    <view class='comfortableTravel-server'>
+                        <view class='service-seat'>
+                            <text class="package {{worryFreeType==0?'active':''}}" data-worryfreetype="0" catchtap="worryFreeTypeChange">套餐内容<text>
+                            <text class="pay {{worryFreeType==1?'active':''}}" data-worryfreetype="1" catchtap="worryFreeTypeChange">购买须知<text>
+                            <text class="refund {{worryFreeType==2?'active':''}}" data-worryfreetype="2" catchtap="worryFreeTypeChange">退款须知<text>
+                        </view>
+                        <view class='service-seat-info'>
+                            <view class="package {{worryFreeType==0?'':'none'}}">
+                                <text class='info'>{{ser.service_info}}</text>
+                            </view>
+                            <view class="pay {{worryFreeType==1?'':'none'}}">
+                                <text class='info'>{{ser.buy_info}}</text>
+                            </view>
+                            <view class="refund {{worryFreeType==2?'':'none'}}">
+                                <text class='info'>{{ser.refund_info}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 订购无忧出行须知 -->
+<template name="mulLineModal">
+    <view class="div_mulLine c-bg-000 flex {{mulLineModalShow?'':'none'}}">
+        <view class="pop-full"  wx:for="{{flightInfos}}" wx:for-index="index" wx:for-item="flight">
+            <text class="pop-full-close" ctachtap="hideEndorse"><i></i></text>
+            <view class="pop-content font-size-13">
+                <view class="main-con">
+                    <view class="flex t-title align-center c-000">
+                        <i class="airsmall_{{flight.FlightNoIcon}}" ></i>
+                        <text>{{flight.CarrierName}} {{flight.FlightNo}}</text>
+                        <i class="line"></i>
+                        <text>{{flight.CabInfos.ClassName}}({{flight.CabInfos.Class}})</text>
+                        <text class="line-type c-bg-3eabff c-fff font-size-10" >{{index == 0 ? '去程' : '回程'}}</text>
+                    </view>
+                    <view class="div-flight flex font-size-13 c-999 c-align align-center">
+                        <view class="col-1">
+                            <view class="font-size-18 c-000"><b data-bind="text: BeginTime">{{flight.BeginTime}}</b></view>
+                            <view data-bind="text: DepCityName + '(' + BeginTerm + ')'">{{flight.DepCityName}}({{flight.BeginTerm}})</view>
+                            <view data-bind="text: getMD(DepDate) + ' ' + GetWeek(DepDate)">{{flight.depDate}} {{flight.depWeek}}</view>
+                        </view>
+                        <i class="icon-toArror font-size-18"></i>
+                        <view class="col-1">
+                            <view class="font-size-18 c-000">{{flight.EndTime}}</view>
+                            <view>{{flight.ArrCityName}}({{flight.EndTerm}})</view>
+                            <view>{{flight.arrDate}} {{flight.arrWeek}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 订购无忧出行须知 -->
+<template name="jsAlertModal">
+    <view id="js-alert-box" class="c-bg-000 flex {{jsAlertModalShow?'':'none'}}">
+		<view class="alert-box">
+			<view id="alert_head" class="alert-head">
+				<view id="js-sec-text" class="alert-sec-text"></view>
+			</view>
+			<view class="alert-body">
+				<view id="js-alert-head" class="alert-head"></view>
+				<view class="alert-concent">
+					<view>为了不影响您的出行，订单需客服确认有票才可支付</view>
+				</view>
+				<a id="js-alert-btn" class="alert-btn" href="javascript:;">立即前往订单页</a>
+			</view>
+		</view>
+	</view>
+</template>
+
+
 
   

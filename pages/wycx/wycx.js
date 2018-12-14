@@ -124,7 +124,6 @@ Page({
       orderId: orderId
     };
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      //console.log(res);
       if (res.Success) {
         var id = options.id;
         _this.setData({
