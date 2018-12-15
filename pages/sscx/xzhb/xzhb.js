@@ -5,14 +5,6 @@ var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
 var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?:[A-Za-z]{1,49}\s[A-Za-z]{2,50}\/[A-Za-z]{2,50})|(?:[A-Za-z]{2,50}\/[A-Za-z]{2,50}\s[A-Za-z]{1,49}))$/;
 //联系手机正则
 var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
-var oldFlightNo = "";
-var depDate = "";
-var startCity = "SZX";
-var serviceId = "";
-var passengerModel = {};
-var flightInfo;
-var dialog;
-var serviceName = "";
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
 var {isCardNo, getDateDiff, getNowFormatDate} = require("../../../utils/util.js");
@@ -28,6 +20,8 @@ Page({
       "right_icon": "../../images/dh-b.png"
     },
     inCaTch: false,
+    serviceId: "",
+    serviceName: "",
     passeners: [],
     selectPasseners: [],
     editPassener: {}, //编辑或者新增的乘机人
@@ -37,7 +31,6 @@ Page({
     disabled:true,
     certificate: ["身份证", "护照", "其他"],
     picker_index: 0,
-    passengerModel:'',
     startDate:"",
     flight: {
       startCity: '',
@@ -357,65 +350,6 @@ Page({
     }
 
   },
-  //选择航班页面确定操作提交航班信息，成功跳转订单支付页面
-  submitFlightInfo(){
-    if (this.checkFlightInfo()) {
-      var flight = this.data.flight;
-      var oldFlightNo = flight.oldFlightNo;
-      var flightNo = flight.flightNo;
-      var flyDate = flight.flyDate;
-      var startCity = flight.startCity;
-      var selectPasseners = this.data.selectPasseners;
-      if (flightNo.toUpperCase() != oldFlightNo.toUpperCase()) {
-        wx.showToast({
-          title: '您输入的航班号发生变化,请重新选择起飞时间进行查询',
-          icon: 'none'
-        });
-        return false;
-      }
-      else if (!flight.canBook) {
-        wx.showToast({
-          title: '航班起飞城市和定位城市不一致,请返回首页修改。',
-          icon: 'none'
-        });
-        return false;
-      }
-      else if (selectPasseners.length == 0) {
-        wx.showToast({
-          title: '请选择乘机人',
-          icon: 'none'
-        });
-        return false;
-      } else {
-          //时间差  当前时间-航班起飞时间
-          var datediff = getDateDiff(getNowFormatDate(), flyDate, "minute");
-          if (datediff <= 180) {
-            wx.showToast({
-              title: '抱歉,您选择的航班起飞时间距现在不足3小时,请通过电话进行预约服务！',
-              icon: 'none'
-            });
-            return false;
-          }
-          var now = new Date(), hour = now.getHours();
-          if (startCity != "SZX") {
-              if (hour < 8 || hour >= 20) {
-                wx.showToast({
-                  title: '抱歉,为保证服务质量,请在08:00--20:00预定服务,请通过电话进行预约服务！',
-                  icon: 'none'
-                });
-                return false;
-              }
-          }
-          var bookInfo = {};
-          bookInfo.FlightInfo = flight;
-          bookInfo.ServiceId = serviceId;
-          bookInfo.ServiceName = serviceName;
-          bookInfo.PassengerInfo = selectPasseners;
-          bookInfo.FlightNo = flightNo;
-          window.location = "xdzf/xdzf?bookInfo=" + JSON.stringify(bookInfo);
-      }
-  }
-  },
   //新增或者编辑乘机人页面验证乘机人信息
   checkPassener: function(psg_name, cert_no, cert_type, phone_number) {
     if (!(nameReg.test(psg_name))) {
@@ -533,10 +467,62 @@ Page({
       });
     }
   },
+  //选择航班页面确定操作提交航班信息，成功跳转订单支付页面
+  submitFlightInfo(){
+    if (this.checkFlightInfo()) {
+      var flight = this.data.flight;
+      var oldFlightNo = flight.oldFlightNo;
+      var flightNo = flight.flightNo;
+      var flyDate = flight.flyDate;
+      var selectPasseners = this.data.selectPasseners;
+      if (flightNo.toUpperCase() != oldFlightNo.toUpperCase()) {
+        wx.showToast({
+          title: '您输入的航班号发生变化,请重新选择起飞时间进行查询',
+          icon: 'none'
+        });
+        return false;
+      }
+      else if (!flight.canBook) {
+        wx.showToast({
+          title: '航班起飞城市和定位城市不一致,请返回首页修改。',
+          icon: 'none'
+        });
+        return false;
+      }
+      else if (selectPasseners.length == 0) {
+        wx.showToast({
+          title: '请选择乘机人',
+          icon: 'none'
+        });
+        return false;
+      } else {
+          //时间差  当前时间-航班起飞时间
+          var datediff = getDateDiff(getNowFormatDate(), flyDate, "minute");
+          if (datediff <= 60) {
+            wx.showToast({
+              title: '抱歉,您选择的航班起飞时间距现在不足1小时,请通过电话进行预约服务！',
+              icon: 'none'
+            });
+            return false;
+          }
+          var bookInfo = {};
+          bookInfo.FlightInfo = flight;
+          bookInfo.ServiceId = this.data.serviceId;
+          bookInfo.ServiceName = this.data.serviceName;
+          bookInfo.PassengerInfo = selectPasseners;
+          bookInfo.FlightNo = flightNo;
+          wx.navigateTo({
+            url: "xdzf/xdzf?bookInfo=" + JSON.stringify(bookInfo)
+          });
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var serviceId = options.id;
+    var serviceName = options.serviceName;
     var flight = this.data.flight;
     flight['startCityName'] = this.getCityName(options.cityCode);
     this.setData({

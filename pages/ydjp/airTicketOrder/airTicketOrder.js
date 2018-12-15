@@ -877,7 +877,7 @@ Page({
         });
     },
     //支付的订单
-    payOrder(){
+    payOrder(orderId){
         wx.showLoading({
             title: '数据加载中...',
         });

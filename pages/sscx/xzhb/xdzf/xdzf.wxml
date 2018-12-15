@@ -26,13 +26,32 @@
   </view>
 </view>
 
+<!--区域选择  -->
+<view class='box box-f1 margin-t-10 backgd-f'>
+    <view class='box box-f1 margin-lr-30 box-ver color-3'>
+      <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1'>
+        <view style='background-image:url(../../../images/qyxz_icon.png)' class='icon-hb enlarge-1'></view>
+        <view class='box box-f1 font-15 margin-l-10 color-3'>区域选择</view>
+      </view>
+      <view class='box box-f1 box-hor box-ac padding-tb-25 font-13 ' bindtap='bindQyxzChange'>
+        <view class='box box-f1' style='margin-left:40rpx;'>
+          <text>{{position}}</text>
+          <text class='margin-l-20'> {{area}}</text>
+        </view>
+        <view class='box box-ac'>
+          <image src='../../../images/yjt_icon_c.png' style='width:16rpx;margin-top:6rpx;' mode='widthFix'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
 <!--乘机人  -->
 <view class='box box-f1 margin-t-10 backgd-f'>
   <view class='box box-f1 margin-lr-30 box-ver color-3'>
     <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1'>
       <view style='background-image:url(../../../images/qyxz_icon.png)' class='icon-hb enlarge-1'></view>
       <view class='box box-f1 box-ae'>
-        <view class='box font-14 margin-l-10 color-3'>区域选择</view>
+        <view class='box font-14 margin-l-10 color-3'>乘机人</view>
         <view class='box box-f1 font-12 color-3' style='margin-left:30rpx;'>已选乘客：
           <text>2</text>人</view>
       </view>
@@ -66,12 +85,12 @@
       <view style='background-image:url(../../../images/qyxz_icon.png)' class='icon-hb enlarge-1'></view>
       <view class='box box-f1 font-15 margin-l-10 color-3'>
         <view style='width:120rpx;color:#999999;'>联系人</view>
-        <view class='box box-f1'>周琦</view>
+        <input type="text" class='box box-f1' data-name="contactor" bindinput="bindinput" value="{{contactor}}" />
       </view>
     </view>
     <view class='box box-f1 font-15 padding-tb-25 color-3' style='margin-left:40rpx;'>
         <view style='width:120rpx;color:#999999;'>手机号</view>
-        <view class='box box-f1'>15988762000</view>      </view>
+        <input type="text" class='box box-f1' data-contacttel="contactor" bindinput="bindinput" value="{{contactTel}}" />
   </view>
 </view>
 
@@ -82,15 +101,17 @@
       <view style='background:url(../../../images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
       <view class='box box-f1 box-ac font-15 margin-l-10' >
         <view class='color-9' style='width:120rpx;'>优惠券</view>
-        <view class='yhj-back {{yhi_gs > 0?"yy":""}}'>{{yhi_gs}}</view>
+        <view class='yhj-back {{couponCount > 0?"yy":""}}'>{{couponCount}}张</view>
       </view>
       <view class='box box-pe box-ac'>
-          <switch checked='{{price==""?false:true}}' color='#f4393c' bindchange="bindYhjChange"></switch>
+          <text class="switch {{couponType==1?'on':''}}" data-coupontype="{{couponType}}" catchtap="couponSelect">
+              <text class="switch-node"></text>
+          </text>
         </view>
     </view>
-    <view class='box box-f1 box-ac box-pe padding-tb-20 border-t-1 {{price==""?"none":""}}'>
+    <!-- <view class='box box-f1 box-ac box-pe padding-tb-20 border-t-1 {{price==""?"none":""}}'>
       <text class='font-15 color-f4'>-￥{{price}}</text>
-    </view>
+    </view> -->
   </view>
 </view>
 
@@ -104,7 +125,9 @@
         <view class='box box-ae font-12'>每人立减20元</view>
       </view>
       <view class='box box-pe box-ac'>
-          <switch checked='' color='#f4393c'></switch>
+          <text class="switch {{salesType==1?'on':''}}" data-salestype="{{salesType}}" catchtap="salesSelect">
+              <text class="switch-node"></text>
+          </text>
         </view>
     </view>
   </view>

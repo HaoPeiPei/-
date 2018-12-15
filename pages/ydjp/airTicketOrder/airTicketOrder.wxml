@@ -97,7 +97,7 @@
                 </view>
                 <view class="passengerInfo {{selectPasseners.length==0?'none':''}}"  wx:for="{{selectPasseners}}" wx:key="*this">
                     <view class="flex align-center text-item b-line c-999 selectedPassenger-info">
-                        <i class="icon-del c-f4393c font-size-40" bindsubmit="Del(this)"></i>
+                        <i class="icon-del c-f4393c font-size-40" data-passenerid='{{item.id}}' catchtap="onSelectPassener"></i>
                         <view class="col-1 row-con">
                             <view class="row-con-group">
                                 <text class="col-title">姓名:</text>

@@ -15,7 +15,39 @@ Page({
     types: 1,
     wz: "随机",
     qy: "左侧中方",
-    obj: ""
+  },
+  //初始化
+  initData(options){
+    var position = options.position;
+    var area = options.area;
+    var key = this.data.key;
+    var types = this.data.types;
+    if(position == '靠窗'){
+      key = 1
+    }else if(position == '过道'){
+      key = 2
+    }else{
+      key = 0
+    };
+    if(area == '左侧中方'){
+      types = 1
+    }else if(area == '左侧下方'){
+      types = 2
+    }else if(area == '右侧前方'){
+      types = 3
+    }else if(area == '右侧中方'){
+      types = 4
+    }else if(area == '右侧下方'){
+      types = 5
+    }else{
+      types = 0
+    }
+    this.setData({
+      wz: position,
+      qy: area,
+      key,
+      types,
+    })
   },
   bindBackChange: function (e) {
     wx.navigateBack({
@@ -45,18 +77,18 @@ Page({
     var currPage = pages[pages.length - 1]; //当前页
     var prevPage = pages[pages.length - 2]; //上一个页面
     prevPage.setData({
-      obj: { wz: wz, qy: qy }
+      position: wz,
+      area: qy,
     });
     wx.navigateBack({
       delta: 1
-    })
-
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initData(options);
   },
 
   /**

@@ -270,65 +270,6 @@ Page({
     }
 
   },
-  //选择航班页面确定操作提交航班信息，成功跳转订单支付页面
-  submitFlightInfo(){
-    if (this.checkFlightInfo()) {
-      var flight = this.data.flight;
-      var oldFlightNo = flight.oldFlightNo;
-      var flightNo = flight.flightNo;
-      var flyDate = flight.flyDate;
-      var startCity = flight.startCity;
-      var selectPasseners = this.data.selectPasseners;
-      if (flightNo.toUpperCase() != oldFlightNo.toUpperCase()) {
-        wx.showToast({
-          title: '您输入的航班号发生变化,请重新选择起飞时间进行查询',
-          icon: 'none'
-        });
-        return false;
-      }
-      else if (!flight.canBook) {
-        wx.showToast({
-          title: '航班起飞城市和定位城市不一致,请返回首页修改。',
-          icon: 'none'
-        });
-        return false;
-      }
-      else if (selectPasseners.length == 0) {
-        wx.showToast({
-          title: '请选择乘机人',
-          icon: 'none'
-        });
-        return false;
-      } else {
-          //时间差  当前时间-航班起飞时间
-          var datediff = getDateDiff(getNowFormatDate(), flyDate, "minute");
-          if (datediff <= 180) {
-            wx.showToast({
-              title: '抱歉,您选择的航班起飞时间距现在不足3小时,请通过电话进行预约服务！',
-              icon: 'none'
-            });
-            return false;
-          }
-          var now = new Date(), hour = now.getHours();
-          if (startCity != "SZX") {
-              if (hour < 8 || hour >= 20) {
-                wx.showToast({
-                  title: '抱歉,为保证服务质量,请在08:00--20:00预定服务,请通过电话进行预约服务！',
-                  icon: 'none'
-                });
-                return false;
-              }
-          }
-          var bookInfo = {};
-          bookInfo.FlightInfo = flight;
-          bookInfo.ServiceId = serviceId;
-          bookInfo.ServiceName = serviceName;
-          bookInfo.PassengerInfo = selectPasseners;
-          bookInfo.FlightNo = flightNo;
-          window.location = "../payOrder/serviceOrder.aspx?bookInfo=" + encodeURIComponent(JSON.stringify(bookInfo));
-      }
-  }
-  },
   //新增或者编辑乘机人页面验证乘机人信息
   checkPassener: function(psg_name, cert_no, cert_type, phone_number) {
     if (!(nameReg.test(psg_name))) {
@@ -444,6 +385,67 @@ Page({
 
         }
       });
+    }
+  },
+  //选择航班页面确定操作提交航班信息，成功跳转订单支付页面
+  submitFlightInfo(){
+    if (this.checkFlightInfo()) {
+      var flight = this.data.flight;
+      var oldFlightNo = flight.oldFlightNo;
+      var flightNo = flight.flightNo;
+      var flyDate = flight.flyDate;
+      var startCity = flight.startCity;
+      var selectPasseners = this.data.selectPasseners;
+      if (flightNo.toUpperCase() != oldFlightNo.toUpperCase()) {
+        wx.showToast({
+          title: '您输入的航班号发生变化,请重新选择起飞时间进行查询',
+          icon: 'none'
+        });
+        return false;
+      }
+      else if (!flight.canBook) {
+        wx.showToast({
+          title: '航班起飞城市和定位城市不一致,请返回首页修改。',
+          icon: 'none'
+        });
+        return false;
+      }
+      else if (selectPasseners.length == 0) {
+        wx.showToast({
+          title: '请选择乘机人',
+          icon: 'none'
+        });
+        return false;
+      } else {
+          //时间差  当前时间-航班起飞时间
+          var datediff = getDateDiff(getNowFormatDate(), flyDate, "minute");
+          if (datediff <= 180) {
+            wx.showToast({
+              title: '抱歉,您选择的航班起飞时间距现在不足3小时,请通过电话进行预约服务！',
+              icon: 'none'
+            });
+            return false;
+          }
+          var now = new Date(), hour = now.getHours();
+          if (startCity != "SZX") {
+              if (hour < 8 || hour >= 20) {
+                wx.showToast({
+                  title: '抱歉,为保证服务质量,请在08:00--20:00预定服务,请通过电话进行预约服务！',
+                  icon: 'none'
+                });
+                return false;
+              }
+          }
+          var bookInfo = {};
+          bookInfo.FlightInfo = flight;
+          bookInfo.ServiceId = serviceId;
+          bookInfo.ServiceName = serviceName;
+          bookInfo.PassengerInfo = selectPasseners;
+          bookInfo.FlightNo = flightNo;
+          wx.navigateTo({
+            url: "xdzf/xdzf?bookInfo=" + JSON.stringify(bookInfo)
+          });
+      }
     }
   },
   //根据cityCode返回城市名称

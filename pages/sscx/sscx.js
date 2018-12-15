@@ -85,7 +85,6 @@ Page({
     var params = { action: "getserviceimg", id: id, memberId: memberId };
 
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      //console.log(res.Data);
       var obj = JSON.parse(res.Data);
       var img_url = [];
       for(var i =0 ;i<obj.length;i++){
@@ -103,9 +102,7 @@ Page({
     var url = "weixin/miniprogram/ashx/service.ashx";
     var memberId = app.globalData.memberId;
     var params = {action: "getservicebyid", id: id, memberId: memberId};
-    
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      //console.log(res.Data);
       var obj = JSON.parse(res.Data);
       _this.setData({
         obj:obj
@@ -127,7 +124,6 @@ Page({
       orderId: orderId
     };
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      //console.log(res);
       if (res.Success) {
         var id = options.id;
         _this.setData({
