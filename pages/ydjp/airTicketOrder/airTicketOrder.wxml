@@ -265,13 +265,13 @@
                     </view>
                     <view class='service-seat-info'>
                         <view class="package {{worryFreeType==0?'':'none'}}">
-                            <text class='info'>{{service_info}}</text>
+                            <template class="info" is="wxParse" data="{{wxParseData:service_info.nodes}}"/>
                         </view>
                         <view class="pay {{worryFreeType==1?'':'none'}}">
-                            <text class='info'>{{buy_info}}</text>
+                            <template class='info' is="wxParse" data="{{wxParseData:buy_info.nodes}}"/>
                         </view>
-                        <view class="refund {{worryFreeType==2?'':'none'}}">
-                            <text class='info'>{{refund_info}}</text>
+                        <view class="refund {{worryFreeType==2?'':'none'}}">、
+                            <template class='info' is="wxParse" data="{{wxParseData:refund_info.nodes}}"/>
                         </view>
                     </view>
                 </view>
