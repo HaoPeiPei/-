@@ -2,7 +2,9 @@
 // pages/ydjp/airTicketOrder/airTicketOrder.js
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
-var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo} = require("../../../utils/util.js");
+var Hub = require("../../../utils/miniProgramSignalr.js");
+var WxParse = require('../../../wxParse/wxParse.js');
+var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo, htmlspecialchars_decode} = require("../../../utils/util.js");
 Page({
     data:{
         airTicketOrderShow: true,
@@ -48,6 +50,8 @@ Page({
         endorseModalContent: '',
         endorseType: 0,
         ser: {},
+        negotiateResponese: {},
+        messageHub: null,
         worryFreeType: 0,
         pasTypePicker:{
             data: ["成人", "儿童", "婴儿"],
@@ -57,6 +61,9 @@ Page({
             data: ["身份证", "护照", "其他"],
             index: 0,
         },
+        service_info: "",
+        buy_info: "",
+        refund_info: "",
     },
     //乘机人乘客类型选择
     pasTypePickerChange(e){
@@ -237,8 +244,8 @@ Page({
             endorseModalShow: true,
             comeEndorseTitle: '退改签详情',
         });
-        if (this.data.comeEndorseContent == "") {
-            showEndorse(this.data.flightInfos[0], "0");
+        if (this.data.endorseModalContent == "") {
+            this.showEndorse(this.data.flightInfos[0], "0");
         }
     },
     //显示往返退改详情
@@ -249,12 +256,12 @@ Page({
             comeEndorseTitle: '去程退改签',
             backEndorseTitle: '回程退改签',
         });
-        if (this.data.comeEndorseContent == "") {
-            showEndorse(this.data.flightInfos[0], "0");
+        if (this.data.endorseModalContent == "") {
+            this.showEndorse(this.data.flightInfos[0], "0");
         }
     },
     //显示退改详情
-    showEndorseModal(carrier, sType){
+    showEndorse(carrier, sType){
         var that = this;
         httpRequst.HttpRequst(
           true,
@@ -262,7 +269,7 @@ Page({
           {
             "sdate": carrier.DepDate,
             "carrier": carrier.Carrier,
-            "cab": _class,
+            "cab": carrier.CabInfos.Class,
             "action": "endorse"
           },
           "POST",
@@ -290,11 +297,11 @@ Page({
         });
         if(endorseType == 0){
             if(this.data.endorseModalContent == ''){
-                showEndorse(this.data.flightInfos[0], "0");
+                this.showEndorse(this.data.flightInfos[0], "0");
             }
         }else if(endorseType == 1){
             if(this.data.endorseModalContent == ''){
-                showEndorse(this.data.flightInfos[1], "1");
+                this.showEndorse(this.data.flightInfos[1], "1");
             }
         }
     },
@@ -304,7 +311,7 @@ Page({
         var worryFreeType = e.currentTarget.dataset.worryfreetype;
         var id = this.data.singleServiceId;
         var region = this.data.singleCityCode;
-        if (stype == "1") {
+        if (worryFreeType == "1") {
             id = this.data.roundServiceId;
             region = this.data.roundCityCode;
         };
@@ -318,8 +325,14 @@ Page({
             },
             "POST",
             res=> {
+                var service_info = htmlspecialchars_decode(res.service_info);
+                var buy_info = htmlspecialchars_decode(res.buy_info);
+                var refund_info = htmlspecialchars_decode(res.refund_info);
                 that.setData({
                     ser: res,
+                    service_info: WxParse.wxParse('service_info', 'html', service_info, that, 5),
+                    buy_info: WxParse.wxParse('buy_info', 'html', buy_info, that, 5),
+                    refund_info: WxParse.wxParse('refund_info', 'html', refund_info, that, 5),
                     worryFreeModalShow: true
                 });
           }); 
@@ -896,11 +909,72 @@ Page({
             }
         });
     },
+    /* websocketStart(queryString){
+        let that = this;
+        let negotiateUrl = "https://www.51jct.cn/signalr/negotiate?clientProtocol=1.5&connectionData="+encodeURIComponent('[{"name":"MessageHub"}]')+"&_="+(Date.parse(new Date())/1000);
+        wx.request({
+            url: negotiateUrl,
+            data: {},
+            method: 'GET', 
+            async: false,
+            success: res => {
+                that.setData({
+                    negotiateResponese: res.data
+                });
+                that.startSocket();
+            },
+            fail: function(res) {
+                console.log(res);
+                return
+            }
+        })
+    },
+    startSocket(){
+        let that = this;
+        let _url = "https://www.51jct.cn/signalr/connect?transport=webSockets&clientProtocol=1.5&connectionToken="+encodeURIComponent(that.data.negotiateResponese.ConnectionToken)+"&connectionData="+encodeURIComponent('[{"name":"MessageHub"}]')+"&_="+(Date.parse(new Date())/1000);
+        _url = _url.replace(/http/,"ws");
+        if(this.data.messageHub != null && this.openStatus){
+            return
+        }
+        let connection = wx.connectSocket({
+            url: _url,
+            header: {
+            'content-type': 'application/json'
+            },
+            protocols: ['protocol1'],
+            method: 'GET'
+        });
+        that.setData({
+            messageHub: connection
+        });
+        connection.onOpen(res => {
+            console.log('websocket connectioned');
+        });
+        wx.onSocketError(function (res) {
+            console.log('WebSocket连接打开失败，请检查！');
+            console.log(res);
+        });
+    }, */
+    websocketStart(){
+        this.hubConnect = new Hub.HubConnection();
+        this.hubConnect.start("https://www.51jct.cn/signalr/Message", { });
+        this.hubConnect.onOpen = res => {
+        console.log("成功开启连接")
+        }
+
+        this.hubConnect.on("showMessage", res => {
+            console.log(res)
+        })
+
+        
+    },
     onLoad:function(options){
         // 生命周期函数--监听页面加载
         this.initDate(options);
         this.loadService();
         this.caculatePirce();
+        this.websocketStart();
+
     },
     onReady:function(){
         // 生命周期函数--监听页面初次渲染完成

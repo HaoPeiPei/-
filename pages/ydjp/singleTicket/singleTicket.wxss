@@ -1,4 +1,5 @@
 /* pages/ydjp/ticket/ticket.wxss */
+@import "../../../wxParse/wxParse.wxss";
 @import "../template/template.wxss";
 .font-size-28{
     font-size: 28rpx;

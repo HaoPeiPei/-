@@ -1,3 +1,4 @@
+@import "../../../wxParse/wxParse.wxss";
 @import '../template/template.wxss';
 .font-size-32{
     font-size: 32rpx;

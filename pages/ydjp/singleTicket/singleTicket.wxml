@@ -1,4 +1,5 @@
 <!--pages/ydjp/ticket/ticket.wxml-->
+<import src="../../../wxParse/wxParse.wxml"/> 
 <import src="../template/template.wxml" />
 <view class="singleTicket {{singleTicketShow?'':'none'}}"  >
     <view class="header flex font-size-18 b-line c-bg-fff">
@@ -74,6 +75,18 @@
             <view>价格</view>
         </view>
     </view>
+</view>
+
+<view class="endorseModal c-bg-000 flex {{endorseModalShow?'':'none'}}">
+    <view class="pop-full font-size-30">
+        <view class="pop-full-close" catchtap="hideEndorseModal"><i></i></view>
+        <view class="pop-content">
+            <view class="title">退改签说明</view>
+            <view class="content ">
+                <template is="wxParse" data="{{wxParseData:endorseModalContent.nodes}}"/>
+            </view>
+        </view>
+    </view>    
 </view>
 
 <template is="selectAir" data="{{selectAirlShow,carrier}}"></template>

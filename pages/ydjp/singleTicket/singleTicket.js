@@ -1,6 +1,7 @@
 // pages/ydjp/ticket/ticket.js
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
+var WxParse = require('../../../wxParse/wxParse.js');
 var {returnDate, getWeek, dateAddValue, getMD, getNowFormatDate, getDateDiff} = require("../../../utils/util.js");
 Page({
 

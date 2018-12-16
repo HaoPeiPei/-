@@ -233,6 +233,15 @@ const compareDate = (dateA, dateB) => {
         return null;
 }
 
+const htmlspecialchars_decode = (str) => {
+    str = str.replace(/&amp;/g, '&');
+    str = str.replace(/&lt;/g, '<');
+    str = str.replace(/&gt;/g, '>');
+    str = str.replace(/&quot;/g, "''");
+    str = str.replace(/&#039;/g, "'");
+    return str;
+}
+
  module.exports = {
     isCardNo: isCardNo,
     getNowFormatDate: getNowFormatDate,
@@ -246,4 +255,5 @@ const compareDate = (dateA, dateB) => {
     getMD: getMD,
     request: request,
     compareDate: compareDate,
+    htmlspecialchars_decode: htmlspecialchars_decode,
 }

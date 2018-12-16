@@ -1,5 +1,5 @@
 var app = getApp();
-var httpRequst = require("../../utils/requst.js");
+var httpRequst = require("../../../../../utils/requst");
 Page({
 
   /**

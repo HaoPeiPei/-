@@ -1,7 +1,7 @@
 // pages/wycx/xzhb/xdzf/xdzf.js
 var app = getApp();
-var httpRequst = require("../../utils/requst.js");
-var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo} = require("../../../utils/util.js");
+var httpRequst = require("../../../../utils/requst");
+var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo} = require("../../../../utils/util.js");
 Page({
 
   /**

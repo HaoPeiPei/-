@@ -1,3 +1,4 @@
+<import src="../../../wxParse/wxParse.wxml"/> 
 <import src="../template/template.wxml" />
 <view class="airTicketOrder" wx-if="{{airTicketOrderShow}}">
     <view class="header flex font-size-18 b-line c-bg-fff">
@@ -244,9 +245,40 @@
 
 <template is="hintModal" data="{{hintModalShow}}" />
 
-<template is="worryFreeModal" data="{{worryFreeModalShow,worryFreeType,...ser}}" />
+<!-- <template is="worryFreeModal" data="{{worryFreeModalShow,worryFreeType,...ser}}" /> -->
 
 <template is="mulLineModal" data="{{mulLineModalShow,flightInfos}}" />
+
+<view class="c-bg-000 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
+    <view class="pop-full">
+        <text class="pop-full-close" ctachtap="hideEndorse"><i></i></text>
+        <view class="pop-content">
+            <view class="title b-line">
+                <view class="c-align font-size-15">订购无忧出行须知</view>
+            </view>
+            <view class="content font-size-15">
+                <view class='comfortableTravel-server'>
+                    <view class='service-seat font-size-30'>
+                        <text class="package {{worryFreeType==0?'active':''}}" data-worryfreetype="0" catchtap="worryFreeTypeChange">套餐内容</text>
+                        <text class="pay {{worryFreeType==1?'active':''}}" data-worryfreetype="1" catchtap="worryFreeTypeChange">购买须知</text>
+                        <text class="refund {{worryFreeType==2?'active':''}}" data-worryfreetype="2" catchtap="worryFreeTypeChange">退款须知</text>
+                    </view>
+                    <view class='service-seat-info'>
+                        <view class="package {{worryFreeType==0?'':'none'}}">
+                            <text class='info'>{{service_info}}</text>
+                        </view>
+                        <view class="pay {{worryFreeType==1?'':'none'}}">
+                            <text class='info'>{{buy_info}}</text>
+                        </view>
+                        <view class="refund {{worryFreeType==2?'':'none'}}">
+                            <text class='info'>{{refund_info}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
 
 <view class="endorseModal c-bg-000 flex {{endorseModalShow?'':'none'}}">
     <view class="pop-full font-size-30">

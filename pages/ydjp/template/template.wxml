@@ -320,20 +320,20 @@
                 </view>
                 <view class="content font-size-15">
                     <view class='comfortableTravel-server'>
-                        <view class='service-seat'>
+                        <view class='service-seat font-size-30'>
                             <text class="package {{worryFreeType==0?'active':''}}" data-worryfreetype="0" catchtap="worryFreeTypeChange">套餐内容</text>
                             <text class="pay {{worryFreeType==1?'active':''}}" data-worryfreetype="1" catchtap="worryFreeTypeChange">购买须知</text>
                             <text class="refund {{worryFreeType==2?'active':''}}" data-worryfreetype="2" catchtap="worryFreeTypeChange">退款须知</text>
                         </view>
                         <view class='service-seat-info'>
                             <view class="package {{worryFreeType==0?'':'none'}}">
-                                <text class='info'>{{ser.service_info}}</text>
+                                <text class='info'>{{service_info}}</text>
                             </view>
                             <view class="pay {{worryFreeType==1?'':'none'}}">
-                                <text class='info'>{{ser.buy_info}}</text>
+                                <text class='info'>{{buy_info}}</text>
                             </view>
                             <view class="refund {{worryFreeType==2?'':'none'}}">
-                                <text class='info'>{{ser.refund_info}}</text>
+                                <text class='info'>{{refund_info}}</text>
                             </view>
                         </view>
                     </view>

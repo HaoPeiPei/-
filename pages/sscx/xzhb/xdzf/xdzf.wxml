@@ -91,9 +91,9 @@
     <view class='box box-f1 font-15 padding-tb-25 color-3' style='margin-left:40rpx;'>
         <view style='width:120rpx;color:#999999;'>手机号</view>
         <input type="text" class='box box-f1' data-contacttel="contactor" bindinput="bindinput" value="{{contactTel}}" />
+    </view>
   </view>
 </view>
-
 <!--优惠券  -->
 <view class='box box-f1 backgd-f margin-t-10'>
   <view class='box box-f1 box-ver margin-lr-30'>
