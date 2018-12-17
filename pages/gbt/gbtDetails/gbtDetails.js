@@ -1,6 +1,9 @@
 // pages/gbt/gbtDetails/gbtDetails.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var httpRequst = require("../../utils/requst.js");
+var WxParse = require('../../../wxParse/wxParse.js');
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -22,22 +25,19 @@ Page({
       { icon_url: "../../images/tsj_icon.png", icon_title: "台式机" },
       { icon_url: "../../images/bgzz_icon.png", icon_title: "报刊杂志" },
     ],
-    service_notice:
-    [
-      "服务时间：不限",
-      "两周岁以下婴儿，在成人陪同下，可免费使用休息室产品(具体情况根据休息室相关规定为准）",
-      "未使用可退,购买之日起一年内有效",
-      "超过有限期未使用的订单视为已使用"
-    ],
+    service_info: "",
     purchase_notice:
     [
       "使用方式：购买之后，可直接前往深圳机场T3航站楼C岛岛尾西部航空柜台凭二维码领取VIP贵宾厅使用卷，抵达指定休息室出示贵宾厅使用卷即可。",
       "登机提示：南航、深航、国航的航班无提醒登机提醒"
-    ]
+    ],
+    serviceId: '',
+    service: {},
   },
+  //立即预约
   catchLjyy:function(){
     wx.navigateTo({
-      url: 'qrdd/qrdd',
+      url: 'qrdd/qrdd?id='+service.id,
     })
   },
   catchBackChange:function(){
@@ -45,11 +45,80 @@ Page({
       delta:1
     })
   },
+  //初始化页面数据
+  initData(options){
+    var serviceId = options.id;
+    this.setData({
+      serviceId: serviceId
+    });
+    this.loadServiceImg(serviceId);
+    this.loadService(serviceId);
+  },
+  //载入服务轮播图片
+  loadServiceImg(){
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getserviceimg", id: this.data.serviceId } , "POST",function(res){
+      wx.hideLoading();
+      if (res.Success) {
+        var imgUrls = res.Data||[].map(function(item){
+          return item.img_url
+        });
+        this.setData({
+          header_text: Object.assign({},this.Data.header_text,{
+            imgUrls
+          })
+        });
+      } else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+      }
+    });
+  },
+  //载入服务
+  loadService(){
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getservicebyid", id: this.data.serviceId } , "POST",function(res){
+      wx.hideLoading();
+      if (res.Success) {
+        var service = {};
+        var data = res.data;
+        var service_info = '';
+        var buy_info = '';
+        var refund_info = '';
+        for (var item in data) {
+          service[item] = data[item];
+          var service_info = data["service_info"];
+          var buy_info = data["buy_info"];
+          var refund_info = data["refund_info"];
+        };
+        this.setData({
+          header_text: Object.assign({},this.Data.header_text,{
+            imgUrls
+          }),
+          service,
+          service_info: WxParse.wxParse('service_info', 'html', service_info, that, 5),
+          buy_info: WxParse.wxParse('buy_info', 'html', buy_info, that, 5),
+          refund_info: WxParse.wxParse('refund_info', 'html', refund_info, that, 5),
+        });
+      } else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initData(options);
   },
 
   /**

@@ -1,7 +1,12 @@
 // pages/wycx/xzhb/xdzf/xdzf.js
 var app = getApp();
+<<<<<<< HEAD
 var httpRequst = require("../../../../utils/requst");
 var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo} = require("../../../../utils/util.js");
+=======
+var httpRequst = require("../../utils/requst.js");
+var { getWeek, getMD } = require("../../../utils/util.js");
+>>>>>>> 4d8112630738806c456de0503cb2f4f8bd27bf14
 Page({
 
   /**
@@ -14,7 +19,6 @@ Page({
       "title_text": "无忧出行下单",
       "right_icon": "../../../images/dh-b.png",
     },
-    obj: "",
     couponType: 0,
     salesType: 0,
     carrier: {},
@@ -51,7 +55,7 @@ Page({
     });
   },
   //初始化数据
-  initDate(options){
+  initData(options){
     var carrier = JSON.parse(options.bookInfo);
     if(JSON.stringify(carrier) != {}){
         var passengerInfo = carrier.PassengerInfo;
@@ -83,7 +87,7 @@ Page({
     httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getservicebyid", id: this.data.service.serviceId } , "POST",function(res){
       wx.hideLoading();
       if (res.Success) {
-        var service = JSON.parse(res.Data);
+        var service = res.Data;
         var price = service.price;
         this.setData({
           service: Object.assign(this.data.service,{
@@ -136,7 +140,7 @@ Page({
       wx.hideLoading();
       if (res.Success) {
         if (parseInt(res.Data) > 0) {
-          var couponCount = obj.Data; 
+          var couponCount = res.Data; 
           this.setData({
             couponCount
           });    
@@ -187,6 +191,63 @@ Page({
   },
   //去支付
   bindZfChange(){
+    if (this.data.carrier.PassengerInfo.length == 0) {
+      wx.showToast({
+        title: '请选择乘机人',
+        icon: 'none',
+      });
+      return false;
+    }
+    if (this.data.contactor == "") {
+      wx.showToast({
+        title: '请填写联系人',
+        icon: 'none',
+      });
+      return false;
+    }
+    if (this.data.contacttel == "") {
+      wx.showToast({
+        title: '请填写联系方式',
+        icon: 'none',
+      });
+      return false;
+    }
+    else {
+        var myreg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
+        if (!myreg.test(this.data.contacttel)) {
+          wx.showToast({
+            title: '请输入有效的手机号码',
+            icon: 'none',
+          });
+          return false;
+        }//this.data.isShare
+    }
+    if (this.data.salesType == 0) {
+      var that = this;
+      wx.showModal({
+        title: '您确定不选择分享优惠吗？',
+        success(res) {
+          if (res.confirm) {
+            that.book();
+          } else if (res.cancel) {
+            return false;
+          }
+        }
+      })
+    } else {
+        if (this.data.isShare == 0 && this.data.salesType == 0) {
+          wx.showToast({
+            title: '需要分享才享受20元优惠券(点击当前页面右上角按钮分享朋友圈)',
+            icon: 'none',
+          });
+            return false;
+        }
+        this.book();
+    }
+  },
+  //支付
+  book(){
+    var orderModel = {};
     var PostionInfo = {};
     PostionInfo.Postion = this.data.postion;
     PostionInfo.Area = this.data.area;
@@ -312,7 +373,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) { 
-    this.initDate(options);
+    this.initData(options);
   },
 
   /**
@@ -333,9 +394,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    var _this = this;
-    var obj = _this.data.obj;
-    console.log(obj)
   },
 
   /**

@@ -23,9 +23,9 @@
     </view>
     <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15'>
       <view class='color-9' style='width:160rpx;'>使用日期</view>
-      <picker mode="date" start="2018-01-01" end="2018-12-30" value='{{valueString}}' bindchange='bindDateChange'>
+      <picker mode="date" start="2018-01-01" end="2018-12-30" value='{{useDate}}' bindchange='bindDateChange'>
         <view class='box box-f1 box-ac'>
-          <input type='text' value='{{valueString}}' placeholder='请选择使用日期' placeholder-style="color:#dddddd;" />
+          <input type='text' value='{{useDate}}' placeholder='请选择使用日期'  data-name='useDate' placeholder-style="color:#dddddd;" />
         </view>
       </picker>
     </view>
@@ -36,17 +36,15 @@
   <view class='box box-f1 box-ver margin-lr-20'>
     <view class='box box-f1 box-ac padding-tb-15 border-b-1'>
       <view style='background:url(../../../images/lxr_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
-      <view class='box box-f1 box-ac font-15 margin-l-10'>
-        <view class='color-9' style='width:120rpx;'>联系人</view>
-        <view class='box box-f1 box-ac'>
-          <input type='text' value='周琦' />
-        </view>
+      <view class='box box-f1 font-15 margin-l-10 color-3'>
+        <view style='width:120rpx;color:#999999;'>联系人</view>
+        <input type="text" class='box box-f1' bindinput="bindinput" data-name='contactor' value="{{contactor}}" />
       </view>
     </view>
     <view class='box box-f1 font-15 margin-l-35 box-ac padding-tb-15'>
       <view class='color-9' style='width:120rpx;'>手机号</view>
       <view class='box box-f1 box-ac'>
-        <input type='text' value='15988762000' />
+        <input type="text" class='box box-f1' bindinput="bindinput"  data-name='contacttel' value="{{contacttel}}" />
       </view>
     </view>
   </view>
@@ -58,12 +56,13 @@
       <view style='background:url(../../../images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
       <view class='box box-f1 box-ac font-15 margin-l-10' bindtap='bindYhjChange'>
         <view class='color-9' style='width:120rpx;'>优惠券</view>
-        <view class='yhj-back {{yhi_gs > 0?"yy":""}}'>{{yhi_gs}}</view>
-        
+        <view class='yhj-back {{couponCount > 0?"yy":""}}'>{{couponCount}}张</view>
       </view>
       <view class='box box-pe box-ac'>
-          <switch checked=''></switch>
-        </view>
+        <text class="switch {{couponType==1?'on':''}}" data-coupontype="{{couponType}}" catchtap="couponSelect">
+            <text class="switch-node"></text>
+        </text>
+      </view>
     </view>
   </view>
 </view>

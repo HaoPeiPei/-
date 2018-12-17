@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 var app = getApp();
 var httpRequst = require("../../../../../utils/requst");
+=======
+
+>>>>>>> 4d8112630738806c456de0503cb2f4f8bd27bf14
 Page({
 
   /**
@@ -13,31 +17,28 @@ Page({
       "right_icon": "../../../../images/dh-b.png"
     },
     key: 0,
-    isUsed: 0,
-    coupons: [],
+    yhi_gs:"",
     conttent_text:
     [
       { backImg_url: "../../../../images/wycx_yhj.png", backImg_url_1: "../../../../images/wycx_yhj_1.png", yhxm: "无忧出行", start_item: "2017.08.19", end_item: "2017.09.27", price: "30",},
       { backImg_url: "../../../../images/sscx_yhj.png", backImg_url_1: "../../../../images/sscx_yhj_1.png", yhxm: "舒适出行", start_item: "2017.08.19", end_item: "2017.09.27", price: "50",},
       { backImg_url: "../../../../images/dbc_yhj.png", backImg_url_1: "../../../../images/dbc_yhj_1.png", yhxm: "代泊车", start_item: "2017.08.19", end_item: "2017.09.27", price: "80",}
-    ],
-
+    ]
   },
   bindBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
   },
-  //切换优惠券使用状态
-  usedSelect: function (e) {
-    var isUsed = e.currentTarget.dataset.isused;
+  bindTapChage: function (e) {
+    var key = e.currentTarget.dataset.key;
     this.setData({
-      isUsed
-    });
-    this.loadCoupon();
+      key: key
+    })
   },
   bindLjsyChange: function (e) {
     var price = e.currentTarget.dataset.price;
+    console.log(price)
     var conttent_text = this.data.conttent_text;
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页

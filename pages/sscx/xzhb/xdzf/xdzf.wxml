@@ -90,8 +90,12 @@
     </view>
     <view class='box box-f1 font-15 padding-tb-25 color-3' style='margin-left:40rpx;'>
         <view style='width:120rpx;color:#999999;'>手机号</view>
+<<<<<<< HEAD
         <input type="text" class='box box-f1' data-contacttel="contactor" bindinput="bindinput" value="{{contactTel}}" />
     </view>
+=======
+        <input type="text" class='box box-f1' data-name='contacttel' data-contacttel="contactor" bindinput="bindinput" value="{{contacttel}}" />
+>>>>>>> 4d8112630738806c456de0503cb2f4f8bd27bf14
   </view>
 </view>
 <!--优惠券  -->
@@ -104,10 +108,10 @@
         <view class='yhj-back {{couponCount > 0?"yy":""}}'>{{couponCount}}张</view>
       </view>
       <view class='box box-pe box-ac'>
-          <text class="switch {{couponType==1?'on':''}}" data-coupontype="{{couponType}}" catchtap="couponSelect">
-              <text class="switch-node"></text>
-          </text>
-        </view>
+        <text class="switch {{couponType==1?'on':''}}" data-coupontype="{{couponType}}" catchtap="couponSelect">
+            <text class="switch-node"></text>
+        </text>
+      </view>
     </view>
     <!-- <view class='box box-f1 box-ac box-pe padding-tb-20 border-t-1 {{price==""?"none":""}}'>
       <text class='font-15 color-f4'>-￥{{price}}</text>
@@ -125,10 +129,10 @@
         <view class='box box-ae font-12'>每人立减20元</view>
       </view>
       <view class='box box-pe box-ac'>
-          <text class="switch {{salesType==1?'on':''}}" data-salestype="{{salesType}}" catchtap="salesSelect">
-              <text class="switch-node"></text>
-          </text>
-        </view>
+        <text class="switch {{salesType==1?'on':''}}" data-salestype="{{salesType}}" catchtap="salesSelect">
+            <text class="switch-node"></text>
+        </text>
+      </view>
     </view>
   </view>
 </view>
@@ -155,7 +159,7 @@
   <view class='box box-f1 box-ac backod-2'>
     <view class='box box-f1 box-ver backod-1 padding-tb-2'>
       <view class='box box-f1 font-13 color-f4 margin-l-1'>￥:
-        <text class='font-18'>210</text>
+        <text class='font-18'>{{totalPrice}}</text>
       </view>
       <view class='box box-f1 font-13 color-f  margin-l-1'>应付金额</view>
     </view>

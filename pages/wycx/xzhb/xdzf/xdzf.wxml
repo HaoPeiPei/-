@@ -80,6 +80,7 @@
 
 <!--联系人  -->
 <view class='box box-f1 margin-t-10  backgd-f'>
+<<<<<<< HEAD
     <view class='box box-f1 margin-lr-30 box-ver color-3'>
       <view class='box box-f1 box-hor box-ac border-b-1 padding-tb-25'>
         <view style='background-image:url(../../../images/qyxz_icon.png)' class='icon-hb enlarge-1'></view>
@@ -87,12 +88,25 @@
           <view style='width:120rpx;color:#999999;'>联系人</view>
           <view class='box box-f1'>周琦</view>
         </view>
+=======
+  <view class='box box-f1 margin-lr-30 box-ver color-3'>
+    <view class='box box-f1 box-hor box-ac border-b-1 padding-tb-25'>
+      <view style='background-image:url(../../../images/qyxz_icon.png)' class='icon-hb enlarge-1'></view>
+      <view class='box box-f1 font-15 margin-l-10 color-3'>
+        <view style='width:120rpx;color:#999999;'>联系人</view>
+        <input type="text" class='box box-f1' data-name="contactor" bindinput="bindinput" value="{{contactor}}" />
+>>>>>>> 4d8112630738806c456de0503cb2f4f8bd27bf14
       </view>
       <view class='box box-f1 font-15 padding-tb-25 color-3' style='margin-left:40rpx;'>
         <view style='width:120rpx;color:#999999;'>手机号</view>
+<<<<<<< HEAD
         <view class='box box-f1'>15988762000</view> 
       </view>
     </view>
+=======
+        <input type="text" class='box box-f1' data-name="contacttel" bindinput="bindinput" value="{{contacttel}}" />
+  </view>
+>>>>>>> 4d8112630738806c456de0503cb2f4f8bd27bf14
 </view>
 
 <!--优惠券  -->
@@ -105,8 +119,10 @@
         <view class='yhj-back {{yhi_gs > 0?"yy":""}}'>{{yhi_gs}}</view>
       </view>
       <view class='box box-pe box-ac'>
-          <switch checked='{{price==""?false:true}}' color='#f4393c' bindchange="bindYhjChange"></switch>
-        </view>
+        <text class="switch {{couponType==1?'on':''}}" data-coupontype="{{couponType}}" catchtap="couponSelect">
+          <text class="switch-node"></text>
+        </text>
+      </view>
     </view>
     <view class='box box-f1 box-ac box-pe padding-tb-20 border-t-1 {{price==""?"none":""}}'>
       <text class='font-15 color-f4'>-￥{{price}}</text>
@@ -124,8 +140,10 @@
         <view class='box box-ae font-12'>每人立减20元</view>
       </view>
       <view class='box box-pe box-ac'>
-          <switch checked='' color='#f4393c'></switch>
-        </view>
+        <text class="switch {{salesType==1?'on':''}}" data-salestype="{{salesType}}" catchtap="salesSelect">
+          <text class="switch-node"></text>
+       </text>
+      </view>
     </view>
   </view>
 </view>
@@ -152,7 +170,7 @@
   <view class='box box-f1 box-ac backod-2'>
     <view class='box box-f1 box-ver backod-1 padding-tb-2'>
       <view class='box box-f1 font-13 color-f4 margin-l-1'>￥:
-        <text class='font-18'>210</text>
+        <text class='font-18'>{{totalPrice}}</text>
       </view>
       <view class='box box-f1 font-13 color-f  margin-l-1'>应付金额</view>
     </view>

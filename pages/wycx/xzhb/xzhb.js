@@ -5,14 +5,6 @@ var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
 var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?:[A-Za-z]{1,49}\s[A-Za-z]{2,50}\/[A-Za-z]{2,50})|(?:[A-Za-z]{2,50}\/[A-Za-z]{2,50}\s[A-Za-z]{1,49}))$/;
 //联系手机正则
 var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
-var oldFlightNo = "";
-var depDate = "";
-var startCity = "SZX";
-var serviceId = "";
-var passengerModel = {};
-var flightInfo;
-var dialog;
-var serviceName = "";
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
 var {isCardNo, getDateDiff, getNowFormatDate} = require("../../../utils/util.js");
@@ -28,6 +20,8 @@ Page({
       "right_icon": "../../images/dh-b.png"
     },
     inCaTch: false,
+    serviceId: "",
+    serviceName: "",
     passeners: [],
     selectPasseners: [],
     editPassener: {}, //编辑或者新增的乘机人
@@ -438,8 +432,8 @@ Page({
           }
           var bookInfo = {};
           bookInfo.FlightInfo = flight;
-          bookInfo.ServiceId = serviceId;
-          bookInfo.ServiceName = serviceName;
+          bookInfo.ServiceId = this.data.serviceId;
+          bookInfo.ServiceName = this.data.serviceName;
           bookInfo.PassengerInfo = selectPasseners;
           bookInfo.FlightNo = flightNo;
           wx.navigateTo({
