@@ -1,6 +1,5 @@
 // pages/gbt/gbt.js
 var app = getApp();
-var wwwRoot = app.globalData.wwwRoot;
 var httpRequst = require("../../utils/requst.js");
 Page({
 
@@ -21,6 +20,7 @@ Page({
     ],
     cityCode: "",
     vipHall: [],
+    imgRoot: app.globalData.imgRoot,
   },
   bindBackChange:function(){
     wx.navigateBack({
@@ -39,12 +39,12 @@ Page({
     wx.showLoading({
       title: '数据加载中...',
     });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getviphalllist", airportCode: cityCode } , "POST",function(res){
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", { action: "getviphalllist", airportCode: cityCode } , "POST",res => {
       wx.hideLoading();
       if (res.Success) {
         this.setData({
           cityCode: cityCode,
-          vipHall: res.Data
+          vipHall: JSON.parse(res.Data)
         });
       } else {
         wx.showToast({

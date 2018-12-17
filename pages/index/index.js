@@ -11,7 +11,7 @@ Page({
   data: {
     imgUrls: "",
     isSZX: true,
-    cityCode:'SZX',
+    airportCode:'SZX',
     airportName:'深圳宝安国际机场',
     url: [
       '../images/7_26.png',
@@ -108,12 +108,12 @@ Page({
     });
   },
   //载入服务信息
-  loadService: function(cityCode) {
+  loadService: function(airportCode) {
     var _this = this; 
     var url = 'weixin/miniprogram/ashx/service.ashx';
     var params = {
       action: "getservice",
-      cityCode: cityCode
+      airportCode: airportCode
     }
     httpRequst.HttpRequst(true, url, params, 'POST', function(res) {
       if (res.Success) {
@@ -124,7 +124,7 @@ Page({
   },
   attachService: function(services){
     var _this = this;
-    var cityCode = _this.data.cityCode;
+    var airportCode = _this.data.airportCode;
     var wycxs = [];
     var sscxs = [];
     var gbts = [];
@@ -202,7 +202,7 @@ Page({
     if (gbts != null && gbts.length > 0) {
       gbt = Object.assign(gbt, {
         isNone: true,
-        href: "../gbt/gbt?cityCode=" + cityCode
+        href: "../gbt/gbt?cityCode=" + airportCode
       });
       _this.setData({
         gbt: gbt,
@@ -219,7 +219,7 @@ Page({
     };
 
     //当城市不为深圳时隐藏接送机、代泊车服务、酒店服务及图标
-    if (cityCode != 'SZX') {
+    if (airportCode != 'SZX') {
       _this.setData({
         isSZX: false
       });
@@ -252,9 +252,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.loadService(app.globalData.cityCode);
+    this.loadService(app.globalData.airportCode);
     this.setData({
-      cityCode: app.globalData.cityCode,
+      airportCode: app.globalData.airportCode,
       airportName: app.globalData.airportName,
     });
   },

@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 var app = getApp();
 var httpRequst = require("../../../../../utils/requst");
-=======
-
->>>>>>> 4d8112630738806c456de0503cb2f4f8bd27bf14
 Page({
 
   /**

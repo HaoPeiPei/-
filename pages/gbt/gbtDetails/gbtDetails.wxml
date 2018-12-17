@@ -47,14 +47,12 @@
     <view class='box box-f1 box-ac color-f4 font-13'>服务须知</view>
   </view>
   <view class='box box-f1 margin-lr-20 box-ver font-13 color-9 padding-tb-20'>
-    <block wx:for="{{service_notice}}">
-      <view class='box box-f1 padding-b-20 padding-last'>
-        <view class='box padding-r-10'>·</view>
-        <view class='box box-f1 box-ac'>
-          <template is="wxParse" data="{{wxParseData:service_info.nodes}}"/>
-        </view>
+    <view class='box box-f1 padding-b-20 padding-last'>
+      <view class='box padding-r-10'></view>
+      <view class='box-f1 box-ac'>
+        <template is="wxParse" data="{{wxParseData:service_info.nodes}}"/>
       </view>
-    </block>
+      </view>
   </view>
 </view>
 
@@ -65,14 +63,28 @@
     <view class='box box-f1 box-ac color-f4 font-13'>购买须知</view>
   </view>
   <view class='box box-f1 margin-lr-20 box-ver font-13 color-9 padding-tb-20'>
-    <block wx:for="{{purchase_notice}}">
       <view class='box box-f1 padding-b-20 padding-last'>
-        <view class='box padding-r-10'>·</view>
-        <view class='box box-f1 box-ac'>
+        <view class='box padding-r-10'></view>
+        <view class=' box-f1 box-ac'>
           <template is="wxParse" data="{{wxParseData:buy_info.nodes}}"/>
         </view>
       </view>
-    </block>
+  </view>
+</view>
+
+<!--退款须知  -->
+<view class='box box-f1 margin-t-10 backgd-f box-ver' style='margin-bottom:90rpx;'>
+  <view class='box box-f1 margin-lr-20 padding-tb-20 border-b-1 position-rel'>
+    <view class='height-1'></view>
+    <view class='box box-f1 box-ac color-f4 font-13'>退款须知</view>
+  </view>
+  <view class='box box-f1 margin-lr-20 box-ver font-13 color-9 padding-tb-20'>
+      <view class='box box-f1 padding-b-20 padding-last'>
+        <view class='box padding-r-10'></view>
+        <view class='box-f1 box-ac'>
+          <template is="wxParse" data="{{wxParseData:refund_info.nodes}}"/>
+        </view>
+      </view>
   </view>
 </view>
 

@@ -1,6 +1,6 @@
 // pages/gbt/gbtDetails/qrdd/qrdd.js
 var app = getApp();
-var httpRequst = require("../../utils/requst.js");
+var httpRequst = require("../../../../utils/requst.js");
 Page({
   /**
    * 页面的初始数据

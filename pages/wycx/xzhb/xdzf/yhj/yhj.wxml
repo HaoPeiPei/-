@@ -1,7 +1,7 @@
 <import src="../../../../../template/template.wxml" />
 <template is="header_content_noBackod" data="{{...header_text}}" />
 
-<view class='{{yhi_gs!="0"?"":"none"}}' style='width:100%;'>
+<view class='{{coupons.length!="0"?"":"none"}}' style='width:100%;'>
   <view class='box box-f1 backgd-f color-9'>
     <view class='box box-f1 box-apc font-16 padding-tb-3 {{key==0?"xz-border":""}}' bindtap='bindTapChage' data-key="0">未使用</view>
     <view class='box box-f1 box-apc font-16 padding-tb-3 {{key==1?"xz-border":""}}' bindtap='bindTapChage' data-key="1">已使用</view>
@@ -32,7 +32,7 @@
 
   <view style='width:100%;' class='{{key==1?"":"none"}}'>
     <block wx:for="{{conttent_text}}">
-      <view style='width:90%;margin:50rpx auto;background:url({{item.backImg_url_1}}) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
+      <view style='width:90%;margin:50rpx auto;background:url({{item.backImg_url_1}}) no-repeat center center;background-size:100% 100%;border-radius:10rpx;'>
         <view class='box box-f1 padding-tb-20 color-f'>
           <view class='box box-f1 box-ver' style='margin-left:80rpx;'>
             <view class='box box-f1 font-16 box-ac'>{{item.yhxm}}</view>
@@ -55,7 +55,7 @@
 </view>
 
 <!--无优惠券  -->
-<view class='box box-f1 box-apc box-ver' wx:if="{{coupons.length==0" style='margin-top:250rpx;'>
+<view class='box box-f1 box-apc box-ver' wx:if="{{coupons.length==0}}" style='margin-top:250rpx;'>
   <view>
     <image src='../../../../images/noyhj_img.png' style='width:260rpx;' mode='widthFix'></image>
   </view>

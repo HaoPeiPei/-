@@ -80,33 +80,19 @@
 
 <!--联系人  -->
 <view class='box box-f1 margin-t-10  backgd-f'>
-<<<<<<< HEAD
-    <view class='box box-f1 margin-lr-30 box-ver color-3'>
-      <view class='box box-f1 box-hor box-ac border-b-1 padding-tb-25'>
-        <view style='background-image:url(../../../images/qyxz_icon.png)' class='icon-hb enlarge-1'></view>
-        <view class='box box-f1 font-15 margin-l-10 color-3'>
-          <view style='width:120rpx;color:#999999;'>联系人</view>
-          <view class='box box-f1'>周琦</view>
-        </view>
-=======
   <view class='box box-f1 margin-lr-30 box-ver color-3'>
     <view class='box box-f1 box-hor box-ac border-b-1 padding-tb-25'>
       <view style='background-image:url(../../../images/qyxz_icon.png)' class='icon-hb enlarge-1'></view>
       <view class='box box-f1 font-15 margin-l-10 color-3'>
         <view style='width:120rpx;color:#999999;'>联系人</view>
         <input type="text" class='box box-f1' data-name="contactor" bindinput="bindinput" value="{{contactor}}" />
->>>>>>> 4d8112630738806c456de0503cb2f4f8bd27bf14
       </view>
       <view class='box box-f1 font-15 padding-tb-25 color-3' style='margin-left:40rpx;'>
         <view style='width:120rpx;color:#999999;'>手机号</view>
-<<<<<<< HEAD
-        <view class='box box-f1'>15988762000</view> 
+        <input type="text" class='box box-f1' data-name="contacttel" bindinput="bindinput" value="{{contacttel}}" />
       </view>
     </view>
-=======
-        <input type="text" class='box box-f1' data-name="contacttel" bindinput="bindinput" value="{{contacttel}}" />
   </view>
->>>>>>> 4d8112630738806c456de0503cb2f4f8bd27bf14
 </view>
 
 <!--优惠券  -->

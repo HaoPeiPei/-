@@ -1,7 +1,6 @@
 // pages/gbt/gbtDetails/gbtDetails.js
 var app = getApp();
-var wwwRoot = app.globalData.wwwRoot;
-var httpRequst = require("../../utils/requst.js");
+var httpRequst = require("../../../utils/requst.js");
 var WxParse = require('../../../wxParse/wxParse.js');
 Page({
   /**
@@ -26,6 +25,8 @@ Page({
       { icon_url: "../../images/bgzz_icon.png", icon_title: "报刊杂志" },
     ],
     service_info: "",
+    buy_info: "",
+    refund_info: "",
     purchase_notice:
     [
       "使用方式：购买之后，可直接前往深圳机场T3航站楼C岛岛尾西部航空柜台凭二维码领取VIP贵宾厅使用卷，抵达指定休息室出示贵宾厅使用卷即可。",
@@ -59,14 +60,16 @@ Page({
     wx.showLoading({
       title: '数据加载中...',
     });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getserviceimg", id: this.data.serviceId } , "POST",function(res){
+    httpRequst.HttpRequst(true, "/weixin/jctnew/ashx/service.ashx", {action: "getserviceimg", id: this.data.serviceId } , "POST",res => {
       wx.hideLoading();
       if (res.Success) {
-        var imgUrls = res.Data||[].map(function(item){
-          return item.img_url
+        var data = JSON.parse(res.Data);
+        var imgUrls = data.map(function(item){
+          var imgUrl = app.globalData.imgRoot+item.img_url
+          return imgUrl
         });
         this.setData({
-          header_text: Object.assign({},this.Data.header_text,{
+          header_text: Object.assign({},this.data.header_text,{
             imgUrls
           })
         });
@@ -83,28 +86,21 @@ Page({
     wx.showLoading({
       title: '数据加载中...',
     });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getservicebyid", id: this.data.serviceId } , "POST",function(res){
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getservicebyid", id: this.data.serviceId } , "POST",res => {
       wx.hideLoading();
       if (res.Success) {
         var service = {};
-        var data = res.data;
-        var service_info = '';
-        var buy_info = '';
-        var refund_info = '';
-        for (var item in data) {
-          service[item] = data[item];
-          var service_info = data["service_info"];
-          var buy_info = data["buy_info"];
-          var refund_info = data["refund_info"];
-        };
+        var service = JSON.parse(res.Data);
+        var service_info = service["service_info"];
+        var buy_info = service["buy_info"];
+        var refund_info = service["refund_info"];
         this.setData({
-          header_text: Object.assign({},this.Data.header_text,{
-            imgUrls
+          header_text: Object.assign({},this.data.header_text,{
           }),
-          service,
-          service_info: WxParse.wxParse('service_info', 'html', service_info, that, 5),
-          buy_info: WxParse.wxParse('buy_info', 'html', buy_info, that, 5),
-          refund_info: WxParse.wxParse('refund_info', 'html', refund_info, that, 5),
+          service: service,
+          service_info: WxParse.wxParse('service_info', 'html', service_info, this, 5),
+          buy_info: WxParse.wxParse('buy_info', 'html', buy_info, this, 5),
+          refund_info: WxParse.wxParse('refund_info', 'html', refund_info, this, 5),
         });
       } else {
         wx.showToast({

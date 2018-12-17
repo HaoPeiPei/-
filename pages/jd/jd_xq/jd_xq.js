@@ -1,5 +1,5 @@
 // pages/jd/jd_xq/jd_xq.js
-var httpRequst = require("../../utils/requst.js");
+var httpRequst = require("../../../utils/requst");
 Page({
   /**
    * 页面的初始数据
