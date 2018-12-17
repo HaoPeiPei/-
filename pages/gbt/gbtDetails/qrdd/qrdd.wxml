@@ -88,7 +88,7 @@
   <view class='box box-f1 box-ac backod-2'>
     <view class='box box-f1 box-ver backod-1 padding-tb-2'>
       <view class='box box-f1 font-13 color-f4 margin-l-1'>￥:
-        <text class='font-18'>210</text>
+        <text class='font-18'>{{totalPrice}}</text>
       </view>
       <view class='box box-f1 font-13 color-f  margin-l-1'>应付金额</view>
     </view>

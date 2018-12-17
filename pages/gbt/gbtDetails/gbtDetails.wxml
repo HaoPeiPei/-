@@ -57,7 +57,7 @@
 </view>
 
 <!--购买须知  -->
-<view class='box box-f1 margin-t-10 backgd-f box-ver' style='margin-bottom:90rpx;'>
+<view class='box box-f1 margin-t-10 backgd-f box-ver' >
   <view class='box box-f1 margin-lr-20 padding-tb-20 border-b-1 position-rel'>
     <view class='height-1'></view>
     <view class='box box-f1 box-ac color-f4 font-13'>购买须知</view>

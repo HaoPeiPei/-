@@ -110,8 +110,8 @@ Page({
     var passengerCount = carrier.passengerInfo.length;
     //优惠金额
     var disAmount = 0;
-    if (JSON.stringify(coupon) != '{}') {
-        disAmount = coupon.denomination;
+    if (JSON.stringify(this.data.coupon) != '{}') {
+        disAmount = this.data.coupon.denomination;
     }
     var totalPrice = price * passengerCount - disAmount;
     if (totalPrice < 0) {
@@ -155,7 +155,6 @@ Page({
   couponSelect: function (e) {
     var couponType = (e.currentTarget.dataset.coupontype == 1 ? 0: 1);
     if(couponType == 1){
-      this.loadCoupon();
       wx.navigateTo({
         url: 'yhj/yhj',
       });

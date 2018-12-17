@@ -38,7 +38,7 @@ Page({
   //立即预约
   catchLjyy:function(){
     wx.navigateTo({
-      url: 'qrdd/qrdd?id='+service.id,
+      url: 'qrdd/qrdd?id='+this.data.service.id,
     })
   },
   catchBackChange:function(){

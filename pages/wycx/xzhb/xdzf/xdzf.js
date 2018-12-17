@@ -117,8 +117,8 @@ Page({
     var passengerCount = carrier.passengerInfo.length;
     //优惠金额
     var disAmount = 0;
-    if (JSON.stringify(coupon) != '{}') {
-        disAmount = coupon.denomination;
+    if (JSON.stringify(this.data.coupon) != '{}') {
+        disAmount = this.data.coupon.denomination;
     }
     var totalPrice = price * passengerCount - disAmount;
     if (totalPrice < 0) {
@@ -162,7 +162,6 @@ Page({
   couponSelect: function (e) {
     var couponType = (e.currentTarget.dataset.coupontype == 1 ? 0: 1);
     if(couponType == 1){
-      this.loadCoupon();
       wx.navigateTo({
         url: 'yhj/yhj',
       });
@@ -424,6 +423,37 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "share", url: '' } , "POST",res => {
+      if (res.Success) {
+        return {
+          title: '靠窗座位人人爱，用我就对了！—环球机场通',
+          path: '/pages/sscx/xzhb/xdzf',
+          imageUrl: "http://www.51jct.cn/weixin/jctnew/images/logo.png",
+          success: res => {
+            wx.showToast({
+              title: "分享成功!",
+              icon: "none",
+            });
+            this.setData({
+              isShare : 1
+            });
+          },
+          fail: res => {
+            wx.showToast({
+              title: "已取消!",
+              icon: "none",
+            });
+          }
+        };
+      } else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+      }
+    });
   }
 })
