@@ -12,7 +12,7 @@ Page({
       "title_text": "",
       "right_icon": "../../images/dh-f.png"
     },
-    room_details:
+    hotelRooms:
     [
       { room_imgURL:"../../images/hhdrj_img.png", type_room: "豪华单人间", room_area: "26", room_floor: "2~8", room_price:"264"},
       { room_imgURL: "../../images/hhsrj_img.png", type_room: "豪华双人间", room_area: "26", room_floor: "2~8", room_price: "253" }, 
@@ -21,6 +21,7 @@ Page({
     hotelId: '',
     hotelImgs: '',
     hotelInfo: {},
+    hotelRooms: [],
   },
   catchBackChange:function(){
     wx.navigateBack({
@@ -54,9 +55,17 @@ Page({
     httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelByCityCode", hotelId: this.data.hotelId } , "POST",function(res){
       wx.hideLoading();
       if (res.Success) {
-        var hotelImgs = res.Data||[].filter(v=>v.Room_ID == "0");
+        var hotelImgs = res.Data;
+        var imgUrls = [];
+        for (let index = 0; index < hotelImgs.length; index++) {
+          if(hotelImgs[index].Room_ID == "0"){
+            imgUrls.push(hotelImgs[index].PicUrl)
+          }
+        }
         this.setData({
-          hotelImgs
+          header_text: Object.assign({},this.data.header_text,{
+            imgUrls
+          })
         });
       } else {
         wx.showToast({
@@ -84,6 +93,33 @@ Page({
         });
       }
     });
+  },
+  //加载酒店房间
+  loadHotelRooms(){
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelRoom", hotelId: this.data.hotelId } , "POST",function(res){
+      wx.hideLoading();
+      if (res.Success) {
+        var hotelRooms = res.Data||[].map(function(item){
+          return Object.assign({}, item, {
+            RoomImg: getRoomImg(item),
+          });
+        })
+        this.setData({
+          hotelRooms
+        });
+      } else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+      }
+    });
+  },
+  getRoomImg(item){
+    return hotelImg.filter(v=>v.Room_ID == item.auto)[0]||"/upload/hotel-default.png";
   },
   /**
    * 生命周期函数--监听页面加载
