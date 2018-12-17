@@ -55,7 +55,7 @@
 </view>
 
 <!--无优惠券  -->
-<view class='box box-f1 box-apc box-ver {{yhi_gs=="0"?"":"none"}}' style='margin-top:250rpx;'>
+<view class='box box-f1 box-apc box-ver' wx:if="{{coupons.length==0" style='margin-top:250rpx;'>
   <view>
     <image src='../../../../images/noyhj_img.png' style='width:260rpx;' mode='widthFix'></image>
   </view>

@@ -45,6 +45,70 @@ Page({
       delta:1
     })
   },
+  //加载所有优惠券
+  loadCoupon(){
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];
+    var param = {
+      action: "getservicebyid",
+      id: prevPage.data.service.serviceId,
+      memberId: app.globalData.memberId,
+      isUsed: this.data.isUsed,
+    };
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", param, "POST",function(res){
+      wx.hideLoading();
+      var  coupons = [];
+      if (res.Success) {
+        if (res.Data.length > 0) {
+          coupons = res.Data.map(item=>{
+            var useType = this.getUseType(item);
+            return Object.assign(item,{useType})
+          });
+        } 
+        this.setData({
+          coupons
+        });
+      } else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+        wx.navigateTo({
+          url: '../../../sscx/sscx',
+        });
+      }
+    });
+  },
+  //获取优惠券使用状态
+  getUseType(item){
+    if (item.is_used == "0" && !item.isExpriy) {
+      return "立即使用";
+    }
+    else if (item.is_used == "1") {
+        return "已使用";
+    } else if (item.isExpriy) {
+        return "已过期";
+    }
+  },
+  //选择优惠券
+  select(e){
+    var serviceTypeName = e.currentTarget.dataset.servicetypename;
+    var coupons = this.data.coupons.filter(v=>v.servicetype_name==serviceTypeName) || [];
+    if(coupons.length > 0){
+      var coupon = coupons[0];
+      if (coupon.is_used == "0" && !coupon.isExpriy) {
+        var pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2];
+        prevPage.caculatePrice();
+        prevPage.setData({
+          coupon
+        });
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

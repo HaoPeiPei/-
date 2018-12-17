@@ -1,5 +1,6 @@
 <!--pages/gbt/gbtDetails/gbtDetails.wxml-->
 <import src="../../../template/template.wxml" />
+<import src="../../../wxParse/wxParse.wxml"/> 
 <template is="header_content_lunbo" data="{{...header_text}}" />
 
 <view class='box box-f1 box-ver backgd-f padding-tb-25'>
@@ -9,12 +10,12 @@
     </view>
     <view class='box box-f1 font-16 margin-b-1'>卓怿头等舱休息室</view>
     <view class='box box-f1 font-13 box-ae color-9 margin-b-2'>服务时间：
-      <text>08:00~24:00</text>
+      <text>{{service.service_time}}</text>
     </view>
     <view class='box box-f1 box-hor'>
       <view class='box box-f1 font-13 color-9 box-ae'>未使用可退,购买之日起一年内有限</view>
       <view class='box font-13 box-as color-f4'>￥
-        <text class='font-18'>210</text>/人</view>
+        <text class='font-18'>{{service.price}}</text>/人</view>
     </view>
   </view>
 </view>
@@ -49,7 +50,9 @@
     <block wx:for="{{service_notice}}">
       <view class='box box-f1 padding-b-20 padding-last'>
         <view class='box padding-r-10'>·</view>
-        <view class='box box-f1 box-ac'>{{item}}</view>
+        <view class='box box-f1 box-ac'>
+          <template is="wxParse" data="{{wxParseData:service_info.nodes}}"/>
+        </view>
       </view>
     </block>
   </view>
@@ -65,7 +68,9 @@
     <block wx:for="{{purchase_notice}}">
       <view class='box box-f1 padding-b-20 padding-last'>
         <view class='box padding-r-10'>·</view>
-        <view class='box box-f1 box-ac'>{{item}}</view>
+        <view class='box box-f1 box-ac'>
+          <template is="wxParse" data="{{wxParseData:buy_info.nodes}}"/>
+        </view>
       </view>
     </block>
   </view>

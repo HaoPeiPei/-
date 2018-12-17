@@ -1,4 +1,5 @@
 /* pages/gbt/gbtDetails/gbtDetails.wxss */
+@import "../template/template.wxss";
  @import "../../../template/template.wxss";  
 
 .height-1{
