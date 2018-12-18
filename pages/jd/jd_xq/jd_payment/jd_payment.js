@@ -1,5 +1,6 @@
 // pages/jd/jd_xq/jd_payment/jd_payment.js
 var httpRequst = require("../../../../utils/requst");
+var { addDate } = require("../../../../utils/util.js");
 Page({
   /**
    * 页面的初始数据
@@ -22,15 +23,15 @@ Page({
     bookInfo: {},
   },
   bindDateChange_1:function(e){
-    var values_1 = e.detail.value;
+    var start_date = e.detail.value;
     this.setData({
-      values_1: values_1,
+      start_date
     })
   },
   bindDateChange_2: function (e) {
-    var values_2 = e.detail.value;
+    var end_date = e.detail.value;
     this.setData({
-      values_2: values_2
+      end_date
     })
   },
   bindLengChange:function(e){
@@ -47,10 +48,15 @@ Page({
   },
   //初始化数据
   initData(options){
-    var roomId = options.roomId;
-    var hotelName = options.hotelName;
+    var roomId = options.id;
+    var hotelName = decodeURIComponent(options.hotelName);
+    var nowDate = new Date();
+    var start_date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+    var end_date = addDate(start_date,1);
     this.setData({
       roomId: roomId,
+      start_date: start_date,
+      end_date: end_date,
       header_text: Object.assign(this.data.header_text,{
         title_text: hotelName,
       })
@@ -81,6 +87,12 @@ Page({
         });
       }
     });
+  },
+  //添加入住人
+  addPassengers(){
+    wx.navigateTo({
+      url: '../../addPassengers/addPassengers',
+    })
   },
   /**
    * 生命周期函数--监听页面加载

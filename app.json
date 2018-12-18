@@ -50,7 +50,8 @@
     "pages/jd/jd_xq/jd_xq",
     "pages/jd/jd_xq/jd_payment/jd_payment",
     "pages/jd/jd_xq/jd_details/jd_details",
-  
+    "pages/jd/addPassengers/addPassengers",
+    
     "pages/sscx/sscx",
     "pages/sscx/xzhb/xzhb",
     "pages/sscx/xzhb/xdzf/xdzf",

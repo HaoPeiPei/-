@@ -93,11 +93,11 @@
       <view class='header-con'>
         <view class='box box-f1 box-hor  margin-lr-1'>
           <view class='header-left' bindtap='bindBackChange'>
-            <image src='{{left_icon}}' style='width:16rpx;' mode='widthFix' />
+            <image src='{{left_icon}}' style='width:16rpx;height: auto;' mode='widthFix' />
           </view>
           <view class='box box-f1 box-apc font-15'>{{title_text}}</view>
           <view class='header-right'>
-            <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;' mode='widthFix' wx:if="{{right_icon.length!=0}}"/>
+            <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;height: auto;' mode='widthFix' wx:if="{{right_icon.length!=0}}"/>
           </view>
         </view>
       </view>

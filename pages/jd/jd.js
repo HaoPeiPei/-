@@ -15,6 +15,7 @@ Page({
     },
     cityCode: "SZX",
     hotels: [],
+    imgRoot: app.globalData.imgRoot,
   },
   book:function(e){
     var auto= e.currentTarget.dataset.auto;
@@ -24,6 +25,7 @@ Page({
   },
   //初始化数据
   initData(){
+    var that  = this;
     wx.showLoading({
       title: '数据加载中...',
     });
@@ -32,10 +34,10 @@ Page({
       if (res.Success) {
         var data = JSON.parse(res.Data);
         var hotels = data.map(function(item){
-          var level = getLevel(item);
+          var level = that.getLevel(item);
           return Object.assign(item, {level});
         });
-        this.setData({
+        that.setData({
           hotels
         });
       } else {

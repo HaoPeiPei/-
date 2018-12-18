@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 9,
 			"list": [
 				{
 					"id": -1,
@@ -84,6 +84,11 @@
 					"name": "xdzf",
 					"pathName": "pages/sscx/xzhb/xdzf/xdzf",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "addPassengers",
+					"pathName": "pages/jd/addPassengers/addPassengers"
 				}
 			]
 		}

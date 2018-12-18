@@ -8,9 +8,9 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../../../images/back-b.png",
+      "left_icon": "../../images/back-b.png",
       "title_text": "选择旅客",
-      "right_icon": "../../../../images/del_icon.png",
+      "right_icon": "../../images/dh-b.png",
     },
     certificate: ["身份证", "护照", "其他"],
     input_val:"身份证",

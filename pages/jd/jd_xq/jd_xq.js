@@ -1,4 +1,5 @@
 // pages/jd/jd_xq/jd_xq.js
+var app = getApp();
 var httpRequst = require("../../../utils/requst");
 Page({
   /**
@@ -12,16 +13,11 @@ Page({
       "title_text": "",
       "right_icon": "../../images/dh-f.png"
     },
-    hotelRooms:
-    [
-      { room_imgURL:"../../images/hhdrj_img.png", type_room: "豪华单人间", room_area: "26", room_floor: "2~8", room_price:"264"},
-      { room_imgURL: "../../images/hhsrj_img.png", type_room: "豪华双人间", room_area: "26", room_floor: "2~8", room_price: "253" }, 
-      { room_imgURL: "../../images/bzsrj_img.png", type_room: "标准双人间", room_area: "26", room_floor: "2~8", room_price: "214" }, 
-    ],
     hotelId: '',
     hotelInfo: {},
-    hotelImgs: '',
+    hotelImg: [],
     hotelRooms: [],
+    imgRoot: app.globalData.imgRoot,
   },
   catchBackChange:function(){
     wx.navigateBack({
@@ -30,7 +26,7 @@ Page({
   },
   bindHotelDetails:function(){
     wx.navigateTo({
-      url: 'jd_details/jd_details?hotelInfo'=JSON.stringify(hotelInfo),
+      url:"jd_details/jd_details?hotelInfo="+JSON.stringify(this.data.hotelInfo)
     })
   },
   bianPayment:function(e){
@@ -41,7 +37,7 @@ Page({
       return
     }
     wx.navigateTo({
-      url: "jd_payment/jd_payment?id="+selected.auto+"&hotelName="+encodeURIComponent(this.data.hotelInfo.Hotel_Name),
+      url:"jd_payment/jd_payment?id="+selected.auto+"&hotelName="+encodeURIComponent(this.data.hotelInfo.Hotel_Name)
     })
   },
   //初始化数据
@@ -52,23 +48,25 @@ Page({
     });
     this.loadHotelImg();
     this.loadHotelInfo();
+    this.loadHotelRooms();
   },
   //载入酒店轮播图片
   loadHotelImg(){
     wx.showLoading({
       title: '数据加载中...',
     });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelByCityCode", hotelId: this.data.hotelId } , "POST",function(res){
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelImg", hotelId: this.data.hotelId } , "POST",res=>{
       wx.hideLoading();
       if (res.Success) {
-        var hotelImgs = res.Data;
+        var hotelImg = JSON.parse(res.Data);
         var imgUrls = [];
-        for (let index = 0; index < hotelImgs.length; index++) {
-          if(hotelImgs[index].Room_ID == "0"){
-            imgUrls.push(hotelImgs[index].PicUrl)
+        for (let index = 0; index < hotelImg.length; index++) {
+          if(hotelImg[index].Room_ID == "0"){
+            imgUrls.push(app.globalData.imgRoot+hotelImg[index].PicUrl)
           }
         }
         this.setData({
+          hotelImg,
           header_text: Object.assign({},this.data.header_text,{
             imgUrls
           })
@@ -83,18 +81,21 @@ Page({
   },
   //加载酒店房间
   loadHotelRooms(){
+    var that = this;
     wx.showLoading({
       title: '数据加载中...',
     });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelRoom", hotelId: this.data.hotelId } , "POST",function(res){
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelRoom", hotelId: this.data.hotelId } , "POST",res=>{
       wx.hideLoading();
       if (res.Success) {
-        var hotelRooms = res.Data||[].map(function(item){
+        var hotelRooms = JSON.parse(res.Data);
+        hotelRooms = hotelRooms.map(function(item){
           return Object.assign({}, item, {
-            RoomImg: getRoomImg(item),
+            PicUrl: that.getRoomImg(item),
+            Class: that.getClass(item),
           });
         })
-        this.setData({
+        that.setData({
           hotelRooms
         });
       } else {
@@ -114,7 +115,7 @@ Page({
       wx.hideLoading();
       if (res.Success) {
         this.setData({
-          hotelInfo: res.Data
+          hotelInfo: JSON.parse(res.Data)
         });
       } else {
         wx.showToast({
@@ -125,7 +126,15 @@ Page({
     });
   },
   getRoomImg(item){
-    return hotelImg.filter(v=>v.Room_ID == item.auto)[0]||"/upload/hotel-default.png";
+    var room = this.data.hotelImg.filter(v=>v.Room_ID == item.auto)[0];
+    return app.globalData.imgRoot+(room.PicUrl||"/upload/hotel-default.png");
+  },
+  getClass(item){
+    if (item.Status == "0") {
+      return "btn c-bg-ccc c-fff c-align font-size-15";
+  } else {
+      return "btn c-bg-f4393c c-fff c-align font-size-15";
+  }
   },
   /**
    * 生命周期函数--监听页面加载
