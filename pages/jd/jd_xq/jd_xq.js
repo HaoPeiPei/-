@@ -19,8 +19,8 @@ Page({
       { room_imgURL: "../../images/bzsrj_img.png", type_room: "标准双人间", room_area: "26", room_floor: "2~8", room_price: "214" }, 
     ],
     hotelId: '',
-    hotelImgs: '',
     hotelInfo: {},
+    hotelImgs: '',
     hotelRooms: [],
   },
   catchBackChange:function(){
@@ -30,12 +30,18 @@ Page({
   },
   bindHotelDetails:function(){
     wx.navigateTo({
-      url: 'jd_details/jd_details',
+      url: 'jd_details/jd_details?hotelInfo'=JSON.stringify(hotelInfo),
     })
   },
-  bianPayment:function(){
+  bianPayment:function(e){
+    var auto = e.currentTarget.dataset.auto;
+    var hotelRooms = this.data.hotelRooms;
+    var selected = this.data.hotelRooms.filter(v=>v.auto == auto)[0];
+    if(selected.Status == '0'){
+      return
+    }
     wx.navigateTo({
-      url: 'jd_payment/jd_payment',
+      url: "jd_payment/jd_payment?id="+selected.auto+"&hotelName="+encodeURIComponent(this.data.hotelInfo.Hotel_Name),
     })
   },
   //初始化数据
@@ -75,25 +81,6 @@ Page({
       }
     });
   },
-  //加载酒店详情
-  loadHotelInfo(){
-    wx.showLoading({
-      title: '数据加载中...',
-    });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelInfo", hotelId: this.data.hotelId } , "POST",function(res){
-      wx.hideLoading();
-      if (res.Success) {
-        this.setData({
-          hotelInfo: res.Data
-        });
-      } else {
-        wx.showToast({
-          title: res.Message,
-          icon: "none",
-        });
-      }
-    });
-  },
   //加载酒店房间
   loadHotelRooms(){
     wx.showLoading({
@@ -109,6 +96,25 @@ Page({
         })
         this.setData({
           hotelRooms
+        });
+      } else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+      }
+    });
+  },
+  //加载酒店详情
+  loadHotelInfo(){
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelInfo", hotelId: this.data.hotelId } , "POST",res => {
+      wx.hideLoading();
+      if (res.Success) {
+        this.setData({
+          hotelInfo: res.Data
         });
       } else {
         wx.showToast({

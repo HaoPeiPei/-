@@ -70,7 +70,7 @@
             <text class='font-16'>{{item.room_price}}</text>
           </view>
           <view class='box box-f1 box-ae box-pe'>
-            <text class='back-2' bindtap='bianPayment'>订</text>
+            <text class='back-2'data-auto='{{item.auto}}' bindtap='bianPayment'>订</text>
           </view>
         </view>
       </view>

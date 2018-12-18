@@ -27,10 +27,11 @@ Page({
     wx.showLoading({
       title: '数据加载中...',
     });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelByCityCode", airport_code: this.data.cityCode } , "POST",function(res){
+    httpRequst.HttpRequst(true, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelByCityCode", airport_code: this.data.cityCode } , "POST",res => {
       wx.hideLoading();
       if (res.Success) {
-        var hotels = res.Data||[].map(function(item){
+        var data = JSON.parse(res.Data);
+        var hotels = data.map(function(item){
           var level = getLevel(item);
           return Object.assign(item, {level});
         });

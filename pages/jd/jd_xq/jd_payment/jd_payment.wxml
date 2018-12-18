@@ -6,8 +6,8 @@
   <form>
     <view class='box box-f1 box-ver backgd-f'>
       <view class='box box-f1 margin-lr-20 border-b-1 padding-tb-30'>
-        <view style='width:160rpx;' class='font-15'>豪华双人间</view>
-        <view class='box box-f1 box-ac box-pe font-13 color-9'>2~8层</view>
+        <view style='width:160rpx;' class='font-15'>{{hotelRoom.Title}}</view>
+        <view class='box box-f1 box-ac box-pe font-13 color-9'>{{hotelRoom.Floor}}<层</view>
       </view>
     </view>
     <view class='box box-f1 box-ver backgd-f'>
@@ -18,10 +18,12 @@
             <view class='box margin-l-10'>入住时间</view>
           </view>
         </view>
-        <view class='box box-f1  box-pe font-13 color-9'>
-          <picker mode="date" style='width:100%' start="2018-06-20" end="2018-12-30" bindchange='bindDateChange_1'>
+        <view class='box box-f1  box-pe font-13 color-9'> 
+          <picker mode="date" style='width:100%' start="2018-06-20" end="2018-12-30" placeholder="请选择入住房时间"  bindchange='bindDateChange_1'>
             <view class='box box-f1 box-hor box-ac'>
-              <view class='box box-f1 box-ac box-pe margin-r-10 color-3'>{{values_1}}</view>
+              <view class='box box-f1 box-ac box-pe margin-r-10 color-3'>
+                <input type="text" value="values_1" />
+                {{}}</view>
               <view style='background:url(../../../images/arrow_r_1.png) no-repeat center center;background-size:100% 100%;width:14rpx;height:24rpx;'></view>
             </view>
           </picker>
@@ -35,7 +37,7 @@
           </view>
         </view>
         <view class='box box-f1  box-pe font-13 color-9'>
-          <picker mode="date" style='width:100%' start="2018-06-20" end="2018-12-30" bindchange='bindDateChange_2'>
+          <picker mode="date" style='width:100%' start="2018-06-20" end="2018-12-30" placeholder="请选择离店房时间" bindchange='bindDateChange_2'>
             <view class='box box-f1 box-hor box-ac'>
               <view class='box box-f1 box-ac box-pe margin-r-10 color-3'>{{values_2}}</view>
               <view style='background:url(../../../images/arrow_r_1.png) no-repeat center center;background-size:100% 100%;width:14rpx;height:24rpx;'></view>

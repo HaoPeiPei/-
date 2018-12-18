@@ -1,4 +1,5 @@
 // pages/jd/jd_xq/jd_details/jd_details.js
+var WxParse = require('../../../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -17,7 +18,29 @@ Page({
       { fac_icon: "../../../images/wiff_icon.png", fac_name: "WLFI" },
       { fac_icon: "../../../images/ct_icon.png", fac_name: "餐厅" },
       { fac_icon: "../../../images/js_icon.png", fac_name: "健身" },
-    ]
+    ],
+    hotelInfo: {},
+    Hotel_Service: "",
+    Hotel_Content: "",
+    Hotel_Policy: "",
+    Traffic: "",
+  },
+  //初始化数据
+  initData(options){
+    var hotelInfo = JSON.parse(options.hotelInfo);
+    if(JSON.stringify(hotelInfo) != "{}")
+    var Hotel_Service = hotelInfo.Hotel_Service;
+    var Hotel_Content = hotelInfo.Hotel_Content;
+    var Hotel_Policy = hotelInfo.Hotel_Policy;
+    var Traffic = hotelInfo.Traffic;
+    this.setData({
+      hotelInfo,
+      Hotel_Service: WxParse.wxParse('Hotel_Service', 'html', Hotel_Service, this, 5),
+      Hotel_Content: WxParse.wxParse('Hotel_Content', 'html', Hotel_Content, this, 5),
+      Hotel_Policy: WxParse.wxParse('Hotel_Policy', 'html', Hotel_Policy, this, 5),
+      Traffic: WxParse.wxParse('Traffic', 'html', Traffic, this, 5),
+    });
+    this.loadHotelInfo();
   },
   bindBackChange:function(){
     wx.navigateBack({
@@ -28,7 +51,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+  this.initData(options);
   },
 
   /**

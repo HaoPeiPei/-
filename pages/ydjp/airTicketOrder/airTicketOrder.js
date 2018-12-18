@@ -86,7 +86,7 @@ Page({
     //初始化数据
     initDate(options){
         var carrier = JSON.parse(options.bookInfo);
-        if(JSON.stringify(carrier) != {}){
+        if(JSON.stringify(carrier) != "{}"){
             var flightInfos = carrier.FlightInfos;
             for (let index = 0; index < flightInfos.length; index++) {
                 const element = flightInfos[index];

@@ -1,7 +1,6 @@
 //app.js
 
 App({
-
   getUserInfo:function(){
     var that = this;
     wx.login({

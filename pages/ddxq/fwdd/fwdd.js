@@ -118,7 +118,6 @@ Page({
     };
     console.log("memberId:" + memberId);
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      //console.log(res);
       if (res.Success) {
         _this.loadingOrderList();
       } else {
