@@ -5,7 +5,7 @@
       <view class='header_noBackod border-b-1'>
         <view class='header-con'>
           <view class='box box-f1 box-hor  margin-lr-1'>
-            <view class='header-left' bindtap='bindBackChange_2'>
+            <view class='header-left' bindtap='bindBackChange'>
               <image src='../../images/back-b.png' style='width:16rpx;' mode='widthFix' />
             </view>
             <view class='box box-f1 box-apc font-15'>选择旅客</view>
@@ -42,8 +42,7 @@
         <view class='height-10'></view>
       </block>
     </view>
-  
-    <template is="pos_fixed_b" data="{{text:'确认'}}" />
+    <view class='box box-f1 box-apc font-16 color-f padding-tb-1 ' style='background:red;position:fixed;bottom:0;width:100%' catchtap='confirmPassener'>确认</view>
 </view>
 
 <!-- 添加乘机人 -->
@@ -52,7 +51,7 @@
     <view class='header_noBackod border-b-1'>
       <view class='header-con'>
         <view class='box box-f1 box-hor  margin-lr-1'>
-          <view class='header-left' bindtap='bindBackChange_3'>
+          <view class='header-left' bindtap='hidEditPassener'>
             <image src='../../images/back-b.png' style='width:16rpx;' mode='widthFix' />
           </view>
           <view class='box box-f1 box-apc font-15'>{{!editPassener.id?"新增乘机人":"编辑乘机人"}}</view>
@@ -100,7 +99,4 @@
     </view>
       <button form-type='submit' style='background:red;position:fixed;bottom:0;width:100%;line-height:2;border:none;color:#ffffff;'>确定</button>
     </form>
-  <!-- <view class='box box-f1 box-apc font-16 color-f padding-tb-1 ' style='background:red;position:fixed;bottom:0;width:100%' catchtap='catchAdd'>确定</view> -->
 </view>
-
-<template is="pos_fixed_b"  data="{{text:'确认'}}"/>

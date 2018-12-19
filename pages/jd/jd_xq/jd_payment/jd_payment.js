@@ -1,6 +1,6 @@
 // pages/jd/jd_xq/jd_payment/jd_payment.js
 var httpRequst = require("../../../../utils/requst");
-var { addDate } = require("../../../../utils/util.js");
+var { addDate, getDateDiff } = require("../../../../utils/util.js");
 Page({
   /**
    * 页面的初始数据
@@ -21,6 +21,13 @@ Page({
     hotelName: '',
     hotelRoom: {},
     bookInfo: {},
+    selectPasseners: [{
+      name: ''
+    }],
+    passener: {},
+    totalPrice: 0,
+    contactor: "",
+    contacttel: "",
   },
   bindDateChange_1:function(e){
     var start_date = e.detail.value;
@@ -36,8 +43,43 @@ Page({
   },
   bindLengChange:function(e){
     var indexs = e.currentTarget.dataset.indexs;
+    //如果选择的行人多于已选择的人数，就添加空值,反之就删除
+    var selectCount = this.data.selectPasseners.length;
+    var selectPasseners = this.data.selectPasseners;
+    if (parseInt(indexs) > selectCount) {
+        var i = selectCount;
+        while (i < parseInt(indexs)) {
+          selectPasseners.push(this.data.passener);
+          i++;
+        }
+    } else if (selectCount > parseInt(indexs)) {
+        var i = parseInt(numCount);
+        while (i < selectCount) {
+          selectPasseners.pop();
+            i++;
+        }
+    }
+    this.calPrice();
     this.setData({
-      indexs: indexs
+      indexs,
+      selectPasseners,
+    })
+  },
+  //计算价格
+  calPrice() {
+    var day_Count = getDateDiff(this.data.start_date, this.data.end_date, "day");
+    var name_Count = this.data.selectPasseners.length;//人数
+    var s_Price = this.data.hotelRoom.Price;
+    var totalPrice = parseInt(name_Count) * parseInt(s_Price) * day_Count;
+    this.setData({
+      totalPrice
+    });
+  },
+  //输入联系人，手机号
+  bindinput(e){
+    var name = e.currentTarget.dataset.name;
+    this.setData({
+      [name]: e.detail.value
     })
   },
   bindListChange:function(){
@@ -91,7 +133,7 @@ Page({
   //添加入住人
   addPassengers(){
     wx.navigateTo({
-      url: '../../addPassengers/addPassengers',
+      url: '../../addPassengers/addPassengers?selectPasseners='+JSON.stringify(this.data.selectPasseners),
     })
   },
   /**

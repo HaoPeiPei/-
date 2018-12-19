@@ -26,7 +26,7 @@ Page({
   },
   bindHotelDetails:function(){
     wx.navigateTo({
-      url:"jd_details/jd_details?hotelInfo="+JSON.stringify(this.data.hotelInfo)
+      url:"jd_details/jd_details?hotelId="+this.data.hotelId
     })
   },
   bianPayment:function(e){

@@ -1,4 +1,5 @@
 // pages/jd/jd_xq/jd_details/jd_details.js
+var httpRequst = require("../../../../utils/requst");
 var WxParse = require('../../../../wxParse/wxParse.js');
 Page({
 
@@ -20,27 +21,39 @@ Page({
       { fac_icon: "../../../images/js_icon.png", fac_name: "健身" },
     ],
     hotelInfo: {},
-    Hotel_Service: "",
-    Hotel_Content: "",
-    Hotel_Policy: "",
-    Traffic: "",
   },
   //初始化数据
   initData(options){
-    var hotelInfo = JSON.parse(options.hotelInfo);
-    if(JSON.stringify(hotelInfo) != "{}")
-    var Hotel_Service = hotelInfo.Hotel_Service;
-    var Hotel_Content = hotelInfo.Hotel_Content;
-    var Hotel_Policy = hotelInfo.Hotel_Policy;
-    var Traffic = hotelInfo.Traffic;
-    this.setData({
-      hotelInfo,
-      Hotel_Service: WxParse.wxParse('Hotel_Service', 'html', Hotel_Service, this, 5),
-      Hotel_Content: WxParse.wxParse('Hotel_Content', 'html', Hotel_Content, this, 5),
-      Hotel_Policy: WxParse.wxParse('Hotel_Policy', 'html', Hotel_Policy, this, 5),
-      Traffic: WxParse.wxParse('Traffic', 'html', Traffic, this, 5),
+    this.loadHotelInfo(options.hotelId);
+  },
+  //加载酒店详情
+  loadHotelInfo(hotelId){
+    var that = this;
+    wx.showLoading({
+      title: '数据加载中...',
     });
-    this.loadHotelInfo();
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", {action: "getHotelInfo", hotelId: hotelId } , "POST",res => {
+      wx.hideLoading();
+      if (res.Success) {
+        var hotelInfo = JSON.parse(res.Data);
+        var Hotel_Service = WxParse.wxParse('Hotel_Service', 'html', hotelInfo.Hotel_Service, that, 5);
+        var Hotel_Content = WxParse.wxParse('Hotel_Content', 'html', hotelInfo.Hotel_Content, that, 5);
+        var Hotel_Policy = WxParse.wxParse('Hotel_Policy', 'html', hotelInfo.Hotel_Policy, that, 5);
+        var Traffic = WxParse.wxParse('Traffic', 'html', hotelInfo.Traffic, that, 5);
+        that.setData({
+          hotelInfo: hotelInfo,
+          Hotel_Service: Hotel_Service,
+          Hotel_Content: Hotel_Content,
+          Hotel_Policy: Hotel_Policy,
+          Traffic: Traffic,
+        });
+      } else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+      }
+    });
   },
   bindBackChange:function(){
     wx.navigateBack({

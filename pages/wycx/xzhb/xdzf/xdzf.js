@@ -41,12 +41,6 @@ Page({
   },
   bindYhjChange: function () {
     var yhi_gs = this.data.yhi_gs;
-    // var pages = getCurrentPages();
-    // var currPage = pages[pages.length - 1]; //当前页
-    // var prevPage = pages[pages.length + 1]; //上一个页面
-    // prevPage.setData({
-    //   yhi_gs: yhi_gs
-    // });
     wx.navigateTo({
       url: 'yhj/yhj?yhi_gs='+yhi_gs,
     })

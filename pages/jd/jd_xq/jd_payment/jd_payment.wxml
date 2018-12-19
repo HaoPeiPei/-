@@ -66,21 +66,27 @@
           </view>
         </view>
         
-        <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1'>
-          <view style='width:120rpx;' >入住人</view>
-          <view class='box box-f1 box-ac'>
-            <input type='text' placeholder='每间需要填写一人姓名' style='line-height:40rpx;height:40rpx;min-height:40rpx;width:100%' placeholder-style="color:#cccccc;"></input>
-          </view>
-          <view style='background:url(../../../images/add_icon_1.png) no-repeat center center;background-size:100% 100%;width:40rpx;height:40rpx;' catchtap="addPassengers" ></view>
+        <view>
+          <block wx:for="{{selectPasseners}}" wx:key="*this">
+            <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1'>
+              <view style='width:120rpx;' >入住人</view>
+              <view class='box box-f1 box-ac'>
+                <block wx:for="{{selectPasseners}}" wx:key="*this">
+                  <input type='text'  style='line-height:40rpx;height:40rpx;min-height:40rpx;width:100%' placeholder='请输入入住人' placeholder-style="color:#cccccc;" value="{{item.name}}" />
+                </block>
+              </view>
+            </view>
+            <view style='background:url(../../../images/add_icon_1.png) no-repeat center center;background-size:100% 100%;width:40rpx;height:40rpx;' catchtap="addPassengers" ></view>
+          </block>
         </view>
 
         <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1'>
           <view style='width:120rpx;' >联系人</view>
-          <view class='box box-f1 box-ac box-pe color-3'>周琦</view>
+          <input type="text" class='box box-f1' data-name="contactor" bindinput="bindinput" value="{{contactor}}" />
         </view>
         <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 '>
           <view style='width:120rpx;' >联系电话</view>
-          <view class='box box-f1 box-ac box-pe color-3'>18506327792</view>
+          <input type="text" class='box box-f1' data-name="contacttel" bindinput="bindinput" value="{{contacttel}}" />
         </view>
       </view>
     </view>
@@ -88,7 +94,7 @@
   <view class='box box-f1 box-ac backod-2'>
     <view class='box box-f1 box-ver backod-1 padding-tb-2'>
       <view class='box box-f1 font-13 color-f4 margin-l-1'>￥:
-        <text class='font-18'>44</text>
+        <text class='font-18'>{{totalPrice}}</text>
       </view>
       <view class='box box-f1 font-13 color-f  margin-l-1'>应付金额</view>
     </view>

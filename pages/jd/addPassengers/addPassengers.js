@@ -1,5 +1,10 @@
 // pages/wycx/addList/addList_page/addList_page.js
-var values = []
+//航班号正则判断规则
+var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
+//乘机人姓名正则判断规则
+var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?:[A-Za-z]{1,49}\s[A-Za-z]{2,50}\/[A-Za-z]{2,50})|(?:[A-Za-z]{2,50}\/[A-Za-z]{2,50}\s[A-Za-z]{1,49}))$/;
+//联系手机正则
+var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
 var {isCardNo, getDateDiff, getNowFormatDate} = require("../../../utils/util.js");
@@ -29,19 +34,13 @@ Page({
     editPassener: {}, //编辑或者新增的乘机人
 
   },
+  //返回
   bindBackChange:function(){
     wx.navigateBack({
       delta:1
     })
   },
-  bindPickerChange:function(e){  
-    var index = e.detail.value
-    var certificate = this.data.certificate
-    console.log(certificate[index])
-    this.setData({
-      input_val: certificate[index]
-    })
-  },
+  //输入
   bindKeyInput_0:function(e){
     var key = e.currentTarget.dataset.key;
     this.data.model[key] = e.detail.value;
@@ -50,16 +49,20 @@ Page({
       values: this.data.model
     })   
   },
-  // 清空信息
-  bindDelChage:function(e){
-    //console.log(1)
-    //var value = this.data.value
+  //隐藏编辑乘机人
+  hidEditPassener(){
     this.setData({
-      value:""
-    })
+      editPassenerShow: false,
+      passengerListShow: true,
+    });
   },
+
   //初始化数据
-  initData(){
+  initData(options){
+    var selectPasseners = options.selectPasseners && JSON.parse(options.selectPasseners) || [];
+    this.setData({
+      selectPasseners
+    });
     this.loadPassenerInfo();
   },
    //选择旅客页面加载乘机人列表
@@ -135,7 +138,7 @@ Page({
     }
   },
   //选择旅客页面确认操作
-  catchLjyy: function(){
+  confirmPassener: function(){
     var selectPasseners = this.data.selectPasseners;
     var passengerListShow = this.data.passengerListShow;
     var editPassenerShow = this.data.editPassenerShow;
@@ -146,25 +149,17 @@ Page({
       });
       return false;
     };
-    this.setData({
-      passengerListShow: false,
-      editPassenerShow: false,
-    });
-  },
-  /* catchLjyy:function(){
-    var model = this.data.model
     var pages = getCurrentPages();
-    var prevPage = pages[pages.length - 1];  //当前页面
-    var prevPage_1 = pages[pages.length - 2];
-
-    prevPage_1.setData({
-      model: model
-    })
-   
+    var currPage = pages[pages.length - 1]; //当前页
+    var prevPage = pages[pages.length -2]; //上一个页面
+    prevPage.setData({
+      selectPasseners: selectPasseners,
+      indexs: selectPasseners.length
+     });
     wx.navigateBack({
       delta:1
     })
-  }, */
+  },
    //新增或者编辑乘机人页面验证乘机人信息
    checkPassener: function(psg_name, cert_no, cert_type, phone_number) {
     if (!(nameReg.test(psg_name))) {
@@ -204,7 +199,7 @@ Page({
   bindPickerChange: function (e) {
     var index = e.detail.value;
     this.setData({
-      picker_index: parseInt(index) + 1
+      picker_index: parseInt(index)
     })
   },
   //新增或者编辑乘机人页面点击确认保存操作
@@ -282,7 +277,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initData();
+    this.initData(options);
   },
 
   /**
