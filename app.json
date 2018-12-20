@@ -51,6 +51,7 @@
     "pages/jd/jd_xq/jd_payment/jd_payment",
     "pages/jd/jd_xq/jd_details/jd_details",
     "pages/jd/addPassengers/addPassengers",
+    "pages/jd/hotelOrder/hotelOrder",
     
     "pages/sscx/sscx",
     "pages/sscx/xzhb/xzhb",

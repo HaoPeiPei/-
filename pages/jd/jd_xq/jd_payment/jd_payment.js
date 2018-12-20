@@ -1,6 +1,7 @@
 // pages/jd/jd_xq/jd_payment/jd_payment.js
+var app = getApp();
 var httpRequst = require("../../../../utils/requst");
-var { addDate, getDateDiff } = require("../../../../utils/util.js");
+var { addDate, getDateDiff, compareDate, returnDate } = require("../../../../utils/util.js");
 Page({
   /**
    * 页面的初始数据
@@ -135,6 +136,115 @@ Page({
     wx.navigateTo({
       url: '../../addPassengers/addPassengers?selectPasseners='+JSON.stringify(this.data.selectPasseners),
     })
+  },
+  //预定
+  book(){
+    var start_date = this.data.start_date;
+    var end_date = this.data.end_date;
+    var contactor = this.data.contactor;
+    var contacttel = this.data.contacttel;
+    if (start_date == "") {
+      wx.showToast({
+        title: "请填写入店日期",
+        icon: "none",
+      });
+      return false;
+    }
+    if (end_date == "") {
+      wx.showToast({
+        title: "请填写离店日期",
+        icon: "none",
+      });
+      return false;
+    }
+    if (compareDate(returnDate(start_date), returnDate(end_date)) >= 0) {
+      wx.showToast({
+        title: "入店日期不能大于或等于离店日期！",
+        icon: "none",
+      });
+      return false;
+    }
+    if (contactor == "") {
+      wx.showToast({
+        title: "请填写联系人",
+        icon: "none",
+      });
+      return false;
+    }
+    if (contacttel == "") {
+      wx.showToast({
+        title: "请填写手机号码",
+        icon: "none",
+      });
+      return false;
+    }
+    else {
+        var myreg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
+        if (!myreg.test(contacttel)) {
+          wx.showToast({
+            title: '请输入有效的手机号码！',
+            icon: "none",
+          });
+          return false;
+        }
+    }
+    var parssInfo = selectPasseners;
+    for (var i = 0; i < parssInfo.length; i++) {
+        if (parssInfo[i].name.length == 0) {
+          wx.showToast({
+            title: "请填写入住人！",
+            icon: "none",
+          });
+          return false;
+        }
+        if (parssInfo[i].name.replace(/\//g, '').length > 28) {
+          wx.showToast({
+            title: "入住人长度大于28！",
+            icon: "none",
+          });
+          return false;
+        }
+        if (parssInfo[i].name.indexOf(',') >= 0) {
+          wx.showToast({
+            title: "入住人不能包含,字符(逗号)！",
+            icon: "none",
+          });
+          return false;
+        }
+    }
+    this.setData({
+      bookInfo: Object.assign({},this.data.bookInfo,{
+        start_date,
+        end_date,
+        contactor,
+        contacttel,
+        userID,
+        passenger: parssInfo,
+      })
+    });
+    this.saveHotelOrder();
+  },
+  //保存酒店订单
+  saveHotelOrder(){
+    var param = {
+      action: "saveHotelOrder", 
+      hotelModel: JSON.stringify(this.data.bookInfo)
+    }
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/hotel.ashx", param , "POST",res => {
+      wx.hideLoading();
+      var obj = JSON.parse(data);
+      if (obj.Success) {
+        window.location = "../payOrder/hotelOrder.aspx?orderID=" + obj.Data; //订单号
+      } else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面加载

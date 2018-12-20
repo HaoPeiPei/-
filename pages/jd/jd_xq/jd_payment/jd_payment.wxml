@@ -98,7 +98,7 @@
       </view>
       <view class='box box-f1 font-13 color-f  margin-l-1'>应付金额</view>
     </view>
-    <view style='font-size:30rpx;color:#ffffff;padding:0rpx 100rpx;'>去支付</view>
+    <view style='font-size:30rpx;color:#ffffff;padding:0rpx 100rpx;' catchtap="book">预定</view>
   </view>
 </view>
   </form>

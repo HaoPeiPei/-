@@ -1,9 +1,9 @@
 <import src="../../../template/template.wxml" />
 <template is="header_content_noBackod" data="{{...header_text}}" />
 <view class='box box-f1 box-hor bg-1'>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="qcxx"?"bor-b":"bor-no"}}'>去程信息</view>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="hcxx"?"bor-b":"bor-no"}}'>回程信息</view>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="clxx"?"bor-b":"bor-no"}}'>车辆信息</view>
+  <view class='box box-f1 box-apc font-12 title-text {{xinx=="qcxx"?"bor-b":"bor-no"}}' data-xinx="{{xinx}}" catchtap="xinxSelect">去程信息</view>
+  <view class='box box-f1 box-apc font-12 title-text {{xinx=="hcxx"?"bor-b":"bor-no"}}'  data-xinx="{{xinx}}" catchtap="xinxSelect">回程信息</view>
+  <view class='box box-f1 box-apc font-12 title-text {{xinx=="clxx"?"bor-b":"bor-no"}}'  data-xinx="{{xinx}}" catchtap="xinxSelect">车辆信息</view>
 </view>
 <view class='content' wx:if="{{xinx == 'qcxx'}}">
   <view class='list'>
@@ -198,7 +198,7 @@
     <view class='je-btn height-100'>
       <view class='box box-f1 box-ver box-pc margin-l-1 height-100'>
         <view class='box box-f1 box-ae color-z font-11'>￥:
-          <text class='font-19'>175</text>
+          <text class='font-19'>{{price}}</text>
         </view>
         <view class='box box-f1 box-as color-f font-10'>应付金额</view>
       </view>
