@@ -1,7 +1,9 @@
 // pages/dpc/dpc_qcxx/dpc_qcxx.js
 var app = getApp();
-var httpRequst = require("../../../../utils/requst");
-var { addDate, getDateDiff, compareDate, returnDate } = require("../../../../utils/util.js");
+var httpRequst = require("../../../utils/requst");
+var { addDate, getDateDiff, compareDate, returnDate } = require("../../../utils/util.js");
+var dateTimePicker = require('../../../utils/dateTimePicker.js');
+var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
 Page({
   /**
    * 页面的初始数据
@@ -13,6 +15,7 @@ Page({
       "title_text": "预约泊车",
       "right_icon": "../../images/dh-b.png",
     },
+    airPort: 'SZX',
     date: '',
     time: '',
     xinx: 'qcxx',
@@ -20,8 +23,9 @@ Page({
     flightNo: "",
     oldGoFlightNo: "",
     go_flightNo: "",
-    depDate: "",
     useDate: "",
+    depDate: "",
+    depTime: "",
     oldBackFlightNo: "",
     back_flightNo: "",
     arrDate: "",
@@ -32,22 +36,159 @@ Page({
     contactor: "",
     contacttel: "",
     price: 0,
+    depTimeArray: null,
+    depDateTime: null,
+    arrTimeArray: null,
+    arrDateTime: null,
   },
-  bindqcDateChange:function(e){
-   
+  //初始化数据
+  initData(){
+    var startYear = new Date().getFullYear();
+    var endYear = new Date().getFullYear()+1;
+    var obj = dateTimePicker.dateTimePicker(startYear, endYear);
+    obj.dateTimeArray.pop();
+    obj.dateTime.pop();
     this.setData({
-      date: e.detail.value
-    });
+      depTimeArray: obj.dateTimeArray, 
+      depDateTime: obj.dateTime, 
+      arrTimeArray: obj.dateTimeArray,
+      arrDateTime: obj.dateTime,
+     });
   },
   bindBackChange:function(){
     wx.navigateBack({
       delta:1
     })
   },
-  bindjcTimeChange:function(e) {
-    
+  inputBlur(e){
+    var type = e.currentTarget.dataset.type;
+    if(type =='qc'){
+      this.setData({
+        go_flightNo: e.detail.value
+      });
+    }else if(type =='hc'){
+      this.setData({
+        back_flightNo: e.detail.value
+      });
+    }
+    if (!flightNoReg.test(e.detail.value)) {
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }; 
+  },
+  //去程日期点击
+  bindqcDateClick(){
+    if (!flightNoReg.test(this.data.go_flightNo)) {
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }
+  },
+  //去程日期选择
+  bindqcDateChange:function(e){
     this.setData({
-      time: e.detail.value
+      depDate: e.detail.value
+    });
+    this.search(1);
+  },
+  //去程接车时间点击
+  bindqcjcDateClick:function(e){
+    if (!flightNoReg.test(this.data.go_flightNo)){ 
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }
+    if (this.data.depDate == "") {
+      wx.showToast({
+        title: '请输入回程日期',
+        icon: 'none'
+      });
+      return false;
+    }
+  },
+  //去程接车时间选择
+  bindqcjcTimeChange:function(e) {
+    var dateTimeArray = this.data.depTimeArray;
+    var dateTime = this.data.depDateTime;
+    var time = `${dateTimeArray[0][dateTime[0]]}-${dateTimeArray[1][dateTime[1]]}-${dateTimeArray[2][dateTime[2]]} ${dateTimeArray[3][dateTime[3]]}-${dateTimeArray[4][dateTime[4]]}`
+    this.setData({
+      depTime: time
+    });
+  },
+  changeqcjcDateTimeColumn(e){
+    var arr = this.data.depDateTime, dateArr = this.data.depTimeArray;
+    arr[e.detail.column] = e.detail.value;
+    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+    this.setData({ 
+      depTimeArray: dateArr,
+      depDateTime: arr
+    });
+  },
+  //回程日期点击
+  bindhcDateClick:function(e){
+    if (!flightNoReg.test(this.data.back_flightNo)) {
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }
+  },
+  //回程日期选择
+  bindhcDateChange:function(e){
+    this.setData({
+      arrDate: e.detail.value
+    });
+    var durate = getDateDiff(this.data.depDate, thi.data.arrDate, "minute");
+    if (durate <= 0) {
+      wx.showToast({
+        title: '您的选择的回程日期不能小于去程日期',
+        icon: 'none'
+      });
+      return false;
+    }
+    this.search(2);
+  },
+  //回程日期时间点击
+  bindhcjcDateClick:function(e){
+    if (!flightNoReg.test(this.data.back_flightNo)){ 
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }
+    if (this.data.arrDate == "") {
+      wx.showToast({
+        title: '请输入回程日期',
+        icon: 'none'
+      });
+      return false;
+    }
+  },
+  //回程接车时间选择
+  bindhcjcTimeChange:function(e) {
+    var dateTimeArray = this.data.arrTimeArray;
+    var dateTime = this.data.arrDateTime;
+    var time = `${dateTimeArray[0][dateTime[0]]}-${dateTimeArray[1][dateTime[1]]}-${dateTimeArray[2][dateTime[2]]} ${dateTimeArray[3][dateTime[3]]}-${dateTimeArray[4][dateTime[4]]}`
+    this.setData({
+      arrTime: time
+    });
+  },
+  changehcjcDateTimeColumn(e){
+    var arr = this.data.arrDateTime, dateArr = this.data.arrTimeArray;
+    arr[e.detail.column] = e.detail.value;
+    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+    this.setData({ 
+      arrTimeArray: dateArr,
+      arrDateTime: arr
     });
   },
   bindZfchage:function(){
@@ -65,44 +206,6 @@ Page({
     this.setData({
       xinx: xinx,
     });
-  },
-  bindBlurChage:function(e){
-    var val = e.detail.value;
-   
-    if (val==""){
-      wx.showToast({
-        title:"请填写正确的航班号",
-        icon:"none",
-      })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000);
-    } else {
-      this.setData({
-        val: val
-      });
-    } 
-  },
-  bindChangeDa: function (e) {
-    var val = e.currentTarget.dataset.hbh;
-    if (val == '') {
-      wx.showToast({
-        title: "请填写正确的航班号",
-        icon: 'none'
-      });
-
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000);
-    }
-
-  },
-  //信息切换
-  xinxSelect(e){
-    var xinx = e.currentTarget.dataset.xinx;
-    this.setData({
-      xinx
-    })
   },
   //检查回程信息
   checkQc() {
@@ -146,7 +249,7 @@ Page({
     return true;
   },
   //检查回程信息
-  CheckHc() {
+  checkHc() {
     if (!flightNoReg.test(this.data.back_flightNo)) {
       wx.showToast({
         title: "请输入正确的航班号",
@@ -195,7 +298,7 @@ Page({
     return true;
   },
   //检查车辆信息
-  CheckCl() {
+  checkCl() {
     var carnoReg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
     if (!carnoReg.test(this.data.carPlate.toUpperCase())) {
       wx.showToast({
@@ -244,6 +347,76 @@ Page({
     }
     return true;
   },
+  //搜索机票
+  search(tripType){
+    var flightNo = "", flyDate = "";
+    if (tripType == 1) {
+        flightNo = this.data.go_flightNo;
+        flyDate = this.data.depDate;
+    } else {
+        flightNo = this.data.back_flightNo;
+        flyDate = this.data.arrDate;
+    }
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    if (this.checkSearch(tripType)) {
+      var param = {
+        action: "getStopCity", 
+        depDate: flyDate, 
+        flightNo: flightNo, 
+        startCity: 'SZX', 
+        air_type: tripType == 2 ? 1 : 2
+      }
+      httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/airTicket.ashx", param, "POST",res => {
+        wx.hideLoading();
+        var obj = JSON.parse(res);
+        if (obj.Status == 1) {
+          if (tripType == 1) {
+            this.setData({
+              depDate: obj.FlightInfos[0].DepTime.trimEnd(":00"),
+              oldGoFlightNo: this.data.go_flightNo
+            });
+          } else {
+            this.setData({
+              depDate: obj.FlightInfos[0].ArrTime.trimEnd(":00"),
+              oldGoFlightNo: this.data.back_flightNo
+            });
+          }
+        } else {
+          wx.showToast({
+            title: obj.ErrorMsg,
+            icon: 'none'
+          });
+        };
+      });
+    }
+  },
+  checkSearch(tripType) {
+    var flightNo = "", flyDate = "";
+    if (tripType == 1) {
+        flightNo = this.data.go_flightNo;
+        flyDate = this.data.depDate;
+    } else {
+        flightNo = this.data.back_flightNo;
+        flyDate = this.data.arrDate;
+    }
+    if (!flightNoReg.test(flightNo)) {
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }
+    else if (flyDate == "") {
+      wx.showToast({
+        title: '请选择去程日期',
+        icon: 'none'
+      });
+      return false;
+    }
+    return true;
+  },
   //计算价格
   caculatePrice() {
     var depTime = this.data.depTime;
@@ -273,10 +446,9 @@ Page({
       };
     });
   },
-
   //创建订单
   createOrder() {
-    if (this.checkQc() && this.CheckHc() && this.CheckCl()) {
+    if (this.checkQc() && this.checkHc() && this.checkCl()) {
       var flyInfo = airPort + "@" + this.data.go_flightNo.toUpperCase() + "@" + this.data.depDate + "@" + this.data.depTime;
       var backInfo = this.data.back_flightNo.toUpperCase() + "@" + this.data.arrDate + "@" + this.data.arrTime;
       var useInfos = app.globalData.memberId + "@" + this.data.contactor + "@" + this.data.contacttel;
@@ -312,7 +484,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.initData();
   },
 
   /**

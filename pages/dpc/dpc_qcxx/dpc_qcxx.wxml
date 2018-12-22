@@ -1,9 +1,9 @@
 <import src="../../../template/template.wxml" />
 <template is="header_content_noBackod" data="{{...header_text}}" />
 <view class='box box-f1 box-hor bg-1'>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="qcxx"?"bor-b":"bor-no"}}' data-xinx="{{xinx}}" catchtap="xinxSelect">去程信息</view>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="hcxx"?"bor-b":"bor-no"}}'  data-xinx="{{xinx}}" catchtap="xinxSelect">回程信息</view>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="clxx"?"bor-b":"bor-no"}}'  data-xinx="{{xinx}}" catchtap="xinxSelect">车辆信息</view>
+  <view class='box box-f1 box-apc font-12 title-text {{xinx=="qcxx"?"bor-b":"bor-no"}}' catchtap="xinxSelect">去程信息</view>
+  <view class='box box-f1 box-apc font-12 title-text {{xinx=="hcxx"?"bor-b":"bor-no"}}' catchtap="xinxSelect">回程信息</view>
+  <view class='box box-f1 box-apc font-12 title-text {{xinx=="clxx"?"bor-b":"bor-no"}}' catchtap="xinxSelect">车辆信息</view>
 </view>
 <view class='content' wx:if="{{xinx == 'qcxx'}}">
   <view class='list'>
@@ -31,7 +31,7 @@
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-apc margin-l-1'>去程航班</view>
             <view class='box box-f1 margin-l-1'>
-              <input placeholder='请输入航班号' placeholder-class='placeholder-class' bindblur='bindBlurChage' id='hbh'></input>
+              <input placeholder='请输入航班号' placeholder-class='placeholder-class' data-type="qc" bindblur='inputBlur' id='hbh'></input>
             </view>
           </view>
         </view>
@@ -40,14 +40,11 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-apc margin-l-1'>去程日期</view>
-            <picker bindchange='bindqcDateChange' mode="date" value='{{date}}' start='2018-04-01' end='2018-12-30' style='width:80%;' wx:if="{{val==''?false:true}}">
+            <picker bindchange='bindqcDateChange' catchtap="bindqcDateClick" data-type='qcxx' mode="date" value='{{depDate}}' start='2018-04-01' end='2018-12-30' style='width:80%;' >
               <view class='box box-f1 margin-l-1'>
-                <input placeholder='请输入去程日期' placeholder-class='placeholder-class' disabled='true' value='{{date}}'></input>
+                <input placeholder='请输入去程日期' placeholder-class='placeholder-class' disabled='true' value='{{depDate}}'></input>
               </view>
             </picker>
-            <view class='box box-f1 margin-l-1' wx:if="{{val==''?true:false}}">
-              <input placeholder='请输入去程日期' placeholder-class='placeholder-class' disabled='true' value='{{date}}' bindtap='bindChangeDa' data-hbh="{{val}}"></input>
-            </view>
           </view>
         </view>
       </li>
@@ -55,9 +52,9 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-apc margin-l-1'>接车时间</view>
-            <picker bindchange='bindjcTimeChange' mode="time" value='{{time}}' start='00:00' end='24:00' style='width:80%'>
+            <picker bindchange='bindqcjcTimeChange' catchtap="bindqcjcDateClick"   mode="multiSelector" value='' bindcolumnchange="changeqcjcDateTimeColumn" range="{{dateTimeArray}}"  style='width:80%'>
               <view class='box box-f1 margin-l-1'>
-                <input placeholder='请输入接车时间' placeholder-class='placeholder-class' disabled='true' value='{{time}}'></input>
+                <input placeholder='请输入接车时间' placeholder-class='placeholder-class' disabled='true' value='{{depTime}}'></input>
               </view>
             </picker>
           </view>
@@ -90,9 +87,9 @@
       <li>
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>去程航班</view>
+            <view class='box box-apc margin-l-1'>回程航班</view>
             <view class='box box-f1 margin-l-1'>
-              <input placeholder='请输入航班号' placeholder-class='placeholder-class'></input>
+              <input placeholder='请输入航班号' data-type="hc" bindblur='inputBlur' placeholder-class='placeholder-class'></input>
             </view>
           </view>
         </view>
@@ -100,10 +97,10 @@
       <li>
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>去程日期</view>
-            <picker bindchange='bindqcDateChange' mode="date" value='{{date}}' start='2018-04-01' end='2018-12-30' style='width:80%'>
+            <view class='box box-apc margin-l-1'>回程日期</view>
+            <picker bindchange='bindhcDateChange' catchtap="bindhcDateClick"  data-type="hcxx" mode="date" value='{{arrDate}}' start='2018-04-01' end='2018-12-30' style='width:80%'>
               <view class='box box-f1 margin-l-1'>
-                <input placeholder='请输入去程日期' placeholder-class='placeholder-class' disabled='true' value='{{date}}'></input>
+                <input placeholder='请输入去程日期' placeholder-class='placeholder-class' disabled='true' value='{{arrDate}}'></input>
               </view>
             </picker>
           </view>
@@ -113,9 +110,9 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-apc margin-l-1'>接车时间</view>
-            <picker bindchange='bindjcTimeChange' mode="time" value='{{time}}' start='00:00' end='24:00' style='width:80%'>
+            <picker bindchange='bindhcjcTimeChange' catchtap="bindhcjcDateClick"  mode="multiSelector" value='' bindcolumnchange="changehcjcDateTimeColumn" range="{{arrTimeArray}}"  style='width:80%'>
               <view class='box box-f1 margin-l-1'>
-                <input placeholder='请输入接车时间' placeholder-class='placeholder-class' disabled='true' value='{{time}}'></input>
+                <input placeholder='请输入接车时间' placeholder-class='placeholder-class' disabled='true' value='{{arrTime}}'></input>
               </view>
             </picker>
           </view>

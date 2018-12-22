@@ -1,0 +1,20 @@
+{
+  "name": "jct",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaoPeiPei/jct.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HaoPeiPei/jct/issues"
+  },
+  "homepage": "https://github.com/HaoPeiPei/jct#readme",
+  "dependencies": {}
+}
