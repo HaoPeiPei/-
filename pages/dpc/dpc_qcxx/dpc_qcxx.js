@@ -23,7 +23,6 @@ Page({
     flightNo: "",
     oldGoFlightNo: "",
     go_flightNo: "",
-    useDate: "",
     depDate: "",
     depTime: "",
     oldBackFlightNo: "",
@@ -48,7 +47,10 @@ Page({
     var obj = dateTimePicker.dateTimePicker(startYear, endYear);
     obj.dateTimeArray.pop();
     obj.dateTime.pop();
+    //var time = `${dateTimeArray[0][dateTime[0]]}-${dateTimeArray[1][dateTime[1]]}-${dateTimeArray[2][dateTime[2]]} ${dateTimeArray[3][dateTime[3]]}:${dateTimeArray[4][dateTime[4]]}`
     this.setData({
+      /* depTime: time,
+      arrTime: time, */
       depTimeArray: obj.dateTimeArray, 
       depDateTime: obj.dateTime, 
       arrTimeArray: obj.dateTimeArray,
@@ -78,6 +80,12 @@ Page({
       });
       return false;
     }; 
+  },
+  bindinput(e){
+    var name = e.currentTarget.dataset.name;
+    this.setData({
+      [name]: e.detail.value
+    });
   },
   //去程日期点击
   bindqcDateClick(){
@@ -117,7 +125,7 @@ Page({
   bindqcjcTimeChange:function(e) {
     var dateTimeArray = this.data.depTimeArray;
     var dateTime = this.data.depDateTime;
-    var time = `${dateTimeArray[0][dateTime[0]]}-${dateTimeArray[1][dateTime[1]]}-${dateTimeArray[2][dateTime[2]]} ${dateTimeArray[3][dateTime[3]]}-${dateTimeArray[4][dateTime[4]]}`
+    var time = `${dateTimeArray[0][dateTime[0]]}-${dateTimeArray[1][dateTime[1]]}-${dateTimeArray[2][dateTime[2]]} ${dateTimeArray[3][dateTime[3]]}:${dateTimeArray[4][dateTime[4]]}`
     this.setData({
       depTime: time
     });
@@ -146,7 +154,7 @@ Page({
     this.setData({
       arrDate: e.detail.value
     });
-    var durate = getDateDiff(this.data.depDate, thi.data.arrDate, "minute");
+    var durate = getDateDiff(this.data.depDate, this.data.arrDate, "minute");
     if (durate <= 0) {
       wx.showToast({
         title: '您的选择的回程日期不能小于去程日期',
@@ -177,7 +185,7 @@ Page({
   bindhcjcTimeChange:function(e) {
     var dateTimeArray = this.data.arrTimeArray;
     var dateTime = this.data.arrDateTime;
-    var time = `${dateTimeArray[0][dateTime[0]]}-${dateTimeArray[1][dateTime[1]]}-${dateTimeArray[2][dateTime[2]]} ${dateTimeArray[3][dateTime[3]]}-${dateTimeArray[4][dateTime[4]]}`
+    var time = `${dateTimeArray[0][dateTime[0]]}-${dateTimeArray[1][dateTime[1]]}-${dateTimeArray[2][dateTime[2]]} ${dateTimeArray[3][dateTime[3]]}:${dateTimeArray[4][dateTime[4]]}`
     this.setData({
       arrTime: time
     });
@@ -192,16 +200,21 @@ Page({
     });
   },
   bindZfchage:function(){
-    wx.navigateTo({
-      url: '../dpc_qzf/dpc_qzf',
-    })
+    if(this.checkCl){
+      this.createOrder();
+    }
   },
   bindXybchage:function(){
     var xinx = this.data.xinx;
     if(xinx == "qcxx"){
-      xinx = "hcxx";
+      if(this.checkQc()){
+        xinx = "hcxx";
+      }
     }else if(xinx == "hcxx"){
-      xinx = "clxx";
+      if(this.checkHc()){
+        xinx = "clxx";
+        this.caculatePrice();
+      }
     }
     this.setData({
       xinx: xinx,
@@ -216,28 +229,28 @@ Page({
       })
       return false;
     }
-    if (this.data.flyDate == "") {
+    if (this.data.depDate == "") {
       wx.showToast({
         title: "请选择去程日期",
         icon: 'none'
       })
       return false;
     }
-    if (this.data.oldGoFlightNo != "" && this.data.flightNo.toUpperCase() != this.data.oldGoFlightNo.toUpperCase()) {
+    if (this.data.oldGoFlightNo != "" && this.data.go_flightNo.toUpperCase() != this.data.oldGoFlightNo.toUpperCase()) {
       wx.showToast({
         title: "您输入的航班号发生变化,请重新选择起飞时间进行查询",
         icon: 'none'
       })
       return false;
     }
-    if (this.data.useDate == "") {
+    if (this.data.depTime == "") {
       wx.showToast({
         title: "请选择接车时间",
         icon: 'none'
       })
       return false;
     }
-    var min = getDateDiff(this.data.useDate, this.data.flyDate, "minute");
+    var min = getDateDiff(this.data.depTime, this.data.depDate, "minute");
     if (min < 45) {
       wx.showToast({
         title: "您的接车时间至少要比起飞时间提前45分钟!",
@@ -245,7 +258,9 @@ Page({
       })
       return false;
     }
-    oldGoFlightNo = this.data.go_flightNo;
+    this.setData({
+      oldGoFlightNo: this.data.go_flightNo
+    });
     return true;
   },
   //检查回程信息
@@ -293,8 +308,10 @@ Page({
         icon: 'none'
       })
       return false;
-    }
-    oldBackFlightNo = this.data.back_flightNo;
+    };
+    this.setData({
+      oldBackFlightNo: this.data.back_flightNo
+    });
     return true;
   },
   //检查车辆信息
@@ -370,17 +387,19 @@ Page({
       }
       httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/airTicket.ashx", param, "POST",res => {
         wx.hideLoading();
-        var obj = JSON.parse(res);
+        var obj = res;
         if (obj.Status == 1) {
           if (tripType == 1) {
+            var depTime = obj.FlightInfos[0].DepTime;
             this.setData({
-              depDate: obj.FlightInfos[0].DepTime.trimEnd(":00"),
+              depDate: depTime.substring(0,depTime.length-3),
               oldGoFlightNo: this.data.go_flightNo
             });
           } else {
+            var arrTime = obj.FlightInfos[0].ArrTime;
             this.setData({
-              depDate: obj.FlightInfos[0].ArrTime.trimEnd(":00"),
-              oldGoFlightNo: this.data.back_flightNo
+              arrDate: arrTime.substring(0,arrTime.length-3),
+              oldBackFlightNo: this.data.back_flightNo
             });
           }
         } else {
@@ -431,7 +450,7 @@ Page({
     }
     httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/valet.ashx", param, "POST",res => {
       wx.hideLoading();
-      var obj = JSON.parse(res);
+      var obj = res;
       if (obj.Success) {
           if (parseInt(obj.Data) > 0) {
             var price = obj.Data;
@@ -449,7 +468,7 @@ Page({
   //创建订单
   createOrder() {
     if (this.checkQc() && this.checkHc() && this.checkCl()) {
-      var flyInfo = airPort + "@" + this.data.go_flightNo.toUpperCase() + "@" + this.data.depDate + "@" + this.data.depTime;
+      var flyInfo = this.data.airPort + "@" + this.data.go_flightNo.toUpperCase() + "@" + this.data.depDate + "@" + this.data.depTime;
       var backInfo = this.data.back_flightNo.toUpperCase() + "@" + this.data.arrDate + "@" + this.data.arrTime;
       var useInfos = app.globalData.memberId + "@" + this.data.contactor + "@" + this.data.contacttel;
       var carInfo = this.data.carPlate.toUpperCase() + "@" + this.data.carType.toUpperCase() + "@" + this.data.carColor.toUpperCase();
@@ -467,12 +486,11 @@ Page({
       }
       httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/valet.ashx", param, "POST",res => {
         wx.hideLoading();
-        var obj = JSON.parse(res);
+        var obj = res;
         if (obj.Success) {
           wx.navigateTo({
-            url: '../dpc/dpc',
+            url: "../dpc_qzf/dpc_qzf?orderId=" + obj.Data,
           });
-          window.location = "../dpc_qzf/dpc_qzf?orderId=" + obj.Data;
         } else {
           layer.msg(obj.ErrorMsg);
           return false;

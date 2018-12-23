@@ -5,6 +5,10 @@ var httpRequst = require("../../../utils/requst.js");
 var Hub = require("../../../utils/miniProgramSignalr.js");
 var WxParse = require('../../../wxParse/wxParse.js');
 var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo, htmlspecialchars_decode} = require("../../../utils/util.js");
+//乘机人姓名正则判断规则
+var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?:[A-Za-z]{1,49}\s[A-Za-z]{2,50}\/[A-Za-z]{2,50})|(?:[A-Za-z]{2,50}\/[A-Za-z]{2,50}\s[A-Za-z]{1,49}))$/;
+//联系手机正则
+var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 Page({
     data:{
         airTicketOrderShow: true,
@@ -186,6 +190,7 @@ Page({
     },
     //计算价格明细
     caculatePirce(){
+        debugger
         var flightInfos = this.data.flightInfos;
         var price = this.data.price;
         var ticketAdultPrice = 0;       //成人票价
@@ -442,10 +447,12 @@ Page({
                 data[j]['active'] = true;
                 }
             };
+            debugger
             that.setData({
                 passeners: data,
-                selectPasseners: selectPasseners
+                selectPasseners: data
             });
+            that.caculatePirce();
         }); 
     },
     //选择旅客页面选择乘机人
@@ -593,8 +600,10 @@ Page({
     check(){
         var selectPasseners = this.data.selectPasseners;
         var flightInfos = this.data.flightInfos;
-        var contactor = this.data.contactor;
-        var contactTel = this.data.contactTel;
+        //var contactor = this.data.contactor;
+        //var contactTel = this.data.contactTel;
+        var contactor = "郝沛沛";
+        var contactTel = "18971573893";
         var buyExpress = this.data.buyExpress;
         var linkName = this.data.linkName;
         var linkPhone = this.data.linkPhone;
@@ -602,7 +611,7 @@ Page({
         var linkAddress = this.data.linkAddress;
         var buySingleService = this.data.buySingleService;
         var buyRoundService = this.data.buyRoundService;
-        if (this.data.selectPasseners.length == 0) {
+        if (selectPasseners.length == 0) {
             wx.showToast({
                 title: '请选择乘机人!',
                 icon: 'none'
@@ -729,11 +738,26 @@ Page({
     },
     //创建订单
     createOrder(){
-        if (this.Check()) {
+        var that = this;
+        if (this.check()) {
             var orderModel = {};
-            var flightInfos = this.data.flightInfos;
-            var selectPasseners = this.data.selectPasseners;
+            orderModel.PayType = 1;
+            var selectPasseners = [];
+            for (let index = 0; index < this.data.passeners.length; index++) {
+                const element = this.data.passeners[index];
+                if(index  == 0){
+                    selectPasseners.push(element)
+                }
+            }
+            var flightInfos = [];
+            for (let index = 0; index < this.data.flightInfos.length; index++) {
+                const element = this.data.flightInfos[index];
+                if(index  == 0){
+                    flightInfos.push(element)
+                }
+            }
             orderModel.FlightInfo = flightInfos;
+            orderModel.PayType = 1;
             orderModel.PassengerInfo = selectPasseners;
             //一名成人最多携带两名儿童或者一名婴儿和一名儿童
             var adlut = 0;
@@ -762,6 +786,8 @@ Page({
                 });
                 return false;
             }
+            var contactor = "郝沛沛";
+            var contactTel = "18971573893";
             var insuranceModel = {};
             insuranceModel.Count = this.data.buyInsurance == 1 ? selectPasseners.length : 0;
             insuranceModel.Price = this.data.insurancePrice;
@@ -773,10 +799,10 @@ Page({
             expressModel.linkRegion = this.data.linkRegion;
             expressModel.linkAddress = this.data.linkAddress;
             orderModel.ExpressInfo = expressModel;
-            orderModel.Contactor = this.data.contactor;
-            orderModel.ContactTel = this.data.contactTel;
+            orderModel.Contactor = contactor;
+            orderModel.ContactTel = contactTel;
             orderModel.MemberId = app.globalData.memberId;
-            orderModel.TotalPrice = this.data.totalPrice;
+            orderModel.TotalPrice = this.data.price.totalPrice;
             var serviceModel = {};
             var temp = [];
             if (this.buySingleService == 1) {
@@ -797,7 +823,7 @@ Page({
                 serviceModel.SalePrice = this.data.singleServiceSalePrice;
                 temp.push(serviceModel);
             }
-            if (tjhs.data.buyRoundService == 1) {
+            if (this.data.buyRoundService == 1) {
                 serviceModel = {};
                 serviceModel.ServiceId = this.data.roundServiceId;
                 serviceModel.Price = this.data.roundServicePrice;
@@ -822,8 +848,8 @@ Page({
             });
             httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createOrder", orderModel: JSON.stringify(orderModel) }, "POST",function(res){
                 wx.hideLoading()
-                if (res.Success == 1) {
-                    this.sendSignalR(res.Data);
+                if (res.Success == true) {
+                    that.sendSignalR(res.Data);
                 } else {
     
                 }
@@ -909,9 +935,9 @@ Page({
             }
         });
     },
-    /* websocketStart(queryString){
+    sendSignalR(){
         let that = this;
-        let negotiateUrl = "https://www.51jct.cn/signalr/negotiate?clientProtocol=1.5&connectionData="+encodeURIComponent('[{"name":"MessageHub"}]')+"&_="+(Date.parse(new Date())/1000);
+        let negotiateUrl = "https://www.51jct.cn/signalr/negotiate?clientProtocol=1.5&connectionData="+encodeURIComponent('[{"name":"messagehub"}]')+"&_="+(Date.parse(new Date())/1000);
         wx.request({
             url: negotiateUrl,
             data: {},
@@ -931,7 +957,7 @@ Page({
     },
     startSocket(){
         let that = this;
-        let _url = "https://www.51jct.cn/signalr/connect?transport=webSockets&clientProtocol=1.5&connectionToken="+encodeURIComponent(that.data.negotiateResponese.ConnectionToken)+"&connectionData="+encodeURIComponent('[{"name":"MessageHub"}]')+"&_="+(Date.parse(new Date())/1000);
+        let _url = "https://www.51jct.cn/signalr/connect?transport=serverSentEvents&clientProtocol=1.5&connectionToken="+encodeURIComponent(that.data.negotiateResponese.ConnectionToken)+"&connectionData="+encodeURIComponent('[{"name":"MessageHub"}]')+"&tid=9";
         _url = _url.replace(/http/,"ws");
         if(this.data.messageHub != null && this.openStatus){
             return
@@ -954,26 +980,31 @@ Page({
             console.log('WebSocket连接打开失败，请检查！');
             console.log(res);
         });
-    }, */
-    websocketStart(){
-        this.hubConnect = new Hub.HubConnection();
-        this.hubConnect.start("https://www.51jct.cn/signalr/Message", { });
+    }, 
+    
+     /*sendSignalR(orderId){
+        /* this.hubConnect = new Hub.HubConnection();
+        this.hubConnect.start("https://www.51jct.cn/signalr/hubs", { nickName: app.globalData.userInfo.nickName, avatar: app.globalData.userInfo.avatarUrl });
         this.hubConnect.onOpen = res => {
-        console.log("成功开启连接")
+            console.log("成功开启连接")
         }
-
         this.hubConnect.on("showMessage", res => {
-            console.log(res)
-        })
+            console.log(orderId)
+            console.log(eval('(' + res.content + ')'));
+            wx.showModal({
+                title: '系统消息',
+                content: res,
+            })
+        }) 
 
-        
-    },
+    },*/
+    
     onLoad:function(options){
         // 生命周期函数--监听页面加载
         this.initDate(options);
         this.loadService();
-        this.caculatePirce();
-        this.websocketStart();
+        this.loadPassenerInfo();
+        //this.caculatePirce();
 
     },
     onReady:function(){

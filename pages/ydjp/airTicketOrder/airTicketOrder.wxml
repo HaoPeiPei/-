@@ -228,13 +228,13 @@
     </view>
     <view class="footer flex c-fff font-size-24">
         <view class="col-1 show-con price flex ">
-            <view class="c-f4393c">¥:<text class="font-size-40 total-price">0</text></view>
+            <view class="c-f4393c">¥:<text class="font-size-40 total-price">{{price.totalPrice}}</text></view>
             <view>应付金额</view>
         </view>
         <view class="detail show-con c-fff" data-pricedetailshow="{{priceDetailShow}}" catchtap="showPriceDetail">
             <view>明细<i class="icon-arror-u c-999 marginL10"></i></view>
         </view>
-        <view class="p-assur font-size-36">去支付</view>
+        <view class="p-assur font-size-36" catchtap="createOrder">去支付</view>
     </view>   
     <template is="priceDetail" data="{{...price,insurancePrice,expressPrice,priceDetailShow}}" />
 </view>

@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -92,6 +92,23 @@
 					"name": "addPassengers",
 					"pathName": "pages/jd/addPassengers/addPassengers",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "dpc_qcxx",
+					"pathName": "pages/dpc/dpc_qcxx/dpc_qcxx",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "dpc_qzf",
+					"pathName": "pages/dpc/dpc_qzf/dpc_qzf",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "map",
+					"pathName": "pages/jsj/map/map"
 				}
 			]
 		}

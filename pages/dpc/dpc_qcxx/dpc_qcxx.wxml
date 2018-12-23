@@ -52,7 +52,7 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-apc margin-l-1'>接车时间</view>
-            <picker bindchange='bindqcjcTimeChange' catchtap="bindqcjcDateClick"   mode="multiSelector" value='' bindcolumnchange="changeqcjcDateTimeColumn" range="{{dateTimeArray}}"  style='width:80%'>
+            <picker bindchange='bindqcjcTimeChange' catchtap="bindqcjcDateClick"   mode="multiSelector" value='' bindcolumnchange="changeqcjcDateTimeColumn" range="{{depTimeArray}}"  style='width:80%'>
               <view class='box box-f1 margin-l-1'>
                 <input placeholder='请输入接车时间' placeholder-class='placeholder-class' disabled='true' value='{{depTime}}'></input>
               </view>
@@ -138,7 +138,9 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-ac margin-l-1' style="width:130rpx;">爱车车牌</view>
-            <view class='box box-f1 margin-l-1'>粤B33207</view>
+            <view class='box box-f1 margin-l-1'>
+                <input type="text" class='box box-f1' data-name="carPlate" placeholder='请输入爱车车牌' bindinput="bindinput" value="{{carPlate}}" />
+            </view>
           </view>
         </view>
       </li>
@@ -146,7 +148,9 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-ac margin-l-1' style="width:130rpx;">爱车型号</view>
-            <view class='box box-f1 margin-l-1'>奥迪A6</view>
+            <view class='box box-f1 margin-l-1'>
+                <input type="text" class='box box-f1' data-name="carType" placeholder='请输入爱车型号' bindinput="bindinput" value="{{carType}}" />
+            </view>
           </view>
         </view>
       </li>
@@ -154,7 +158,9 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-ac margin-l-1' style="width:130rpx;">爱车颜色</view>
-            <view class='box box-f1 margin-l-1'>黑色</view>
+            <view class='box box-f1 margin-l-1'>
+                <input type="text" class='box box-f1' data-name="carColor" placeholder='请输入爱车颜色' bindinput="bindinput" value="{{carColor}}" />
+            </view>
           </view>
         </view>
       </li>
@@ -172,7 +178,9 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-ac margin-l-1' style="width:130rpx;">姓名</view>
-            <view class='box box-f1 margin-l-1'>周琦</view>
+            <view class='box box-f1 margin-l-1'>
+              <input type="text" class='box box-f1' data-name="contactor" placeholder='请输入联系人' bindinput="bindinput" value="{{contactor}}" />
+            </view>
           </view>
         </view>
       </li>
@@ -180,7 +188,10 @@
         <view class='li-view'>
           <view class='box box-f1 box-ac font-12 padding-tb-1'>
             <view class='box box-ac margin-l-1' style="width:130rpx;">联系电话</view>
-            <view class='box box-f1 margin-l-1'>159 8876 2000</view>
+            <!-- <view class='box box-f1 margin-l-1'>159 8876 2000</view> -->
+            <view class='box box-f1 margin-l-1'>
+              <input type="text" class='box box-f1' data-name="contacttel" placeholder='请输入联系方式' bindinput="bindinput" value="{{contacttel}}" />
+            </view>
           </view>
         </view>
       </li>

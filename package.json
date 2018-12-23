@@ -16,5 +16,8 @@
     "url": "https://github.com/HaoPeiPei/jct/issues"
   },
   "homepage": "https://github.com/HaoPeiPei/jct#readme",
-  "dependencies": {}
+  "dependencies": {
+    "vant-weapp": "^0.4.10"
+  },
+  "devDependencies": {}
 }

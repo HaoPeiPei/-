@@ -1,4 +1,6 @@
 // pages/jsj/map/map.js
+var amap = require("../../../utils/amap");
+var bmap = require("../../../utils/bmap-wx.min.js");
 Page({
 
   /**
@@ -11,24 +13,72 @@ Page({
       "title_text": "接送地址",
       "right_icon": "../../images/dh-f.png"
     },
+    longitude: 0,
+    latitude: 0,
+    seekList: []
   },
   bindBackChages: function (e) {
     wx.navigateBack({
       delta: 1
     })
   },
+  //初始化数据
+  initData(){
+    this.mapCtx = wx.createMapContext('map');
+    this.BMap = new bmap.BMapWX({
+      ak: '32nOnN3jF3mfT0encQETVs3M'
+    });
+
+    amap.getRegeo()
+      .then(d => {
+        let { name, desc, latitude, longitude } = d[0];
+        let { city } = d[0].regeocodeData.addressComponent;
+        let seekList = d[0].regeocodeData.pois;
+        this.setData({
+          city,
+          latitude,
+          longitude,
+          seekList
+        });
+      })
+      .catch(e => {
+        this.setData({ 
+          latitude: 114.06777,//纬度
+          longitude: 22.547331,//经度
+        }); 
+        //this.regeocoder();
+      })
+
+  },
+  //输入提示
+  autoSearch(e) {
+    var pageNum = e.currentTarget.dataset.pagenum;
+    var cityName = "深圳";
+    var keywords = e.detail.value;
+    if (keywords) {
+      amap.getInputtips(cityName, '', keywords)
+        .then(d => {
+            var seekList = d.tips || [];
+            this.setData({
+              seekList
+            });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.initData();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**

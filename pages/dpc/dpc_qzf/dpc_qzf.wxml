@@ -9,7 +9,7 @@
           <image src='../../images/dh-b.png'></image>
           <view class='box box-ac font-15 margin-l-2'>代泊车</view>
         </view>
-        <view class='box box-f1 box-ac box-pe font-2'>购买日期 2017-08-16 18:30:45</view>
+        <view class='box box-f1 box-ac box-pe font-2'>购买日期 {{order.create_time}}</view>
       </view>
     </view>
     <view class='li-view margin-l-5 margin-r-5 no-border'>
@@ -22,15 +22,15 @@
         <view class='box box-f1 box-ver font-1' style='height:240rpx;margin-left:30rpx'>
           <view class='box box-f1 box-hor box-ac'>
             <view class='dd-text'>订单状态</view>
-            <view class='box box-f1 box-ac color-z'>待支付</view>
+            <view class='box box-f1 box-ac color-z'>{{order.order_status}}</view>
           </view>
           <view class='box box-f1 box-hor box-ac'>
             <view class='dd-text'>订单号</view>
-            <view class='box box-f1 box-ac color-z'>V201708061000020</view>
+            <view class='box box-f1 box-ac color-z'>{{order.order_id}}</view>
           </view>
           <view class='box box-f1 box-hor box-ac'>
             <view class='dd-text'>支付金额</view>
-            <view class='box box-f1 box-ac  color-z'>￥175</view>
+            <view class='box box-f1 box-ac  color-z'>￥{{order.pay_amount_due}}</view>
           </view>
         </view>
       </view>
@@ -43,17 +43,45 @@
             <image src='../../images/dd-9.png'></image>
           </view>
         </view>
-        <view class='box box-f1 box-ac font-1 margin-l-2 color-9'>订单详情</view>
+        <view class='box box-f1 box-ac font-1 margin-l-2 color-9'>订单信息</view>
       </view>
     </view>
-    <block wx:for="{{arrays}}">
-      <view class='li-view margin-l-5 margin-r-5 no-border'>
+    <view class='li-view margin-l-5 margin-r-5 no-border'>
+      <view class='box box-f1'>
+        <view class='loback '>接车时间</view>
+        <view class='box box-f1 box-ac font-1'>{{order.inplan_time}}</view>
+      </view>
+    </view>
+    <view class='li-view margin-l-5 margin-r-5 no-border'>
+      <view class='box box-f1'>
+        <view class='loback '>取车时间</view>
+        <view class='box box-f1 box-ac font-1'>{{order.outplan_time}}</view>
+      </view>
+    </view>
+    <view class='li-view margin-l-5 margin-r-5 no-border'>
+      <view class='box box-f1'>
+        <view class='loback '>汇合地点</view>
+        <view class='box box-f1 box-ac font-1'>深圳宝安机场T3航站楼出发5号门</view>
+      </view>
+    </view>
+    <view class='li-view margin-l-5 margin-r-5 no-border'>
+      <view class='box box-f1'>
+        <view class='loback '>泊车天数</view>
+        <view class='box box-f1 box-ac font-1'>{{order.pay_type}}天</view>
+      </view>
+    </view>
+    <view class='li-view margin-l-5 margin-r-5 no-border'>
+      <view class='box box-f1'>
+        <view class='loback '>联系人</view>
+        <view class='box box-f1 box-ac font-1'>{{order.contact_name}}</view>
+      </view>
+    </view>
+    <view class='li-view margin-l-5 margin-r-5 no-border'>
         <view class='box box-f1'>
-          <view class='loback '>{{item.title}}</view>
-          <view class='box box-f1 box-ac font-1'>{{item.dataStart}}</view>
+          <view class='loback '>联系电话</view>
+          <view class='box box-f1 box-ac font-1'>{{order.contact_tel}}</view>
         </view>
       </view>
-    </block>
     <view class='bg-ee' style='width:100%;height:10rpx'></view>
     <view class='li-view margin-l-5 margin-r-5'>
       <view class='box box-f1 box-ac'>
@@ -65,20 +93,30 @@
         <view class='box box-f1 box-ac font-1 margin-l-2 color-9'>车辆详情</view>
       </view>
     </view>
-    <block wx:for="{{clxx}}">
       <view class='li-view margin-l-5 margin-r-5 no-border'>
         <view class='box box-f1'>
-          <view class='loback '>{{item.title}}</view>
-          <view class='box box-f1 box-ac font-1'>{{item.dataVehicle}}</view>
+          <view class='loback '>爱车车牌</view>
+          <view class='box box-f1 box-ac font-1'>{{order.car_no}}</view>
         </view>
       </view>
-    </block>
+      <view class='li-view margin-l-5 margin-r-5 no-border'>
+        <view class='box box-f1'>
+          <view class='loback '>爱车型号</view>
+          <view class='box box-f1 box-ac font-1'>{{order.car_brand}}</view>
+        </view>
+      </view>
+      <view class='li-view margin-l-5 margin-r-5 no-border'>
+        <view class='box box-f1'>
+          <view class='loback '>爱车颜色</view>
+          <view class='box box-f1 box-ac font-1'>{{order.car_color}}</view>
+        </view>
+      </view>
     <view class='footer-zf'>
       <view class='box box-f1 box-hor'>
-        <view class='box box-f1 box-apc qxdd-btn'>
+        <view class='box box-f1 box-apc qxdd-btn' catchtap="cancelOrder">
           取消订单
         </view>
-        <view class='box box-f1 box-apc ljzf-btn'>
+        <view class='box box-f1 box-apc ljzf-btn' catchtap="pay">
           立即支付
         </view>
       </view>

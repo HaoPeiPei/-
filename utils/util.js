@@ -241,6 +241,60 @@ const htmlspecialchars_decode = (str) => {
     str = str.replace(/&#039;/g, "'");
     return str;
 }
+/*
+*获取时间格式字符串的年月日时分秒
+*
+*
+*/
+ const formatDate = (time, type) => {
+    var myDate = new Date(time.replace(/-/g, "/"));
+    var rslt;
+    switch (type) {
+    case "year":
+        rslt = myDate.getFullYear();
+        break;
+    case "month":
+        rslt = (myDate.getMonth() + 1) > 10 ? (myDate.getMonth() + 1) : '0' + (myDate.getMonth() + 1);
+        break;
+    case "day":
+        rslt = myDate.getDate() > 10 ? myDate.getDate() : '0' + myDate.getDate();
+        break;
+    case "week":
+        rslt = myDate.getDay() + 1;
+        break;
+    case "hour":
+        rslt = myDate.getHours() > 10 ? myDate.getHours() : '0' + myDate.getHours();
+        break;
+    case "minute":
+        rslt = myDate.getMinutes() > 10 ? myDate.getMinutes() : '0' + myDate.getMinutes();
+        break;
+    case "second":
+        rslt = myDate.getSeconds() > 10 ? myDate.getSeconds() : '0' + myDate.getSeconds();
+        break;
+    case "yyyy-mm-dd":
+        rslt = myDate.getFullYear() + "-" + ((myDate.getMonth() + 1) > 10 ? (myDate.getMonth() + 1) : '0' + (myDate.getMonth() + 1)) + "-" + (myDate.getDate() > 10 ? myDate.getDate() : '0' + myDate.getDate());
+        break;
+    default:
+        break;
+    }
+    return rslt;
+}
+
+//
+const add0 = () => {
+    return  
+}
+//转换时间戳
+const formatTimestamp= (timestamp) =>{
+    var time = new Date(timestamp);
+    var y = time.getFullYear();
+    var m = time.getMonth()+1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    return y+'-'+(m<10?'0'+m:m)+'-'+(d<10?'0'+d:d)+' '+(h<10?'0'+h:h)+':'+(mm<10?'0'+mm:mm)+':'+(s<10?'0'+s:s);
+}
 
  module.exports = {
     isCardNo: isCardNo,
@@ -256,4 +310,6 @@ const htmlspecialchars_decode = (str) => {
     request: request,
     compareDate: compareDate,
     htmlspecialchars_decode: htmlspecialchars_decode,
+    formatDate: formatDate,
+    formatTimestamp: formatTimestamp,
 }

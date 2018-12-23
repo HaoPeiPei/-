@@ -116,8 +116,8 @@ Page({
                   var FlightLowestPrice = parseInt(cabInfo.SalePrice) - parseInt(cabInfo.Promotion);
                   return Object.assign(cabInfo,{FlightLowestPrice});
                 });
+                var Discount = item.CabInfos[0].Discount;
               };
-              var Discount = item.CabInfos[0].Discount;
               var FlightNoIcon = item.FlightNo.substring(0, 2);
               return Object.assign(item,{CabInfos,Discount,FlightNoIcon});
             });

@@ -132,5 +132,8 @@
         "selectedIconPath": "pages/images/wd-s.png"
       }
     ]
-  }
+  },
+  "component": true,
+  "usingComponents":{}
+
 }
