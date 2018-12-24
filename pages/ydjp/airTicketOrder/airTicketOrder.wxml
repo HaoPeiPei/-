@@ -115,12 +115,12 @@
             <view class="main-con font-size-32 c-999 contact">
                 <view class="flex t-title align-center">
                     <i class="icon-contacts icon font-size-38"></i>
-                    <input type="text" class=" col-1" id="contactor" name="contactor" value="{{contactor}}"  placeholder="请输入联系人" />
+                    <input type="text" class=" col-1" id="contactor" name="contactor" bindinput="bindinput" value="{{contactor}}"  placeholder="请输入联系人" />
                 </view>
                 <view class="flex t-title align-center">
                     <i class="icon-phone icon ico-spac font-size-38"></i>
                     手机号
-                    <input type="text" class=" col-1" id="contactTel" name="contactTel" value="{{contactTel}}"  placeholder="请输入联系方式" />
+                    <input type="text" class=" col-1" id="contactTel" name="contactTel" bindinput="bindinput" value="{{contactTel}}"  placeholder="请输入联系方式" />
                 </view>
             </view>
             <view class="main-con font-size-32">

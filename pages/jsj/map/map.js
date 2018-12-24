@@ -33,7 +33,7 @@ Page({
       .then(d => {
         let { name, desc, latitude, longitude } = d[0];
         let { city } = d[0].regeocodeData.addressComponent;
-        let seekList = d[0].regeocodeData.pois;
+        let seekList = d[0].regeocodeData.pois || [];
         this.setData({
           city,
           latitude,
@@ -67,6 +67,23 @@ Page({
           console.log(e);
         });
     }
+  },
+  //选择地址
+  selectSeek(e){
+    var address = e.currentTarget.dataset.address;
+    var location = e.currentTarget.dataset.location.split(',');
+    var lat = location.length > 1 && location[0];
+    var lng = location.length > 2 && location[1];
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length -2]; //上一个页面
+    prevPage.setData({
+      address,
+      lat,
+      lng,
+     });
+    wx.navigateBack({
+      delta:1
+    })
   },
   /**
    * 生命周期函数--监听页面加载

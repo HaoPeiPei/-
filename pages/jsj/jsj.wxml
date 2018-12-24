@@ -38,33 +38,25 @@
     <view class='box box-f1 margin-lr-1 font-14'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>送达地点</view>
       <view class='box box-f1 border-b-1 color-3' style='padding:40rpx 0rpx;' bindtap='bindMapChage'>
-        <input type='text' placeholder='请输入送达地点' style='width:100%' />
-      </view>
-    </view>
-    <view class='box box-f1 margin-lr-1 font-14'>
-      <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车日期</view>
-      <view class='box box-f1 color-3 border-b-1 ' style='padding:40rpx 0rpx;'>
-        <van-popup class='box box-f1 color-3 border-b-1 ' v-model="show" position="bottom" :overlay="true">
-          <van-datetime-picker
-            type="datetime"
-            value="{{ currentDate }}"
-            min-date="{{ minDate }}"
-            max-date="{{ maxDate }}"
-            bind:change="onChange"
-            title=""
-          />
-        </van-popup>
-        <view style='width:100%' value='{{dd_date}}' >请输入用车日期</view>
-      <!-- <picker mode="date" start="2018-05-22" end="2018-12-30" style='width:100%;' bindchange='bindDateChage'>
-        </picker> -->
+        <input type='text' placeholder='请输入送达地点' style='width:100%' value="{{address}}" />
       </view>
     </view>
     <view class='box box-f1 margin-lr-1 font-14'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车时间</view>
       <view class='box box-f1 color-3' style='padding:40rpx 0rpx;'>
-      <picker mode="time" start="00:00" end="24:00" style='width:100%;' bindchange='bindTimeChage'>
-        <input type='text' placeholder='请输入用车时间' style='width:100%' value='{{useDate}}'/>
-        </picker>
+      <van-popup show="{{useDateShow}}" position="bottom" >
+          <van-datetime-picker 
+            type="datetime"
+            value="{{currentDate}}"
+            min-date="{{minDate}}"
+            max-date="{{ maxDate }}"
+            bind:confirm="useDatePopconfirm"
+            title="请输入用车日期"
+          />
+        </van-popup>
+        <view class='box box-f1 color-3' bindtap='useDateChange'>
+          <input type='text' placeholder='请输入用车日期' style='width:100%' value="{{useDate}}" />
+        </view>
       </view>
     </view>
     <view class='height-10'></view>
@@ -94,11 +86,11 @@
     <view class='box box-f1 margin-lr-1 font-14'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>乘车地点</view>
       <view class='box box-f1 border-b-1 color-3' style='padding:40rpx 0rpx;' bindtap='bindMapChage'>
-        <input type='text' placeholder='请输入送达地点' style='width:100%' />
+        <input type='text' placeholder='请输入送达地点' style='width:100%' value="{{address}}"/>
       </view>
     </view>
     <view class='box box-f1 margin-lr-1 font-14'>
-      <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车日期</view>
+      <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车时间</view>
       <view class='box box-f1 color-3 border-b-1 ' style='padding:40rpx 0rpx;'>
         <van-popup show="{{useDateShow}}" position="bottom" >
           <van-datetime-picker 
@@ -106,7 +98,6 @@
             value="{{currentDate}}"
             min-date="{{minDate}}"
             max-date="{{ maxDate }}"
-            bind:change="useDatePopChange"
             bind:confirm="useDatePopconfirm"
             title="请输入用车日期"
           />
@@ -114,18 +105,7 @@
         <view class='box box-f1 color-3' bindtap='useDateChange'>
           <input type='text' placeholder='请输入用车日期' style='width:100%' value="{{useDate}}" />
         </view>
-      <!-- <picker mode="date" start="2018-05-22" end="2018-12-30" style='width:100%;' bindchange='bindDateChage'>
-        <input type='text' placeholder='请输入用车日期' style='width:100%' value='{{useDate}}'/>
-        </picker>-->
       </view> 
-    </view>
-    <view class='box box-f1 margin-lr-1 font-14'>
-      <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车时间</view>
-      <view class='box box-f1 color-3' style='padding:40rpx 0rpx;'>
-        <picker mode="time" start="00:00" end="24:00" style='width:100%;' bindchange='bindTimeChage'>
-          <input type='text' placeholder='请输入用车时间' style='width:100%' value='{{tm_date}}'/>
-        </picker>
-      </view>
     </view>
     <view class='height-10'></view>
     <view class='box box-f1 margin-lr-1 font-14 padding-tb-1 color-4c'>温馨提示：请距离用车时间前5小时下单;若不足5小时，请通过其他方式预定此项服务！</view>
@@ -133,5 +113,5 @@
 </view>
 
 <view class='footer'>
-  <view class='box box-f1 box-apc padding-tb-1 color-f backod-f4 font-16' bindtap='bindNavChage'>搜索</view>
+  <view class='box box-f1 box-apc padding-tb-1 color-f backod-f4 font-16' bindtap='book'>搜索</view>
 </view>

@@ -188,6 +188,13 @@ Page({
         });
         return count;
     },
+    //输入联系人，手机号
+    bindinput(e){
+        var name = e.currentTarget.dataset.name;
+        this.setData({
+        [name]: e.detail.value
+        })
+    },
     //计算价格明细
     caculatePirce(){
         debugger

@@ -25,6 +25,7 @@ Page({
     flyDate: "",
     arrTime: "",
     depTime: "",
+    flightNo: "",
     oldFlightNo: "",
     lng: "",
     lat: "",
@@ -106,7 +107,12 @@ Page({
     var tripType = e.currentTarget.dataset.triptype;
     this.setData({
       tripType,
-      flyDate: ''
+      flyDate: '',
+      address: '',
+      lng: "",
+      lat: "",
+      useDate:"",
+      flightNo:"",
     })
   },
 
@@ -349,21 +355,23 @@ Page({
       tm_date: tm_date
     })
   },
-  Book() {
-    var queryModel = { 
-      tripType: this.data.tripType, 
-      flightNo: this.data.flightNo, 
-      flyDate: this.data.flyDate, 
-      address: this.data.address, 
-      useDate: this.data.useDate, 
-      lng: this.data.lng, 
-      lat: this.datalat, 
-      depTime: this.data.depTime, 
-      arrTime: this.data.arrTime 
-    };
-    wx.navigateTo({
-      url: "chooseCar.aspx?queryInfo=" + JSON.stringify(queryModel),
-    })
+  book() {
+    if(this.check){
+      var queryModel = { 
+        tripType: this.data.tripType, 
+        flightNo: this.data.flightNo, 
+        flyDate: this.data.flyDate, 
+        address: this.data.address, 
+        useDate: this.data.useDate, 
+        lng: this.data.lng, 
+        lat: this.datalat, 
+        depTime: this.data.depTime, 
+        arrTime: this.data.arrTime 
+      };
+      wx.navigateTo({
+        url: "/cxxz/cxxz?queryInfo=" + JSON.stringify(queryModel),
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
