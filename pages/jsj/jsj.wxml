@@ -2,7 +2,6 @@
 <import src="../../template/template.wxml" />
 
 <template is="header_content_backod" data="{{...header_text}}" />
-<van-button>按钮</van-button>
 <view class='box box-f1 margin-lr-1 aa box-ver'>
   <view class='box box-f1 font-16'>
     <view class='box box-f1'>
@@ -44,7 +43,7 @@
     <view class='box box-f1 margin-lr-1 font-14'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车时间</view>
       <view class='box box-f1 color-3' style='padding:40rpx 0rpx;'>
-      <van-popup show="{{useDateShow}}" position="bottom" >
+        <van-popup show="{{useDateShow}}" position="bottom" >
           <van-datetime-picker 
             type="datetime"
             value="{{currentDate}}"
@@ -91,7 +90,7 @@
     </view>
     <view class='box box-f1 margin-lr-1 font-14'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车时间</view>
-      <view class='box box-f1 color-3 border-b-1 ' style='padding:40rpx 0rpx;'>
+      <view class='box box-f1 color-3 ' style='padding:40rpx 0rpx;'>
         <van-popup show="{{useDateShow}}" position="bottom" >
           <van-datetime-picker 
             type="datetime"

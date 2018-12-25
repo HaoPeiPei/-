@@ -24,10 +24,18 @@ Page({
     queryInfo: "",
     priceMark: '',
   },
-  bindBackChages: function (e) {
+  //返回
+  bindBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   //初始化数据
   initData(options){
@@ -155,7 +163,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    initData(options);
+    this.initData(options);
   },
 
   /**

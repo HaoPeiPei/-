@@ -8,11 +8,11 @@
   </view>
   <view class='box box-f1 box-ver backgd-f padding-tb-1' style='position:relative;'>
     <view class='height-1'></view>
-    <view class='box box-f1 font-16 margin-lr-1'>{{item.service_name}}</view>
+    <view class='box box-f1 font-16 margin-lr-1 '>{{item.service_name}}</view>
     <view class='box box-f1 margin-lr-1'>
-      <view class='box box-f1 box-pe line1 font-13'>营业时间:{{item.service_time}} {{item.terminal}}</view>
+      <view class='box box-f1  line1 font-13 box-pc'>营业时间:{{item.service_time}} {{item.terminal}}</view>
       <view class='box box-ps' data-id="{{item.id}}" bindtap='book' style='padding:8rpx 20rpx;background:#f4393c;border-radius:10rpx;color:#ffffff;'>
-        <text>预定</text>
+        <view class="font-13">预定</view>
       </view>
     </view>
   </view>

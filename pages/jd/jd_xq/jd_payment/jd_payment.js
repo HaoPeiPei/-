@@ -28,7 +28,7 @@ Page({
     passener: {},
     totalPrice: 0,
     contactor: "",
-    contacttel: "",
+    contactTel: "",
   },
   bindDateChange_1:function(e){
     var start_date = e.detail.value;
@@ -43,6 +43,7 @@ Page({
     })
   },
   bindLengChange:function(e){
+    var inBind = this.data.inBind;
     var indexs = e.currentTarget.dataset.indexs;
     //如果选择的行人多于已选择的人数，就添加空值,反之就删除
     var selectCount = this.data.selectPasseners.length;
@@ -62,6 +63,7 @@ Page({
     }
     this.calPrice();
     this.setData({
+      inBind: !inBind,
       indexs,
       selectPasseners,
     })
@@ -78,9 +80,9 @@ Page({
   },
   //输入联系人，手机号
   bindinput(e){
-    var name = e.currentTarget.dataset.name;
+    var id = e.currentTarget.id;
     this.setData({
-      [name]: e.detail.value
+      [id]: e.detail.value
     })
   },
   bindListChange:function(){
@@ -142,7 +144,7 @@ Page({
     var start_date = this.data.start_date;
     var end_date = this.data.end_date;
     var contactor = this.data.contactor;
-    var contacttel = this.data.contacttel;
+    var contactTel = this.data.contactTel;
     if (start_date == "") {
       wx.showToast({
         title: "请填写入店日期",
@@ -171,7 +173,7 @@ Page({
       });
       return false;
     }
-    if (contacttel == "") {
+    if (contactTel == "") {
       wx.showToast({
         title: "请填写手机号码",
         icon: "none",
@@ -180,7 +182,7 @@ Page({
     }
     else {
         var myreg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
-        if (!myreg.test(contacttel)) {
+        if (!myreg.test(contactTel)) {
           wx.showToast({
             title: '请输入有效的手机号码！',
             icon: "none",
@@ -217,7 +219,7 @@ Page({
         start_date,
         end_date,
         contactor,
-        contacttel,
+        contactTel,
         userID,
         passenger: parssInfo,
       })

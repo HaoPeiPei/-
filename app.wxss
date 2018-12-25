@@ -40,6 +40,9 @@ a, a:visited {
   }
 
 /*盒子布局基本属性  start*/
+.flex{
+  display: flex;
+}
 
 .box {
   display: -webkit-box !important;
@@ -732,4 +735,11 @@ page {
 }
 .font-weight-bold{
   font-weight: bold;
+}
+
+.font-size-19{
+  font-size: 38rpx;
+}
+.font-size-15{
+  font-size: 30rpx;
 }

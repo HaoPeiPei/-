@@ -2,7 +2,7 @@
 <import src="../../../../template/template.wxml" />
 <template is="header_content_noBackod" data="{{...header_text}}" />
 
-<view class='box box-f1 box-ver'>
+<view class='box box-f1 box-ver' style="padding-bottom: 102rpx;">
   <form>
     <view class='box box-f1 box-ver backgd-f'>
       <view class='box box-f1 margin-lr-20 border-b-1 padding-tb-30'>
@@ -65,32 +65,31 @@
             </block>
           </view>
         </view>
-        
-        <view>
-          <block wx:for="{{selectPasseners}}" wx:key="*this">
-            <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1'>
-              <view style='width:120rpx;' >入住人</view>
-              <view class='box box-f1 box-ac'>
-                <block wx:for="{{selectPasseners}}" wx:key="*this">
-                  <input type='text'  style='line-height:40rpx;height:40rpx;min-height:40rpx;width:100%' placeholder='请输入入住人' placeholder-style="color:#cccccc;" value="{{item.name}}" />
-                </block>
+        <view class='box box-f1 box-hor font-13 box-ac border-b-1'>
+          <view class=' box-f1 box-hor font-13 box-ac'>
+            <block wx:for="{{selectPasseners}}" wx:for-index="idx" wx:key="*this"  >
+              <view class='box box-f1 box-hor font-13 padding-tb-30 color-9  box-ac {{selectPasseners.length==(idx+1)?"":"border-b-1"}}'>
+                <view style='width:120rpx;' >入住人</view>
+                <view class='box box-f1 box-ac'>
+                  <input type='text'  placeholder='请输入入住人' placeholder-style="color:#cccccc;" value="{{item.name}}" />
+                </view>
               </view>
-            </view>
-            <view style='background:url(../../../images/add_icon_1.png) no-repeat center center;background-size:100% 100%;width:40rpx;height:40rpx;' catchtap="addPassengers" ></view>
-          </block>
+            </block>
+          </view>
+          <view style='background:url(../../../images/add_icon_1.png) no-repeat center center;background-size:100% 100%;width:40rpx;height:40rpx;margin-left:36rpx;' catchtap="addPassengers" ></view>
         </view>
 
-        <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1'>
+        <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1 box-ac'>
           <view style='width:120rpx;' >联系人</view>
-          <input type="text" class='box box-f1' data-name="contactor" bindinput="bindinput" value="{{contactor}}" />
+          <input type="text" class='box box-f1' id="contactor" bindinput="bindinput" value="{{contactor}}" />
         </view>
-        <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 '>
+        <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 box-ac'>
           <view style='width:120rpx;' >联系电话</view>
-          <input type="text" class='box box-f1' data-name="contacttel" bindinput="bindinput" value="{{contacttel}}" />
+          <input type="text" class='box box-f1' id="contactTel" bindinput="bindinput" value="{{contactTel}}" />
         </view>
       </view>
     </view>
-    <view style='position:fixed;bottom:0;width:100%;'>
+    <view style='position:fixed;bottom:0;width:100%;z-index: 999;'>
   <view class='box box-f1 box-ac backod-2'>
     <view class='box box-f1 box-ver backod-1 padding-tb-2'>
       <view class='box box-f1 font-13 color-f4 margin-l-1'>￥:

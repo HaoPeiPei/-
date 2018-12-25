@@ -1,6 +1,7 @@
 // pages/gbt/gbtDetails/qrdd/qrdd.js
 var app = getApp();
 var httpRequst = require("../../../../utils/requst.js");
+var { formatTimestamp, addDate } = require("../../../../utils/util.js");
 Page({
   /**
    * 页面的初始数据
@@ -13,14 +14,17 @@ Page({
       "right_icon": "../../../images/dh-b.png"
     },
     useDate:"",
+    useDateShow: false,
     service: {},
     coupon: {},
     coupontype: 0,
     contactor:"",
-    contacttel:"",
+    contactTel:"",
     totalPrice: 0,
     couponCount: 0,
     isShare: 0,
+    minDate: "",
+    maxDate: ""
   },
   bindDateChange:function(e){
     var val = e.detail.value;
@@ -48,13 +52,32 @@ Page({
       }
     })
   },
+  //返回
+  catchBackChange: function (e) {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
+  },
   //初始化数据
   initData(options){
     var serviceId = options.id;
+    var nowDate = new Date();
+    var minDate = nowDate.getTime();
+    var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+    var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
     this.setData({
       service: Object.assign(this.data.service,{
         serviceId: serviceId
       }),
+      minDate,
+      maxDate,
     });
     this.getService(serviceId);
     this.loadCouponCount(serviceId);
@@ -67,10 +90,10 @@ Page({
     httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getservicebyid", id: this.data.service.serviceId } , "POST",res => {
       wx.hideLoading();
       if (res.Success) {
-        var service = res.Data;
+        var service = JSON.parse(res.Data);
         var price = service.price;
         this.setData({
-          service: Object.assign(this.data.service,{
+          service: Object.assign(this.data.service, service, {
             price: price
           })
         });
@@ -135,8 +158,23 @@ Page({
       }
     });
   },
+  useDateChange(){
+    this.setData({
+      useDateShow: true
+    });
+  },
+  useDatePopconfirm(e){
+    var useDate = formatTimestamp(e.detail);
+    this.setData({
+      useDate: useDate.substring(0,useDate.length-3),
+      useDateShow: false
+    });
+  },
   //切换优惠券
   couponSelect: function (e) {
+    if(this.data.couponCount == 0){
+      return
+    }
     var couponType = (e.currentTarget.dataset.coupontype == 1 ? 0: 1);
     if(couponType == 1){
       wx.navigateTo({
@@ -155,9 +193,9 @@ Page({
   },
   //输入联系人，手机号
   bindinput(e){
-    var name = e.currentTarget.dataset.name;
+    var id = e.currentTarget.id;
     this.setData({
-      [name]: e.detail.value
+      [id]: e.detail.value
     })
   },
   //去支付
@@ -176,7 +214,7 @@ Page({
       });
       return false;
     }
-    if (this.data.contacttel == "") {
+    if (this.data.contactTel == "") {
       wx.showToast({
         title: '请填写联系方式',
         icon: 'none'
@@ -185,7 +223,7 @@ Page({
     }
     else {
         var myreg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
-        if (!myreg.test(this.data.contacttel)) {
+        if (!myreg.test(this.data.contactTel)) {
           wx.showToast({
             title: '请输入有效的手机号码',
             icon: 'none'
@@ -203,7 +241,7 @@ Page({
     orderModel.TotalPrice = this.data.totalPrice;
     orderModel.MemberId = app.globalData.memberId;
     orderModel.Contactor = this.data.contactor;
-    orderModel.ContactTel = this.data.contacttel;
+    orderModel.ContactTel = this.data.contactTel;
     wx.showLoading({
       title: '数据加载中...',
     });

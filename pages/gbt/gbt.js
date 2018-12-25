@@ -22,11 +22,20 @@ Page({
     vipHall: [],
     imgRoot: app.globalData.imgRoot,
   },
-  bindBackChange:function(){
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
-      delta:1
+      delta: 1
     })
   },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
+  },
+  //预定
   book:function(e){
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({

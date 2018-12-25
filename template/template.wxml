@@ -79,7 +79,7 @@
 
 
 <template name="pos_fixed_b">
-  <view class='box box-f1 box-apc font-16 color-f padding-tb-1 ' style='background:red;position:fixed;bottom:0;width:100%' catchtap='catchLjyy'>{{text}}</view>
+  <view class='box box-f1 box-apc font-16 color-f padding-tb-1 ' style='background:red;position:fixed;bottom:0;width:100%;z-index: 999;' catchtap='catchLjyy'>{{text}}</view>
 </template>
 
 <!--不带背景的头部
@@ -92,11 +92,11 @@
     <view class='header_noBackod border-b-1'>
       <view class='header-con'>
         <view class='box box-f1 box-hor  margin-lr-1'>
-          <view class='header-left' bindtap='bindBackChange'>
+          <view class='header-left' bindtap='catchBackChange'>
             <image src='{{left_icon}}' style='width:16rpx;height: auto;' mode='widthFix' />
           </view>
           <view class='box box-f1 box-apc font-15'>{{title_text}}</view>
-          <view class='header-right'>
+          <view class='header-right' data-phonenumber="400-700-7355" catchtap="telephone">
             <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;height: auto;' mode='widthFix' wx:if="{{right_icon.length!=0}}"/>
           </view>
         </view>
@@ -116,11 +116,11 @@
     <view class='header_backod'>
       <view class='header-con'>
         <view class='box box-f1 box-hor color-f margin-lr-1'>
-          <view class='header-left' catchtap='catchBackChange'>
+          <view class='header-left'  catchtap='catchBackChange'>
             <image src='{{left_icon}}' style='width:16rpx;' mode='widthFix' />
           </view>
           <view class='box box-f1 box-apc font-15'>{{title_text}}</view>
-          <view class='header-right'>
+          <view class='header-right' data-phonenumber="400-700-7355" catchtap="telephone">
             <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;' mode='widthFix' wx:if="{{right_icon.length!=0}}"/>
           </view>
         </view>

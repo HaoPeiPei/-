@@ -3,7 +3,6 @@ var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
 var app = getApp();
 var httpRequst = require("../../utils/requst");
 var { formatTimestamp, addDate, getDateDiff, getNowFormatDate, formatDate } = require("../../utils/util.js");
-var dateTimePicker = require('../../utils/dateTimePicker.js');
 var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
 Page({
 
@@ -44,10 +43,18 @@ Page({
       maxDate,
     });
   },
-  bindBackChages: function (e) {
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   bindNavChage:function(){
     wx.navigateTo({
@@ -356,7 +363,7 @@ Page({
     })
   },
   book() {
-    if(this.check){
+    if(this.check()){
       var queryModel = { 
         tripType: this.data.tripType, 
         flightNo: this.data.flightNo, 
@@ -369,7 +376,7 @@ Page({
         arrTime: this.data.arrTime 
       };
       wx.navigateTo({
-        url: "/cxxz/cxxz?queryInfo=" + JSON.stringify(queryModel),
+        url: "cxxz/cxxz?queryInfo=" + JSON.stringify(queryModel),
       })
     }
   },

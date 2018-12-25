@@ -9,45 +9,74 @@
       <view style='background:url(../../../images/ddxq_icon_b.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
       <view class='box box-f1 box-ac font-15 margin-l-10'>订单详情</view>
     </view>
-    <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15 border-b-1'>
-      <view class='color-9' style='width:160rpx;'>酒店名称</view>
-      <view class='box box-f1 box-ac'></view>
+    <view class='box box-f1 margin-l-35 padding-tb-1 border-b-1 box-ac font-14'>
+      <view class='color-9' style='width:160rpx;'>服务项目</view>
+      <view class='box box-f1 box-ac'>{{service.service_name}}</view>
     </view>
-    <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15 border-b-1'>
-      <view class='color-9' style='width:160rpx;'>房间数</view>
-      <view class='box box-f1 box-ac'></view>
+    <view class='box box-f1 margin-l-35 padding-tb-1 border-b-1 box-ac font-14'>
+      <view class='color-9' style='width:160rpx;'>起飞机场</view>
+      <view class='box box-f1 box-ac'>深圳宝安机场</view>
     </view>
-    <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15 border-b-1'>
-      <view class='color-9' style='width:160rpx;'>房间类型</view>
-      <view class='box box-f1 box-ac'></view>
-    </view>
-    <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15 border-b-1'>
-      <view class='color-9' style='width:160rpx;'>住店日期</view>
-      <view class='box box-f1 box-ac'></view>
-    </view>
-    <view class='box box-f1 font-12 margin-l-35 box-ac padding-tb-15 border-b-1'>
-      <view class='color-9' style='width:160rpx;'>入住人</view>
-      <view class='box box-f1 box-ac'></view>
-    </view>
-  </view>
-</view>
-
-<view class='box box-f1 backgd-f margin-t-10'>
-  <view class='box box-f1 box-ver margin-lr-20'>
-    <view class='box box-f1 box-ac padding-tb-15 border-b-1'>
-      <view style='background:url(../../../images/lxr_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
-      <view class='box box-f1 font-15 margin-l-10 color-3'>
-        <view style='width:120rpx;color:#999999;'>联系名称</view>
-        <view class='box box-f1 box-ac'></view>
+    <view class='box box-f1 margin-l-35 padding-tb-1 box-ac font-14'>
+      <view class='color-9' style='width:160rpx;'>使用日期</view>
+      <view class='box box-f1 color-3' >
+        <van-popup show="{{useDateShow}}" position="bottom" >
+          <van-datetime-picker 
+            type="datetime"
+            value="{{currentDate}}"
+            min-date="{{minDate}}"
+            max-date="{{ maxDate }}"
+            bind:confirm="useDatePopconfirm"
+            title="请输入用车日期"
+          />
+        </van-popup>
+        <view class='box box-f1 color-3' bindtap='useDateChange'>
+          <input type='text' placeholder='请输入用车日期' style='width:100%' value="{{useDate}}" />
+        </view>
       </view>
     </view>
-    <view class='box box-f1 font-15 margin-l-35 box-ac padding-tb-15'>
-      <view class='color-9' style='width:120rpx;'>联系方式</view>
-      <view class='box box-f1 box-ac'></view>
+  </view>
+</view>
+
+<!--联系人  -->
+<view class='box box-f1 backgd-f margin-t-1'>
+  <view class='box box-f1 margin-lr-1 box-ver'>
+    <view class='box box-f1 box-ac padding-tb-1 border-b-1'>
+      <i class="icon-contacts font-size-19 c-999"></i>
+      <!-- <view style='background:url(../../../images/lxr_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
+      </view> -->
+      <view class='box box-f1 box-ac font-14  margin-l-1'>
+        <view class='color-9' style='width:120rpx;'>联系人</view>
+        <view class='box box-f1 margin-l-5 color-3'>
+            <input type="text" class=" col-1" id="contactor" name="contactor" bindinput="bindinput" value="{{contactor}}"  placeholder="请输入联系人" />
+        </view>
+      </view>
+    </view>
+    <view class='box box-f1 margin-l-4 padding-tb-1 box-ac font-14'>
+      <i class="icon-phone ico-spac font-size-15 c-999"></i>
+      <view class='color-9  margin-l-1' style='width:120rpx;'>手机号</view>
+      <view class='box box-f1 margin-l-5 color-3'>
+        <input type="text" class=" col-1" id="contactTel" name="contactTel" bindinput="bindinput" value="{{contactTel}}"  placeholder="请输入联系方式" />
+      </view>
     </view>
   </view>
 </view>
 
+<!--优惠券  -->
+<view class='box box-f1 backgd-f margin-t-1 box-ver font-14'>
+  <view class='box box-f1 margin-lr-1 padding-tb-1 box-ac'>
+    <view style='background:url(../../../images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'></view>
+    <view class='box box-f1 margin-l-1' >
+      <view class='font-14 color-9'>优惠券</view>
+      <view class='yhj-back margin-l-1 {{couponCount>0?"yy":""}}'>{{couponCount}}张</view>
+    </view>
+    <view class='box box-pe box-ac'>
+        <text class="switch {{couponType==1?'on':''}}" data-coupontype="{{couponType}}" catchtap="couponSelect">
+          <text class="switch-node"></text>
+        </text>
+      </view>
+  </view>
+</view>
 <view class='box box-f1 backgd-f margin-t-10'>
   <view class='box box-f1 box-ver margin-lr-20'>
     <view class='box box-f1 box-ac padding-tb-20 border-b-1'>
