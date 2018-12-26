@@ -1,6 +1,6 @@
 @import "../../../template/template.wxss";
 page{
-  background: #eee;
+  background: #fff;
 }
 .header-white{
   height: 80rpx;
@@ -14,7 +14,7 @@ page{
   color: #999;
 }
 .title-text.bor-b{
-  border-bottom: 1px solid #f4393c;
+  border-bottom: 4px solid #f4393c;
   color: #222;
 }
 .title-text.bor-no{
@@ -22,12 +22,8 @@ page{
   color: #222;
 }
 .content{
-  padding: 0rpx 40rpx;
+  padding: 0rpx 0rpx;
   background-color: #fff;
-}
-.list {
-   margin-top:20rpx; 
-   
 }
 .list ul{
  display: block;
@@ -35,6 +31,9 @@ page{
 .list ul li{
   /* background-color: red; */
   
+}
+.list .li-view:last-child {
+  border-bottom: 1px solid #dbdbdb;
 }
 .list ul li .li-view {
   /*正文内容为垂直居中*/
@@ -57,9 +56,6 @@ page{
   border-bottom: none;
 }
 
-.list ul li:last-child .li-view {
-  border-bottom: none;
-}
 
 .list ul li .no-indent {
   /*底部横线满屏显示*/
@@ -102,4 +98,22 @@ page{
 .zf-btn{
   width:30%;
   background-color:#f4393c;
+}
+.marign-l-15{
+  margin-left: 30rpx;
+}
+.border-b-10{
+  border-bottom: 20rpx solid rgb(243, 245, 247);
+}
+.padding-lr-15{
+  padding: 0 30rpx;
+}
+.padding-b-10{
+  padding-bottom: 20rpx;
+}
+.w-95{
+  width: 190rpx;
+}
+.height25{
+  height: 52rpx;
 }

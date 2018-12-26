@@ -13,7 +13,7 @@ Page({
       "title_text": "确认订单", 
       "right_icon": "../../../images/dh-b.png"
     },
-    useDate:"",
+    useDate: '',
     useDateShow: false,
     service: {},
     coupon: {},
@@ -23,8 +23,9 @@ Page({
     totalPrice: 0,
     couponCount: 0,
     isShare: 0,
+    currentDate: '',
     minDate: "",
-    maxDate: ""
+    maxDate: "",
   },
   bindDateChange:function(e){
     var val = e.detail.value;
@@ -76,6 +77,7 @@ Page({
       service: Object.assign(this.data.service,{
         serviceId: serviceId
       }),
+      currentDate: minDate,
       minDate,
       maxDate,
     });
@@ -158,16 +160,19 @@ Page({
       }
     });
   },
+  //选择用车时间
   useDateChange(){
     this.setData({
       useDateShow: true
     });
   },
+  //用车时间确认
   useDatePopconfirm(e){
     var useDate = formatTimestamp(e.detail);
     this.setData({
       useDate: useDate.substring(0,useDate.length-3),
-      useDateShow: false
+      currentDate: e.detail,
+      useDateShow: false,
     });
   },
   //切换优惠券
@@ -235,11 +240,11 @@ Page({
   },
   book(){
     var orderModel = {};
+    orderModel.MemberId = app.globalData.memberId;
     orderModel.usedDate = this.data.useDate;
     orderModel.CouponInfo = this.data.coupon;
     orderModel.ServiceId = this.data.service.serviceId;
     orderModel.TotalPrice = this.data.totalPrice;
-    orderModel.MemberId = app.globalData.memberId;
     orderModel.Contactor = this.data.contactor;
     orderModel.ContactTel = this.data.contactTel;
     wx.showLoading({
@@ -247,6 +252,7 @@ Page({
     });
     var param = {
       action: "createorder", 
+      MemberId: app.globalData.memberId,
       orderInfo: JSON.stringify(orderModel) 
     }
     httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", param, "POST",res => {

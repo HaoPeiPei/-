@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -121,6 +121,12 @@
 					"id": -1,
 					"name": "jd_payment",
 					"pathName": "pages/jd/jd_xq/jd_payment/jd_payment",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "dpc_qcxx",
+					"pathName": "pages/dpc/dpc_qcxx/dpc_qcxx",
 					"query": ""
 				}
 			]

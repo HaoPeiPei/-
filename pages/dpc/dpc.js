@@ -13,10 +13,18 @@ Page({
       "background_url": "../images/valet_bg.png"
     },
   },
-  catchBackChange: function () {
+   //返回
+   catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   makeAnAppointment:function(){
     wx.navigateTo({

@@ -1,62 +1,83 @@
 <import src="../../../template/template.wxml" />
 <template is="header_content_noBackod" data="{{...header_text}}" />
-<view class='box box-f1 box-hor bg-1'>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="qcxx"?"bor-b":"bor-no"}}' catchtap="xinxSelect">去程信息</view>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="hcxx"?"bor-b":"bor-no"}}' catchtap="xinxSelect">回程信息</view>
-  <view class='box box-f1 box-apc font-12 title-text {{xinx=="clxx"?"bor-b":"bor-no"}}' catchtap="xinxSelect">车辆信息</view>
+<view class='box box-f1 box-hor bg-1 border-b-10'>
+  <view class='box box-f1 box-apc font-17 title-text {{xinx=="qcxx"?"bor-b":"bor-no"}}' >去程信息</view>
+  <view class='box box-f1 box-apc font-17 title-text {{xinx=="hcxx"?"bor-b":"bor-no"}}' >回程信息</view>
+  <view class='box box-f1 box-apc font-17 title-text {{xinx=="clxx"?"bor-b":"bor-no"}}' >车辆信息</view>
 </view>
 <view class='content' wx:if="{{xinx == 'qcxx'}}">
-  <view class='list'>
+  <view class='list padding-lr-15'>
     <ul>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac padding-tb-2' style='height:40rpx'>
-            <view class='' style='height:40rpx;line-height:40rpx;'>
-              <image src='../../images/3_43.png' style='width:8rpx;height:26rpx;'></image>
-            </view>
-            <view class='box box-f1 margin-l-1 font-12'>去程信息</view>
+        <view class='li-view border-b-1'>
+          <view class='box box-f1 box-ac ' style='height:40rpx'>
+            <view class='box box-f1 font-15'>去程信息</view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>取车地点</view>
-            <view class='box box-f1 margin-l-1 color-text'>深圳宝安机场T3航站楼出发5号门</view>
+        <view class='li-view border-b-1 marign-l-15 '>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>代泊地点</view>
+            <view class='box box-f1 color-text height26'>深圳宝安机场T3航站楼出发5号门</view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>去程航班</view>
-            <view class='box box-f1 margin-l-1'>
-              <input placeholder='请输入航班号' placeholder-class='placeholder-class' data-type="qc" bindblur='inputBlur' id='hbh'></input>
+        <view class='li-view border-b-1 marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>去程航班</view>
+            <view class='box box-f1'>
+              <input placeholder='请输入航班号' placeholder-class='placeholder-class' data-type="qc" bindblur='inputBlur' id='hbh' value="{{go_flightNo}}"></input>
             </view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>去程日期</view>
-            <picker bindchange='bindqcDateChange' catchtap="bindqcDateClick" data-type='qcxx' mode="date" value='{{depDate}}' start='2018-04-01' end='2018-12-30' style='width:80%;' >
-              <view class='box box-f1 margin-l-1'>
-                <input placeholder='请输入去程日期' placeholder-class='placeholder-class' disabled='true' value='{{depDate}}'></input>
+        <view class='li-view marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>去程日期</view>
+            <view class='box box-f1 color-3 box-ac' >
+              <van-popup show="{{depDateShow}}" position="bottom" >
+                <van-datetime-picker 
+                  type="date"
+                  value="{{depDatecurrentDate}}"
+                  min-date="{{minDate}}"
+                  max-date="{{maxDate}}"
+                  bind:confirm="depDatePopconfirm"
+                  bind:cancel="depDateCancel"
+                  title="请输入去程日期"
+                />
+              </van-popup>
+              <view class='box box-f1 color-3' bindtap='depDateChange'>
+                <input type='text' placeholder='请输入去程日期' style='width:100%' value="{{depDate}}" />
               </view>
-            </picker>
+              <i class="icon-arror-r"></i>
+            </view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>接车时间</view>
-            <picker bindchange='bindqcjcTimeChange' catchtap="bindqcjcDateClick"   mode="multiSelector" value='' bindcolumnchange="changeqcjcDateTimeColumn" range="{{depTimeArray}}"  style='width:80%'>
-              <view class='box box-f1 margin-l-1'>
-                <input placeholder='请输入接车时间' placeholder-class='placeholder-class' disabled='true' value='{{depTime}}'></input>
+        <view class='li-view marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>接车时间</view>
+            <view class='box box-f1 color-3 box-ac' >
+              <van-popup show="{{depTimeShow}}" position="bottom" >
+                <van-datetime-picker 
+                  type="datetime"
+                  value="{{depTimecurrentDate}}"
+                  min-date="{{minDate}}"
+                  max-date="{{maxDate}}"
+                  bind:confirm="depTimePopconfirm"
+                  bind:cancel="depTimeCancel"
+                  title="请输入接车时间"
+                />
+              </van-popup>
+              <view class='box box-f1 color-3' bindtap='depTimeChange'>
+                <input type='text' placeholder='请输入接车时间' style='width:100%' value="{{depTime}}" />
               </view>
-            </picker>
+              <i class="icon-arror-r"></i>
+            </view>
           </view>
         </view>
       </li>
@@ -64,57 +85,78 @@
   </view>
 </view>
 <view class='content' wx:if="{{xinx == 'hcxx'}}">
-  <view class='list'>
+  <view class='list padding-lr-15'>
     <ul>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac padding-tb-2' style='height:40rpx'>
-            <view class='' style='height:40rpx;line-height:40rpx;'>
-              <image src='../../images/3_43.png' style='width:8rpx;height:26rpx;'></image>
-            </view>
-            <view class='box box-f1 margin-l-1 font-12'>回程信息</view>
+        <view class='li-view border-b-1'>
+          <view class='box box-f1 box-ac ' style='height:40rpx'>
+            <view class='box box-f1 font-15'>回程信息</view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>取车地点</view>
-            <view class='box box-f1 margin-l-1 color-text'>深圳宝安机场T3航站楼出发5号门</view>
+        <view class='li-view border-b-1 marign-l-15' >
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>取车地点</view>
+            <view class='box box-f1 color-text height26'>深圳宝安机场T3航站楼出发5号门</view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>回程航班</view>
-            <view class='box box-f1 margin-l-1'>
-              <input placeholder='请输入航班号' data-type="hc" bindblur='inputBlur' placeholder-class='placeholder-class'></input>
+        <view class='li-view border-b-1 marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>回程航班</view>
+            <view class='box box-f1'>
+              <input placeholder='请输入航班号' placeholder-class='placeholder-class' data-type="hc" bindblur='inputBlur' id='hbh' value="{{back_flightNo}}"></input>
             </view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>回程日期</view>
-            <picker bindchange='bindhcDateChange' catchtap="bindhcDateClick"  data-type="hcxx" mode="date" value='{{arrDate}}' start='2018-04-01' end='2018-12-30' style='width:80%'>
-              <view class='box box-f1 margin-l-1'>
-                <input placeholder='请输入去程日期' placeholder-class='placeholder-class' disabled='true' value='{{arrDate}}'></input>
+        <view class='li-view marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>回程日期</view>
+            <view class='box box-f1 color-3 box-ac' >
+              <van-popup show="{{arrDateShow}}" position="bottom" >
+                <van-datetime-picker 
+                  type="date"
+                  value="{{arrDatecurrentDate}}"
+                  min-date="{{minDate}}"
+                  max-date="{{maxDate}}"
+                  bind:confirm="arrDatePopconfirm"
+                  bind:cancel="arrDateCancel"
+                  title="请输入回程日期"
+                />
+              </van-popup>
+              <view class='box box-f1 color-3' bindtap='arrDateChange'>
+                <input type='text' placeholder='请输入回程日期' style='width:100%' value="{{arrDate}}" />
               </view>
-            </picker>
+              <i class="icon-arror-r"></i>
+            </view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-apc margin-l-1'>接车时间</view>
-            <picker bindchange='bindhcjcTimeChange' catchtap="bindhcjcDateClick"  mode="multiSelector" value='' bindcolumnchange="changehcjcDateTimeColumn" range="{{arrTimeArray}}"  style='width:80%'>
-              <view class='box box-f1 margin-l-1'>
-                <input placeholder='请输入接车时间' placeholder-class='placeholder-class' disabled='true' value='{{arrTime}}'></input>
+        <view class='li-view marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>还车时间</view>
+            <view class='box box-f1 color-3 box-ac' >
+              <van-popup show="{{arrTimeShow}}" position="bottom" >
+                <van-datetime-picker 
+                  type="datetime"
+                  value="{{arrTimecurrentDate}}"
+                  min-date="{{minDate}}"
+                  max-date="{{maxDate}}"
+                  bind:confirm="arrTimePopconfirm"
+                  bind:cancel="arrTimeCancel"
+                  title="请输入还车时间"
+                />
+              </van-popup>
+              <view class='box box-f1 color-3' bindtap='arrTimeChange'>
+                <input type='text' placeholder='请输入还车时间' style='width:100%' value="{{arrTime}}" />
               </view>
-            </picker>
+              <i class="icon-arror-r"></i>
+            </view>
           </view>
         </view>
       </li>
@@ -123,74 +165,69 @@
 </view>
 <view class='content' wx:if="{{xinx == 'clxx'}}">
   <view class='list'>
-    <ul>
+    <ul class="padding-b-10 border-b-10 padding-lr-15"> 
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac padding-tb-2' style='height:40rpx'>
-            <view class='' style='height:40rpx;line-height:40rpx;'>
-              <image src='../../images/3_43.png' style='width:8rpx;height:26rpx;'></image>
-            </view>
-            <view class='box box-f1 margin-l-1 font-12'>车辆信息</view>
+        <view class='li-view border-b-1'>
+          <view class='box box-f1 box-ac' style='height:40rpx'>
+            <view class='box box-f1 font-15'>车辆信息</view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-ac margin-l-1' style="width:130rpx;">爱车车牌</view>
-            <view class='box box-f1 margin-l-1'>
-                <input type="text" class='box box-f1' data-name="carPlate" placeholder='请输入爱车车牌' bindinput="bindinput" value="{{carPlate}}" />
+        <view class='li-view marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95'>爱车车牌</view>
+            <view class='box box-f1'>
+                <input type="text" class='box box-f1' id="carPlate" placeholder='请输入爱车车牌' bindinput="bindinput" value="{{carPlate}}" />
             </view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-ac margin-l-1' style="width:130rpx;">爱车型号</view>
-            <view class='box box-f1 margin-l-1'>
-                <input type="text" class='box box-f1' data-name="carType" placeholder='请输入爱车型号' bindinput="bindinput" value="{{carType}}" />
+        <view class='li-view marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95' >爱车型号</view>
+            <view class='box box-f1 '>
+                <input type="text" class='box box-f1' id="carType" placeholder='请输入爱车型号' bindinput="bindinput" value="{{carType}}" />
             </view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-ac margin-l-1' style="width:130rpx;">爱车颜色</view>
-            <view class='box box-f1 margin-l-1'>
-                <input type="text" class='box box-f1' data-name="carColor" placeholder='请输入爱车颜色' bindinput="bindinput" value="{{carColor}}" />
+        <view class='li-view marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac w-95' >爱车颜色</view>
+            <view class='box box-f1'>
+                <input type="text" class='box box-f1' id="carColor" placeholder='请输入爱车颜色' bindinput="bindinput" value="{{carColor}}" />
             </view>
           </view>
         </view>
       </li>
+    </ul>
+    <ul class="padding-lr-15">
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac padding-tb-2' style='height:40rpx'>
-            <view class='' style='height:40rpx;line-height:40rpx;'>
-              <image src='../../images/3_43.png' style='width:8rpx;height:26rpx;'></image>
-            </view>
-            <view class='box box-f1 margin-l-1 font-12'>联系人</view>
+        <view class='li-view '>
+          <view class='box box-f1 box-ac' style='height:40rpx'>
+            <view class='box box-f1 font-15 w-95'>联系人</view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
-            <view class='box box-ac margin-l-1' style="width:130rpx;">姓名</view>
-            <view class='box box-f1 margin-l-1'>
-              <input type="text" class='box box-f1' data-name="contactor" placeholder='请输入联系人' bindinput="bindinput" value="{{contactor}}" />
+        <view class='li-view marign-l-15'>
+          <view class='box box-f1 box-ac font-15 '>
+            <view class='box box-ac ' style="width:130rpx;">姓名</view>
+            <view class='box box-f1 '>
+              <input type="text" class='box box-f1' id="contactor" placeholder='请输入联系人' bindinput="bindinput" value="{{contactor}}" />
             </view>
           </view>
         </view>
       </li>
       <li>
         <view class='li-view'>
-          <view class='box box-f1 box-ac font-12 padding-tb-1'>
+          <view class='box box-f1 box-ac font-15 '>
             <view class='box box-ac margin-l-1' style="width:130rpx;">联系电话</view>
-            <!-- <view class='box box-f1 margin-l-1'>159 8876 2000</view> -->
             <view class='box box-f1 margin-l-1'>
-              <input type="text" class='box box-f1' data-name="contacttel" placeholder='请输入联系方式' bindinput="bindinput" value="{{contacttel}}" />
+              <input type="text" class='box box-f1' id="contactTel" placeholder='请输入联系方式' bindinput="bindinput" value="{{contactTel}}" />
             </view>
           </view>
         </view>
@@ -199,7 +236,7 @@
   </view>
 </view>
 <view class='footer' wx:if="{{xinx=='qcxx'||xinx=='hcxx'}}">
-  <button class='submit-btn box box-f1 box-apc font-12' bindtap='bindXybchage'>下一步</button>
+  <button class='submit-btn box box-f1 box-apc font-15' bindtap='bindXybchage'>下一步</button>
 </view>
 <view class='footer' wx:if="{{xinx=='clxx'}}">
   <view class='box box-f1' style='height:100rpx;'>
