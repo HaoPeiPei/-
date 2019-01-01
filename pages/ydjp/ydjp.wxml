@@ -1,13 +1,8 @@
 <!--pages/ydjp/ydjp.wxml-->
+<import src="../../template/template.wxml" />
 <view class="wrap">
-    <view class="header-top">
-        <view class="header-title flex">
-            <i class="icon-arror-l" catchtap="catchBackChange"></i>
-            <text class="col-1 title"> 国内机票</text>
-            <i class="icon-phone"  data-phonenumber="400-700-7355" catchtap="telephone"></i>
-        </view>
-    </view>
-    <view class="main main-space">
+    <template is="header_content_backod" data="{{...header_text}}" />
+    <view class="main main-space margin-top--10">
         <view class="ticket-type flex c-align">
             <text class="col-1 ticket-type-single text {{ticketType==0?'active':''}}" data-tickettype="0" catchtap="changeTicketType">单程</text> 
             <text class="col-1 ticket-type-double text {{ticketType==1?'active':''}}" data-tickettype="1" catchtap="changeTicketType">往返</text>

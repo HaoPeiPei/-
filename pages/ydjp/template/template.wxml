@@ -199,6 +199,7 @@
                 </view>
                 </view>
             </picker>
+            
             <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
                 <view style='width:140rpx;' class='color-3'>证件号</view>
                 <view class='box box-f1 box-ac'>

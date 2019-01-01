@@ -207,14 +207,14 @@
     <ul class="padding-lr-15">
       <li>
         <view class='li-view '>
-          <view class='box box-f1 box-ac' style='height:40rpx'>
-            <view class='box box-f1 font-15 w-95'>联系人</view>
+          <view class='box box-f1 box-ac font-15' style='height:40rpx'>
+            <view class='box box-f1 w-95'>联系人</view>
           </view>
         </view>
       </li>
       <li>
-        <view class='li-view marign-l-15'>
-          <view class='box box-f1 box-ac font-15 '>
+        <view class='li-view marign-l-15 '>
+          <view class='box box-f1 box-ac font-15'>
             <view class='box box-ac ' style="width:130rpx;">姓名</view>
             <view class='box box-f1 '>
               <input type="text" class='box box-f1' id="contactor" placeholder='请输入联系人' bindinput="bindinput" value="{{contactor}}" />
@@ -223,7 +223,7 @@
         </view>
       </li>
       <li>
-        <view class='li-view'>
+        <view class='li-view marign-l-15'>
           <view class='box box-f1 box-ac font-15 '>
             <view class='box box-ac margin-l-1' style="width:130rpx;">联系电话</view>
             <view class='box box-f1 margin-l-1'>

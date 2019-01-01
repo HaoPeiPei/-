@@ -33,7 +33,9 @@ Page({
         roundServiceId: 0,
         roundCityCode: "",
         roundServiceSalePrice: 0,
-        price: {},
+        price: {
+            totalPrice: 0
+        },
         singlePosition: "随机",
         singleArea: "左侧前方",
         roundPosition: "随机",
@@ -57,10 +59,6 @@ Page({
         negotiateResponese: {},
         messageHub: null,
         worryFreeType: 0,
-        pasTypePicker:{
-            data: ["成人", "儿童", "婴儿"],
-            index: 0,
-        }, 
         pasCerPicker: {
             data: ["身份证", "护照", "其他"],
             index: 0,
@@ -91,6 +89,7 @@ Page({
     initDate(options){
         var carrier = JSON.parse(options.bookInfo);
         if(JSON.stringify(carrier) != "{}"){
+            debugger
             var flightInfos = carrier.FlightInfos;
             for (let index = 0; index < flightInfos.length; index++) {
                 const element = flightInfos[index];
@@ -100,6 +99,7 @@ Page({
                 element['arrWeek'] = getWeek(element.ArrDate);
                 element['aduOilTax'] = (parseInt(element.AduOil) + parseInt(element.Tax));
             }
+            this.loadService();
             this.setData({
                 flightInfos
             });
@@ -190,9 +190,9 @@ Page({
     },
     //输入联系人，手机号
     bindinput(e){
-        var name = e.currentTarget.dataset.name;
+        var id = e.currentTarget.id;
         this.setData({
-        [name]: e.detail.value
+        [id]: e.detail.value
         })
     },
     //计算价格明细
@@ -423,183 +423,22 @@ Page({
             priceDetailShow: !priceDetailShow
         });
     },
-    //显示选择旅客弹框
-    showAddPassengerModal(){
-        this.loadPassenerInfo();
-        this.setData({
-            airTicketOrderShow: false,
-            selectPassengerShow: true,
-            passengerDetailShow: false,
+    //选择航班页面添加乘机人跳转至乘机人列表页
+    addPassengers: function() {
+        wx.navigateTo({
+        url: '../addPassengers/addPassengers?selectPasseners='+JSON.stringify(this.data.selectPasseners),
         })
-    },
-    //选择旅客页面加载乘机人列表
-    loadPassenerInfo: function(){
-        var that = this;
-        var memberId = app.globalData.memberId;
-        var selectPasseners = that.data.selectPasseners;
-        var selectPassenerIds = [];
-        for (var i = 0; i < selectPasseners.length; i++) {
-            selectPassenerIds = selectPassenerIds.concat(selectPasseners[i]['id']);
-        }
-        wx.showLoading({
-            title: '数据加载中...',
-        });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/passenger.ashx', {action: "get", memberId: memberId}, "POST",function(res){
-            wx.hideLoading();
-            var data = JSON.parse(res.Data);
-            selectPasseners = [];
-            for (var j = 0; j < data.length; j++) {
-                if(selectPassenerIds.indexOf(data[j]['id'])!=-1){
-                selectPasseners = selectPasseners.concat(data[j]);
-                data[j]['active'] = true;
-                }
-            };
-            debugger
-            that.setData({
-                passeners: data,
-                selectPasseners: data
-            });
-            that.caculatePirce();
-        }); 
     },
     //选择旅客页面选择乘机人
     onSelectPassener: function(e){
         var passenerid = e.currentTarget.dataset.passenerid;
-        var passeners = this.data.passeners;
-        var passener = passeners.filter(v=>passenerid==v.id)[0] || {};
-        if(JSON.stringify(passener) != '{}'){
-        passener['active'] = ! passener['active'];
-        var selectPasseners = passeners.filter(v=>v.active);
-        this.setData({
-            selectPasseners: selectPasseners,
-            passeners: passeners
-        });
-        }
-    },
-    //选择旅客页面确认操作
-    catchLjyy: function(){
         var selectPasseners = this.data.selectPasseners;
-        if (selectPasseners.length == 0) {
-            wx.showToast({
-                title: '请先选择乘机人',
-                icon: 'none'
-            });
-            return false;
-        };
+        var passener = selectPasseners.filter(v=>passenerid==v.id)[0] || {};
+        var newSelectPasseners = [];
+        if(JSON.stringify(passener) != '{}'){
+        var selectPasseners = selectPasseners.filter(v=> v.id!=passener.id);
         this.setData({
-            airTicketOrderShow: true,
-            selectPassengerShow: false,
-            passengerDetailShow: false,
-        });
-    },
-    //显示新增，编辑或者旅客弹框
-    showPassengerDetailModal(){
-        this.setData({
-            airTicketOrderShow: false,
-            selectPassengerShow: false,
-            passengerDetailShow: true
-        })
-    },
-    //隐藏新增，编辑或者旅客弹框
-    hidePassengerDetailModal(){
-        this.setData({
-            airTicketOrderShow: false,
-            selectPassengerShow: true,
-            passengerDetailShow: false
-        })
-    },
-    //新增或者编辑乘机人页面验证乘机人信息
-    checkPassener: function(psg_name, type, cert_no, cert_type, phone_number) {
-        if (!(nameReg.test(psg_name))) {
-        wx.showToast({
-            title: '请按照登机所持证件填写中文或英文姓名',
-            icon: 'none',
-        });
-        return false;
-        }
-        if (cert_type == 1) {
-            //判断身份证
-            if (!(isCardNo(cert_no))) {
-                wx.showToast({
-                title: '请输入有效的身份证证件信息',
-                icon: 'none',
-                });
-                return false;
-            }
-        }
-        if(cert_no == ''){
-        wx.showToast({
-            title: '证件号不能为空',
-            icon: 'none',
-        });
-        return false;
-        }
-        if (!(mobileReg.test(phone_number))) {
-        wx.showToast({
-            title: '请输入有效的手机号码',
-            icon: 'none',
-        });
-        return false;
-        }
-        return true;
-    },
-   //新增或者编辑乘机人页面点击确认保存操作
-    submitPassener:function(e){
-        var formId = e.detail.formId;
-        var val = e.detail.value;
-        var psg_name = val.name;
-        var type = parseInt(val.type) + 1;
-        var cert_no = val.cert_no;
-        var cert_type = parseInt(val.cert_type) + 1;
-        var phone_number = val.tel;
-        var flag = this.checkPassener(psg_name, type, cert_no, cert_type, phone_number);
-        if(flag){ 
-            var param = { 
-                action: val.action, 
-                psgId: val.psgId, 
-                memberId: app.globalData.memberId, 
-                psg_name: psg_name, 
-                cert_no: cert_no, 
-                cert_type: cert_type, 
-                phone_number: phone_number, 
-            }
-            this.savePassener(param);
-        }
-    },
-    //保存乘机人信息
-    savePassener: function(param) {
-        var that = this;
-        var memberId = app.globalData.memberId;
-        if (memberId != null && memberId != "") {
-        wx.showLoading({
-            title: '数据加载中...',
-        });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/passenger.ashx', param , "POST",function(res){
-            wx.hideLoading();
-            if (res.Success) {
-                that.showAddPassengerModal();
-            } else {
-
-            }
-        });
-        }
-    },
-    //删除乘机人信息
-    deletePassener: function(e){
-        var that = this;
-        var passenerId = e.currentTarget.dataset.passenerid;
-        var memberId = app.globalData.memberId;
-        if (memberId != null && memberId != "") {
-        wx.showLoading({
-            title: '数据加载中...',
-        });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/passenger.ashx', { action: "del", memberId: memberId, psgId: passenerId } , "POST",function(res){
-            wx.hideLoading()
-            if (res.Success) {
-                that.showAddPassengerModal();
-            } else {
-
-            }
+            selectPasseners: selectPasseners
         });
         }
     },
@@ -607,10 +446,8 @@ Page({
     check(){
         var selectPasseners = this.data.selectPasseners;
         var flightInfos = this.data.flightInfos;
-        //var contactor = this.data.contactor;
-        //var contactTel = this.data.contactTel;
-        var contactor = "郝沛沛";
-        var contactTel = "18971573893";
+        var contactor = this.data.contactor;
+        var contactTel = this.data.contactTel;
         var buyExpress = this.data.buyExpress;
         var linkName = this.data.linkName;
         var linkPhone = this.data.linkPhone;
@@ -988,31 +825,9 @@ Page({
             console.log(res);
         });
     }, 
-    
-     /*sendSignalR(orderId){
-        /* this.hubConnect = new Hub.HubConnection();
-        this.hubConnect.start("https://www.51jct.cn/signalr/hubs", { nickName: app.globalData.userInfo.nickName, avatar: app.globalData.userInfo.avatarUrl });
-        this.hubConnect.onOpen = res => {
-            console.log("成功开启连接")
-        }
-        this.hubConnect.on("showMessage", res => {
-            console.log(orderId)
-            console.log(eval('(' + res.content + ')'));
-            wx.showModal({
-                title: '系统消息',
-                content: res,
-            })
-        }) 
-
-    },*/
-    
     onLoad:function(options){
         // 生命周期函数--监听页面加载
         this.initDate(options);
-        this.loadService();
-        this.loadPassenerInfo();
-        //this.caculatePirce();
-
     },
     onReady:function(){
         // 生命周期函数--监听页面初次渲染完成

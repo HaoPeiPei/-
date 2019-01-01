@@ -354,7 +354,7 @@ Page({
       that.setData({
         endorseModalShow: true
       });
-      HttpRequst(
+      httpRequst.HttpRequst(
         true,
         '/weixin/jctnew/ashx/airTicket.ashx',
         {
@@ -389,13 +389,13 @@ Page({
       var flyTime = carrier.DepDate + " " + carrier.BeginTime + ":00";
       var currNow = getNowFormatDate();
       var datediff = getDateDiff(currNow, flyTime, "minute");
-      /* if (datediff <= 120) { //从深圳出发的在一个小时内预约无忧出行，得电话联系，其它城市需要3小时
+      if (datediff <= 120) { //从深圳出发的在一个小时内预约无忧出行，得电话联系，其它城市需要3小时
         wx.showToast({
           title: '抱歉,您选择的航班起飞时间距现在不足2小时,请通过电话进行预订!客服电话:400-700-7355',
           icon: 'none',
         })
         return false;
-      } */
+      }
       var selectedFlightInfo = Object.assign({},carrier);             //保存当前选择的航班信息
       var _class = e.currentTarget.dataset.class;
       var cabInfos = carrier.CabInfos;

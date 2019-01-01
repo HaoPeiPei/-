@@ -30,10 +30,18 @@ Page({
     id:'',
     obj:''
   },
+  //返回
   catchBackChange: function () {
     wx.navigateBack({
       delta: 1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   bindChageTk: function (e) {
     var key = e.currentTarget.dataset.key
@@ -102,18 +110,27 @@ Page({
     var params = {action: "getservicebyid", id: id, memberId: memberId};
     
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      //console.log(res.Data);
       var obj = JSON.parse(res.Data);
       _this.setData({
         obj:obj
       });
     });
   },
+  //初始化参数
+  initData(options){
+    var id = options.id;
+    this.setData({
+      id:id
+    });
+    this.loadServiceImg(id);
+    this.loadService(id);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this;
+    this.initData(options);
+    /* var _this = this;
     var memberId = app.globalData.memberId;
     var url = 'weixin/miniprogram/ashx/service.ashx';
     var action = 'orderPage';
@@ -137,7 +154,7 @@ Page({
           url: '../logIndex/logIndex?key=5&id='+id
         })
       }
-    });  
+    });   */
   },
 
   /**

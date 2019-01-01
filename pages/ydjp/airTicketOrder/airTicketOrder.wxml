@@ -34,7 +34,7 @@
                 <view class="t-line flex align-items single-price">
                     <view class="col-1">
                         <view class="c-999 font-size-24 title">票价</view>
-                        <view class="c-f4393c font-size-34" >¥{{flight.FlightLowestPrice}}</view>
+                        <view class="c-f4393c font-size-34" >¥{{flight.CabInfos.FlightLowestPrice}}</view>
                     </view>
                     <view class="col-1">
                         <view class="c-999 font-size-24">机建+燃油</view>
@@ -74,7 +74,7 @@
                     <view class="t-line flex align-items mul-price">
                         <view class="col-1">
                             <view class="c-999 font-size-24 title">票价</view>
-                            <view class="c-f4393c font-size-34" >¥{{flightInfos[0].FlightLowestPrice+flightInfos[1].FlightLowestPrice}}}}</view>
+                            <view class="c-f4393c font-size-34" >¥{{flightInfos[0].CabInfos.FlightLowestPrice+flightInfos[1].CabInfos.FlightLowestPrice}}}}</view>
                         </view>
                         <view class="col-1">
                             <view class="c-999 font-size-24">机建+燃油</view>
@@ -94,7 +94,7 @@
                         <i class="icon-luckyMan icon font-size-38"></i>
                         乘机人<text class="font-size-24">已选乘客：0人</text>
                     </view>
-                    <text class="sp-add c-3eabff" catchtap="showAddPassengerModal">+ 添加乘机人</text>
+                    <text class="sp-add c-3eabff" catchtap="addPassengers">+ 添加乘机人</text>
                 </view>
                 <view class="passengerInfo {{selectPasseners.length==0?'none':''}}"  wx:for="{{selectPasseners}}" wx:key="*this">
                     <view class="flex align-center text-item b-line c-999 selectedPassenger-info">
@@ -115,12 +115,13 @@
             <view class="main-con font-size-32 c-999 contact">
                 <view class="flex t-title align-center">
                     <i class="icon-contacts icon font-size-38"></i>
-                    <input type="text" class=" col-1" id="contactor" name="contactor" bindinput="bindinput" value="{{contactor}}"  placeholder="请输入联系人" />
+                    联系人
+                    <input type="text" class=" col-1" id="contactor" bindinput="bindinput" value="{{contactor}}"  placeholder="请输入联系人" />
                 </view>
                 <view class="flex t-title align-center">
                     <i class="icon-phone icon ico-spac font-size-38"></i>
                     手机号
-                    <input type="text" class=" col-1" id="contactTel" name="contactTel" bindinput="bindinput" value="{{contactTel}}"  placeholder="请输入联系方式" />
+                    <input type="text" class=" col-1" id="contactTel"  bindinput="bindinput" value="{{contactTel}}"  placeholder="请输入联系方式" />
                 </view>
             </view>
             <view class="main-con font-size-32">

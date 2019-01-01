@@ -52,6 +52,7 @@ Page({
   },
   //初始化数据
   initData(options){
+    debugger
     var carrier = JSON.parse(options.bookInfo);
     if(JSON.stringify(carrier) != {}){
         var passengerInfo = carrier.PassengerInfo;

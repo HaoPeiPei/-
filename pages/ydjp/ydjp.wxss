@@ -1,31 +1,13 @@
 /* pages/ydjp/ydjp.wxss */
 /* header */
+
+@import "../../template/template.wxss";
 .wrap{
     height: 100vh;
     background-color: #fff; 
 }
-.header-top{
-    width: 100%;
-    height: 385rpx;
-    position: relative;
-    top: 0rpx;
-    left: 0rpx;
-    background-color: #f5f5f5;
-}
-.header-top .header-title{
-    height: 80rpx;
-    text-align: center;
-    color: #fff;
-    font-size: 35rpx;
-}
-.header-top .header-title .icon-arror-l{
-    margin: 37rpx 0 0 24rpx;
-}
-.header-top .header-title  .title{
-    margin-top: 30rpx;
-}
-.header-top .header-title .icon-phone{
-    margin: 30rpx 25rpx 0 0 ;
+.margin-top--10{
+    margin-top: -10rpx;
 }
 .main{
     padding: 0 25rpx;
@@ -35,7 +17,7 @@
     color: #fff;
     height: 95rpx;
     line-height: 95rpx;
-    font-size: 30rpx;
+    font-size: 34rpx;
     background-color: #fff;
 }
 .main .ticket-type .text{
@@ -50,7 +32,7 @@
 }
 .main .ticket-city{
     padding: 80rpx 15rpx;
-    font-size: 35rpx;
+    font-size: 38rpx;
 }
 .main .ticket-city .i-arror{
     width: 50rpx;
@@ -59,11 +41,11 @@
     font-size: 50rpx;
 }
 .ticket-date .date_wrap text:nth-child(1){
-    font-size: 34rpx;
+    font-size: 38rpx;
     margin-right: 20rpx;
 }
 .ticket-date .date_wrap text:nth-child(2){
-    font-size: 20rpx;
+    font-size: 24rpx;
 }
 .ticket-date-single .date_wrap{
     width: 100%;

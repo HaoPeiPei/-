@@ -3,9 +3,21 @@
 .content{
   width: 100%;
 }
+.c-3eabff{
+  color: #3eabff !important;
+}
+.font-size-30{
+  font-size: 30rpx !important;
+}
+.font-size-40{
+  font-size: 40rpx !important;
+}
+.font-size-26{
+  font-size: 26rpx;
+}
 .list{
   background-color: #fff;
-  margin-bottom: 120rpx;
+  padding-bottom: 120rpx;
 }
 .logo-text{
   width: 310rpx;
@@ -14,8 +26,14 @@
   width: 30rpx;
   height: 30rpx;
 }
+.margin-l-55{
+  margin-left: 55rpx;
+}
 .margin-l-5{
   margin-left: 20rpx;
+}
+.margin-l-24{
+  margin-left: 24rpx;
 }
 .margin-r-5{
   margin-right: 20rpx;
@@ -33,7 +51,6 @@
 }
 .dd-text{
   width: 130rpx;
-  color: #333333;
 }
 .font-1{
   font-size: 24rpx
@@ -53,9 +70,8 @@
   height: 100%;
 }
 .loback{
-  width: 190rpx;
-  font-size: 22rpx;
-  text-align: center;
+  width: 135rpx;
+  text-align: left;
   color: #999999;
 }
 .footer-zf{

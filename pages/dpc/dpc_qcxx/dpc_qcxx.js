@@ -62,9 +62,19 @@ Page({
      });
   },
   bindBackChange:function(){
-    wx.navigateBack({
-      delta:1
-    })
+    if(this.data.xinx == 'qcxx'){
+      wx.navigateBack({
+        delta:1
+      })
+    }else if(this.data.xinx == 'hcxx'){
+      wx.setData({
+        xinx: 'qcxx'
+      });
+    }else if(this.data.xinx == 'clxx'){
+      wx.setData({
+        xinx: 'hcxx'
+      });
+    }
   },
   inputBlur(e){
     var type = e.currentTarget.dataset.type;

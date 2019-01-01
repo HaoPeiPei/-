@@ -7,6 +7,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    header_text:
+    {
+      "left_icon": "../images/back-f.png",
+      "title_text": "国内机票",
+      "right_icon": "../images/dh-f.png",
+      "background_url": "../images/worryFree.png"
+    },
     ticketType: 0,
     depDate:'',
     depDateStr:'',

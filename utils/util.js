@@ -295,6 +295,38 @@ const formatTimestamp= (timestamp) =>{
     var s = time.getSeconds();
     return y+'-'+(m<10?'0'+m:m)+'-'+(d<10?'0'+d:d)+' '+(h<10?'0'+h:h)+':'+(mm<10?'0'+mm:mm)+':'+(s<10?'0'+s:s);
 }
+const chkdateForma = (datestr) =>  {
+    var res = datestr.match(/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/);
+    if (res == null)
+        return false;
+    else
+        return true;
+}
+const diffDateYear = (startTime, endTime) => {
+    //将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式 
+    startTime = startTime.replace(/\-/g, "/");
+    endTime = endTime.replace(/\-/g, "/");
+        
+    var sTime = new Date(startTime);      //开始时间
+    var eTime = new Date(endTime);  //结束时间
+    var iYear = eTime.getYear() - sTime.getYear();
+    var iMonth = sTime.getMonth() - eTime.getMonth();
+    var iDate = sTime.getDate() - eTime.getDate();
+    if (iYear<0) {
+        return -1;
+    }
+    if (iYear == 0 && iMonth < 0) {
+        return -1;
+    }
+    if (iYear == 0 && iMonth == 0 && iDate < 0) {
+        return -1;
+    }
+    if (iMonth < 0 || (iMonth == 0 && iDate < 0)) {
+        return iYear+1;
+    } else {
+        return iYear;
+    }
+}
 
  module.exports = {
     isCardNo: isCardNo,
@@ -312,4 +344,6 @@ const formatTimestamp= (timestamp) =>{
     htmlspecialchars_decode: htmlspecialchars_decode,
     formatDate: formatDate,
     formatTimestamp: formatTimestamp,
+    chkdateForma: chkdateForma,
+    diffDateYear: diffDateYear,
 }

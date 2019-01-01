@@ -154,7 +154,7 @@
             <image src='{{left_icon}}' style='width:16rpx;' mode='widthFix' />
           </view>
           <view class='box box-f1 box-apc font-15'>{{title_text}}</view>
-          <view class='header-right'>
+          <view class='header-right' data-phonenumber="400-700-7355" catchtap="telephone">
             <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;' mode='widthFix' />
           </view>
         </view>

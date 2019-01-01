@@ -272,7 +272,7 @@ Page({
           icon: "none",
         });
         wx.navigateTo({
-          url: '../../gbt/gbt',
+          url: '../../gbt',
         });
       }
     });

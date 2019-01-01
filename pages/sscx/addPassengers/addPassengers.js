@@ -154,7 +154,6 @@ Page({
     var prevPage = pages[pages.length -2]; //上一个页面
     prevPage.setData({
       selectPasseners: selectPasseners,
-      indexs: selectPasseners.length
      });
     wx.navigateBack({
       delta:1

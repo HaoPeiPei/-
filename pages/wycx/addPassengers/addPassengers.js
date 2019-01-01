@@ -153,8 +153,7 @@ Page({
     var currPage = pages[pages.length - 1]; //当前页
     var prevPage = pages[pages.length -2]; //上一个页面
     prevPage.setData({
-      selectPasseners: selectPasseners,
-      indexs: selectPasseners.length
+      selectPasseners: selectPasseners
      });
     wx.navigateBack({
       delta:1

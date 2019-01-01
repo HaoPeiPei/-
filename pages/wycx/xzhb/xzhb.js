@@ -7,7 +7,7 @@ var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?
 var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
-var {isCardNo, getDateDiff, getNowFormatDate} = require("../../../utils/util.js");
+var {addDate, getDateDiff, getNowFormatDate, getFormatDate} = require("../../../utils/util.js");
 Page({
 
   /**
@@ -22,17 +22,15 @@ Page({
     inCaTch: false,
     serviceId: "",
     serviceName: "",
-    passeners: [],
     selectPasseners: [],
-    editPassener: {}, //编辑或者新增的乘机人
-    inBind_1: true,
-    inBind_2: false,
-    inBind_3:false,
     disabled:true,
     certificate: ["身份证", "护照", "其他"],
     picker_index: 0, 
     passengerModel:'',
-    startDate:"",
+    flyDateShow: false,
+    currentDate: '',
+    minDate:'',
+    maxDate:'',
     flight: {
       startCity: '',
       startCityName: '',
@@ -40,131 +38,71 @@ Page({
       canBook: true,
     }
   },
-  bindBackChange: function() {
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
   },
-  bindBackChange_2: function() {
-    var inBind_1 = this.data.inBind_1;
-    var inBind_2 = this.data.inBind_2;
-    this.setData({
-      inBind_1: !inBind_1,
-      inBind_2: !inBind_2,
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
     });
   },
-  bindBackChange_3: function () {
-    var inBind_1 = this.data.inBind_1;
-    var inBind_2 = this.data.inBind_2;
-    var inBind_3 = this.data.inBind_3;
-    this.setData({
-      inBind_1: false,
-      inBind_2: true,
-      inBind_3: false,
-    });
-  },
-  //选择旅客页面加载乘机人列表
-  loadPassenerInfo: function(){
-    var that = this;
-    var memberId = app.globalData.memberId;
-    var passeners = that.data.passeners;
-    var selectPasseners = that.data.selectPasseners;
-    var selectPassenerIds = [];
-    for (var i = 0; i < selectPasseners.length; i++) {
-      selectPassenerIds = selectPassenerIds.concat(selectPasseners[i]['id']);
-    }
-    wx.showLoading({
-      title: '数据加载中...',
-    });
-    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/passenger.ashx', {action: "get", memberId: memberId}, "POST",function(res){
-      wx.hideLoading();
-      var data = JSON.parse(res.Data);
-      selectPasseners = [];
-      for (var j = 0; j < data.length; j++) {
-        if(selectPassenerIds.indexOf(data[j]['id'])!=-1){
-          selectPasseners = selectPasseners.concat(data[j]);
-          data[j]['active'] = true;
-        }
-      }
-      
-      that.setData({
-        passeners: data,
-        selectPasseners: selectPasseners
+  //请选择使用日期选择
+  flyDateChange(){
+    if (!flightNoReg.test(this.data.flight.flightNo)) {
+      this.setData({
+        flypDateShow: false
       });
-    }); 
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }
+    this.setData({
+      flyDateShow: true
+    });
+  },
+  //请选择使用日期确认
+  flyDatePopconfirm(e) {
+    var flyDate = getFormatDate(e.detail);
+    var flight = this.data.flight;
+    flight['flyDate'] = flyDate;
+    this.setData({
+      currentDate: e.detail,
+      flyDateShow: false,
+      flight
+    });
+    this.searchFlightInfo();
+  },
+  //请选择使用日期取消
+  flyDateCancel(e){
+    this.setData({
+      flyDateShow: false,
+    })
   },
   //选择航班页面添加乘机人跳转至乘机人列表页
-  bindNavChange: function() {
-    var inBind_1 = this.data.inBind_1;
-    var inBind_2 = this.data.inBind_2;
-    this.setData({
-      inBind_1: !inBind_1,
-      inBind_2: !inBind_2,
-    });
-  },
-  //选择旅客页面添加乘机人跳转至详情页
-  addPassener:function(){
-    var inBind_1 = this.data.inBind_1;
-    var inBind_2 = this.data.inBind_2;
-    var inBind_3 = this.data.inBind_3;
-    this.setData({
-      inBind_1: false,
-      inBind_2: false,
-      inBind_3: true,
-      editPassener: {}
-    });
-  },
-  //选择旅客页面编辑乘机人跳转至详情页
-  editPassener: function(e) {
-    var that = this;
-    var passenerId = e.currentTarget.dataset.passenerid;
-    var passeners = that.data.passeners;
-    var editPassener = that.data.editPassener;
-    var passener = {}; 
-    for (let i = 0; i < passeners.length; i++) {
-      if(passenerId == passeners[i].id){
-        passener = passeners[i];
-      }
-    }
-    this.setData({
-      inBind_1: false,
-      inBind_2: false,
-      inBind_3: true,
-      editPassener: passener
-    });
+  addPassengers: function() {
+    wx.navigateTo({
+      url: '../addPassengers/addPassengers?selectPasseners='+JSON.stringify(this.data.selectPasseners),
+    })
   },
   //选择旅客页面选择乘机人
   onSelectPassener: function(e){
     var passenerid = e.currentTarget.dataset.passenerid;
-    var passeners = this.data.passeners;
-    var passener = passeners.filter(v=>passenerid==v.id)[0] || {};
+    var selectPasseners = this.data.selectPasseners;
+    var passener = selectPasseners.filter(v=>passenerid==v.id)[0] || {};
+    var newSelectPasseners = [];
     if(JSON.stringify(passener) != '{}'){
-      passener['active'] = ! passener['active'];
-      var selectPasseners = passeners.filter(v=>v.active);
+      var selectPasseners = selectPasseners.filter(v=> v.id!=passener.id);
       this.setData({
-        selectPasseners: selectPasseners,
-        passeners: passeners
+        selectPasseners: selectPasseners
       });
     }
-  },
-  //选择旅客页面确认操作
-  catchLjyy: function(){
-    var selectPasseners = this.data.selectPasseners;
-    var inBind_1 = this.data.inBind_1;
-    var inBind_2 = this.data.inBind_2;
-    var inBind_3 = this.data.inBind_3;
-    if (selectPasseners.length == 0) {
-      wx.showToast({
-        title: '请先选择乘机人',
-        icon: 'none'
-      });
-      return false;
-    };
-    this.setData({
-      inBind_1: true,
-      inBind_2: false,
-      inBind_3: false,
-    });
   },
   //选择航班页面验证填写航班号
   flightNoReg: function(e) {
@@ -185,16 +123,6 @@ Page({
       });
     }
   }, 
-  //选择航班页面初始化起飞时间的弹框
-  initDatePicker: function() {
-    var nowDate = new Date();
-    var flight = this.data.flight;
-    flight['startDate'] = new Date(nowDate.getFullYear() , nowDate.getMonth(), nowDate.getDate());
-    flight['endDate'] = new Date(nowDate.getFullYear()+1 , nowDate.getMonth(), nowDate.getDate());
-    this.setData({
-      flight: flight
-    });
-  },
   //选择航班页面验证填写航班号和起飞时间
   checkFlightInfo: function(){
     var flightNo = this.data.flight.flightNo;
@@ -263,123 +191,6 @@ Page({
       });
     }
 
-  },
-  //新增或者编辑乘机人页面验证乘机人信息
-  checkPassener: function(psg_name, cert_no, cert_type, phone_number) {
-    if (!(nameReg.test(psg_name))) {
-      wx.showToast({
-        title: '请按照登机所持证件填写中文或英文姓名',
-        icon: 'none',
-      });
-      return false;
-    }
-    if (cert_type == 1) {
-      //判断身份证
-      if (!(isCardNo(cert_no))) {
-        wx.showToast({
-          title: '请输入有效的身份证证件信息',
-          icon: 'none',
-        });
-        return false;
-      }
-    }
-    if(cert_no == ''){
-      wx.showToast({
-        title: '证件号不能为空',
-        icon: 'none',
-      });
-      return false;
-    }
-    if (!(mobileReg.test(phone_number))) {
-      wx.showToast({
-        title: '请输入有效的手机号码',
-        icon: 'none',
-      });
-      return false;
-    }
-    return true;
-  },
-  //新增或者编辑乘机人页面选择证件类型弹框
-  bindPickerChange: function (e) {
-    var index = e.detail.value;
-    this.setData({
-      picker_index: parseInt(index) + 1
-    })
-  },
-  //新增或者编辑乘机人页面点击确认保存操作
-  submitPassener:function(e){
-    var formId = e.detail.formId;
-    var val = e.detail.value;
-    var psg_name = val.name;
-    var cert_no = val.cert_no;
-    var cert_type = parseInt(val.cert_type) + 1;
-    var phone_number = val.tel;
-    var flag = this.checkPassener(psg_name, cert_no, cert_type, phone_number);
-    if(flag){
-      var param = { 
-        action: val.action, 
-        psgId: val.psgId, 
-        memberId: app.globalData.memberId, 
-        psg_name: psg_name, 
-        cert_no: cert_no, 
-        cert_type: cert_type, 
-        phone_number: phone_number, 
-      }
-      this.savePassener(param);
-    }
-  },
-  //保存乘机人信息
-  savePassener: function(param) {
-    var that = this;
-    var memberId = app.globalData.memberId;
-    if (memberId != null && memberId != "") {
-      wx.showLoading({
-        title: '数据加载中...',
-      });
-      httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/passenger.ashx', param , "POST",function(res){
-        wx.hideLoading();
-        if (res.Success) {
-          that.loadPassenerInfo();
-          var inBind_1 = that.data.inBind_1;
-          var inBind_2 = that.data.inBind_2;
-          var inBind_3 = that.data.inBind_3;
-          that.setData({
-            inBind_1: false,
-            inBind_2: true,
-            inBind_3: false,
-          });
-        } else {
-
-        }
-      });
-    }
-  },
-  //删除乘机人信息
-  deletePassener: function(e){
-    var that = this;
-    var passenerId = e.currentTarget.dataset.passenerid;
-    var memberId = app.globalData.memberId;
-    if (memberId != null && memberId != "") {
-      wx.showLoading({
-        title: '数据加载中...',
-      });
-      httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/passenger.ashx', { action: "del", memberId: memberId, psgId: passenerId } , "POST",function(res){
-        wx.hideLoading()
-        if (res.Success) {
-          that.loadPassenerInfo();
-          var inBind_1 = that.data.inBind_1;
-          var inBind_2 = that.data.inBind_2;
-          var inBind_3 = that.data.inBind_3;
-          that.setData({
-            inBind_1: false,
-            inBind_2: true,
-            inBind_3: false,
-          });
-        } else {
-
-        }
-      });
-    }
   },
   //选择航班页面确定操作提交航班信息，成功跳转订单支付页面
   submitFlightInfo(){
@@ -529,17 +340,26 @@ Page({
         return "珠海"
     }
   },
+  //初始化数据
+  initData(options){
+    var flight = this.data.flight;
+    flight['startCityName'] = this.getCityName(options.cityCode);
+    var nowDate = new Date();
+    var minDate = nowDate.getTime();
+    var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+    var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
+    this.setData({
+      currentDate: minDate,
+      minDate,
+      maxDate,
+      flight
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var flight = this.data.flight;
-    flight['startCityName'] = this.getCityName(options.cityCode);
-    this.setData({
-      flight: flight
-    })
-    this.loadPassenerInfo();
-    this.initDatePicker();
+    this.initData(options);
   },
 
   /**

@@ -1,5 +1,8 @@
 /* pages/sscx/sscx.wxss */
 @import "../../template/template.wxss";
+.padding-b-100{
+  padding-bottom: 100rpx;
+}
 .header-content{
   width: 100%;
   

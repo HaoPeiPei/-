@@ -7,7 +7,7 @@ var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?
 var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
-var {isCardNo, getDateDiff, getNowFormatDate} = require("../../../utils/util.js");
+var {isCardNo, getFormatDate, addDate, chkdateForma, diffDateYear, getNowFormatDate} = require("../../../utils/util.js");
 Page({
 
   /**
@@ -21,7 +21,9 @@ Page({
       "right_icon": "../../images/dh-b.png",
     },
     certificate: ["身份证", "护照", "其他"],
-    picker_index: 0, 
+    pasType: ["成人", "儿童","婴儿"],
+    certificate_index: 0, 
+    pasType_index: 0, 
     values:[],
     model:{
       user_name: "", zjh_text: "", sjh_text:""
@@ -32,7 +34,11 @@ Page({
     passeners: [],
     selectPasseners: [],
     editPassener: {}, //编辑或者新增的乘机人
-
+    birthdayShow: false,
+    birthday: '',
+    currentDate: '',
+    minDate: '',
+    maxDate: '',
   },
   //返回
   bindBackChange:function(){
@@ -56,14 +62,40 @@ Page({
       passengerListShow: true,
     });
   },
-
   //初始化数据
   initData(options){
     var selectPasseners = options.selectPasseners && JSON.parse(options.selectPasseners) || [];
+    var nowDate = new Date();
+    var minDate = new Date(addDate('1900-1-1',0).replace(/-/g,  "/")).getTime();
+    var maxDate = nowDate.getTime();
     this.setData({
-      selectPasseners
+      selectPasseners,
+      currentDate: maxDate,
+      maxDate,
+      minDate,
     });
     this.loadPassenerInfo();
+  },
+  //生日日期选择
+  birthdayChange(){
+    this.setData({
+      birthdayShow: true
+    });
+  },
+  //生日日期确认
+  birthdayPopconfirm(e) {
+    var birthday = getFormatDate(e.detail);
+    this.setData({
+      birthday: birthday,
+      currentDate: e.detail,
+      birthdayShow: false,
+    });
+  },
+  //生日日期取消
+  depDateCancel(e){
+    this.setData({
+      depDateShow: false,
+    })
   },
    //选择旅客页面加载乘机人列表
    loadPassenerInfo: function(){
@@ -140,28 +172,53 @@ Page({
   //选择旅客页面确认操作
   confirmPassener: function(){
     var selectPasseners = this.data.selectPasseners;
-    var passengerListShow = this.data.passengerListShow;
-    var editPassenerShow = this.data.editPassenerShow;
     if (selectPasseners.length == 0) {
       wx.showToast({
         title: '请先选择乘机人',
         icon: 'none'
       });
       return false;
+    }else{
+      var adlut = 0;
+      var child = 0;
+      var boby = 0;
+      for (var i = 0; i < selectPasseners.length; i++) {
+          var pass = selectPasseners[i];
+          if (pass.type == "0") {
+              adlut = adlut + 1;
+          } else if (pass.type == "1") {
+              child = child + 1;
+          } else {
+              boby = boby + 1;
+          }
+      }
+      if (boby > adlut) {
+        wx.showToast({
+          title: '一名成人只能带一个婴儿',
+          icon: 'none'
+        })
+        return false;
+      } else if ((child + boby) / 2 > adlut) {
+        wx.showToast({
+          title: '一名成人只能带两个儿童或一个儿童和一个婴儿',
+          icon: 'none'
+        })
+        return false;
+      }
     };
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页
     var prevPage = pages[pages.length -2]; //上一个页面
     prevPage.setData({
       selectPasseners: selectPasseners,
-      indexs: selectPasseners.length
      });
+    prevPage.caculatePirce();
     wx.navigateBack({
       delta:1
     })
   },
    //新增或者编辑乘机人页面验证乘机人信息
-   checkPassener: function(psg_name, cert_no, cert_type, phone_number) {
+   checkPassener: function(psg_name,type, birthday, cert_no, cert_type, phone_number) {
     if (!(nameReg.test(psg_name))) {
       wx.showToast({
         title: '请按照登机所持证件填写中文或英文姓名',
@@ -169,37 +226,84 @@ Page({
       });
       return false;
     }
-    if (cert_type == 1) {
-      //判断身份证
-      if (!(isCardNo(cert_no))) {
+
+    if(type == 0){//成人
+      if (cert_type == 1) {
+        //判断身份证
+        if (!(isCardNo(cert_no))) {
+          wx.showToast({
+            title: '请输入有效的身份证证件信息',
+            icon: 'none',
+          });
+          return false;
+        }
+      }else if(cert_no == ''){
         wx.showToast({
-          title: '请输入有效的身份证证件信息',
+          title: '证件号不能为空',
+          icon: 'none',
+        });
+        return false;
+      }else if (!(mobileReg.test(phone_number))) {
+        wx.showToast({
+          title: '请输入有效的手机号码',
           icon: 'none',
         });
         return false;
       }
-    }
-    if(cert_no == ''){
+    }else{
+      if (birthday == "") {
+        wx.showToast({
+          title: '请选择生日',
+          icon: 'none',
+        });
+        return false;
+    } else if (!chkdateForma(birthday)) {
       wx.showToast({
-        title: '证件号不能为空',
+        title: '请输入正确的日期格式',
         icon: 'none',
       });
       return false;
     }
-    if (!(mobileReg.test(phone_number))) {
-      wx.showToast({
-        title: '请输入有效的手机号码',
-        icon: 'none',
-      });
-      return false;
+    //儿童
+    if ( type == 1) {
+        if (diffDateYear(birthday, getNowFormatDate()) < 3) {
+          wx.showToast({
+            title: '小于2周岁，不属于儿童',
+            icon: 'none',
+          });
+          return false;
+        }
+        if (diffDateYear(birthday, getNowFormatDate()) > 12) {
+          wx.showToast({
+            title: '超过12周岁，不属于儿童',
+            icon: 'none',
+          });
+          return false;
+        }
+    } else {
+        if (diffDateYear(birthday, getNowFormatDate()) > 2) {
+          wx.showToast({
+            title: '超过2周岁，不属于婴儿',
+            icon: 'none',
+          });
+          return false;
+        }
+    }
     }
     return true;
   },
-  //新增或者编辑乘机人页面选择证件类型弹框
-  bindPickerChange: function (e) {
+  //新增或者编辑乘机人页面选择乘客类型弹框
+  bindPasTypeChange: function (e) {
     var index = e.detail.value;
     this.setData({
-      picker_index: parseInt(index)
+      pasType_index: parseInt(index)
+    })
+  },
+  //新增或者编辑乘机人页面选择证件类型弹框
+  bindCertificateChange: function (e) {
+    var index = e.detail.value;
+    this.setData({
+      certificate_index: parseInt(index)
     })
   },
   //新增或者编辑乘机人页面点击确认保存操作
@@ -207,10 +311,12 @@ Page({
     var formId = e.detail.formId;
     var val = e.detail.value;
     var psg_name = val.name;
+    var type = parseInt(val.type) + 1;
     var cert_no = val.cert_no;
     var cert_type = parseInt(val.cert_type) + 1;
     var phone_number = val.tel;
-    var flag = this.checkPassener(psg_name, cert_no, cert_type, phone_number);
+    var birthday = this.data.birthday;
+    var flag = this.checkPassener(psg_name, type, birthday, cert_no, cert_type, phone_number);
     if(flag){
       var param = { 
         action: val.action, 
@@ -220,6 +326,8 @@ Page({
         cert_no: cert_no, 
         cert_type: cert_type, 
         phone_number: phone_number, 
+        type: type, 
+        birthday: birthday, 
       }
       this.savePassener(param);
     }
@@ -236,8 +344,6 @@ Page({
         wx.hideLoading();
         if (res.Success) {
           that.loadPassenerInfo();
-          var passengerListShow = that.data.passengerListShow;
-          var editPassenerShow = that.data.editPassenerShow;
           that.setData({
             passengerListShow: true,
             editPassenerShow: false,
