@@ -161,9 +161,14 @@ const getFormatDate = (indate) => {
 // 日期，在原有日期基础上，增加days天数，默认增加1天
 const addDate = (datestr, days) => {
     var date = returnDate(datestr);
-    if (days == undefined || days == '') {
-        days = 1;
+    if (days == undefined || days == '' ) {
+        if(days === 0){
+            days =  0;
+        }else{
+            days = 1;
+        }
     }
+    
     date.setDate(date.getDate() + days);
     var month = date.getMonth() + 1;
     var day = date.getDate();

@@ -38,18 +38,16 @@
         </view>
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">所在地区</text>
-            <picker class="col-1" bindchange="pasTypePickerChange" value="{{pasTypePicker.index}}" range="{{pasTypePicker.data}}" mode='selector' placeholder="省/市/区">
-                <view class='box box-f1 box-ac font-13'>
-                    <view style='width:140rpx;' class='color-3'>乘客类型</view>
-                    <view class='box box-f1 box-ac'>
-                        <view>{{pasTypePicker.data[pasTypePicker.index]}}</view>
-                        <input type='text' value="{{pasTypePicker.index}}" class="none" data-key="type" name="linkRegion" name='linkRegion'/>
-                    </view>
-                    <view class='box bxo-ac'>
-                        <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
-                    </view>
-                </view>
-            </picker>
+            <van-popup show="{{linkRegionShow}}"  position="bottom" >
+                <van-area 
+                    area-list="{{areaList}}"  
+                    bind:confirm="linkRegionConfirm"
+                />
+            </van-popup>
+            <view id="arrDate" bindtap='linkRegionChange'>
+                <input type='text' placeholder='请选择省市区' value="{{linkRegion}}" id="linkRegion" />
+            </view>
+            <i class="icon-arror-r"></i>
         </view>
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">详细地址</text>
@@ -199,7 +197,7 @@
                 </view>
                 </view>
             </picker>
-            
+
             <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
                 <view style='width:140rpx;' class='color-3'>证件号</view>
                 <view class='box box-f1 box-ac'>
@@ -293,10 +291,10 @@
 
 <!-- 保险提示信息 -->
 <template name="hintModal">
-    <view class="c-bg-000 flex hintModal {{hintModalShow?'':'none'}}">
+    <view class="c-bg-000 flex hintModal {{hintModalShow?'':'none'}}" >
         <view class="pop-full">
-            <text class="pop-full-close" ctachtap="hideEndorse"><i></i></text>
-            <view class="pop-content">
+            <text class="pop-full-close" catchtap="hideEndorseModal"><i></i></text>
+            <view class="pop-content" >
                 <view class="title b-line">
                     <view class="c-align font-size-15">航空意外险</view>
                 </view>
@@ -314,7 +312,7 @@
 <template name="worryFreeModal">
     <view class="c-bg-000 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
         <view class="pop-full">
-            <text class="pop-full-close" ctachtap="hideEndorse"><i></i></text>
+            <text class="pop-full-close" ctachtap="hideEndorseModal"><i></i></text>
             <view class="pop-content">
                 <view class="title b-line">
                     <view class="c-align font-size-15">订购无忧出行须知</view>
@@ -326,7 +324,7 @@
                             <text class="pay {{worryFreeType==1?'active':''}}" data-worryfreetype="1" catchtap="worryFreeTypeChange">购买须知</text>
                             <text class="refund {{worryFreeType==2?'active':''}}" data-worryfreetype="2" catchtap="worryFreeTypeChange">退款须知</text>
                         </view>
-                        <view class='service-seat-info'>
+                        <view class='service-seat-info' style="height:280rpx;">
                             <view class="package {{worryFreeType==0?'':'none'}}">
                                 <text class='info'>{{service_info}}</text>
                             </view>
@@ -348,7 +346,7 @@
 <template name="mulLineModal">
     <view class="div_mulLine c-bg-000 flex {{mulLineModalShow?'':'none'}}">
         <view class="pop-full"  wx:for="{{flightInfos}}" wx:for-index="index" wx:for-item="flight">
-            <text class="pop-full-close" ctachtap="hideEndorse"><i></i></text>
+            <text class="pop-full-close" ctachtap="hideEndorseModal"><i></i></text>
             <view class="pop-content font-size-13">
                 <view class="main-con">
                     <view class="flex t-title align-center c-000">

@@ -115,6 +115,9 @@ Page({
       var data = JSON.parse(res.Data);
       selectPasseners = [];
       for (var j = 0; j < data.length; j++) {
+        data[j]['TypeName'] = that.getType(data[j]);
+        data[j]["CertTypeName"] = that.getCertType(data[j]);
+        data[j]["CertNoCont"] = that.getCertNo(data[j]);
         if(selectPassenerIds.indexOf(data[j]['id'])!=-1){
           selectPasseners = selectPasseners.concat(data[j]);
           data[j]['active'] = true;
@@ -142,17 +145,21 @@ Page({
     var that = this;
     var passenerId = e.currentTarget.dataset.passenerid;
     var passeners = that.data.passeners;
-    var editPassener = that.data.editPassener;
     var passener = {}; 
     for (let i = 0; i < passeners.length; i++) {
       if(passenerId == passeners[i].id){
         passener = passeners[i];
       }
     }
+    var currentDate = new Date(addDate(passener.birthday,0).replace(/-/g,  "/")).getTime();
     this.setData({
       passengerListShow: false,
       editPassenerShow: true,
-      editPassener: passener
+      editPassener: passener,
+      certificate_index: passener.cert_type, 
+      pasType_index: passener.type, 
+      birthday: passener.birthday,
+      currentDate 
     });
   },
   //选择旅客页面选择乘机人
@@ -311,7 +318,7 @@ Page({
     var formId = e.detail.formId;
     var val = e.detail.value;
     var psg_name = val.name;
-    var type = parseInt(val.type) + 1;
+    var type = parseInt(val.type);
     var cert_no = val.cert_no;
     var cert_type = parseInt(val.cert_type) + 1;
     var phone_number = val.tel;
@@ -324,9 +331,9 @@ Page({
         memberId: app.globalData.memberId, 
         psg_name: psg_name, 
         cert_no: cert_no, 
+        type: type, 
         cert_type: cert_type, 
         phone_number: phone_number, 
-        type: type, 
         birthday: birthday, 
       }
       this.savePassener(param);
@@ -385,6 +392,37 @@ Page({
           }
         }
       })
+    }
+  },
+  getType(item) {
+    if (item.type == "0") {
+        return "";
+    }
+    else if (item.type == "1") {
+        return "(儿童)";
+    } else {
+        return "(婴儿)";
+    }
+  },
+  getCertType(item) {
+    if (item.type == "0") {
+        if (item.cert_type == "1") {
+            return "身份证";
+        }
+        else if (item.cert_type == "2") {
+            return "护照";
+        } else {
+            return "其他";
+        }
+    } else {
+        return "生日";
+    }
+  },
+  getCertNo (item) {
+    if (item.type == "0") {
+        return item.cert_no;
+    }else {
+        return item.birthday;
     }
   },
   /**

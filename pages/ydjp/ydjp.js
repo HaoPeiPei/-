@@ -18,12 +18,12 @@ Page({
     minDate: '',
     maxDate: '',
     depDateShow: false,
-    depDateCurrent: '',
+    depDatecurrentDate: '',
     depDate:'',
     depDateStr:'',
     depWeek:'',
     arrDateShow: false,
-    arrDateCurrent: '',
+    arrDateCurrentDate: '',
     arrDate:'',
     arrDateStr:'',
     arrWeek:'',
@@ -35,24 +35,26 @@ Page({
   //初始化
   initData(){
     var nowDate = new Date();
+    var minDate = nowDate.getTime();
+    var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+    var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
     var depDateStr = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+    depDateStr = addDate(depDateStr,0);
     var depDate = getChineseFormatDate(depDateStr);
     var depWeek = getWeek(depDateStr);
     var arrDateStr = addDate(depDateStr,1);
     var arrDate = getChineseFormatDate(arrDateStr) ;
     var arrWeek = getWeek(arrDateStr);
-    var minDate = nowDate.getTime();
-    var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-    var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
+    var arrDateCurrentDate = new Date(addDate(arrDateStr,0).replace(/-/g,  "/")).getTime();
     this.setData({
       minDate: minDate,
       maxDate: maxDate,
       depDate: depDate,
-      depDateCurrent: minDate,
+      depDatecurrentDate: minDate,
       depDateStr: depDateStr,
       depWeek: depWeek,
       arrDate: arrDate,
-      arrDateCurrent: minDate,
+      arrDateCurrentDate: arrDateCurrentDate,
       arrDateStr: arrDateStr,
       arrWeek: arrWeek,
     });
@@ -107,7 +109,7 @@ Page({
     var date = getChineseFormatDate(dateStr);
     var week = getWeek(dateStr);
     this.setData({
-      arrDateStr: dataStr,
+      arrDateStr: dateStr,
       arrDate: date,
       arrWeek: week,
       arrDatecurrentDate: e.detail,
@@ -120,26 +122,6 @@ Page({
       arrDateShow: false,
     })
   },
-  /* //选择时间
-  bindqcDateChange(e){
-    var dataStr = e.detail.value;
-    var date = getChineseFormatDate(dataStr);
-    var week = getWeek(dataStr);
-    var name = e.currentTarget.dataset.name;
-    if(name == 'depDate'){
-      this.setData({
-        depDateStr: dataStr,
-        depDate: date,
-        depWeek: week,
-      });
-    }else if(name == 'arrDate'){
-      this.setData({
-        arrDateStr: dataStr,
-        arrDate: date,
-        arrWeek: week,
-      });
-    }
-  }, */
   //切换单程或者往返
   changeTicketType(e){
     var ticketType = e.currentTarget.dataset.tickettype;

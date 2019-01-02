@@ -30,11 +30,11 @@
           <view class='box box-f1 box-ver font-13 color-9 margin-lr-1'>
             <view class='box box-f1 padding-tb-2'>
               <view style='width:140rpx'>姓名：</view>
-              <view class='box box-f1'>{{item.name}}</view>
+              <view class='box box-f1'>{{item.name}}<text class="col-content c-3eabff" data-bind="text: name">{{item.TypeName}}</text></view>
             </view>
             <view class='box box-f1 padding-tb-2'>
-              <view style='width:140rpx'>身份证：</view>
-              <view class='box box-f1'>{{item.cert_no}}</view>
+              <view style='width:140rpx'>{{item.CertTypeName}}：</view>
+              <view class='box box-f1'>{{item.CertNoCont}}</view>
             </view>
           </view>
           <view class="icon-edit  font-size-10" data-passenerid="{{item.id}}" catchtap='editPassener'></view>
@@ -84,7 +84,7 @@
         </view>
         </view>
       </picker>
-      <picker bindchange="bindCertificateChange" value="{{certificate_index}}" range="{{certificate}}" mode='selector'>
+      <picker bindchange="bindCertificateChange" value="{{certificate_index}}" range="{{certificate}}" mode='selector' class="{{pasType_index==0?'':'none'}}">
         <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
           <view style='width:140rpx;' class='color-3'>证件类型</view>
           <view class='box box-f1 box-ac'>
@@ -96,13 +96,13 @@
           </view>
         </view>
       </picker>
-      <view class="box box-f1 box-ac font-13 padding-tb-1 border-b-1 {{pasType_index==0?'':'none'}}}">
+      <view class="box box-f1 box-ac font-13 padding-tb-1 border-b-1 {{pasType_index==0?'':'none'}}">
         <view style='width:140rpx;' class='color-3'>证件号</view>
         <view class='box box-f1 box-ac'>
           <input type='text' placeholder='请输入证件号' data-certType='{{picker_index}}' value='{{editPassener.cert_no}}' data-key="cert_no" name='cert_no' />
         </view>
       </view>
-      <view class="box box-f1 box-ac font-13 padding-tb-1 border-b-1 {{pasType_index==1||pasType_index==2?'':'none'}}}" >
+      <view class="box box-f1 box-ac font-13 padding-tb-1 border-b-1 {{pasType_index != 0?'':'none'}}}" >
         <view style='width:140rpx;' class='color-3'>生日</view>
         <view class='box box-f1 color-3 box-ac' >
           <van-popup show="{{birthdayShow}}" position="bottom" >

@@ -9,6 +9,7 @@ var { getWeek, getMD, getNowFormatDate, getDateDiff, isCardNo, htmlspecialchars_
 var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?:[A-Za-z]{1,49}\s[A-Za-z]{2,50}\/[A-Za-z]{2,50})|(?:[A-Za-z]{2,50}\/[A-Za-z]{2,50}\s[A-Za-z]{1,49}))$/;
 //联系手机正则
 var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
+import areaList from "../../../utils/area";
 Page({
     data:{
         airTicketOrderShow: true,
@@ -66,6 +67,8 @@ Page({
         service_info: "",
         buy_info: "",
         refund_info: "",
+        areaList: areaList,
+        linkRegionShow: false,
     },
     //乘机人乘客类型选择
     pasTypePickerChange(e){
@@ -89,7 +92,6 @@ Page({
     initDate(options){
         var carrier = JSON.parse(options.bookInfo);
         if(JSON.stringify(carrier) != "{}"){
-            debugger
             var flightInfos = carrier.FlightInfos;
             for (let index = 0; index < flightInfos.length; index++) {
                 const element = flightInfos[index];
@@ -98,12 +100,13 @@ Page({
                 element['arrDate'] = getMD(element.ArrDate);
                 element['arrWeek'] = getWeek(element.ArrDate);
                 element['aduOilTax'] = (parseInt(element.AduOil) + parseInt(element.Tax));
-            }
-            this.loadService();
+            };
             this.setData({
                 flightInfos
             });
+            this.loadService();
         }
+
     },
     //加载服务
     loadService(){
@@ -197,7 +200,6 @@ Page({
     },
     //计算价格明细
     caculatePirce(){
-        debugger
         var flightInfos = this.data.flightInfos;
         var price = this.data.price;
         var ticketAdultPrice = 0;       //成人票价
@@ -349,6 +351,12 @@ Page({
                 });
           }); 
     },
+    //显示航班意外险
+    showHintModal(e){
+        this.setData({
+            hintModalShow: true,
+        });
+    },
     //切换订购无忧出行须知详情
     worryFreeTypeChange(e){
         var worryFreeType = e.currentTarget.dataset.worryfreetype;
@@ -415,6 +423,16 @@ Page({
         wx.navigateTo({
             url: '../region/region?position='+position+'&area='+area+'&serviceType='+serviceType,
         })
+    },
+    //显示省市区选择
+    linkRegionChange(){
+        this.setData({
+            linkRegionShow: true
+        });
+    },
+    //省市区选择确定
+    linkRegionConfirm(data){
+        console.log(data)
     },
     //显示价格明细
     showPriceDetail(e){

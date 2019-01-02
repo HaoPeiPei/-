@@ -103,9 +103,11 @@
                             <view class="row-con-group">
                                 <text class="col-title">姓名:</text>
                                 <text class="col-content" data-bind="text: name">{{item.name}}</text>
+                                <text class="col-content c-3eabff" data-bind="text: name">{{item.TypeName}}</text>
                             </view>
-                            <view class="row-con-group">
-                                <text class="col-content" data-bind="text: $root.getCertNo($data)">{{item.cert_no}}</text>
+                            <view class="row-con-group box">
+                                <view style='width:140rpx'>{{item.CertTypeName}}：</view>
+                                <view class='box box-f1'>{{item.CertNoCont}}</view>
                             </view>
                         </view>
                         <i class="icon-edit c-ededed font-size-40" bindsubmit="Del(this)"></i>
@@ -129,10 +131,10 @@
                     <view>
                         <i class="icon-vipMoon icon ico-spac c-3eabff font-size-38"></i>
                         <text>航班意外险</text>
-                        <i class="i-spac icon-hint c-f4393c bx"></i>
+                        <i class="i-spac icon-hint c-f4393c bx" catchtap="showHintModal"></i>
                     </view>
                     <view>
-                        <text class="c-999 marginR70">¥/人</text>
+                        <text class="c-999 marginR70">¥{{insurancePrice}}/人</text>
                         <text class="switch {{buyInsurance==1?'on':''}}" data-buyinsurance="{{buyInsurance}}" catchtap="insuranceSelect">
                             <text class="switch-node"></text>
                         </text>
@@ -151,7 +153,7 @@
                         <view>
                             <text class="c-999 ">¥{{singleServicePrice}}</text>
                             <text class="singleServicePrice marginR70">/人</text>
-                            <text class="switch {{buySingleService==1?'on':''}}" data-servicetype="singleSevice" data-servicevalue="{{buySingleService}}" catchtap="serviceSelect">
+                            <text class="switch {{buySingleService==1?'on':''}}" data-servicetype="singleService" data-servicevalue="{{buySingleService}}" catchtap="serviceSelect">
                                 <text class="switch-node"></text>
                             </text>
                         </view>
@@ -175,7 +177,7 @@
                         <view>
                             <text class="c-999 ">¥{{singleServicePrice}}</text>
                             <text class="singleServicePrice marginR70">/人</text>
-                            <text class="switch {{buySingleService==1?'on':''}}" data-servicetype="singleSevice" data-servicevalue="{{buySingleService}}" catchtap="serviceSelect">
+                            <text class="switch {{buySingleService==1?'on':''}}" data-servicetype="singleService" data-servicevalue="{{buySingleService}}" catchtap="serviceSelect">
                                 <text class="switch-node"></text>
                             </text>
                         </view>
@@ -223,7 +225,7 @@
                         </text>
                     </view>
                 </view>
-                <template is="exprerss" data="{{buyExpress,linkName,linkPhone,linkRegion,linkAddress}}"></template>
+                <template is="exprerss" data="{{linkRegionShow,areaList,buyExpress,linkName,linkPhone,linkRegion,linkAddress}}"></template>
             </view>
         </view>
     </view>

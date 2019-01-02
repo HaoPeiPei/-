@@ -7,6 +7,12 @@ con-mess-l.font-size-34{
 .font-size-24{
     font-size: 24rpx;
 }
+.font-size-13{
+    font-size: 26rpx;
+}
+.font-size-10{
+    font-size: 26rpx;
+}
 .width-50{
     width: 50%;
 }
@@ -82,16 +88,16 @@ con-mess-l.font-size-34{
     background-color: #fff;
     border-radius: 15rpx;
     margin:auto;
-    width:70%;
+    width:80%;
     position: relative;
     overflow: visible;
 }
 .pop-full-close {
     position: absolute;
-    top: -60rpx;
+    top: -69rpx;
     right: 47%;
-    width: 40rpx;
-    height: 40rpx;
+    width: 48rpx;
+    height: 48rpx;
     border: 1px solid #fff;
     border-radius: 50%;
     background-color: transparent;
@@ -100,7 +106,7 @@ con-mess-l.font-size-34{
 .pop-full-close:after {
     content: '';
     position: absolute;
-    top: 40rpx;
+    bottom: -24rpx;
     left: 50%;
     width: 1rpx;
     height: 20rpx;
@@ -127,9 +133,11 @@ con-mess-l.font-size-34{
     content: '';
     position: absolute;
     top: 50%;
-    width: 20rpx;
+    top: 50%;
+    width: 24rpx;
     height: 1rpx;
     background-color: #fff;
+    border-radius: 4rpx;
     left: 50%;
 }
 .pop-full .pop-content {
@@ -330,4 +338,65 @@ con-mess-l.font-size-34{
     font-size:  27rpx;
     color: #7c7c7c;
     text-align: center;
+}
+.comfortableTravel-server{
+    width: 100%;
+    font-size: 26rpx;
+    color: #000000;
+    background-color: #FFFFFF;
+    padding-top: 24rpx;
+}
+.comfortableTravel-server .service-seat{
+    width: 100%;
+    height: 96rpx;
+    line-height: 96rpx;
+    margin-top: 0;
+    text-align: center;
+    color: #F03929;
+    overflow: hidden;
+}
+.comfortableTravel-server .service-seat  text{
+    position: relative;
+    top: 10rpx;
+    left: 5%;
+    text-align: center;
+}
+.comfortableTravel-server .service-seat .package {
+    float: left;
+    width: 30%;
+    height: 78rpx;
+    line-height: 78rpx;
+    border-top-left-radius: 12rpx;
+    border-bottom-left-radius: 12rpx;
+    border-left: 2rpx solid #F03929;
+    border-top: 2rpx solid #F03929;
+    border-bottom: 2rpx solid #F03929;
+    border-right: none;
+}
+.comfortableTravel-server .service-seat .pay{
+    float: left;
+	width: 30%;
+	height: 78rpx;
+    line-height: 78rpx;
+	border: 2rpx solid #F03929;
+}
+.comfortableTravel-server .service-seat .refund{
+    float: left;
+	width: 30%;
+	height: 78rpx;
+    line-height: 78rpx;
+	border-top-right-radius:12rpx;
+	border-bottom-right-radius: 12rpx;
+	border-right: 2rpx solid #F03929;
+	border-top: 2rpx solid #F03929;
+	border-bottom: 2rpx solid #F03929;
+	border-left: none;
+}
+.comfortableTravel-server .service-seat text.active{
+    background-color: #F03929;
+    color: #FFFFFF;
+}
+.comfortableTravel-server .service-seat-info{
+    height: 480rpx;
+    overflow-y:scroll;
 }

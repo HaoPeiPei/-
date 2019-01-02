@@ -330,7 +330,6 @@ Page({
     },
     //查看详情
     viewDetail(e){
-      debugger
       var carriers = this.data.flightInfos;
       var flightNo =  e.currentTarget.dataset.flightno;
       var beginTime =  e.currentTarget.dataset.begintime;
