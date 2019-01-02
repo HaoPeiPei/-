@@ -630,8 +630,6 @@ Page({
                 });
                 return false;
             }
-            var contactor = "郝沛沛";
-            var contactTel = "18971573893";
             var insuranceModel = {};
             insuranceModel.Count = this.data.buyInsurance == 1 ? selectPasseners.length : 0;
             insuranceModel.Price = this.data.insurancePrice;
@@ -643,8 +641,8 @@ Page({
             expressModel.linkRegion = this.data.linkRegion;
             expressModel.linkAddress = this.data.linkAddress;
             orderModel.ExpressInfo = expressModel;
-            orderModel.Contactor = contactor;
-            orderModel.ContactTel = contactTel;
+            orderModel.Contactor = this.data.contactor;
+            orderModel.ContactTel = this.data.contactTel;
             orderModel.MemberId = app.globalData.memberId;
             orderModel.TotalPrice = this.data.price.totalPrice;
             var serviceModel = {};

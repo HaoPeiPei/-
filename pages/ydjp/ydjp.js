@@ -1,6 +1,6 @@
 // pages/ydjp/ydjp.js
 var app = getApp();
-var {getWeek, getChineseFormatDate, compareDate, addDate, returnDate} = require("../../utils/util.js");
+var {getWeek, getChineseFormatDate, compareDate, addDate, returnDate, getFormatDate} = require("../../utils/util.js");
 Page({
 
   /**
@@ -15,9 +15,15 @@ Page({
       "background_url": "../images/worryFree.png"
     },
     ticketType: 0,
+    minDate: '',
+    maxDate: '',
+    depDateShow: false,
+    depDateCurrent: '',
     depDate:'',
     depDateStr:'',
     depWeek:'',
+    arrDateShow: false,
+    arrDateCurrent: '',
     arrDate:'',
     arrDateStr:'',
     arrWeek:'',
@@ -35,11 +41,18 @@ Page({
     var arrDateStr = addDate(depDateStr,1);
     var arrDate = getChineseFormatDate(arrDateStr) ;
     var arrWeek = getWeek(arrDateStr);
+    var minDate = nowDate.getTime();
+    var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+    var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
     this.setData({
+      minDate: minDate,
+      maxDate: maxDate,
       depDate: depDate,
+      depDateCurrent: minDate,
       depDateStr: depDateStr,
       depWeek: depWeek,
       arrDate: arrDate,
+      arrDateCurrent: minDate,
       arrDateStr: arrDateStr,
       arrWeek: arrWeek,
     });
@@ -57,21 +70,57 @@ Page({
       phoneNumber: phoneNumber
     });
   },
-  //切换单程或者往返
-  changeTicketType(e){
-    var ticketType = e.currentTarget.dataset.tickettype;
+  //去程日期点击
+  depDateChange(){
     this.setData({
-      ticketType: ticketType
-    });
-  }, 
-  //选择城市
-  selectCity(e){
-    var ticketType = e.currentTarget.dataset.tickettype;
-    wx.navigateTo({
-      url: 'dwcs/dwcs?ticketType='+ticketType,
+      depDateShow: true
     });
   },
-  //选择时间
+  //去程日期确认
+  depDatePopconfirm(e) {
+    var dateStr = getFormatDate(e.detail);
+    var date = getChineseFormatDate(dateStr);
+    var week = getWeek(dateStr);
+    this.setData({
+      depDateStr: dateStr,
+      depDate: date,
+      depWeek: week,
+      depDatecurrentDate: e.detail,
+      depDateShow: false,
+    });
+  },
+  //去程日期取消
+  depDateCancel(e){
+    this.setData({
+      depDateShow: false,
+    })
+  },
+  //回程日期点击
+  arrDateChange(){
+    this.setData({
+      arrDateShow: true
+    });
+  },
+  //回程日期确认
+  arrDatePopconfirm(e) {
+    var dateStr = getFormatDate(e.detail);
+    var date = getChineseFormatDate(dateStr);
+    var week = getWeek(dateStr);
+    this.setData({
+      arrDateStr: dataStr,
+      arrDate: date,
+      arrWeek: week,
+      arrDatecurrentDate: e.detail,
+      arrDateShow: false,
+    });
+  },
+  //回程日期取消
+  arrDateCancel(e){
+    this.setData({
+      arrDateShow: false,
+    })
+  },
+  /* //选择时间
   bindqcDateChange(e){
     var dataStr = e.detail.value;
     var date = getChineseFormatDate(dataStr);
@@ -90,6 +139,20 @@ Page({
         arrWeek: week,
       });
     }
+  }, */
+  //切换单程或者往返
+  changeTicketType(e){
+    var ticketType = e.currentTarget.dataset.tickettype;
+    this.setData({
+      ticketType: ticketType
+    });
+  }, 
+  //选择城市
+  selectCity(e){
+    var ticketType = e.currentTarget.dataset.tickettype;
+    wx.navigateTo({
+      url: 'dwcs/dwcs?ticketType='+ticketType,
+    });
   },
   //城市互换
   cityExchange(){

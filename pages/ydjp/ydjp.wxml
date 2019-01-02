@@ -20,24 +20,57 @@
         </view>
         <view class="ticket-date ticket-date-single flex align-center {{ticketType==0?'':'none'}}" >
             <view class="col-1 date_wrap">
-                <picker  bindchange='bindqcDateChange' data-name='depDate' mode="date" start='{{startDate}}' end='{{endDate}}' >
+                <van-popup show="{{depDateShow}}" position="bottom" >
+                    <van-datetime-picker 
+                    type="date"
+                    value="{{depDatecurrentDate}}"
+                    min-date="{{minDate}}"
+                    max-date="{{maxDate}}"
+                    bind:confirm="depDatePopconfirm"
+                    bind:cancel="depDateCancel"
+                    title=""
+                    />
+                </van-popup>
+                <view id="depDate" bindtap='depDateChange'>
                     <text>{{depDate}}</text>
                     <text>{{depWeek}}</text>
-                </picker>
+                </view>
             </view>
         </view>
         <view class="ticket-date ticket-date-double flex align-center justify-content-space-between {{ticketType==1?'':'none'}}" >
-            <view class="date_wrap ">
-                <picker bindchange='bindqcDateChange' data-name='depDate' mode="date" start='{{startDate}}' end='{{endDate}}' >
+            <view class="col-1 date_wrap">
+                <van-popup show="{{depDateShow}}" position="bottom" >
+                    <van-datetime-picker 
+                    type="date"
+                    value="{{depDatecurrentDate}}"
+                    min-date="{{minDate}}"
+                    max-date="{{maxDate}}"
+                    bind:confirm="depDatePopconfirm"
+                    bind:cancel="depDateCancel"
+                    title=""
+                    />
+                </van-popup>
+                <view id="depDate" bindtap='depDateChange'>
                     <text>{{depDate}}</text>
                     <text>{{depWeek}}</text>
-                </picker>
+                </view>
             </view>
-            <view class="date_wrap flex justify-content-end">
-                <picker bindchange='bindqcDateChange' data-name='arrDate' mode="date" start='{{startDate}}' end='{{endDate}}' >
+            <view class="col-1 date_wrap">
+                <van-popup show="{{arrDateShow}}" position="bottom" >
+                    <van-datetime-picker 
+                    type="date"
+                    value="{{arrDatecurrentDate}}"
+                    min-date="{{minDate}}"
+                    max-date="{{maxDate}}"
+                    bind:confirm="arrDatePopconfirm"
+                    bind:cancel="arrDateCancel"
+                    title=""
+                    />
+                </van-popup>
+                <view id="arrDate" bindtap='arrDateChange'>
                     <text>{{arrDate}}</text>
                     <text>{{arrWeek}}</text>
-                </picker>            
+                </view>
             </view>
         </view>
         <view class="ticket-find" catchtap="goTicket">
