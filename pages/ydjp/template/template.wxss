@@ -400,3 +400,12 @@ con-mess-l.font-size-34{
     height: 480rpx;
     overflow-y:scroll;
 }
+.div_mulLine{
+    
+}
+.div_mulLine .main-con{
+    margin:  24rpx 30rpx;
+}
+.div_mulLine .div-flight{
+    margin: -12rpx 0 12rpx 0;
+}   

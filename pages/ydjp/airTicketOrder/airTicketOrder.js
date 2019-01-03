@@ -424,15 +424,25 @@ Page({
             url: '../region/region?position='+position+'&area='+area+'&serviceType='+serviceType,
         })
     },
-    //显示省市区选择
+    //省市区选择
     linkRegionChange(){
         this.setData({
             linkRegionShow: true
         });
     },
+    //取消省市区选择
+    linkRegionCancel(){
+        this.setData({
+            linkRegionShow: false
+        });
+    },
     //省市区选择确定
-    linkRegionConfirm(data){
-        console.log(data)
+    linkRegionConfirm(e){
+        var detail = e.detail.detail;
+        this.setData({
+            linkRegion: detail.province + ' ' + detail.city + ' ' + detail.county,
+            linkRegionShow: false
+        });
     },
     //显示价格明细
     showPriceDetail(e){

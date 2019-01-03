@@ -42,6 +42,7 @@
                 <van-area 
                     area-list="{{areaList}}"  
                     bind:confirm="linkRegionConfirm"
+                    bind:cancel="linkRegionCancel"
                 />
             </van-popup>
             <view id="arrDate" bindtap='linkRegionChange'>
@@ -342,13 +343,13 @@
     </view>
 </template>
 
-<!-- 订购无忧出行须知 -->
+<!-- 往返机票信息 -->
 <template name="mulLineModal">
     <view class="div_mulLine c-bg-000 flex {{mulLineModalShow?'':'none'}}">
-        <view class="pop-full"  wx:for="{{flightInfos}}" wx:for-index="index" wx:for-item="flight">
+        <view class="pop-full"  >
             <text class="pop-full-close" ctachtap="hideEndorseModal"><i></i></text>
             <view class="pop-content font-size-13">
-                <view class="main-con">
+                <view class="main-con" wx:for="{{flightInfos}}" wx:for-index="index" wx:for-item="flight">
                     <view class="flex t-title align-center c-000">
                         <i class="airsmall_{{flight.FlightNoIcon}}" ></i>
                         <text>{{flight.CarrierName}} {{flight.FlightNo}}</text>
