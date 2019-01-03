@@ -19,7 +19,9 @@
                 <text>{{prevDate}}</text>
             </view>
             <view class="search-cur  col-1 flex">
-                <text>{{nowDate}} {{nowWeek}}</text>
+                <text>
+                    {{nowDate}} {{nowWeek}}
+                </text>
             </view>
             <view class="search-date r-align next" catchtap="nextSearch">
                 <text>后一天</text>

@@ -30,11 +30,11 @@
     <view class="exprerss" wx-if="{{buyExpress==1}}" >
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">姓名</text>
-            <input type="text" class="col-1" value="{{linkName}}" id="linkName" name="linkName" placeholder="请填写收件人姓名" />
+            <input type="text" class="col-1" value="{{linkName}}" bindinput="bindinput" id="linkName" placeholder="请填写收件人姓名" />
         </view>
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">联系电话</text>
-            <input type="text" class="col-1" value="{{linkPhone}}" id="linkPhone" name="linkPhone" placeholder="请填写收件人联系电话" />         
+            <input type="text" class="col-1" value="{{linkPhone}}" bindinput="bindinput" id="linkPhone" placeholder="请填写收件人联系电话" />         
         </view>
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">所在地区</text>
@@ -45,14 +45,14 @@
                     bind:cancel="linkRegionCancel"
                 />
             </van-popup>
-            <view id="arrDate" bindtap='linkRegionChange'>
-                <input type='text' placeholder='请选择省市区' value="{{linkRegion}}" id="linkRegion" />
+            <view class="col-1" bindtap='linkRegionChange'>
+                <input type='text' placeholder='请选择省市区'  value="{{linkRegion}}" id="linkRegion" />
             </view>
             <i class="icon-arror-r"></i>
         </view>
         <view class="flex align-center text-item c-000 ">
             <text class="col-title c-999">详细地址</text>
-            <input type="text" class=" col-1" value="{{linkAddress}}" id="linkAddress" name="linkAddress" placeholder="请填写详细地址" />
+            <input type="text" class=" col-1" value="{{linkAddress}}" bindinput="bindinput" id="linkAddress" placeholder="请填写详细地址" />
         </view>
     </view>
 </template>
@@ -95,125 +95,6 @@
                 <view class="c-f4393c"><text>¥{{servicePrice}}</text><text class="c-999">X{{serviceCount}}</text></view>
             </view>
         </view>
-    </view>
-</template>
-
-<!-- 选择旅客 -->
-<template name="selectPassenger">
-    <view class='selectPassenger' wx:if="{{selectPassengerShow}}"> 
-        <view class='header'>
-        <view class='header_noBackod border-b-1'>
-            <view class='header-con'>
-            <view class='box box-f1 box-hor'>
-                <view class='header-left' bindtap='showPassengerDetailModal'>
-                <image src='../../images/back-b.png' style='width:16rpx;' mode='widthFix' />
-                </view>
-                <view class='box box-f1 box-apc font-15'>选择旅客</view>
-                <view class='header-right'>
-                <!-- <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;' mode='widthFix' wx:if="{{right_icon.length!=0}}"/> -->
-                </view>
-            </view>
-            </view>
-        </view>
-        </view>
-        <view class='box box-f1 box-ver padding-tb-10 backgd-f' bindtap='showPassengerDetailModal'>
-        <view class='box box-f1 box-apc '>
-            <view style='background:url(../../images/addList.png) no-repeat center center;background-size:cover;width:80rpx;height:80rpx;' ></view>
-        </view>
-        <view class='box box-f1 box-apc font-13'>添加</view>
-        </view>
-        <view class='{{passeners.length==0?"none":""}}'>
-        <view class='height-10'></view>
-        <block wx:for="{{passeners}}" wx:key="*this">
-            <view class='box box-f1 box-hor margin-lr-1 padding-tb-1 box-ac'>
-            <view class="icon-yes {{item.active? 'c-f4393c':''}} font-size-10" data-passenerid='{{item.id}}' data-index="{{index}}" catchtap='onSelectPassener'></view>
-            <view class='box box-f1 box-ver font-13 color-9 margin-lr-1'>
-                <view class='box box-f1 padding-tb-2'>
-                <view style='width:140rpx'>姓名：</view>
-                <view class='box box-f1'>{{item.name}}</view>
-                </view>
-                <view class='box box-f1 padding-tb-2'>
-                <view style='width:140rpx'>身份证：</view>
-                <view class='box box-f1'>{{item.cert_no}}</view>
-                </view>
-            </view>
-            <view class="icon-edit  font-size-10" data-passenerid="{{item.id}}" catchtap='editPassener'></view>
-            </view>
-            <view class='height-10'></view>
-        </block>
-        </view>
-        <template is="pos_fixed_b" data="{{text:'确认'}}" />
-    </view>
-</template>
-      
-<!-- 添加乘机人 -->
-<template name="passengerDetail">
-    <view class='add-edit-passenger backgd-f' wx:if="{{passengerDetailShow}}">
-        <view class='header'>
-            <view class='header_noBackod border-b-1'>
-                <view class='header-con'>
-                    <view class='box box-f1 box-hor '>
-                        <view class='header-left' bindtap='hidePassengerDetailModal'>
-                            <image src='../../images/back-b.png' style='width:16rpx;' mode='widthFix' />
-                        </view>
-                        <view class='box box-f1 box-apc font-15'>{{!editPassener.id?"新增乘机人":"编辑乘机人"}}</view>
-                        <view class='header-right flex align-center'>
-                            <view class="icon-dustbin btn-delete font-size-10" data-passenerid="{{editPassener.id}}" catchtap='deletePassener'></view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-        </view>
-        <form bindsubmit='submitPassener' report-submit='true'>
-            <input type='text' value='{{!editPassener.id?"add":"update"}}' class="none"  name='action'/>
-            <input type='text' value="{{editPassener.id}}" class="none"  name='psgId'/>
-            <view class='box box-f1 margin-lr-1 box-ver'>
-            <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
-                <view style='width:140rpx;' class='color-3'>姓名</view>
-                <view class='box box-f1 box-ac'>
-                <input type='text' placeholder='请输入姓名' value='{{editPassener.name}}' data-key="name" name='name'/>
-                </view>
-            </view>
-            <picker bindchange="pasTypePickerChange" value="{{pasTypePicker.index}}" range="{{pasTypePicker.data}}" mode='selector'>
-                <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
-                <view style='width:140rpx;' class='color-3'>乘客类型</view>
-                <view class='box box-f1 box-ac'>
-                    <view>{{pasTypePicker.data[pasTypePicker.index]}}</view>
-                    <input type='text' value="{{pasTypePicker.index}}" class="none" data-key="type" name='type'/>
-                </view>
-                <view class='box bxo-ac'>
-                    <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
-                </view>
-                </view>
-            </picker>
-            <picker bindchange="pasCerPickerChange" value="{{pasCerPicker.index}}" range="{{pasCerPicker.data}}" mode='selector'>
-                <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
-                <view style='width:140rpx;' class='color-3'>证件类型</view>
-                <view class='box box-f1 box-ac'>
-                    <view>{{pasCerPicker.data[pasCerPicker.index]}}</view>
-                    <input type='text' value="{{pasCerPicker.index}}" class="none" data-key="cert_type" name='cert_type'/>
-                </view>
-                <view class='box bxo-ac'>
-                    <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
-                </view>
-                </view>
-            </picker>
-
-            <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
-                <view style='width:140rpx;' class='color-3'>证件号</view>
-                <view class='box box-f1 box-ac'>
-                    <input type='text' placeholder='请输入证件号' data-certType='{{pasCerPicker.index}}' value='{{editPassener.cert_no}}' data-key="cert_no" name='cert_no' />
-                </view>
-            </view>
-            <view class='box box-f1 box-ac font-13 padding-tb-1 '>
-                <view style='width:140rpx;' class='color-3'>手机号</view>
-                <view class='box box-f1 box-ac'>
-                <input type='text' placeholder='请输入手机号' value='{{editPassener.tel}}' data-key="tel" name='tel'/>
-                </view>
-            </view>
-            </view>
-            <button form-type='submit' style='background:red;position:fixed;bottom:0;width:100%;line-height:2;border:none;color:#ffffff;'>确定</button>
-        </form>
     </view>
 </template>
 
@@ -290,30 +171,12 @@
     </view>
 </template>
 
-<!-- 保险提示信息 -->
-<template name="hintModal">
-    <view class="c-bg-000 flex hintModal {{hintModalShow?'':'none'}}" >
-        <view class="pop-full">
-            <text class="pop-full-close" catchtap="hideEndorseModal"><i></i></text>
-            <view class="pop-content" >
-                <view class="title b-line">
-                    <view class="c-align font-size-15">航空意外险</view>
-                </view>
-                <view class="content font-size-15">
-                    <view>1、保险责任：航空意外伤害保险责任320万元/航段（国航直销产品120万元/航段），指被保险人持有效机票检票并进入保单载明的合法商业运营的客运飞机客舱时起至抵达机票载明的终点离开客运飞机客舱的期间内遭受意外伤害所导致的保险责任</view>
-                    <view>2、保险费：30元/航段，计划起飞时间之前退票可退保</view>
-                    <view>3、本产品由中国人寿、新华人寿、太平洋寿险、太平养老、众安在线、阳光人寿、天安财险、华夏人寿、国华人寿、泰康在线等保险公司承保，销售服务方为携程保险代理有限公司、深圳众诚泰保险经纪公司</view>
-                </view>
-            </view>
-        </view>
-    </view>
-</template>
 
 <!-- 订购无忧出行须知 -->
 <template name="worryFreeModal">
     <view class="c-bg-000 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
         <view class="pop-full">
-            <text class="pop-full-close" ctachtap="hideEndorseModal"><i></i></text>
+            <text class="pop-full-close" catchtap="hideWorryFreeModal"><i></i></text>
             <view class="pop-content">
                 <view class="title b-line">
                     <view class="c-align font-size-15">订购无忧出行须知</view>
@@ -343,11 +206,30 @@
     </view>
 </template>
 
+<!-- 保险提示信息 -->
+<template name="hintModal">
+    <view class="c-bg-000 flex hintModal {{hintModalShow?'':'none'}}" >
+        <view class="pop-full">
+            <text class="pop-full-close" catchtap="hideHintModal"><i></i></text>
+            <view class="pop-content" >
+                <view class="title b-line">
+                    <view class="c-align font-size-15">航空意外险</view>
+                </view>
+                <view class="content font-size-15">
+                    <view>1、保险责任：航空意外伤害保险责任320万元/航段（国航直销产品120万元/航段），指被保险人持有效机票检票并进入保单载明的合法商业运营的客运飞机客舱时起至抵达机票载明的终点离开客运飞机客舱的期间内遭受意外伤害所导致的保险责任</view>
+                    <view>2、保险费：30元/航段，计划起飞时间之前退票可退保</view>
+                    <view>3、本产品由中国人寿、新华人寿、太平洋寿险、太平养老、众安在线、阳光人寿、天安财险、华夏人寿、国华人寿、泰康在线等保险公司承保，销售服务方为携程保险代理有限公司、深圳众诚泰保险经纪公司</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
 <!-- 往返机票信息 -->
 <template name="mulLineModal">
     <view class="div_mulLine c-bg-000 flex {{mulLineModalShow?'':'none'}}">
         <view class="pop-full"  >
-            <text class="pop-full-close" ctachtap="hideEndorseModal"><i></i></text>
+            <text class="pop-full-close" catchtap="hideMulLineModal"><i></i></text>
             <view class="pop-content font-size-13">
                 <view class="main-con" wx:for="{{flightInfos}}" wx:for-index="index" wx:for-item="flight">
                     <view class="flex t-title align-center c-000">
@@ -376,7 +258,7 @@
     </view>
 </template>
 
-<!-- 订购无忧出行须知 -->
+<!-- 订单需客服确认 -->
 <template name="jsAlertModal">
     <view id="js-alert-box" class="c-bg-000 flex {{jsAlertModalShow?'':'none'}}">
 		<view class="alert-box">

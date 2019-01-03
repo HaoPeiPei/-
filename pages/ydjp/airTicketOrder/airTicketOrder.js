@@ -20,6 +20,7 @@ Page({
         hintModalShow: false,
         worryFreeModalShow: false,
         jsAlertModalShow: false,
+        mulLineModalShow: false,
         buyInsurance: 1,
         buySingleService: 0,
         buyRoundService: 0,
@@ -105,6 +106,7 @@ Page({
                 flightInfos
             });
             this.loadService();
+            this.caculatePirce();
         }
 
     },
@@ -262,6 +264,12 @@ Page({
             this.showEndorse(this.data.flightInfos[0], "0");
         }
     },
+    //显示往返机票详情
+    showMulLineModal(){
+        this.setData({
+            mulLineModalShow: true
+        });
+    },
     //显示往返退改详情
     showMultiEndorse(){
         this.setData({
@@ -302,7 +310,7 @@ Page({
     },
     //切换去回程改签详情
     endorseTypeChange(e){
-        var endorseType = e.currentTarget.dataset.endorstype;
+        var endorseType = e.currentTarget.dataset.endorsetype;
         this.setData({
             endorseType: endorseType,
             endorseModalShow: true,
@@ -365,13 +373,34 @@ Page({
             worryFreeModalShow: true
         });
     },
+    //隐藏保险提示信息
+    hideHintModal(e){
+        this.setData({
+            hintModalShow: false,
+        });
+    },
+    //隐藏往返机票信息
+    hideMulLineModal(e){
+        this.setData({
+            mulLineModalShow: false,
+        });
+    },
+    //隐藏订购无忧出行须知
+    hideWorryFreeModal(e){
+        this.setData({
+            worryFreeModalShow: false,
+        });
+    },
+    //隐藏订购无忧出行须知
+    hideWorryFreeModal(e){
+        this.setData({
+            worryFreeModalShow: false,
+        });
+    },
     //隐藏退改详情
     hideEndorseModal(e){
         this.setData({
             endorseModalShow: false,
-            hintModalShow: false,
-            worryFreeModalShow: false,
-            jsAlertModalShow: false,
         });
     },
     //切换航班意外险
@@ -614,20 +643,8 @@ Page({
         if (this.check()) {
             var orderModel = {};
             orderModel.PayType = 1;
-            var selectPasseners = [];
-            for (let index = 0; index < this.data.passeners.length; index++) {
-                const element = this.data.passeners[index];
-                if(index  == 0){
-                    selectPasseners.push(element)
-                }
-            }
-            var flightInfos = [];
-            for (let index = 0; index < this.data.flightInfos.length; index++) {
-                const element = this.data.flightInfos[index];
-                if(index  == 0){
-                    flightInfos.push(element)
-                }
-            }
+            var selectPasseners = this.data.selectPasseners;
+            var flightInfos = this.data.flightInfos;
             orderModel.FlightInfo = flightInfos;
             orderModel.PayType = 1;
             orderModel.PassengerInfo = selectPasseners;
@@ -675,7 +692,7 @@ Page({
             orderModel.TotalPrice = this.data.price.totalPrice;
             var serviceModel = {};
             var temp = [];
-            if (this.buySingleService == 1) {
+            if (this.data.buySingleService == 1) {
                 serviceModel.ServiceId = this.data.singleServiceId;
                 serviceModel.Price = this.data.singleServicePrice;
                 serviceModel.AirportCode = flightInfos[0].DepCity;
@@ -709,7 +726,7 @@ Page({
                 serviceModel.ArrDate = flightInfos[1].ArrDate;
                 serviceModel.BeginTime = flightInfos[1].BeginTime;
                 serviceModel.EndTime = flightInfos[1].EndTime;
-                serviceModel.SalePrice = roundServiceSalePrice;
+                serviceModel.SalePrice = this.data.roundServiceSalePrice;
                 temp.push(serviceModel);
             }
             orderModel.ServiceInfo = temp;

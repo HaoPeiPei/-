@@ -112,7 +112,7 @@ Page({
       arrDateStr: dateStr,
       arrDate: date,
       arrWeek: week,
-      arrDatecurrentDate: e.detail,
+      arrDateCurrentDate: e.detail,
       arrDateShow: false,
     });
   },

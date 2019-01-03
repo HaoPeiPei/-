@@ -59,7 +59,7 @@
                 <van-popup show="{{arrDateShow}}" position="bottom" >
                     <van-datetime-picker 
                     type="date"
-                    value="{{arrDatecurrentDate}}"
+                    value="{{arrDateCurrentDate}}"
                     min-date="{{minDate}}"
                     max-date="{{maxDate}}"
                     bind:confirm="arrDatePopconfirm"

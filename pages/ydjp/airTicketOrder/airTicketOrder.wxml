@@ -59,7 +59,7 @@
                                 <text data-bind="text: FlightInfos()[0].FlightNo">{{flightInfos[0].FlightNo}}</text>
                             </view>
                         </view>
-                        <image src="../../images/wfxq_icon_1.png" class="arrow"></image>
+                        <image src="../../images/wfxq_icon_1.png" class="arrow" catchtap="showMulLineModal"></image>
                     </view>
                     <view class="flex align-center mul-back">
                         <view class="flex">
@@ -74,11 +74,11 @@
                     <view class="t-line flex align-items mul-price">
                         <view class="col-1">
                             <view class="c-999 font-size-24 title">票价</view>
-                            <view class="c-f4393c font-size-34" >¥{{flightInfos[0].CabInfos.FlightLowestPrice+flightInfos[1].CabInfos.FlightLowestPrice}}}}</view>
+                            <view class="c-f4393c font-size-34" >¥{{flightInfos[0].CabInfos.FlightLowestPrice+flightInfos[1].CabInfos.FlightLowestPrice}}</view>
                         </view>
                         <view class="col-1">
                             <view class="c-999 font-size-24">机建+燃油</view>
-                            <view class="c-f4393c font-size-34" >¥{{flightInfos[0].aduOilTax+flightInfos[1].aduOilTax}}}</view>
+                            <view class="c-f4393c font-size-34" >¥{{flightInfos[0].aduOilTax+flightInfos[1].aduOilTax}}</view>
                         </view>
                         <view class="endorse c-align c-3eabff font-size-24 "  catchtap="showMultiEndorse" >
                             <view>退改详情</view>
@@ -92,7 +92,7 @@
                 <view class="flex t-title align-center b-line c-999 font-size-32">
                     <view class="luckyMan col-1 flex">
                         <i class="icon-luckyMan icon font-size-38"></i>
-                        乘机人<text class="font-size-24">已选乘客：0人</text>
+                        乘机人<text class="font-size-24">已选乘客：{{selectPasseners.length}}人</text>
                     </view>
                     <text class="sp-add c-3eabff" catchtap="addPassengers">+ 添加乘机人</text>
                 </view>
@@ -197,14 +197,14 @@
                         <view>
                             <text class="c-999 ">¥{{roundServicePrice}}</text>
                             <text class="singleServicePrice marginR70">/人</text>
-                            <text class="switch {{buyRoundService==1?'on':''}}" data-servicetype="roundSevice" data-servicevalue="{{buyRoundService}}" catchtap="serviceSelect">
+                            <text class="switch {{buyRoundService==1?'on':''}}" data-servicetype="roundService" data-servicevalue="{{buyRoundService}}" catchtap="serviceSelect">
                                 <text class="switch-node"></text>
                             </text>
                         </view>
                     </view>
                     <view id="region_single" class="flex align-center singleService" data-servicetype="roundService" wx-if="{{buyRoundService==1}}" catchtap="selectArea">
                         <view class="col-1 col-title row-data">
-                                {{roundPostion}} {{roundArea}}
+                                {{roundPosition}} {{roundArea}}
                         </view>
                         <i class="icon-arror-r"></i>
                     </view>
@@ -253,8 +253,8 @@
 <template is="mulLineModal" data="{{mulLineModalShow,flightInfos}}" />
 
 <view class="c-bg-000 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
-    <view class="pop-full">
-        <text class="pop-full-close" ctachtap="hideEndorse"><i></i></text>
+    <view class="pop-full" style="width: 70%;">
+        <text class="pop-full-close" catchtap="hideWorryFreeModal"><i></i></text>
         <view class="pop-content">
             <view class="title b-line">
                 <view class="c-align font-size-15">订购无忧出行须知</view>
@@ -287,11 +287,16 @@
     <view class="pop-full font-size-30">
         <view class="pop-full-close" catchtap="hideEndorseModal"><i></i></view>
         <view class="pop-content">
-            <view class="title flex">
-                <view class="{{endorseType==0?'active':''}}" data-endorsetype="0" catchtap="endorseTypeChange">{{comeEndorseTitle}}</view>
-                <view class="{{endorseType==1?'active':''}}" data-endorsetype="1" wx-if="{{flightInfos&&flightInfos.length == 2}}" catchtap="endorseTypeChange">{{backEndorseContent}}</view>
+            <view wx-if="{{flightInfos&&flightInfos.length == 2}}">
+                <view class="title flex padding0" >
+                    <view  class="text col-1 {{endorseType==0?'active':''}}" data-endorsetype="0" catchtap="endorseTypeChange">{{comeEndorseTitle}}</view>
+                    <view  class="text col-1 {{endorseType==1?'active':''}}" data-endorsetype="1"  catchtap="endorseTypeChange">{{backEndorseTitle}}</view>
+                </view>
             </view>
-            <view class="content ">
+            <view wx:else >
+                <view class="title">退改签说明</view>
+            </view>
+            <view class="content font-size-30">
                 <template is="wxParse" data="{{wxParseData:endorseModalContent.nodes}}"/>
             </view>
         </view>

@@ -95,6 +95,13 @@ Page({
     search(){
       var that = this;
       var openid = 'oZDU-wVTjVXuwwKYWsD4f1RuOXYc';
+      var sDate = this.data.sDate;
+        var nowDate = getMD(dateAddValue(returnDate(sDate), 0));
+        var nowWeek = getWeek(sDate);
+        this.setData({
+          nowDate,
+          nowWeek,
+        });
       if (openid != null && openid != "") {
         this.setData({
           waitShow: true,
@@ -429,7 +436,6 @@ Page({
         var sDate = this.data.eDate;
         var eDate = flyData;
         ticketType = 1;
-        this.search();
         this.setData({
           multiTicketShow: true,
           selectAirlShow: false,
@@ -442,6 +448,7 @@ Page({
           eDate: eDate,
           ticketType: ticketType
         });
+        this.search();
       }else if(ticketType == 1){
         wx.navigateTo({
           url: '../airTicketOrder/airTicketOrder?bookInfo='+JSON.stringify(bookInfo)

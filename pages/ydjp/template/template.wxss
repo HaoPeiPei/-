@@ -13,11 +13,17 @@ con-mess-l.font-size-34{
 .font-size-10{
     font-size: 26rpx;
 }
+.font-size-18{
+    font-size: 36rpx;
+}
 .width-50{
     width: 50%;
 }
 .bg-color-f4393c{
     background: #f4393c;
+}
+.padding0{
+    padding: 0 !important;
 }
 .filterModal{
     position: fixed;
@@ -406,6 +412,33 @@ con-mess-l.font-size-34{
 .div_mulLine .main-con{
     margin:  24rpx 30rpx;
 }
+.div_mulLine .main-con .t-title{
+    font-size: 26rpx;
+    padding: 20rpx 0;
+}
+.div_mulLine .main-con .line{
+    height: 24rpx;
+    width: 5rpx;
+    margin: 0 12rpx;
+    display: inline-block;
+}
+.div_mulLine .main-con .line-type{
+    font-size: 24rpx;
+    border-radius: 7rpx;
+    padding: 3rpx 7rpx;
+    margin-left: 24rpx;
+}
 .div_mulLine .div-flight{
     margin: -12rpx 0 12rpx 0;
 }   
+.endorseModal .title{
+    border-bottom: solid 1px #d7d7d7;
+    position: relative;
+}
+.endorseModal .title .text{
+    text-align: center;
+    padding:  36rpx 0;
+}
+.endorseModal .title .text.active{
+    border-bottom: solid 5rpx #f4393c;
+}

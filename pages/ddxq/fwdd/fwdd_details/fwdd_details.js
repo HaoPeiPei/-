@@ -38,10 +38,8 @@ Page({
     _this.setData({
       orderId: orderId
     });
-    var memberId = app.globalData.memberId;
-    var url = "weixin/miniprogram/ashx/service.ashx";
+    var url = "/weixin/jctnew/ashx/service.ashx";
     var params = {
-      memberId: memberId,
       orderId: orderId,
       action: "getorderbyid"
     }

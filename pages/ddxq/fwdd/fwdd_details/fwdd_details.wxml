@@ -70,9 +70,9 @@
           <view style='width:150rpx;' class='color-9'>使用日期</view>
           <view class='color-3'>{{OrderMain.use_date}}</view>
         </view>
-        <view class='box box-f1 box-ac padding-t-20 none'>
-          <view style='width:150rpx;' class='color-9'>区域</view>
-          <view class='color-3'>{{OrderMain.seat_area}}</view>
+        <view class='box box-f1 box-ac padding-t-20 c-3eabff'>
+          <view style='width:150rpx;' class='-9'>区域</view>
+          <view >{{OrderMain.seat_area}}</view>
         </view>
         <view class='box box-f1 box-ac padding-t-20'>
           <view style='width:150rpx;' class='color-9'>联系人</view>
