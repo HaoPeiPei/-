@@ -24,7 +24,6 @@ Page({
     status: '', //设置的条件
     memberId: '',
     action: 'orderPage',
-    url: 'weixin/miniprogram/ashx/rentcar.ashx',
   },
   bindBackChange: function() {
     wx.navigateBack({
@@ -46,37 +45,18 @@ Page({
       url: 'jsjdd_details/jsjdd_details?orderId=' + orderId,
     })
   },
+  //初始化参数
+  initDate(){
+    this.loadingOrderList();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var _this = this;
-    var memberId = app.globalData.memberId;
-    console.log(memberId);
-    var url ='weixin/miniprogram/ashx/service.ashx';
-    var action = 'orderPage';
-    var orderId = '201806071000001';
-    var params = {
-      memberId: memberId,
-      action: action,
-      orderId: orderId
-    };
-    console.log("memberId:" + memberId);
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      //console.log(res);
-      if(res.Success){
-        _this.loadingOrderList();
-      }else{
-        wx.navigateTo({
-          url: '../../logIndex/logIndex?key=2',
-        })
-      }
-    });
+    this.initDate();
   },
   loadingOrderList:function(){
     var _this = this;
-    var url = _this.data.url;
-    
     var pageindex = _this.data.pageindex;
     var pagesize = _this.data.pagesize;
     var status = _this.data.status;
@@ -85,10 +65,10 @@ Page({
       "pageindex": pageindex,
       "pagesize": pagesize,
       "status": status,
-      "memberId": memberId,
+      "userid": memberId,
       "action": "orderPage"
     };
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
+    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/rentcar.ashx', params, 'POST', function (res) {
      
       console.log(res);
       if(res.Data == '0'){
@@ -114,11 +94,9 @@ Page({
         for (var i = 0; i < messages.length; i++) {
           orderList_1.push(messages[i]);
         }
-       // console.log("orderList_1:" + orderList_1);
         _this.setData({
           orderList_1: _this.data.orderList_1.concat(orderList_1)
         });
-        //console.log("orderList_1"+_this.data.orderList_1);
       }
       setTimeout(function () {
         wx.hideLoading()

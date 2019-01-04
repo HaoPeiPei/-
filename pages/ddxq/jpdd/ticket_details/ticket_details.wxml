@@ -21,37 +21,37 @@
     <view class='box box-f1 margin-lr-20 border-t-1 font-13 color-9  box-ver'>
       <view class='box box-f1 padding-tb-20'>
         <view style='width:150rpx;'>订单号</view>
-        <view class='box box-f1 box-pe'>T2017092000000629</view>
+        <view class='box box-f1 box-pe'>{{order.airticketOrder.Order.order_id}}</view>
       </view>
       <view class='box box-f1 padding-b-20'>
         <view style='width:150rpx;'>下单时间</view>
-        <view class='box box-f1 box-pe'>2017-09-20 19:30:00</view>
+        <view class='box box-f1 box-pe'>{{order.airticketOrder.Order.create_time}}</view>
       </view>
     </view>
   </view>
   <!--行程 -->
   <view class='box box-f1 margin-t-10 backgd-f'>
     <view class='box box-f1 margin-lr-20 box-ver'>
-      <view class='box box-f1 box-ver' wx:if="{{single_return==1}}">
+      <view class='box box-f1 box-ver' wx:if="{{order.airticketOrder.FlightInfos.length==1}}">
         <view class='box box-f1 font-13 box-ac padding-tb-20'>
           <view style='background-image:url("../../../images/hnhk_icon.png")' class='background-icon'></view>
           <view class='box box-f1 box-ac margin-l-10'>
-            <view>海南航空 HU7710</view>
+            <view>{{order.airticketOrder.FlightInfoExts[0].CarrierName + ' ' + order.airticketOrder.FlightInfos[0].flight_no}}</view>
             <view style='background-image:url("../../../images/2_38.png")' class='background-icon-1 margin-lr-10'></view>
-            <view>经济舱（H）</view>
+            <view>{{order.airticketOrder.FlightInfoExts[0].CabName + '(' + order.airticketOrder.FlightInfos[0].cab + ')'}}</view>
           </view>
         </view>
         <view class='box box-f1 padding-b-20 box-ac border-b-1'>
           <view class='box box-f1 box-ver box-apc'>
-            <view class='box font-24' style='line-height:46rpx;'>07:25</view>
-            <view class='box font-15 color-9 padding-tb-10'>宝安T3</view>
-            <view class='box font-13 color-9'>08-03 星期四</view>
+            <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].dep_time}}</view>
+            <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].dep_city_name + '(' + order.airticketOrder.FlightInfos[0].start_terminal + ')'}}</view>
+            <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].depWeek}}</view>
           </view>
           <view style='background-image:url("../../../images/dd_icon.png")' class='background-icon-2'></view>
           <view class='box box-f1 box-ver box-apc'>
-            <view class='box font-24' style='line-height:46rpx;'>10:30</view>
-            <view class='box font-15 color-9 padding-tb-10'>首都T1</view>
-            <view class='box font-13 color-9'>08-03 星期四</view>
+            <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].arr_time}}</view>
+            <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].arr_city_name + '(' + order.airticketOrder.FlightInfos[0].end_terminal + ')'}}</view>
+            <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].arrDate}} {{order.airticketOrder.FlightInfos[0].arrWeek}}</view>
           </view>
         </view>
       </view>
@@ -59,19 +59,19 @@
         <view class='box box-f1 box-ver padding-tb-20 border-b-1'>
           <view class='box box-f1 box-ac'>
             <view class='font-10 prompt-btn'>去程</view>
-            <view class='box box-f1 font-19 margin-l-20 color-3'>08-03 07:25 HU7706</view>
+            <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].dep_time}} {{order.airticketOrder.FlightInfos[0].flight_no}}</view>
             <view style='background-image:url("../../../images/wfxq_icon_1.png")' class='background-icon-6' bindtap='bianReturnChange'></view>
           </view>
           <view class='box box-f1 box-ac'>
             <view class='font-10 prompt-btn'>返程</view>
-            <view class='box box-f1 font-19 margin-l-20 color-3'>08-03 07:25 HU7706</view>
+            <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[1].arrDate}} {{order.airticketOrder.FlightInfos[1].dep_time}} {{order.airticketOrder.FlightInfos[1].flight_no}}</view>
           </view>
         </view>
       </view>
       <view class='box box-f1 padding-tb-20 font-12'>
         <view class='box box-f1 box-ac'>
           <view class='box'>订单金额</view>
-          <view class='box margin-lr-20 color-f4'>￥1750</view>
+          <view class='box margin-lr-20 color-f4'>{{order.airticketOrder.Order.total_price}}</view>
           <view style='background-image:url("../../../images/xl_icon_1.png")' class='background-icon-3' bindtap='bianPriceChange'></view>
         </view>
         <view class='box box-ac' bindtap='bianRetreatingChange'>
@@ -82,7 +82,7 @@
     </view>
   </view>
   <!--值机区域  -->
-  <view class='box box-f1 margin-t-10 backgd-f'>
+  <view class='box box-f1 margin-t-10 backgd-f none'>
     <view class='box box-f1 padding-tb-20 font-15 margin-lr-20'>
       <view class='box color-9 box-ac'>
         <view style='background-image:url("../../../images/sscx.png")' class='background-icon'></view>
@@ -98,24 +98,17 @@
         <view style='background-image:url("../../../images/cjr_icon_1.png")' class='background-icon'></view>
         <view class='margin-l-10'>乘机人</view>
       </view>
-      <view class='box box-f1 box-ver margin-l-38 padding-tb-20 border-b-1'>
+      <view class='box box-f1 box-ver margin-l-38 padding-tb-20 border-b-1' wx:for="{{order.airticketOrder.Passengers}}">
         <view class='box box-f1 font-13 color-9'>
           <view style='width:150rpx;'>姓名</view>
-          <view class='box box-f1 color-3'>周琦</view>
+          <view class='box box-f1 color-3'>
+            <text class="col-content" data-bind="text: name">{{item.name}}</text>
+            <text class="col-content c-3eabff" data-bind="text: name">{{item.TypeName}}</text>
+          </view>
         </view>
         <view class='box box-f1 font-13 color-9 padding-t-20'>
-          <view style='width:150rpx;'>身份证</view>
-          <view class='box box-f1 color-3'>429336199209125896</view>
-        </view>
-      </view>
-      <view class='box box-f1 box-ver margin-l-38 padding-tb-20'>
-        <view class='box box-f1 font-13 color-9'>
-          <view style='width:150rpx;'>姓名</view>
-          <view class='box box-f1 color-3'>周琦</view>
-        </view>
-        <view class='box box-f1 font-13 color-9 padding-t-20'>
-          <view style='width:150rpx;'>身份证</view>
-          <view class='box box-f1 color-3'>429336199209125896</view>
+          <view style='width:150rpx;'>{{item.CertTypeName}}：</view>
+          <view class='box box-f1 color-3'>{{item.CertNoCont}}</view>
         </view>
       </view>
     </view>
@@ -126,11 +119,11 @@
       <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
         <view style='background-image:url("../../../images/lxr_icon.png")' class='background-icon'></view>
         <view class='margin-l-10'>联系人</view>
+        <view style='width:150rpx;'>{{order.airticketOrder.Order.contact_name}}</view>
       </view>
       <view class='box box-f1 box-ver margin-l-38 padding-tb-20'>
         <view class='box box-f1 font-15 color-9'>
-          <view style='width:150rpx;'>手机号</view>
-          <view class='box box-f1 color-3'>15988762000</view>
+          <view style='width:150rpx;'>{{order.airticketOrder.Order.contact_tel}}</view>
         </view>
       </view>
     </view>
@@ -145,15 +138,15 @@
       <view class='box box-f1 box-ver margin-l-38 padding-tb-20 '>
         <view class='box box-f1 font-13 color-9'>
           <view style='width:150rpx;'>姓名</view>
-          <view class='box box-f1 color-3'>周琦</view>
+          <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_name}}</view>
         </view>
         <view class='box box-f1 font-13 color-9 padding-tb-20'>
           <view style='width:150rpx;'>电话</view>
-          <view class='box box-f1 color-3'>15988762000</view>
+          <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_mobile}}</view>
         </view>
         <view class='box box-f1 font-13 color-9'>
           <view style='width:150rpx;'>地址</view>
-          <view class='box box-f1 color-3'>北京海淀区苏州街36号</view>
+          <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_address}}</view>
         </view>
       </view>
     </view>
@@ -288,23 +281,23 @@
           <view class='box box-f1 font-13 box-ac padding-tb-20'>
             <view style='background-image:url("../../../images/hnhk_icon.png")' class='background-icon'></view>
             <view class='box box-ac margin-l-10'>
-              <view>海南航空 HU7710</view>
+              <view>{{order.airticketOrder.FlightInfoExts[0].CarrierName + ' ' + order.airticketOrder.FlightInfos[0].flight_no}}</view>
               <view style='background-image:url("../../../images/2_38.png")' class='background-icon-1 margin-lr-10'></view>
-              <view>经济舱（H）</view>
+              <view>{{order.airticketOrder.FlightInfoExts[0].CabName + '(' + order.airticketOrder.FlightInfos[0].cab + ')'}}</view>
             </view>
             <view class='prompt-btn font-10 margin-l-20'>去程</view>
           </view>
           <view class='box box-f1 padding-b-20 box-ac'>
             <view class='box box-f1 box-ver box-apc'>
-              <view class='box font-24' style='line-height:46rpx;'>07:25</view>
-              <view class='box font-15 color-9 padding-tb-10'>宝安T3</view>
-              <view class='box font-13 color-9'>08-03 星期四</view>
+              <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].dep_time}}</view>
+              <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].dep_city_name + '(' + order.airticketOrder.FlightInfos[0].start_terminal + ')'}}</view>
+              <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].depWeek}}</view>
             </view>
             <view style='background-image:url("../../../images/dd_icon.png")' class='background-icon-2'></view>
             <view class='box box-f1 box-ver box-apc'>
-              <view class='box font-24' style='line-height:46rpx;'>10:30</view>
-              <view class='box font-15 color-9 padding-tb-10'>首都T1</view>
-              <view class='box font-13 color-9'>08-03 星期四</view>
+              <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].arr_time}}</view>
+              <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].arr_city_name + '(' + order.airticketOrder.FlightInfos[0].end_terminal + ')'}}</view>
+              <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].arrDate}} {{order.airticketOrder.FlightInfos[0].arrWeek}}</view>
             </view>
           </view>
         </view>
@@ -320,15 +313,15 @@
           </view>
           <view class='box box-f1 box-ac'>
             <view class='box box-f1 box-ver box-apc'>
-              <view class='box font-24' style='line-height:46rpx;'>07:25</view>
-              <view class='box font-15 color-9 padding-tb-10'>宝安T3</view>
-              <view class='box font-13 color-9'>08-03 星期四</view>
+              <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[1].dep_time}}</view>
+              <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[1].dep_city_name + '(' + order.airticketOrder.FlightInfos[1].start_terminal + ')'}}</view>
+              <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[1].depDate}} {{order.airticketOrder.FlightInfos[1].depWeek}}</view>
             </view>
             <view style='background-image:url("../../../images/dd_icon.png")' class='background-icon-2'></view>
             <view class='box box-f1 box-ver box-apc'>
-              <view class='box font-24' style='line-height:46rpx;'>10:30</view>
-              <view class='box font-15 color-9 padding-tb-10'>首都T1</view>
-              <view class='box font-13 color-9'>08-03 星期四</view>
+              <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[1].arr_time}}</view>
+              <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[1].arr_city_name + '(' + order.airticketOrder.FlightInfos[1].end_terminal + ')'}}</view>
+              <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[1].arrDate}} {{order.airticketOrder.FlightInfos[1].arrWeek}}</view>
             </view>
           </view>
         </view>

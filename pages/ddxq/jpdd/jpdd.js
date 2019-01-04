@@ -43,7 +43,7 @@ Page({
     var orderId = e.currentTarget.dataset.id;
     console.log(orderId);
     wx.navigateTo({
-      url: 'jsjdd_details/jsjdd_details?orderId=' + orderId,
+      url: 'ticket_details/ticket_details?orderId=' + orderId,
     })
   },
   //初始化参数
@@ -103,14 +103,12 @@ Page({
       }, 2000)
     });
   },
-  searchScrollLower: function () {  //上拉加载                         
-    //console.log("上啦");
+  searchScrollLower: function () {  //上拉加载    
     var _this = this;
     var pageindex = _this.data.pageindex;
     _this.setData({
       pageindex: ++pageindex
     });
-    //console.log("pageindex:" + pageindex);
     _this.loadingOrderList();
   },
   /**

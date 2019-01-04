@@ -71,7 +71,7 @@
           <view class='box box-f1 box-ac'>{{item.pattern_type=="1"?"接机":"送机"}}
             <text class='font-11 margin-l-20'>(经济型)</text>
           </view>
-          <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
+          <view class='dzf-btn' wx:if="{{item.order_status==8}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
         </view>
         <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
           <view class='box box-f1 font-12 color-9 margin-b-10'>

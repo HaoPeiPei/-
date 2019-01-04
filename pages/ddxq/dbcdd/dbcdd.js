@@ -24,7 +24,6 @@ Page({
     status: '', //设置的条件
     memberId: '',
     action: 'orderPage',
-    url: '/weixin/jctnew/ashx/airTicket.ashx',
   },
   bindBackChange: function () {
     wx.navigateBack({
@@ -70,7 +69,7 @@ Page({
       "userid": memberId,
       "action": "orderPage"
     };
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
+    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/valet.ashx', params, 'POST', function (res) {
       console.log(res);
       if (res.Data == '0') {
         wx.showLoading({
@@ -98,25 +97,21 @@ Page({
         for (var i = 0; i < messages.length; i++) {
           orderList_1.push(messages[i]);
         }
-        // console.log("orderList_1:" + orderList_1);
         _this.setData({
           orderList_1: _this.data.orderList_1.concat(orderList_1)
         });
-        //console.log("orderList_1"+_this.data.orderList_1);
       }
       setTimeout(function () {
         wx.hideLoading()
       }, 2000)
     });
   },
-  searchScrollLower: function () {  //上拉加载                         
-    //console.log("上啦");
+  searchScrollLower: function () {  //上拉加载   
     var _this = this;
     var pageindex = _this.data.pageindex;
     _this.setData({
       pageindex: ++pageindex
     });
-    //console.log("pageindex:" + pageindex);
     _this.loadingOrderList();
   },
   /**

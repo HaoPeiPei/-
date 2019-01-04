@@ -38,11 +38,11 @@
         </view>
       </view>
       <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status==0}}">
-        <view class='box box-f1 box-ac color-f480'>￥{{item.sell_price}}</view>
+        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
         <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}" data-code="{{item.service_type_code}}">去支付</view>
       </view>
       <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-        <view class='box box-f1 box-ac color-f480'>￥{{item.sell_price}}</view>
+        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
         <view class='ckxq-btn' bindtap='bianGetChange' data-id="{{item.order_id}}" data-code="{{item.service_type_code}}">查看详情</view>
       </view>
     </view>
@@ -72,11 +72,11 @@
         </view>
       </view>
       <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status==0}}">
-        <view class='box box-f1 box-ac color-f480'>￥{{item.sell_price}}</view>
+        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
         <view class='qzf-btn' bindtap='bianGetChange' data-title="{{item.service_name}}">去支付</view>
       </view>
       <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-        <view class='box box-f1 box-ac color-f480'>￥{{item.sell_price}}</view>
+        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
         <view class='ckxq-btn' bindtap='bianGetChange' data-title="{{item.service_name}}">查看详情</view>
       </view>
     </view>
@@ -105,11 +105,11 @@
         </view>
       </view>
       <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status==0}}">
-        <view class='box box-f1 box-ac color-f480'>￥{{item.sell_price}}</view>
+        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
         <view class='qzf-btn' bindtap='bianGetChange' data-title="{{item.service_name}}">去支付</view>
       </view>
       <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-        <view class='box box-f1 box-ac color-f480'>￥{{item.sell_price}}</view>
+        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
         <view class='ckxq-btn' bindtap='bianGetChange' data-title="{{item.service_name}}">查看详情</view>
       </view>
     </view>
@@ -138,11 +138,11 @@
         </view>
       </view>
       <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status==0}}">
-        <view class='box box-f1 box-ac color-f480'>￥{{item.sell_price}}</view>
+        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
         <view class='qzf-btn' bindtap='bianGetChange' data-title="{{item.service_name}}">去支付</view>
       </view>
       <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-        <view class='box box-f1 box-ac color-f480'>￥{{item.sell_price}}</view>
+        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
         <view class='ckxq-btn' bindtap='bianGetChange' data-title="{{item.service_name}}">查看详情</view>
       </view>
     </view>
