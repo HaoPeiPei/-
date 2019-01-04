@@ -25,7 +25,7 @@ Page({
     memberId: '',
     action: 'orderPage',
   },
-  bindBackChange: function() {
+  catchBackChange: function() {
     wx.navigateBack({
       delta: 1,
     })
@@ -34,6 +34,7 @@ Page({
     var status = e.currentTarget.dataset.status;
     this.setData({
       orderList_1:[],//清空数据
+      pageindex: 1,
       status: status
     })
     this.loadingOrderList();
@@ -103,14 +104,12 @@ Page({
       }, 2000)
     });
   },
-  searchScrollLower:function(){  //上拉加载                         
-    //console.log("上啦");
+  searchScrollLower:function(){  //上拉加载        
     var _this = this;
     var pageindex = _this.data.pageindex;
     _this.setData({
       pageindex: ++pageindex
     });
-    //console.log("pageindex:" + pageindex);
     _this.loadingOrderList();
   },
   /**

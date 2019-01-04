@@ -27,7 +27,7 @@ Page({
     arrWeek:'',
     price: {}
   },
-  bindBackChange: function () {
+  catchBackChange: function () {
     wx.navigateBack({
       delta: 1,
     })
@@ -88,7 +88,7 @@ Page({
             element['arrDate'] = getMD(element.arr_date);
             element['arrWeek'] = getWeek(element.arr_date);
         };
-        var passeners = order.airticketOrder.Passengers;
+        var passeners = data.airticketOrder.Passengers;
         for (var j = 0; j < passeners.length; j++) {
           passeners[j]['TypeName'] = _this.getType(passeners[j]);
           passeners[j]["CertTypeName"] = _this.getCertType(passeners[j]);
@@ -97,6 +97,7 @@ Page({
         _this.setData({
           order:data
         });
+        _this.caculatePirce();
       }
     });
   },
@@ -133,7 +134,7 @@ Page({
   },
   //计算价格明细
   caculatePirce(){
-    var flightInfos = this.data.order.airticketOrder.FlightInfos;
+    var order = this.data.order;
     var price = this.data.price;
     var ticketAdultPrice = 0;       //成人票价
     var ticketChildPrice = 0;       //儿童票价
@@ -141,6 +142,7 @@ Page({
     var tax = 0;                    //税费
     var insurance_price = 0;//保险
     var refund = 0;                 //现返
+    var servicePrice = 0;               
     var delivery_price = order.airticketOrder.Order.delivery_price;//快递费
     var passengs = order.airticketOrder.Passengers;//机票乘机人表
     var servers = order.serviceOrders;//服务表
@@ -159,7 +161,7 @@ Page({
         if (i + 1 < adultPriceArr.length && tmpCert_no == adultPriceArr[i + 1].cert_no && tmpName == adultPriceArr[i + 1].passenger_name)
         {
             refund += adultPriceArr[i+1].refund;
-            price += adultPriceArr[i+1].sale_price;
+            ticketAdultPrice += adultPriceArr[i+1].sale_price;
             taxes += adultPriceArr[i+1].fee + passengs[i].tax;
         }
         break;
@@ -177,39 +179,53 @@ Page({
       }
       break;
     }
-
-    adultCount = adult / order.airticketOrder.FlightInfos.length;;
-    childCount = adult / order.airticketOrder.FlightInfos.length;;
-    babyCount = adult / order.airticketOrder.FlightInfos.length;;
-    var totalPrice = 0;
-    var insuranceCount = this.data.buyInsurance * (adultCount + childCount + babyCount);
-    var expressCount = this.data.buyExpress * (adultCount > 0 ? 1 : 0);
-    var servicePrice = this.data.singleServicePrice * this.data.buySingleService + this.data.roundServicePrice * this.data.buyRoundService;
-    var serviceCount = adultCount + childCount;
-    totalPrice = ticketAdultPrice * adultCount +
-        tax * adultCount + ticketChildPrice * childCount +
-        ticketBabyPrice * babyCount +
-        this.data.buyInsurance * (adultCount + childCount + babyCount) * this.data.insurancePrice +
-        this.data.buySingleService * (adultCount + childCount) * this.data.singleServicePrice +
-        this.data.buyRoundService * (adultCount + childCount) * this.data.roundServicePrice +
-        this.data.buyExpress * this.data.expressPrice * (adultCount > 0 ? 1 : 0);
-    
+    for (var i = 0; i < passengs.length; i++) {
+      if (passengs[i].passenger_type == "0")
+      {
+        adultCount++;
+      }
+      else if (passengs[i].passenger_type == "1")
+      {
+        childCount++;
+      }
+      else if (passengs[i].passenger_type == "2") {
+        babyCount++;
+      }
+    }
+    adultCount = adultCount / order.airticketOrder.FlightInfos.length;;
+    childCount = childCount / order.airticketOrder.FlightInfos.length;;
+    babyCount = babyCount / order.airticketOrder.FlightInfos.length;
+    if (servers != null) {
+      for (var i = 0; i < servers.length; i++) {
+          servicePrice += parseInt(servers[i].pay_amount_due);
+      }
+    }
+    passengs = this.filterByPassengerName(passengs);
     this.setData({
         price: Object.assign({}, price, {
-            totalPrice,
             ticketAdultPrice,
             adultCount,
             ticketChildPrice,
             childCount,
             ticketBabyPrice,
-            expressCount,
-            insuranceCount,
             babyCount,
+            insurance_price,
+            delivery_price,
             tax,
             refund,
             servicePrice,
-            serviceCount
         })
+    });
+  },
+  //过滤
+  filterByPassengerName(passengers){
+    var obj = {};
+    passengers = passengers.reduce((cur,next) => {
+        obj[next.passenger_name] ? "" : obj[next.passenger_name] = true && cur.push(next);
+        return cur;
+    },[]);
+    this.setData({
+      passengers
     });
   },
   //初始化参数

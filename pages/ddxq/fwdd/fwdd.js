@@ -70,7 +70,7 @@ Page({
       }, 2000)
     });
   },
-  bindBackChange: function() {
+  catchBackChange: function() {
     wx.navigateBack({
       delta: 1,
     })
@@ -79,6 +79,7 @@ Page({
     var status = e.currentTarget.dataset.status;
     this.setData({
       orderList_1: [],//清空数据
+      pageindex: 1,
       status: status
     })
     this.loadingOrderList();

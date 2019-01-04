@@ -25,7 +25,7 @@ Page({
     memberId: '',
     action: 'orderPage',
   },
-  bindBackChange: function () {
+  catchBackChange: function () {
     wx.navigateBack({
       delta: 1,
     })

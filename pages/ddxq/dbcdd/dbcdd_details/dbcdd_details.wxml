@@ -67,11 +67,11 @@
         </view>
         <view class='box box-f1 padding-t-20'>
           <view class='color-9' style='width:160rpx;'>汇合地点</view>
-          <view class='box box-f1 color-3'>{{Order.in_airport}}</view>
+          <view class='box box-f1 color-3'>深圳宝安机场T3航站楼出发5号门</view>
         </view>
-        <view class='box box-f1 padding-t-20'>
-          <view class='color-9' style='width:160rpx;'>泊车天数</view>
-          <view class='box box-f1 color-3'>{{Order.pay_type}} 天</view>
+        <view class='box box-f1 padding-t-20 c-3eabff'>
+          <view style='width:160rpx;'>泊车天数</view>
+          <view class='box box-f1'>{{Order.pay_type}} 天</view>
         </view>
         <view class='box box-f1 padding-t-20'>
           <view class='color-9' style='width:160rpx;'>联系人</view>

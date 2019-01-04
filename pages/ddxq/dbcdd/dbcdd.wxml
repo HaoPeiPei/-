@@ -44,10 +44,16 @@
             <view class='box box-f1 color-3'>{{item.outplan_time}}</view>
           </view>
         </view>
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status==0}}">
-          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">去支付</view>
-        </view>
+        <block wx:if="{{item.order_status=='0'||item.order_status=='1'||item.order_status=='2'}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status=='0'}}">
+            <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+            <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">去支付</view>
+          </view>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
+              <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">申请退款</view>
+            </view>
+        </block>
         <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
           <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
           <view class='ckxq-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">查看详情</view>
@@ -64,6 +70,14 @@
         <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
           <view class='box box-f1 box-ac'>代泊车</view>
           <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
+          <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url(../../images/ycp_bacl_1.png)'>已支付</view>
+          <view class='dzf-btn' wx:elif="{{item.order_status==2}}" style='background-image:url(../../images/ycp_bacl_1.png)'>已预订</view>
+          <view class='dzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url(../../images/tk_back_1.png)'>申请退款</view>
+          <view class='dzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url(../../images/tk_back_1.png)'>退款中</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==5}}" style='background-image:url(../../images/qx_back_1.png)'>已退款</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==6}}" style='background-image:url(../../images/qx_back_1.png)'>已拒绝</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==7}}" style='background-image:url(../../images/qx_back_1.png)'>已取消</view>
+          <view class='tk-btn' wx:else="{{item.order_status==8}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
         </view>
         <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
           <view class='box box-f1 font-12 color-9 margin-b-10'>
@@ -83,13 +97,19 @@
             <view class='box box-f1 color-3'>{{item.outplan_time}}</view>
           </view>
         </view>
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status==0}}">
-          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='qzf-btn' bindtap='bianGetChange' data-title="{{item.service_title}}" data-state="{{item.state}}">去支付</view>
-        </view>
+        <block wx:if="{{item.order_status=='0'||item.order_status=='1'||item.order_status=='2'}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status=='0'}}">
+            <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+            <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">去支付</view>
+          </view>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
+              <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">申请退款</view>
+            </view>
+        </block>
         <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
           <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='ckxq-btn' bindtap='bianGetChange' data-title="{{item.service_title}}" data-state="{{item.state}}">查看详情</view>
+          <view class='ckxq-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">查看详情</view>
         </view>
       </view>
     </block>
@@ -102,7 +122,15 @@
       <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
         <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
           <view class='box box-f1 box-ac'>代泊车</view>
-          <view class='dzf-btn' wx:if="{{item.order_status==2}}" style='background-image:url(../../images/ycp_bacl_1.png)'>已预订</view>
+          <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
+          <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url(../../images/ycp_bacl_1.png)'>已支付</view>
+          <view class='dzf-btn' wx:elif="{{item.order_status==2}}" style='background-image:url(../../images/ycp_bacl_1.png)'>已预订</view>
+          <view class='dzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url(../../images/tk_back_1.png)'>申请退款</view>
+          <view class='dzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url(../../images/tk_back_1.png)'>退款中</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==5}}" style='background-image:url(../../images/qx_back_1.png)'>已退款</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==6}}" style='background-image:url(../../images/qx_back_1.png)'>已拒绝</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==7}}" style='background-image:url(../../images/qx_back_1.png)'>已取消</view>
+          <view class='tk-btn' wx:else="{{item.order_status==8}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
         </view>
         <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
           <view class='box box-f1 font-12 color-9 margin-b-10'>
@@ -122,13 +150,19 @@
             <view class='box box-f1 color-3'>{{item.outplan_time}}</view>
           </view>
         </view>
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status==0}}">
-          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='qzf-btn' bindtap='bianGetChange' data-title="{{item.service_title}}" data-state="{{item.state}}">去支付</view>
-        </view>
+        <block wx:if="{{item.order_status=='0'||item.order_status=='1'||item.order_status=='2'}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status=='0'}}">
+            <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+            <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">去支付</view>
+          </view>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
+              <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">申请退款</view>
+            </view>
+        </block>
         <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
           <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='ckxq-btn' bindtap='bianGetChange' data-title="{{item.service_title}}" data-state="{{item.state}}">查看详情</view>
+          <view class='ckxq-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">查看详情</view>
         </view>
       </view>
     </block>
@@ -141,9 +175,15 @@
       <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
         <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
           <view class='box box-f1 box-ac'>代泊车</view>
-          <view class='dzf-btn' wx:if="{{item.order_status==3}}" style='background-image:url(../../images/tk_back_1.png)'>申请退款</view>
+          <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
+          <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url(../../images/ycp_bacl_1.png)'>已支付</view>
+          <view class='dzf-btn' wx:elif="{{item.order_status==2}}" style='background-image:url(../../images/ycp_bacl_1.png)'>已预订</view>
+          <view class='dzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url(../../images/tk_back_1.png)'>申请退款</view>
           <view class='dzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url(../../images/tk_back_1.png)'>退款中</view>
           <view class='tk-btn' wx:elif="{{item.order_status==5}}" style='background-image:url(../../images/qx_back_1.png)'>已退款</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==6}}" style='background-image:url(../../images/qx_back_1.png)'>已拒绝</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==7}}" style='background-image:url(../../images/qx_back_1.png)'>已取消</view>
+          <view class='tk-btn' wx:else="{{item.order_status==8}}" style='background-image:url(../../images/dzf_back_1.png)'>待支付</view>
         </view>
         <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
           <view class='box box-f1 font-12 color-9 margin-b-10'>
@@ -163,13 +203,19 @@
             <view class='box box-f1 color-3'>{{item.outplan_time}}</view>
           </view>
         </view>
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status==0}}">
-          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='qzf-btn' bindtap='bianGetChange' data-title="{{item.service_title}}" data-state="{{item.state}}">去支付</view>
-        </view>
+        <block wx:if="{{item.order_status=='0'||item.order_status=='1'||item.order_status=='2'}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status=='0'}}">
+            <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+            <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">去支付</view>
+          </view>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
+              <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">申请退款</view>
+            </view>
+        </block>
         <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
           <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='ckxq-btn' bindtap='bianGetChange' data-title="{{item.service_title}}" data-state="{{item.state}}">查看详情</view>
+          <view class='ckxq-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">查看详情</view>
         </view>
       </view>
     </block>

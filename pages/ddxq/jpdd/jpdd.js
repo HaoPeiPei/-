@@ -15,7 +15,6 @@ Page({
       "right_icon": "",
     },
 
-    key: 0,
     single_return: 0,
     ErrCode: "",
     orderList_1: [], //放置返回数据的数组
@@ -26,7 +25,7 @@ Page({
     action: 'orderPage',
     url: '/weixin/jctnew/ashx/airTicket.ashx',
   },
-  bindBackChange: function () {
+  catchBackChange: function () {
     wx.navigateBack({
       delta: 1,
     })
@@ -35,6 +34,7 @@ Page({
     var status = e.currentTarget.dataset.status;
     this.setData({
       orderList_1: [],//清空数据
+      pageindex: 1,
       status: status
     })
     this.loadingOrderList();

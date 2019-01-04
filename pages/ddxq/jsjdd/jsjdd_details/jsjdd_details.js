@@ -19,7 +19,7 @@ Page({
     order:'',
     orderId:''
   },
-  bindBackChange: function () {
+  catchBackChange: function () {
     wx.navigateBack({
       delta: 1,
     })

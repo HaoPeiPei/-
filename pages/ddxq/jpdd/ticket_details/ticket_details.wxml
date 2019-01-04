@@ -102,7 +102,7 @@
         <view class='box box-f1 font-13 color-9'>
           <view style='width:150rpx;'>姓名</view>
           <view class='box box-f1 color-3'>
-            <text class="col-content" data-bind="text: name">{{item.name}}</text>
+            <text class="col-content" data-bind="text: name">{{item.passenger_name}}</text>
             <text class="col-content c-3eabff" data-bind="text: name">{{item.TypeName}}</text>
           </view>
         </view>
@@ -194,43 +194,53 @@
     <view class='popup-content'>
       <view class='box box-f1 box-ver margin-40'>
         <view class='box box-f1 padding-tb-20 border-b-1 box-ver'>
-          <view class='box box-f1 font-15 '>
-            <view class='color-3'>成人机票</view>
+          <view class='box box-f1 font-15 ' wx:if="{{price.adultCount!=0}}">
+            <view class='color-3'>成人票</view>
             <view class='box box-f1 box-pe'>
-              <text class='color-f4'>￥1750</text> ×2</view>
+              <text class='color-f4'>￥{{price.ticketAdultPrice}}</text> ×{{price.adultCount}}</view>
+          </view>
+          <view class='box box-f1 font-15 ' wx:if="{{price.babyCount!=0}}">
+            <view class='color-3'>儿童票</view>
+            <view class='box box-f1 box-pe'>
+              <text class='color-f4'>￥{{price.childCount}}</text> ×{{price.childCount}}</view>
+          </view>
+          <view class='box box-f1 font-15 ' wx:if="{{price.babyCount!=0}}">
+            <view class='color-3'>婴儿票</view>
+            <view class='box box-f1 box-pe'>
+              <text class='color-f4'>￥{{price.ticketBabyPrice}}</text> ×{{price.babyCount}}</view>
           </view>
           <view class='box box-f1 font-15 margin-t-10'>
             <view class='color-3'>机建+燃油</view>
             <view class='box box-f1 box-pe'>
-              <text class='color-f4'>￥100</text> ×2</view>
+              <text class='color-f4'>￥{{price.tax}}</text></view>
           </view>
         </view>
         <view class='box box-f1 padding-tb-40 border-b-1 box-ver'>
           <view class='box box-f1 font-15 '>
             <view class='color-3'>保险</view>
             <view class='box box-f1 box-pe'>
-              <text class='color-f4'>￥40</text> ×2</view>
+              <text class='color-f4'>￥{{price.insurance_price}}</text></view>
           </view>
         </view>
         <view class='box box-f1 padding-tb-40 border-b-1 box-ver'>
           <view class='box box-f1 font-15 '>
             <view class='color-3'>快递</view>
             <view class='box box-f1 box-pe'>
-              <text class='color-f4'>￥15</text> ×1</view>
+              <text class='color-f4'>￥{{price.delivery_price}}</text></view>
           </view>
         </view>
         <view class='box box-f1 padding-tb-40 border-b-1 box-ver'>
           <view class='box box-f1 font-15 '>
             <view class='color-3'>现返</view>
             <view class='box box-f1 box-pe'>
-              <text class='color-f4'>￥0</text> ×2</view>
+              <text class='color-f4'>￥{{price.refund}}</text></view>
           </view>
         </view>
         <view class='box box-f1 padding-tb-40 box-ver'>
           <view class='box box-f1 font-15 '>
             <view class='color-3'>无忧出行</view>
             <view class='box box-f1 box-pe'>
-              <text class='color-f4'>￥196</text> ×2</view>
+              <text class='color-f4'>￥{{price.servicePrice}}</text></view>
           </view>
         </view>
       </view>

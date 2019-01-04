@@ -22,7 +22,7 @@ Page({
     OrderPassengerInfos:'',
     ind:''
   },
-  bindBackChange: function () {
+  catchBackChange: function () {
     wx.navigateBack({
       delta: 1,
     })
