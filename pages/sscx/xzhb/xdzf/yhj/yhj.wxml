@@ -3,10 +3,10 @@
 
 <view class='{{yhi_gs!="0"?"":"none"}}' style='width:100%;'>
   <view class='box box-f1 backgd-f color-9'>
-    <view class='box box-f1 box-apc font-16 padding-tb-3 {{key==0?"xz-border":""}}' bindtap='bindTapChage' data-key="0">未使用</view>
-    <view class='box box-f1 box-apc font-16 padding-tb-3 {{key==1?"xz-border":""}}' bindtap='bindTapChage' data-key="1">已使用</view>
+    <view class='box box-f1 box-apc font-16 padding-tb-3 {{isUsed==0?"xz-border":""}}' bindtap='bindTapChage' data-isused="0">未使用</view>
+    <view class='box box-f1 box-apc font-16 padding-tb-3 {{isUsed==1?"xz-border":""}}' bindtap='bindTapChage' data-isused="1">已使用</view>
   </view>
-  <view style='width:100%;' class='{{key==0?"":"none"}}'>
+  <view style='width:100%;' class='{{isUsed==0?"":"none"}}'>
     <block wx:for="{{conttent_text}}">
       <view style='width:90%;margin:50rpx auto;background:url({{item.backImg_url}}) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
         <view class='box box-f1 padding-tb-20 color-f'>
@@ -29,7 +29,7 @@
     </block>
   </view>
 
-  <view style='width:100%;' class='{{key==1?"":"none"}}'>
+  <view style='width:100%;' class='{{isUsed==1?"":"none"}}'>
     <block wx:for="{{conttent_text}}">
       <view style='width:90%;margin:50rpx auto;background:url({{item.backImg_url_1}}) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
         <view class='box box-f1 padding-tb-20 color-f'>

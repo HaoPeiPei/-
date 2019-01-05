@@ -22,25 +22,16 @@ Page({
     OrderPassengerInfos:'',
     ind:''
   },
-  catchBackChange: function () {
+  bindBackChange: function () {
     wx.navigateBack({
       delta: 1,
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  //加载订单详情
+  loadOrderDetail(){
     var _this = this;
-    console.log(options.orderId);
-    var Order = _this.data.Order;
-    var orderId = options.orderId;
-    _this.setData({
-      orderId: orderId
-    });
-    var url = "/weixin/jctnew/ashx/service.ashx";
     var params = {
-      orderId: orderId,
+      orderId: this.data.orderId,
       action: "getorderbyid"
     }
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
@@ -56,6 +47,21 @@ Page({
         });
       }
     });
+  },
+  //初始化参数
+  initData(options){
+    var _this = this;
+    var orderId = options.orderId;
+    _this.setData({
+      orderId: orderId,
+    });
+    this.loadOrderDetail();
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.initData(options);
   },
   //取消订单
   bindCancelOrder: function () {

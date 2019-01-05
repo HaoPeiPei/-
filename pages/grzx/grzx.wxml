@@ -7,7 +7,7 @@
   </view>
   <view class='box box-f1 box-ver margin-l-1' wx:if="{{login_state==1}}">
     <view class='box box-f1 box-ac font-14'>
-      <view class='box box-f1 box-ac'>飞猪</view>
+      <view class='box box-f1 box-ac'>{{user.UserInfoJson.nickname}}</view>
       <view class='box box-f1 '>
         <view class='box box-f1 box-hor box-pe'>
           <view class='box box-apc'>退出</view>
@@ -17,7 +17,7 @@
         </view>
       </view>
     </view>
-    <view class='box box-f1 box-as font-12'>135****5371</view>
+    <view class='box box-f1 box-as font-12'>{{user.UserInfoJson.Mobile}}</view>
   </view>
   <view class='box box-f1 margin-l-20' wx:else>
     <view class='box box-f1 box-apc'>

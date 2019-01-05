@@ -1,4 +1,7 @@
 // pages/grzx/grzx.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var httpRequst = require("../../../utils/requst.js");
 Page({
 
   /**
@@ -14,6 +17,7 @@ Page({
     login_state:'1', //0 未登录 1登录
     user_rights:"0",  //0 员工版 1用户版 
     inBind:false,
+    user: {}
   },
   bindEwmChange:function(){
     var inBind = this.data.inBind;
@@ -21,13 +25,36 @@ Page({
       inBind: !inBind
     })
   },
+  //加载用户信息
+  loadUser(){
+    var _this = this;
+    var params = {
+      "action": "get",
+      "openId": app.globalData.openId
+    }
+    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
+      if (obj.Success) {
+        _this.setData({
+          user: JSON.parse(obj.Data)
+        })
+      } else {
+        //todo 跳转到登陆页面
+        wx.navigateTo({
+          url: '../logIndex/logIndex'
+        });
+      }
+    });
+  },
+  //初始化参数
+  initData(){
+    this.loadUser();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
-
+    this.initData();
+  },  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -94,7 +94,7 @@ Page({
     //获取乘机人列表
     search(){
       var that = this;
-      var openid = 'oZDU-wVTjVXuwwKYWsD4f1RuOXYc';
+      var openId =  app.globalData.openId;
       var sDate = this.data.sDate;
         var nowDate = getMD(dateAddValue(returnDate(sDate), 0));
         var nowWeek = getWeek(sDate);
@@ -102,7 +102,7 @@ Page({
           nowDate,
           nowWeek,
         });
-      if (openid != null && openid != "") {
+      if (openId != null && openId != "") {
         this.setData({
           waitShow: true,
           noDateShow: false,
@@ -112,7 +112,7 @@ Page({
           scity: this.data.sCity, 
           ecity: this.data.eCity, 
           sdate: this.data.sDate, 
-          openId: openid
+          openId: openId
         }
         httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/airTicket.ashx", param , "POST",function(res){
           wx.hideLoading();

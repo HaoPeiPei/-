@@ -1,13 +1,13 @@
 <!--pages/fx/fx.wxml-->
 <view class='box box-f1 box-apc view-fx font-15'>发现</view>
-<block wx:for='{{fx}}'>
+<block wx:for='{{discover}}'>
 <view class='view-imag'>
   <view class='view-2'>
-    <image src='{{item.src}}' class='widthHeight-100'></image>
+    <image src='{{item.path}}' class='widthHeight-100'></image>
   </view>
   <view class='box box-f1 box-ver backgr-w padding-tb-2 view-1'>
-    <view class='box box-f1 box-ac font-12 margin-l-1 color-3'>{{item.fxTitle}}</view>
-    <view class='box box-f1 box-ac font-10 margin-l-1 color-9'>{{item.fxContent}}</view>
+    <view class='box box-f1 box-ac font-12 margin-l-1 color-3'>{{item.main_title}}</view>
+    <view class='box box-f1 box-ac font-10 margin-l-1 color-9'>{{item.sub_title}}</view>
   </view>
 </view>
 </block>

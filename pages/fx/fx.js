@@ -1,21 +1,46 @@
 // pages/fx/fx.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var httpRequst = require("../../../utils/requst.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    discover: {},
     fx:
     [
       { 'src': '../images/1.png', 'fxTitle': '注册有礼', 'fxContent': '邀好友注册,各赢大奖'}
     ]
   },
-
+  //加载发现数据
+  loadDiscover(){
+    var _this = this;
+    var params = {
+      "action": "get"
+    }
+    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/discover.ashx', params, 'POST', function (res) {
+      if (res.Success) {
+        _this.setData({
+          discover: JSON.parse(res.Data)
+        });
+      } else {
+          wx.navigateBack({
+            delta: 1
+          })
+      }
+    });
+  },
+  //初始化页面数据
+  initData(){
+    this.loadDiscover();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.initData();
   },
 
   /**

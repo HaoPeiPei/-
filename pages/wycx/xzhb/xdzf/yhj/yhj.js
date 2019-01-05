@@ -11,7 +11,7 @@ Page({
       "title_text": "优惠券",
       "right_icon": "../../../../images/dh-b.png"
     },
-    key: 0,
+    isUsed: 0,
     yhi_gs:"",
     conttent_text:
     [
@@ -26,14 +26,14 @@ Page({
     })
   },
   bindTapChage: function (e) {
-    var key = e.currentTarget.dataset.key;
+    var isUsed = e.currentTarget.dataset.isused;
     this.setData({
-      key: key
-    })
+      isUsed: isUsed
+    });
+    this.loadCoupon();
   },
   bindLjsyChange: function (e) {
     var price = e.currentTarget.dataset.price;
-    console.log(price)
     var conttent_text = this.data.conttent_text;
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页

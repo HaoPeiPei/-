@@ -23,26 +23,16 @@ Page({
       delta: 1,
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  //加载订单详情
+  loadOrderDetail(){
     var _this = this;
-    console.log(options.orderId);
-    var Order = _this.data.Order;
-    var orderId = options.orderId;
-    _this.setData({
-      orderId: orderId
-    });
     var memberId = app.globalData.memberId;
-    var url = "weixin/miniprogram/ashx/valet.ashx";
     var params = {
       memberId: memberId,
-      orderId: orderId,
+      orderId: this.data.orderId,
       action: "getorder"
     }
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      console.log(res);
+    httpRequst.HttpRequst(true, "/weixin/miniprogram/ashx/valet.ashx", params, 'POST', function (res) {
       if (res.Success) {
         var data = JSON.parse(res.Data);
         _this.setData({
@@ -50,6 +40,21 @@ Page({
         });
       }
     });
+  },
+  //初始化参数
+  initData(options){
+    var _this = this;
+    var orderId = options.orderId;
+    _this.setData({
+      orderId: orderId,
+    });
+    this.loadOrderDetail();
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.initData(options);
   },
   //取消订单
   bindCancelOrder: function () {
