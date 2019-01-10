@@ -62,7 +62,7 @@
         <template is="noDate" data="{{noDateShow}}" ></template>
     </view>
     <view class="filter flex align-center c-align">
-        <view class="col-1 c-fff div-filter font-size-20 {{filterActive?'c-f4393c':'c-fff'}}" catchtap="showFilterModal">
+        <view class="col-1 div-filter font-size-20 {{filterActive?'c-f4393c':'c-fff'}}" catchtap="showFilterModal">
             <i class="icon-filter"></i>
             <view>筛选</view>
         </view>

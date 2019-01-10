@@ -15,10 +15,10 @@ Page({
       "right_icon": "../../../images/dh-b.png",
     },
     couponType: 0,
-    salesType: 0,
+    salesType: 1,
     carrier: {},
     service: {},
-    coupon: {},
+    coupon: null,
     isShare: 0,
     couponCount: 0,
     totalPrice: 0,
@@ -27,7 +27,8 @@ Page({
     position: "随机",
     area: "左侧前方",
   },
-  bindBackChange: function () {
+  //返回
+  catchBackChange: function () {
     wx.showModal({
       title: '温馨提示',
       content: '您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回？',
@@ -42,54 +43,79 @@ Page({
       }
     })
   },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
+  },
   bindQyxzChange:function(){
     var position = this.data.position;
     var area = this.data.area;
     wx.navigateTo({
-        url: '../qyxz/qyxz?position='+position+'&area='+area,
+        url: 'qyxz/qyxz?position='+position+'&area='+area,
     });
   },
   //初始化数据
   initData(options){
+    var that = this;
     var carrier = JSON.parse(options.bookInfo);
     if(JSON.stringify(carrier) != {}){
-        var passengerInfo = carrier.PassengerInfo;
-        var serviceId = carrier.ServiceId;
-        var serviceName = carrier.ServiceName;
-        for (let index = 0; index < passengerInfo.length; index++) {
-            const element = flightInfos[index];
-            element['depDate'] = getMD(element.DepDate);
-            element['depWeek'] = getWeek(element.DepDate);
-            element['arrDate'] = getMD(element.ArrDate);
-            element['arrWeek'] = getWeek(element.ArrDate);
-        };
-        this.setData({
-          service: Object.assign(this.data.service,{
-            serviceId: serviceId,
-            serviceName: serviceName
-          }),
-          carrier: carrier
-        });
-        this.getService();
-        this.loadCouponCount();
+      var serviceId = carrier.ServiceId;
+      var serviceName = carrier.ServiceName;
+      var flightInfo = carrier.FlightInfo;
+      var passengerInfo = carrier.PassengerInfo;
+      flightInfo['depTime'] = flightInfo.DepTime.substr(11, 5);
+      flightInfo['arrTime'] = flightInfo.ArrTime.substr(11, 5);
+      flightInfo['depDate'] = getMD(flightInfo.DepTime);
+      flightInfo['depWeek'] = getWeek(flightInfo.DepTime);
+      flightInfo['arrDate'] = getMD(flightInfo.ArrTime);
+      flightInfo['arrWeek'] = getWeek(flightInfo.ArrTime);
+      passengerInfo = passengerInfo.map(function(item){
+        var certType = that.getCertType(item);
+        return Object.assign(item, {certType})
+      })
+      this.setData({
+        service: Object.assign(this.data.service,{
+          serviceId: serviceId,
+          serviceName: serviceName
+        }),
+        carrier: carrier
+      });
+      this.getService();
+      this.loadCouponCount();
+    }
+  },
+  getCertType(item) {
+    if (item.type == "0") {
+        if (item.cert_type == "1") {
+            return "身份证";
+        }
+        else if (item.cert_type == "2") {
+            return "护照";
+        } else {
+            return "其他";
+        }
     }
   },
   //载入服务
   getService(){
+    var that = this;
     wx.showLoading({
       title: '数据加载中...',
     });
     httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "getservicebyid", id: this.data.service.serviceId } , "POST",function(res){
       wx.hideLoading();
       if (res.Success) {
-        var service = res.Data;
+        var service = JSON.parse(res.Data);
         var price = service.price;
-        this.setData({
-          service: Object.assign(this.data.service,{
+        that.setData({
+          service: Object.assign(that.data.service,{
             price: price
           })
         });
-        this.caculatePrice();
+        that.caculatePrice();
       } else {
         wx.showToast({
           title: res.Message,
@@ -107,10 +133,10 @@ Page({
     if (this.data.isShare == "1") {
         price = price - 20;
     }
-    var passengerCount = carrier.passengerInfo.length;
+    var passengerCount = this.data.carrier.PassengerInfo.length;
     //优惠金额
     var disAmount = 0;
-    if (JSON.stringify(this.data.coupon) != '{}') {
+    if (this.data.coupon != null) {
         disAmount = this.data.coupon.denomination;
     }
     var totalPrice = price * passengerCount - disAmount;
@@ -123,6 +149,7 @@ Page({
   },
   //加载优惠券张数
   loadCouponCount(){
+    var that = this;
     wx.showLoading({
       title: '数据加载中...',
     });
@@ -136,7 +163,7 @@ Page({
       if (res.Success) {
         if (parseInt(res.Data) > 0) {
           var couponCount = res.Data; 
-          this.setData({
+          that.setData({
             couponCount
           });    
         }
@@ -153,13 +180,16 @@ Page({
   },
   //切换优惠券
   couponSelect: function (e) {
+    if(this.data.couponCount == 0){
+      return
+    }
     var couponType = (e.currentTarget.dataset.coupontype == 1 ? 0: 1);
     if(couponType == 1){
       wx.navigateTo({
         url: 'yhj/yhj',
       });
     }else{
-      coupon = {};
+      var coupon = null;
       this.setData({
         coupon
       });
@@ -243,14 +273,14 @@ Page({
   book(){
     var orderModel = {};
     var PostionInfo = {};
-    PostionInfo.Postion = this.data.postion;
+    PostionInfo.Postion = this.data.position;
     PostionInfo.Area = this.data.area;
     orderModel.FlightInfo = this.data.carrier.FlightInfo;
     orderModel.FlightNo = this.data.carrier.FlightNo;
     orderModel.PassengerInfo = this.data.carrier.PassengerInfo;
     orderModel.CouponInfo = this.data.coupon;
     orderModel.PostionInfo = PostionInfo;
-    orderModel.ServiceId = this.data.service.ServiceId;
+    orderModel.ServiceId = this.data.ServiceId;
     orderModel.TotalPrice = this.data.totalPrice;
     orderModel.MemberId = app.globalData.memberId;
     orderModel.Contactor = this.data.contactor;

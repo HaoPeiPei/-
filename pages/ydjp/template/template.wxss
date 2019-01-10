@@ -298,6 +298,13 @@ con-mess-l.font-size-34{
     margin: 0 0 0 10rpx;
     display: inline-block;
 }
+.selectAir .line{
+    width: 5rpx;
+    display: inline-block;
+    height: 20rpx;
+    background-color: #f4393c;
+    margin-right: 10rpx;
+}
 
 /*等待图样式*/
 .wait {

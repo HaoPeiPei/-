@@ -53,18 +53,21 @@ Page({
   //初始化数据
   initData(options){
     debugger
+    var that = this;
     var carrier = JSON.parse(options.bookInfo);
     if(JSON.stringify(carrier) != {}){
-        var passengerInfo = carrier.PassengerInfo;
         var serviceId = carrier.ServiceId;
         var serviceName = carrier.ServiceName;
-        for (let index = 0; index < passengerInfo.length; index++) {
-            const element = flightInfos[index];
-            element['depDate'] = getMD(element.DepDate);
-            element['depWeek'] = getWeek(element.DepDate);
-            element['arrDate'] = getMD(element.ArrDate);
-            element['arrWeek'] = getWeek(element.ArrDate);
-        };
+        var flightInfo = carrier.FlightInfo;
+        var passengerInfo = carrier.PassengerInfo;
+        flightInfo['depTime'] = getMD(flightInfo.DepTime);
+        flightInfo['depWeek'] = getWeek(flightInfo.DepTime);
+        flightInfo['arrDate'] = getMD(flightInfo.ArrTime);
+        flightInfo['arrWeek'] = getWeek(flightInfo.ArrTime);
+        passengerInfo = passengerInfo.map(function(item){
+          var certType = that.getCertType(item);
+          return Object.assign(item,{certType})
+        })
         this.setData({
           service: Object.assign(this.data.service,{
             serviceId: serviceId,
@@ -74,6 +77,20 @@ Page({
         });
         this.getService();
         this.loadCouponCount();
+    }
+  },
+  getCertType(item) {
+    if (item.type == "0") {
+        if (item.cert_type == "1") {
+            return "身份证";
+        }
+        else if (item.cert_type == "2") {
+            return "护照";
+        } else {
+            return "其他";
+        }
+    } else {
+        return "生日";
     }
   },
   //载入服务

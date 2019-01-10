@@ -1,22 +1,13 @@
-// pages/grzx/yqm_details/yqm_hdgz/yqm_hdgz.js
+// pages/grzx/gnjs_details/gnjs_details.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    header_text:
-    {
-      "left_icon": "../../../images/back-b.png",
-      "title_text": "活动规则",
-      "right_icon": "",
-    },
+  
   },
-  catchBackChange:function(){
-    wx.navigateBack({
-      delta:1
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

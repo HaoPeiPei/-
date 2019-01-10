@@ -7,17 +7,17 @@
     <view class='box box-f1 box-apc font-16 padding-tb-3 {{isUsed==1?"xz-border":""}}' bindtap='bindTapChage' data-isused="1">已使用</view>
   </view>
   <view style='width:100%;' class='{{isUsed==0?"":"none"}}'>
-    <block wx:for="{{conttent_text}}">
-      <view style='width:90%;margin:50rpx auto;background:url({{item.backImg_url}}) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
+    <block wx:for="{{coupons}}">
+      <view style='width:90%;margin:50rpx auto;background:url(../../../../images/wycx_yhj.png) no-repeat center center;background-size:100% 100%;border-radius:10rpx;' data-servicetypename="{{item.servicetype_name}}" catchtap="select" >
         <view class='box box-f1 padding-tb-20 color-f'>
           <view class='box box-f1 box-ver' style='margin-left:80rpx;'>
-            <view class='box box-f1 font-16 box-ac'>{{item.yhxm}}</view>
+            <view class='box box-f1 font-16 box-ac'>{{item.servicetype_name}}</view>
             <view class='box box-f1 font-14 box-ac'>优惠券</view>
-            <view class='box box-f1 font-10 box-ac'>有效期：{{item.start_item}} ~ {{item.end_item}}</view>
+            <view class='box box-f1 font-10 box-ac'>有效期：{{item.expiry_date}}到期</view>
           </view>
           <view class='box box-ver' style='padding:8rpx 70rpx;'>
             <view class='font-12'>RMB</view>
-            <view class='' style='font-size:80rpx;line-height:70rpx;'>{{item.price}}</view>
+            <view class='' style='font-size:80rpx;line-height:70rpx;'>{{item.denomination}}</view>
           </view>
         </view>
         <view style='height:60rpx;'>
@@ -30,17 +30,17 @@
   </view>
 
   <view style='width:100%;' class='{{isUsed==1?"":"none"}}'>
-    <block wx:for="{{conttent_text}}">
-      <view style='width:90%;margin:50rpx auto;background:url({{item.backImg_url_1}}) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
+    <block wx:for="{{coupons}}">
+      <view style='width:90%;margin:50rpx auto;background:url(../../../../images/wycx_yhj_1.png) no-repeat center center;background-size:100% 100%;border-radius:10rpx;'>
         <view class='box box-f1 padding-tb-20 color-f'>
           <view class='box box-f1 box-ver' style='margin-left:80rpx;'>
-            <view class='box box-f1 font-16 box-ac'>{{item.yhxm}}</view>
+            <view class='box box-f1 font-16 box-ac'>{{item.servicetype_name}}</view>
             <view class='box box-f1 font-14 box-ac'>优惠券</view>
-            <view class='box box-f1 font-10 box-ac'>有效期：{{item.start_item}} ~ {{item.end_item}}</view>
+            <view class='box box-f1 font-10 box-ac'>有效期：{{item.expiry_date}}到期</view>
           </view>
           <view class='box box-ver' style='padding:8rpx 70rpx;'>
             <view class='font-12'>RMB</view>
-            <view class='' style='font-size:80rpx;line-height:70rpx;'>{{item.price}}</view>
+            <view class='' style='font-size:80rpx;line-height:70rpx;'>{{item.denomination}}</view>
           </view>
         </view>
         <view style='height:60rpx;'>

@@ -6,21 +6,21 @@
   <view class='box box-f1 margin-lr-30 box-ver'>
     <view class='box box-f1 box-hor box-ac'>
       <view style='background-image:url(../../../images/hnhk_icon.png)' class='icon-hb'></view>
-      <view class='box box-f1 font-13 margin-l-10 color-3'>海南航空 HU7710</view>
+      <view class='box box-f1 font-13 margin-l-10 color-3'>{{carrier.Flight.CarrierName}} {{carrier.Flight.FlightNo}}</view>
     </view>
     <view class='box box-f1 padding-t-20 box-apc'>
       <view class='box box-ver box-apc box-f1'>
-        <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>07:25</view>
-        <view class='box font-15 padding-tb-10 color-9'>宝安T3</view>
-        <view class='box font-13 color-9'>09-17 星期天</view>
+        <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>{{carrier.Flight.BeginTime}}</view>
+        <view class='box font-15 padding-tb-10 color-9'>{{carrier.Flight.DepCityName}}({{carrier.Flight.BeginTerm}})</view>
+        <view class='box font-13 color-9'>{{carrier.Flight.depDate}} {{carrier.Flight.depWeek}}</view>
       </view>
       <view>
         <image src='../../../images/dd_icon.png' style='width:150rpx;' mode='widthFix'></image>
       </view>
       <view class='box box-ver box-apc box-f1'>
-        <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>07:25</view>
-        <view class='box font-15 padding-tb-10 color-9'>宝安T3</view>
-        <view class='box font-13 color-9'>09-17 星期天</view>
+        <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>{{carrier.Flight.EndTime}}</view>
+        <view class='box font-15 padding-tb-10 color-9'>{{carrier.Flight.ArrCityName}}({{carrier.Flight.EndTerm}})</view>
+        <view class='box font-13 color-9'>{{carrier.Flight.arrDate}} {{carrier.Flight.arrWeek}}</view>
       </view>
     </view>
   </view>
@@ -62,18 +62,13 @@
       <view class='box box-f1 box-ver font-14 margin-l-20'>
         <view class='box box-f1 box-ac'>
           <view style='width:120rpx;' class='color-9'>姓名:</view>
-          <view class='box box-f1 color-3'>周琦</view>
+          <view class='box box-f1 color-3'>{{item.name}}</view>
         </view>
         <view class='box box-f1 margin-t-10'>
-          <view style='width:120rpx;' class='color-9'>身份证:</view>
-          <view class='box box-f1 color-3'>429336 19920912 5896</view>
+          <view style='width:120rpx;' class='color-9'>{{item.certType}}:</view>
+          <view class='box box-f1 color-3'>{{item.cert_no}}</view>
         </view>
       </view>
-    </view>
-    <view class='box box-f1 box-ac padding-tb-25'>
-      <navigator>
-        <view class='tjcjr'>+添加乘机人</view>
-      </navigator>
     </view>
   </view>
 </view>

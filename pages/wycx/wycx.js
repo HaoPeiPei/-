@@ -130,31 +130,6 @@ Page({
    */
   onLoad: function (options) {
     this.initData(options);
-    /* var _this = this;
-    var memberId = app.globalData.memberId;
-    var url = 'weixin/miniprogram/ashx/service.ashx';
-    var action = 'orderPage';
-    var orderId = '201806071000001';
-    var params = {
-      memberId: memberId,
-      action: action,
-      orderId: orderId
-    };
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      if (res.Success) {
-        var id = options.id;
-        _this.setData({
-          id:id
-        });
-        _this.loadServiceImg(id);
-        _this.loadService(id);
-      } else {
-        var id = options.id;
-        wx.navigateTo({
-          url: '../logIndex/logIndex?key=5&id='+id
-        })
-      }
-    });   */
   },
 
   /**

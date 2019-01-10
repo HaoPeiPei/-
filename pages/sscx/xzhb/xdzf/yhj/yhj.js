@@ -21,10 +21,18 @@ Page({
       { backImg_url: "../../../../images/dbc_yhj.png", backImg_url_1: "../../../../images/dbc_yhj_1.png", yhxm: "代泊车", start_item: "2017.08.19", end_item: "2017.09.27", price: "80",}
     ]
   },
-  bindBackChange: function (e) {
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   bindTapChage: function (e) {
     var isUsed = e.currentTarget.dataset.isused;
@@ -49,10 +57,11 @@ Page({
   },
   //加载所有优惠券
   loadCoupon(){
+    var that = this;
     var pages = getCurrentPages();
     var prevPage = pages[pages.length - 2];
     var param = {
-      action: "getservicebyid",
+      action: "getcoupon",
       id: prevPage.data.service.serviceId,
       memberId: app.globalData.memberId,
       isUsed: this.data.isUsed,
@@ -61,13 +70,18 @@ Page({
       wx.hideLoading();
       var  coupons = [];
       if (res.Success) {
-        if (res.Data.length > 0) {
-          coupons = res.Data.map(item=>{
-            var useType = this.getUseType(item);
-            return Object.assign(item,{useType})
-          });
-        } 
-        this.setData({
+        if(res.Data == ''){
+          coupons = [];
+        }else{
+          var coupons = JSON.parse(res.Data);
+          if (coupons.length > 0) {
+            coupons = coupons.map(item=>{
+              var useType = that.getUseType(item);
+              return Object.assign(item,{useType})
+            });
+          } 
+        }
+        that.setData({
           coupons
         });
       } else {
@@ -111,16 +125,15 @@ Page({
       }
     }
   },
+  //初始化页面
+  initData(){
+    this.loadCoupon();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var yhi_gs = options.yhi_gs;
-    console.log(yhi_gs)
-    var _this = this;
-    _this.setData({
-      yhi_gs: yhi_gs
-    })
+    this.initData();
   },
 
   /**

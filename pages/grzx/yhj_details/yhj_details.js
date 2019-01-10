@@ -24,7 +24,7 @@ Page({
         { backImg_url: "../../images/dbc_yhj.png", backImg_url_1: "../../images/dbc_yhj_1.png", yhxm: "代泊车", start_item: "2017.08.19", end_item: "2017.09.27", price: "80", }
       ]
   },
-  bindBackChange: function (e) {
+  catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
@@ -41,19 +41,22 @@ Page({
     var _this = this;
     var params = {
       "action": "coupon",
+      "isUsed": this.data.isUsed,
       "openId": app.globalData.openId 
     }
     httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
+      debugger
       if (res.Success) {
-        if (res.Data.length > 0) {
-          coupons = res.Data.map(item=>{
-            var useType = this.getUseType(item);
+        var obj = JSON.parse(res.Data);
+        if (obj.length > 0) {
+          var  coupons = obj.map(item=>{
+            var useType = _this.getUseType(item);
             return Object.assign(item,{useType})
           });
+          _this.setData({
+            coupons
+          });
         } 
-        this.setData({
-          coupons
-        });
       } else {
         //todo 跳转到登陆页面
         wx.navigateTo({

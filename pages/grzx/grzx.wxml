@@ -17,7 +17,7 @@
         </view>
       </view>
     </view>
-    <view class='box box-f1 box-as font-12'>{{user.UserInfoJson.Mobile}}</view>
+    <view class='box box-f1 box-as font-12'>{{user.Mobile}}</view>
   </view>
   <view class='box box-f1 margin-l-20' wx:else>
     <view class='box box-f1 box-apc'>
@@ -37,7 +37,7 @@
         <image src='{{item.src}}' style='width:60rpx;height:60rpx;'></image>
       </view>
       <view class='box box-f1 box-apc font-12 color-3'>{{item.personalTitle}}
-        <view wx:if='{{item.naber != null }}'>{{item.naber}}张</view>
+        <view wx:if='{{item.personalTitle=="优惠卷" && user.CounponCount != null }}'>{{user.CounponCount}}张</view>
       </view>
     </view>
     </navigator>
@@ -76,15 +76,17 @@
       </navigator>
     </li>
     <li>
-      <view class='li-view box box-f1 box-ac' bindtap='bindListChange' data-list="2">
-        <view class='box margin-r-1'>
-          <image src='../images/yhxy_icon_1.png' class='image-1' />
-        </view>
-        <view class='box box-f1 font-12'>用户协议</view>
-        <view class='box'>
-          <image src='../images/yjt_icon_c.png' class='image-2' />
-        </view>
-      </view>
+      <navigator style='width:100%;' url='yhxy_details/yhxy_details' hover-class='none'>
+          <view class='li-view box box-f1 box-ac'  bindtap='bindListChange' data-list="2">
+            <view class='box margin-r-1'>
+              <image src='../images/yhxy_icon_1.png' class='image-1' />
+            </view>
+            <view class='box box-f1 font-12'>用户协议</view>
+            <view class='box'>
+              <image src='../images/yjt_icon_c.png' class='image-2' />
+            </view>
+          </view>
+      </navigator>
     </li>
     <li wx:if="{{user_rights==0}}">
       <view class='li-view box box-f1 box-ac' bindtap='bindListChange' data-list="3">

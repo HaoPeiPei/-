@@ -2,11 +2,11 @@
 <import src="../template/template.wxml" />
 <view class="airTicketOrder" wx-if="{{airTicketOrderShow}}">
     <view class="header flex font-size-18 b-line c-bg-fff">
-        <i class="back icon-arror-l"></i>
+        <i class="back icon-arror-l" catchtap='catchBackChange'></i>
         <view class="col-1 c-align">
             国内机票下单
         </view>
-        <a href="tel:400-700-7355"><i class="icon-phone"></i></a>
+       <i class="icon-phone" data-phonenumber="400-700-7355" catchtap="telephone"></i>
     </view>
     <view class="main">
         <view class="flight-info" data-model="flightInfoModel">

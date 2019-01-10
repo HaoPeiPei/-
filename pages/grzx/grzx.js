@@ -1,7 +1,7 @@
 // pages/grzx/grzx.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
-var httpRequst = require("../../../utils/requst.js");
+var httpRequst = require("../../utils/requst.js");
 Page({
 
   /**
@@ -11,8 +11,8 @@ Page({
     personal:
     [
       { 'src': '../images/yqm_icon_1.png', 'personalTitle': '邀请码', 'url':'yqm_details/yqm_details'},
-        { 'src': '../images/yhj_icon_1.png', 'personalTitle': '优惠卷', 'naber': '3', 'url': 'yhj_details/yhj_details' },
-      { 'src': '../images/zwkf_icon_1.png', 'personalTitle': '暂未开放', 'url': 'yqm_details/yqm_details' }
+      { 'src': '../images/yhj_icon_1.png', 'personalTitle': '优惠卷', 'url': 'yhj_details/yhj_details' },
+      { 'src': '../images/zwkf_icon_1.png', 'personalTitle': '暂未开放', 'url': '' }
     ],
     login_state:'1', //0 未登录 1登录
     user_rights:"0",  //0 员工版 1用户版 
@@ -33,9 +33,9 @@ Page({
       "openId": app.globalData.openId
     }
     httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
-      if (obj.Success) {
+      if (res.Success) {
         _this.setData({
-          user: JSON.parse(obj.Data)
+          user: JSON.parse(res.Data)
         })
       } else {
         //todo 跳转到登陆页面

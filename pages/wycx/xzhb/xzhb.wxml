@@ -59,9 +59,9 @@
       <view class='box font-15 margin-l-1 color-9'>乘机人</view>
       <view class='box font-11 color-9 box-ae margin-l-1'>已选乘客：
         <text>{{selectPasseners.length}}</text>人</view>
-      <view class='box box-pe box-f1 font-13 '>
+      <!-- <view class='box box-pe box-f1 font-13 '>
         <text class='border-2' bindtap='addPassengers'>+添加乘机人</text>
-      </view>
+      </view> -->
     </view>
     <block class='{{selectPasseners.length==0?"none":""}}' wx:for="{{selectPasseners}}" wx:key="*this">
       <view class='box box-f1 margin-lr-1'>

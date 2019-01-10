@@ -16,7 +16,7 @@ Page({
     },
     user: {}
   },
-  bindBackChange: function () {
+  catchBackChange: function () {
     wx.navigateBack({
       delta: 1
     })
@@ -37,8 +37,8 @@ Page({
       "openId": app.globalData.openId
     }
     httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
-      if (obj.Success) {
-        var user = JSON.parse(obj.Data)
+      if (res.Success) {
+        var user = JSON.parse(res.Data)
         var title = user.UserInfoJson.nickname + "为您推荐了环球机场通,速来领取200元出行大礼包吧!";
         var shareImg = user.UserInfoJson.headimgurl;
         _this.setData({

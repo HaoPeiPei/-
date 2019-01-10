@@ -281,21 +281,18 @@ Page({
     hideFilterModal(){
       this.setData({
         filterModalShow: false,
-        filterActive: false
       });
     },
     //显示筛选弹框
     showFilterModal(){
       this.setData({
         filterModalShow: true,
-        filterActive: true
       });
     },
     //筛选弹框取消
     cancelFilterModal(){
       this.setData({
         filterModalShow: false,
-        filterActive: false
       });
     },
     //筛选弹框确认
@@ -310,22 +307,33 @@ Page({
             displayFlightInfos.push(flightInfos[j])
           }
         }
+        this.setData({
+          displayFlightInfos: displayFlightInfos,
+          filterModalShow: false,
+          filterActive: true
+        });
+      }else{
+        this.cancelFilterModal();
+        this.setData({
+          displayFlightInfos: flightInfos,
+          filterModalShow: false,
+          filterActive: false
+        });
       };
-      this.setData({
-        displayFlightInfos: displayFlightInfos,
-        filterModalShow: false,
-        filterActive: true
-      });
     },
     //筛选弹框清空筛选
     removeAllFilterModal(){
       var carriers = this.data.carriers;
+      var flightInfos = this.data.flightInfos;
       carriers = carriers.map(function(item){
         item['active'] = false;
-        return carriers;
+        return item;
       });
       this.setData({
-        carriers
+        carriers,
+        displayFlightInfos: flightInfos,
+        filterModalShow: false,
+        filterActive: false
       });
     },
     //查看详情

@@ -73,8 +73,8 @@ App({
     wwwRoot: "https://www.51jct.cn",
     imgRoot: "https://www.51jct.cn",
     remoteUrl: "https://www.51jct.cn",
-    memberId:'6711',
-    openid : 'oZDU-wVTjVXuwwKYWsD4f1RuOXYc',
+    memberId:'7530',//6711
+    openId : 'oZDU-wbLV1EJkwy4Xdt-dt7HQIm8',//oZDU-wVTjVXuwwKYWsD4f1RuOXYc
     userInfo: {},
     airportCode:'SZX',
     airportName:'深圳宝安国际机场',

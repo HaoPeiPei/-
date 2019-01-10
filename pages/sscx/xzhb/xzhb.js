@@ -247,8 +247,8 @@ Page({
       });
       httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', param , "POST",function(res){
         wx.hideLoading();
+        var flight = that.data.flight;
         if (res.Status == 1) {
-            var flight = that.data.flight;
             var resFlight = res.FlightInfos[0];
             var resFlight = Object.assign(flight,resFlight);
             var depTime = resFlight.DepTime;
@@ -325,18 +325,30 @@ Page({
   },
   //初始化页面数据
   initData(options){
-    var flight = this.data.flight;
-    flight['startCityName'] = this.getCityName(options.cityCode);
-    var nowDate = new Date();
-    var minDate = nowDate.getTime();
-    var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-    var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
-    this.setData({
-      currentDate: minDate,
-      minDate,
-      maxDate,
-      flight
-    });
+    var serviceId = options.id;
+    var cityCode = options.cityCode;
+    var serviceName = decodeURIComponent(options.serviceName);
+    if (serviceId != null && cityCode != null && serviceName != null) {
+      var flight = this.data.flight;
+      flight['startCityName'] = this.getCityName(cityCode);
+      var nowDate = new Date();
+      var minDate = nowDate.getTime();
+      var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+      var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
+      this.setData({
+        currentDate: minDate,
+        minDate,
+        maxDate,
+        flight,
+        serviceId,
+        serviceName
+      });
+    } else {
+        wx.navigateTo({
+          url: '../../sscx/sscx'
+        })
+    }
+    
   },
   /**
    * 生命周期函数--监听页面加载

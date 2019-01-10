@@ -71,22 +71,17 @@ Page({
         areaList: areaList,
         linkRegionShow: false,
     },
-    //乘机人乘客类型选择
-    pasTypePickerChange(e){
-        var pasTypePicker = Object.assign({},this.data.pasTypePicker,{
-            pickerIndex:  parseInt(e.detail.value) + 1
-        }) ;
-        this.setData({
-            pasTypePicker
-        });
-    },
-    //乘机人乘客类型选择
-    pasCerPickerChange(e){
-        var pasCerPicker = Object.assign({},this.data.pasCerPicker,{
-            pickerIndex:  parseInt(e.detail.value) + 1
-        }) ;
-        this.setData({
-            pasCerPicker
+    //返回
+    catchBackChange: function () {
+        wx.navigateBack({
+            delta: 1
+        })
+    }, 
+    //拨打电话
+    telephone(e){
+        var phoneNumber = e.currentTarget.dataset.phonenumber;
+        wx.makePhoneCall({
+            phoneNumber: phoneNumber
         });
     },
     //初始化数据

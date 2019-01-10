@@ -71,7 +71,7 @@ Page({
       if(res.Success){
         var obj = JSON.parse(res.Data);
         wx.navigateTo({
-          url: 'xzhb/xzhb?id=' + obj.id + '&cityCode=' + obj.airport_code + '&serviceName=' + obj.service_name,
+          url: 'xzhb/xzhb?id=' + obj.id + '&cityCode=' + obj.airport_code + '&serviceName=' + encodeURIComponent(obj.service_name),
         })
       }
     });
@@ -109,35 +109,20 @@ Page({
       });
     });
   },
+  //初始化参数
+  initData(options){
+    var id = options.id;
+    this.setData({
+      id:id
+    });
+    this.loadServiceImg(id);
+    this.loadService(id);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this;
-    var memberId = app.globalData.memberId;
-    var url = 'weixin/miniprogram/ashx/service.ashx';
-    var action = 'orderPage';
-    var orderId = '201806071000001';
-    var params = {
-      memberId: memberId,
-      action: action,
-      orderId: orderId
-    };
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      if (res.Success) {
-        var id = options.id;
-        _this.setData({
-          id:id
-        });
-        _this.loadServiceImg(id);
-        _this.loadService(id);
-      } else {
-        var id = options.id;
-        wx.navigateTo({
-          url: '../logIndex/logIndex?key=6&id='+id
-        })
-      }
-    }); 
+    this.initData(options);
   },
 
   /**
