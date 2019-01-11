@@ -361,7 +361,11 @@ Page({
       });
     } else {
         wx.navigateTo({
+<<<<<<< HEAD
           url: '../wycx'
+=======
+          url: '../../wycx/wycx'
+>>>>>>> wycx
         })
     }
   },

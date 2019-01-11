@@ -75,7 +75,7 @@ Page({
       if(res.Success){
         var obj = JSON.parse(res.Data);
         wx.navigateTo({
-          url: 'xzhb/xzhb?id=' + obj.id + '&cityCode=' + obj.airport_code + '&serviceName=' + obj.service_name,
+          url: 'xzhb/xzhb?id=' + obj.id + '&cityCode=' + obj.airport_code + '&serviceName=' + encodeURIComponent(obj.service_name),
         })
       }
     });

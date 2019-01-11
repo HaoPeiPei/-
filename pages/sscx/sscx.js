@@ -33,11 +33,19 @@ Page({
     id:'',
     key:""
   },
+  //返回
   catchBackChange: function () {
     wx.navigateBack({
       delta: 1
     })
   }, 
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
+  },
   bindChageTk:function(e){
     var key = e.currentTarget.dataset.key
     var inBind = this.data.inBind

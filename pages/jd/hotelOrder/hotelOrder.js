@@ -94,7 +94,7 @@ Page({
     }
     //优惠金额
     var disAmount = 0;
-    if (JSON.stringify(this.data.coupon) != '{}') {
+    if (this.data.coupon != null) {
         disAmount = this.data.coupon.denomination;
     }
     var totalPrice = price - disAmount;
@@ -107,6 +107,7 @@ Page({
   },
   //加载优惠券张数
   loadCouponCount(){
+    var that = this;
     wx.showLoading({
       title: '数据加载中...',
     });
@@ -120,7 +121,7 @@ Page({
       if (res.Success) {
         if (parseInt(res.Data) > 0) {
           var couponCount = res.Data; 
-          this.setData({
+          that.setData({
             couponCount
           });    
         }
@@ -137,13 +138,16 @@ Page({
   },
   //切换优惠券
   couponSelect: function (e) {
+    if(this.data.couponCount == 0){
+      return
+    }
     var couponType = (e.currentTarget.dataset.coupontype == 1 ? 0: 1);
     if(couponType == 1){
       wx.navigateTo({
         url: 'yhj/yhj',
       });
     }else{
-      coupon = {};
+      var coupon = null;
       this.setData({
         coupon
       });
@@ -155,9 +159,9 @@ Page({
   },
   //输入联系人，手机号
   bindinput(e){
-    var name = e.currentTarget.dataset.name;
+    var id = e.currentTarget.id;
     this.setData({
-      [name]: e.detail.value
+      [id]: e.detail.value
     })
   },
   //去支付
@@ -176,7 +180,7 @@ Page({
       });
       return false;
     }
-    if (this.data.contacttel == "") {
+    if (this.data.contactTel == "") {
       wx.showToast({
         title: '请填写联系方式',
         icon: 'none'
@@ -185,7 +189,7 @@ Page({
     }
     else {
         var myreg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
-        if (!myreg.test(this.data.contacttel)) {
+        if (!myreg.test(this.data.contactTel)) {
           wx.showToast({
             title: '请输入有效的手机号码',
             icon: 'none'
@@ -203,7 +207,7 @@ Page({
     orderModel.TotalPrice = this.data.totalPrice;
     orderModel.MemberId = app.globalData.memberId;
     orderModel.Contactor = this.data.contactor;
-    orderModel.ContactTel = this.data.contacttel;
+    orderModel.ContactTel = this.data.contactTel;
     wx.showLoading({
       title: '数据加载中...',
     });

@@ -22,11 +22,16 @@ Page({
     isShare: 0,
     couponCount: 0,
     totalPrice: 0,
+<<<<<<< HEAD:pages/wycx/xdzf/xdzf.js
     rechargeAmount : 0,//充值余额
     presentAmonut  : 0,//充值余额
     payType: 0, //支付方式 1:微信、0:钱包支付
     contactor: app.globalData.user.realName,
     contactTel: app.globalData.user.mobile,
+=======
+    contactor: "",
+    contactTel: "",
+>>>>>>> wycx:pages/sscx/xzhb/xdzf/xdzf.js
     position: "随机",
     area: "左侧前方",
   },
@@ -53,6 +58,16 @@ Page({
       phoneNumber: phoneNumber
     });
   },
+<<<<<<< HEAD:pages/wycx/xdzf/xdzf.js
+=======
+  bindQyxzChange:function(){
+    var position = this.data.position;
+    var area = this.data.area;
+    wx.navigateTo({
+        url: 'region/region?position='+position+'&area='+area,
+    });
+  },
+>>>>>>> wycx:pages/sscx/xzhb/xdzf/xdzf.js
   //初始化数据
   initData(options){
     var carrier = JSON.parse(options.bookInfo);

@@ -8,7 +8,11 @@
   </view>
   <view style='width:100%;' class='{{isUsed==0?"":"none"}}'>
     <block wx:for="{{coupons}}">
+<<<<<<< HEAD:pages/sscx/yhj/yhj.wxml
       <view style='width:90%;margin:50rpx auto;background:url(../../images/wycx_yhj.png) no-repeat center center;background-size:100% 100%;border-radius:10rpx;' data-servicetypename="{{item.servicetype_name}}" catchtap="select" >
+=======
+      <view style='width:90%;margin:50rpx auto;background:url(../../../../images/wycx_yhj.png) no-repeat center center;background-size:100% 100%;border-radius:10rpx;' data-servicetypename="{{item.servicetype_name}}" catchtap="select" >
+>>>>>>> wycx:pages/wycx/xzhb/xdzf/yhj/yhj.wxml
         <view class='box box-f1 padding-tb-20 color-f'>
           <view class='box box-f1 box-ver' style='margin-left:80rpx;'>
             <view class='box box-f1 font-16 box-ac'>{{item.servicetype_name}}</view>
@@ -31,7 +35,11 @@
 
   <view style='width:100%;' class='{{isUsed==1?"":"none"}}'>
     <block wx:for="{{coupons}}">
+<<<<<<< HEAD:pages/sscx/yhj/yhj.wxml
       <view style='width:90%;margin:50rpx auto;background:url(../../images/wycx_yhj_1.png) no-repeat center center;background-size:100% 100%;border-radius:10rpx;'>
+=======
+      <view style='width:90%;margin:50rpx auto;background:url(../../../../images/wycx_yhj_1.png) no-repeat center center;background-size:100% 100%;border-radius:10rpx;'>
+>>>>>>> wycx:pages/wycx/xzhb/xdzf/yhj/yhj.wxml
         <view class='box box-f1 padding-tb-20 color-f'>
           <view class='box box-f1 box-ver' style='margin-left:80rpx;'>
             <view class='box box-f1 font-16 box-ac'>{{item.servicetype_name}}</view>
