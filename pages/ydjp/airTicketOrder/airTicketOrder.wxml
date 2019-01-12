@@ -248,7 +248,7 @@
 
 <template is="hintModal" data="{{hintModalShow}}" />
 
-<!-- <template is="worryFreeModal" data="{{worryFreeModalShow,worryFreeType,...ser}}" /> -->
+<template is="jsAlertModal" data="{{jsAlertModalShow}}" />
 
 <template is="mulLineModal" data="{{mulLineModalShow,flightInfos}}" />
 

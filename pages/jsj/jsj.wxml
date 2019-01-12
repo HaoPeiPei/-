@@ -20,42 +20,61 @@
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>机场名称</view>
       <view class='box box-f1 border-b-1 color-3 box-ac' style='padding:40rpx 0rpx;'>深圳宝安国际机场T3航站楼</view>
     </view>
-    <view class='box box-f1 margin-lr-1 font-14'>
+    <view class='box box-f1 margin-lr-1 font-14 '>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>航班号</view>
-      <view class='box box-f1 border-b-1 color-3' style='padding:40rpx 0rpx;'>
-        <input type='text' placeholder='请输入航班号' bindblur='inputBlur' style='width:100%' />
+      <view class='box box-f1 color-3 border-b-1' style='padding:40rpx 0rpx;'>
+        <input type='text' placeholder='请输入航班号' bindblur='inputBlur' style='width:100%' value="{{flightNo}}" />
       </view>
     </view>
-    <view class='box box-f1 margin-lr-1 font-14'>
+    <view class='box box-f1 margin-lr-1 font-14 '>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>到达时间</view>
-      <view class='box box-f1 border-b-1 color-3' style='padding:40rpx 0rpx;'>
-        <picker mode="date" start="2018-05-22" end="2018-12-30" style='width:100%;' bindchange='bindDateChage'>
-          <input type='text' placeholder='请选择航班时间' style='width:100%' value='{{flyDate}}'/>
-        </picker>
+      <view class='box box-f1 color-3 border-b-1' style='padding:40rpx 0rpx;'>
+        <view class='box box-f1 color-3'>
+          <view class='box box-f1 color-3 box-ac' >
+            <van-popup show="{{flyDateShow}}" position="bottom" >
+              <van-datetime-picker 
+                type="date"
+                value="{{flyDatecurrentDate}}"
+                min-date="{{minDate}}"
+                max-date="{{maxDate}}"
+                bind:confirm="flyDatePopconfirm"
+                bind:cancel="flyDateCancel"
+                title=""
+              />
+            </van-popup>
+            <view class='box box-f1 color-3' bindtap='flyDateChange'>
+              <input type='text' placeholder='请选择航班时间' style='width:100%' value="{{flyDate}}" />
+            </view>
+            <i class="icon-arror-r"></i>
+          </view>
+        </view>
       </view>
     </view>
-    <view class='box box-f1 margin-lr-1 font-14'>
+    <view class='box box-f1 margin-lr-1 font-14 box-ac'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>送达地点</view>
       <view class='box box-f1 border-b-1 color-3' style='padding:40rpx 0rpx;' bindtap='bindMapChage'>
         <input type='text' placeholder='请输入送达地点' style='width:100%' value="{{address}}" />
       </view>
+      <i class="icon-arror-r font-15"></i>
     </view>
-    <view class='box box-f1 margin-lr-1 font-14'>
+    <view class='box box-f1 margin-lr-1 font-14 box-ac'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车时间</view>
       <view class='box box-f1 color-3' style='padding:40rpx 0rpx;'>
         <van-popup show="{{useDateShow}}" position="bottom" >
           <van-datetime-picker 
             type="datetime"
-            value="{{currentDate}}"
+            value="{{useDatecurrentDate}}"
             min-date="{{minDate}}"
             max-date="{{ maxDate }}"
             bind:confirm="useDatePopconfirm"
+            bind:cancel="useDateCancel"
             title="请输入用车日期"
           />
         </van-popup>
         <view class='box box-f1 color-3' bindtap='useDateChange'>
           <input type='text' placeholder='请输入用车日期' style='width:100%' value="{{useDate}}" />
         </view>
+        <i class="icon-arror-r font-15"></i>
       </view>
     </view>
     <view class='height-10'></view>
@@ -64,46 +83,63 @@
 
   <!--送机  -->
   <view class='box box-f1 backgd-f box-ver {{tripType==2?"":"none"}}'>
-    <view class='box box-f1 margin-lr-1 font-14'>
+    <view class='box box-f1 margin-lr-1 font-14 border-b-1'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>机场名称</view>
-      <view class='box box-f1 border-b-1 color-3 box-ac' style='padding:40rpx 0rpx;'>深圳宝安国际机场T3航站楼</view>
+      <view class='box box-f1 color-3 box-ac' style='padding:40rpx 0rpx;'>深圳宝安国际机场T3航站楼</view>
     </view>
     <view class='box box-f1 margin-lr-1 font-14'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>航班号</view>
-      <view class='box box-f1 border-b-1 color-3' style='padding:40rpx 0rpx;'>
-        <input type='text' placeholder='请输入航班号' bindblur='inputBlur'  style='width:100%' />
+      <view class='box box-f1 color-3 border-b-1' style='padding:40rpx 0rpx;'>
+        <input type='text' placeholder='请输入航班号' bindblur='inputBlur'  style='width:100%' value="{{flightNo}}"/>
       </view>
     </view>
     <view class='box box-f1 margin-lr-1 font-14'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>出发时间</view>
-      <view class='box box-f1 border-b-1 color-3' style='padding:40rpx 0rpx;'>
-        <picker mode="date" start="2018-05-22" end="2018-12-30" style='width:100%;' bindchange='bindDateChage'>
-          <input type='text' placeholder='请选择航班时间' style='width:100%' value='{{flyDate}}'/>
-        </picker>
+      <view class='box box-f1 color-3 border-b-1' style='padding:40rpx 0rpx;'>
+        <view class='box box-f1 color-3 box-ac' >
+          <van-popup show="{{flyDateShow}}" position="bottom" >
+            <van-datetime-picker 
+              type="date"
+              value="{{flyDatecurrentDate}}"
+              min-date="{{minDate}}"
+              max-date="{{maxDate}}"
+              bind:confirm="flyDatePopconfirm"
+              bind:cancel="flyDateCancel"
+              title=""
+            />
+          </van-popup>
+          <view class='box box-f1 color-3' bindtap='flyDateChange'>
+            <input type='text' placeholder='请选择航班时间' style='width:100%' value="{{flyDate}}" />
+          </view>
+          <i class="icon-arror-r"></i>
+        </view>
       </view>
     </view>
-    <view class='box box-f1 margin-lr-1 font-14'>
+    <view class='box box-f1 margin-lr-1 font-14 box-ac'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>乘车地点</view>
-      <view class='box box-f1 border-b-1 color-3' style='padding:40rpx 0rpx;' bindtap='bindMapChage'>
-        <input type='text' placeholder='请输入送达地点' style='width:100%' value="{{address}}"/>
+      <view class='box box-f1  color-3 border-b-1' style='padding:40rpx 0rpx;' bindtap='bindMapChage'>
+        <input type='text' placeholder='请输入送达地点' style='width:100%' value="{{addressName}}"/>
       </view>
+      <i class="icon-arror-r font-15"></i>
     </view>
-    <view class='box box-f1 margin-lr-1 font-14'>
+    <view class='box box-f1 margin-lr-1 font-14 box-ac'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>用车时间</view>
       <view class='box box-f1 color-3 ' style='padding:40rpx 0rpx;'>
         <van-popup show="{{useDateShow}}" position="bottom" >
           <van-datetime-picker 
             type="datetime"
-            value="{{currentDate}}"
+            value="{{useDatecurrentDate}}"
             min-date="{{minDate}}"
             max-date="{{ maxDate }}"
             bind:confirm="useDatePopconfirm"
+            bind:cancel="useDateCancel"
             title="请输入用车日期"
           />
         </van-popup>
         <view class='box box-f1 color-3' bindtap='useDateChange'>
           <input type='text' placeholder='请输入用车日期' style='width:100%' value="{{useDate}}" />
         </view>
+        <i class="icon-arror-r font-15"></i>
       </view> 
     </view>
     <view class='height-10'></view>

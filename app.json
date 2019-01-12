@@ -4,11 +4,10 @@
     "pages/index/index",
 
     "pages/wycx/xzhb/xzhb",
-    "pages/wycx/xzhb/xdzf/xdzf",
-    "pages/wycx/xzhb/xdzf/yhj/yhj",
-    "pages/wycx/xzhb/xdzf/qyxz/qyxz",
-    "pages/wycx/xzhb/addList/addList",
-    "pages/wycx/xzhb/addList/addList_page/addList_page",
+    "pages/wycx/xdzf/xdzf",
+    "pages/wycx/yhj/yhj",
+    "pages/wycx/region/region",
+    "pages/wycx/addPassengers/addPassengers",
 
     
     "pages/index/ydjp/ydjp",
@@ -56,11 +55,10 @@
     
     "pages/sscx/sscx",
     "pages/sscx/xzhb/xzhb",
-    "pages/sscx/xzhb/xdzf/xdzf",
-    "pages/sscx/xzhb/xdzf/yhj/yhj",
-    "pages/sscx/xzhb/xdzf/qyxz/qyxz",
-    "pages/sscx/xzhb/addList/addList",
-    "pages/sscx/xzhb/addList/addList_page/addList_page",
+    "pages/sscx/xdzf/xdzf",
+    "pages/sscx/yhj/yhj",
+    "pages/sscx/region/region",
+    "pages/sscx/addPassengers/addPassengers",
 
     "pages/jsj/jsj",
     "pages/jsj/map/map",

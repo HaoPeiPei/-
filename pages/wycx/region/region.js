@@ -33,7 +33,6 @@ Page({
   initData(options){
     var position = options.position;
     var area = options.area;
-    var serviceType = options.serviceType;
     var key = this.data.key;
     var types = this.data.types;
     if(position == '靠窗'){
@@ -60,8 +59,7 @@ Page({
       wz: position,
       qy: area,
       key,
-      types,
-      serviceType
+      types
     })
   },
   bindBackChange: function (e) {
@@ -88,21 +86,12 @@ Page({
   bindQrChange: function () {
     var wz = this.data.wz;
     var qy = this.data.qy;
-    var serviceType = this.data.serviceType;
     var pages = getCurrentPages();
-    var currPage = pages[pages.length - 1]; //当前页
     var prevPage = pages[pages.length - 2]; //上一个页面
-    if(serviceType == 'singleService'){
-      prevPage.setData({
-        singlePosition: wz,
-        singleArea: qy,
-      });
-    }else if(serviceType == 'roundService'){
-      prevPage.setData({
-        roundPosition: wz,
-        roundArea: qy,
-      });
-    }
+    prevPage.setData({
+      position: wz,
+      area: qy,
+    });
     
     wx.navigateBack({
       delta: 1

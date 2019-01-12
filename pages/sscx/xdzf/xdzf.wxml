@@ -1,0 +1,172 @@
+<!--pages/wycx/xzhb/xdzf/xdzf.wxml-->
+<import src="../../../template/template.wxml" />
+
+<template is="header_content_noBackod" data="{{...header_text}}" />
+<view class='box box-f1 backgd-f padding-tb-25'>
+  <view class='box box-f1 margin-lr-30 box-ver'>
+    <view class='box box-f1 box-hor box-ac'>
+      <i class="icon-information font-20"></i>
+      <view class='box box-f1 font-13 margin-l-10 color-3'>{{carrier.FlightInfo.CarrierName}} {{carrier.FlightNo}}</view>
+    </view>
+    <view class='box box-f1 padding-t-20 box-apc'>
+      <view class='box box-ver box-apc box-f1'>
+        <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>{{carrier.FlightInfo.depTime}}</view>
+        <view class='box font-15 padding-tb-10 color-9'>{{carrier.FlightInfo.DepCityName}}</view>
+        <view class='box font-13 color-9'>{{carrier.FlightInfo.depDate}} {{carrier.FlightInfo.depWeek}}</view>
+      </view>
+      <view >
+        <image src='../../images/dd_icon.png' style='width:150rpx;' mode='widthFix'></image>
+      </view>
+      <view class='box box-ver box-apc box-f1'>
+        <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>{{carrier.FlightInfo.arrTime}}</view>
+        <view class='box font-15 padding-tb-10 color-9'>{{carrier.FlightInfo.ArrCityName}}</view>
+        <view class='box font-13 color-9'>{{carrier.FlightInfo.arrDate}} {{carrier.FlightInfo.arrWeek}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--区域选择  -->
+<view class='box box-f1 margin-t-10 backgd-f'>
+    <view class='box box-f1 margin-lr-30 box-ver color-3'>
+      <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1'>
+        <i class="icon-trip ico-spac font-15"></i>
+        <view class='box box-f1 font-15 margin-l-10 color-3'>区域选择</view>
+      </view>
+      <view class='box box-f1 box-hor box-ac padding-tb-25 font-13 ' bindtap='areaSelect'>
+        <view class='box box-f1' style='margin-left:40rpx;'>
+          <text>{{position}}</text>
+          <text class='margin-l-20'> {{area}}</text>
+        </view>
+        <view class='box box-ac'>
+          <image src='../../images/yjt_icon_c.png' style='width:16rpx;margin-top:6rpx;' mode='widthFix'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+<!--乘机人  -->
+<view class='box box-f1 margin-t-10 backgd-f'>
+  <view class='box box-f1 margin-lr-30 box-ver color-3'>
+    <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1'>
+      <i class="icon-luckyMan ico-spac font-20 c-999"></i>
+      <view class='box box-f1 box-ae'>
+        <view class='box font-14 margin-l-10 color-3'>乘机人</view>
+        <view class='box box-f1 font-12 color-3' style='margin-left:30rpx;'>已选乘客：
+          <text>{{carrier.PassengerInfo.length}}</text>人</view>
+      </view>
+    </view>
+    <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1' style='margin-left:40rpx;'>
+      <view class='box box-f1 box-ver font-14 margin-l-20' wx:for="{{carrier.PassengerInfo}}" wx:key="*this">
+        <view class='box box-f1 box-ac'>
+          <view style='width:120rpx;' class='color-9'>姓名:</view>
+          <view class='box box-f1 color-3'>{{item.name}}</view>
+        </view>
+        <view class='box box-f1 margin-t-10'>
+          <view style='width:120rpx;' class='color-9'>{{item.certType}}:</view>
+          <view class='box box-f1 color-3'>{{item.cert_no}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--联系人  -->
+<view class='box box-f1 margin-t-10  backgd-f'>
+  <view class='box box-f1 margin-lr-30 box-ver color-3'>
+    <view class='box box-f1 box-hor box-ac border-b-1 padding-tb-25'>
+      <i class="icon-contacts font-20 c-999"></i>
+      <view class='box box-f1 font-15 margin-l-10 color-3'>
+        <view style='width:120rpx;color:#999999;'>联系人</view>
+        <input type="text" class='box box-f1' id="contactor" bindinput="bindinput" value="{{contactor}}" />
+      </view>
+    </view>
+    <view class='box box-f1 font-15 padding-tb-25 color-3' >
+        <i class="icon-phone font-15 c-999"></i>
+        <view style='width:120rpx;color:#999999;'>手机号</view>
+        <input type="text" class='box box-f1' id='contactTel'  bindinput="bindinput" value="{{contactTel}}" />
+    </view>
+  </view>
+</view>
+
+<!--优惠券  -->
+<view class='box box-f1 backgd-f margin-t-10'>
+  <view class='box box-f1 box-ver margin-lr-30'>
+    <view class='box box-f1 box-ac padding-tb-20'>
+      <i class="icon-coupon font-20 c-999"></i>
+      <view class='box box-f1 box-ac font-15 margin-l-10' >
+        <view class='color-9' style='width:120rpx;'>优惠券</view>
+        <view class='yhj-back {{couponCount > 0?"yy":""}}'>{{couponCount}}张</view>
+      </view>
+      <view class='box box-pe box-ac'>
+        <text class="switch {{couponType==1?'on':''}}" data-coupontype="{{couponType}}" catchtap="couponSelect">
+            <text class="switch-node"></text>
+        </text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--特惠购  -->
+<view class='box box-f1 backgd-f margin-t-10'>
+  <view class='box box-f1 box-ver margin-lr-30'>
+    <view class='box box-f1 box-ac padding-tb-20'>
+      <i class="icon-preferential font-20 c-f4393c"></i>
+      <view class='box box-f1 box-ae font-15 margin-l-10 color-3'>
+        <view class='' style='width:120rpx;'>特惠购</view>
+        <view class='box box-ae font-12'>每人立减20元</view>
+      </view>
+      <view class='box box-pe box-ac'>
+        <text class="switch {{salesType==1?'on':''}}" data-salestype="{{salesType}}" catchtap="salesSelect">
+            <text class="switch-node"></text>
+        </text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--支付方式  -->
+<view class='box box-f1 backgd-f margin-t-10' style='margin-bottom:110rpx;'>
+  <view class='box box-f1 box-ver margin-lr-30'>
+    <view class='box box-f1 box-ac padding-tb-25 border-b-1'>
+      <i class="icon-payment font-20 c-f4393c"></i>
+      <view class='box box-f1 box-ac font-15 margin-l-10'>
+        <view class='color-9' style='width:120rpx;'>支付方式</view>
+      </view>
+    </view>
+    <view class='box box-f1 font-15 box-ac padding-tb-20' style='margin-left:40rpx;'>
+      <view class='color-9' style='width:120rpx;'>微信支付</view>
+       <view class='box box-f1 box-ac'>
+        <view style='background:url(../../images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
+      </view> 
+      <view class='box box-pe box-ac'>
+        <text class="switch {{payType==1?'on':''}}" data-paytype="{{payType}}" catchtap="payTypeSelect">
+            <text class="switch-node"></text>
+        </text>
+      </view>
+    </view>
+    <view class='box box-f1 font-15 box-ac padding-tb-20' style='margin-left:40rpx;'>
+      <view class='color-9' style='width:120rpx;'>钱包支付</view>
+       <view class='box box-f1 box-ac'>
+        <view style='background:url(../../images/con_wallet@3x.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
+      </view> 
+      <view class='box box-pe box-ac'>
+        <text class="switch {{payType==0?'on':''}}" data-paytype="{{payType}}" catchtap="payTypeSelect">
+            <text class="switch-node"></text>
+        </text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view style='position:fixed;bottom:0;width:100%;z-index: 9999;'>
+  <view class='box box-f1 box-ac backod-2'>
+    <view class='box box-f1 box-ver backod-1 padding-tb-2'>
+      <view class='box box-f1 font-13 color-f4 margin-l-1'>￥:
+        <text class='font-18'>{{totalPrice}}</text>
+      </view>
+      <view class='box box-f1 font-13 color-f  margin-l-1'>应付金额</view>
+    </view>
+    <view style='font-size:30rpx;color:#ffffff;padding:0rpx 100rpx;' bindtap='pay'>去支付</view>
+  </view>
+</view>

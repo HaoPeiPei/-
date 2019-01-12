@@ -33,7 +33,7 @@
               <view class='box box-f1'>{{item.name}}</view>
             </view>
             <view class='box box-f1 padding-tb-2'>
-              <view style='width:140rpx'>身份证：</view>
+              <view style='width:140rpx'>{{item.certType}}:</view>
               <view class='box box-f1'>{{item.cert_no}}</view>
             </view>
           </view>

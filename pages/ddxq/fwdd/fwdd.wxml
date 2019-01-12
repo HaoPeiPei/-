@@ -10,7 +10,7 @@
 </view>
 <!--全部订单  -->
 <view  wx:if="{{status==''}}">
-  <scroll-view style='width：100%;height:1350rpx;' bindscrolltolower="searchScrollLower" scroll-y>
+  <scroll-view style='width:100%;height:1350rpx;' bindscrolltolower="searchScrollLower" scroll-y>
   <block wx:for="{{orderList_1}}" wx:key="*this">
     <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
       <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>

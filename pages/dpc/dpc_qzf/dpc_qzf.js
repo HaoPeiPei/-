@@ -34,21 +34,18 @@ Page({
     orderId: "",
     order: {},
   },
-  bindBack:function(){
-    wx.showModal({
-      title: '温馨提示',
-      content: '您的订单未完成支付，如果现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回？',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-          wx.navigateBack({
-            delta:1
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
+  //返回
+  catchBackChange: function (e) {
+    wx.navigateBack({
+      delta: 1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   //初始化参数
   initData(options){

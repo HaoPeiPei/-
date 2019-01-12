@@ -263,6 +263,7 @@
     <view id="js-alert-box" class="c-bg-000 flex {{jsAlertModalShow?'':'none'}}">
 		<view class="alert-box">
 			<view id="alert_head" class="alert-head">
+                <view class="svg" width="104" height="104" ></view>           
 				<view id="js-sec-text" class="alert-sec-text"></view>
 			</view>
 			<view class="alert-body">

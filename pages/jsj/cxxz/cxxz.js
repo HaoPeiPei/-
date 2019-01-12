@@ -149,11 +149,11 @@ Page({
   //预定
   book:function(e){
     var VehicleType = e.currentTarget.dataset.vehicletype;
-    var VehicPriceleType = e.currentTarget.dataset.price;
+    var Price = e.currentTarget.dataset.price;
     var AddServices = e.currentTarget.dataset.addservices;
     var bookModel = {};
     bookModel.BookInfo = JSON.parse(this.data.queryInfo);
-    bookModel.PriceInfo = Object.assign({},{VehicleType, VehicPriceleType, AddServices});;
+    bookModel.PriceInfo = Object.assign({},{VehicleType, Price, AddServices});;
     bookModel.PriceMark = this.data.priceMark;
     wx.navigateTo({
       url: 'ddxq/ddxq?bookInfo='+encodeURIComponent(JSON.stringify(bookModel)),

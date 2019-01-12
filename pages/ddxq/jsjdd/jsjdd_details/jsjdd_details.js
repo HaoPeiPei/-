@@ -68,7 +68,7 @@ Page({
         if (res.confirm) {
           var memberId = app.globalData.memberId;
           var action = "cancel";
-          var url = "weixin/miniprogram/ashx/rentcar.ashx"
+          var url = "/weixin/jctnew/ashx/rentcar.ashx"
           var params={
             memberId: memberId,
             action: action,
@@ -106,7 +106,7 @@ Page({
         if (res.confirm) {
           var memberId = app.globalData.memberId;
           var action = "cancel";
-          var url = "weixin/miniprogram/ashx/rentcar.ashx"
+          var url = "/weixin/jctnew/ashx/rentcar.ashx"
           var params = {
             memberId: memberId,
             action: action,

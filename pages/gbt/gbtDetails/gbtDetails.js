@@ -41,10 +41,18 @@ Page({
       url: 'qrdd/qrdd?id='+this.data.service.id,
     })
   },
+  //返回
   catchBackChange:function(){
     wx.navigateBack({
       delta:1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   //初始化页面数据
   initData(options){

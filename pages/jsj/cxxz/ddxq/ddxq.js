@@ -38,8 +38,8 @@ Page({
     toAddress: '',
     useTime: '',
     totalPrice: 0,
-    contactor: '',
-    contacttel: '',
+    contactor: app.globalData.user.realName,
+    contactTel: app.globalData.user.mobile,
   },
   bindBackChange:function(e){
     wx.showModal({
@@ -98,6 +98,7 @@ Page({
         toAddress,
         useTime,
         totalPrice,
+        carType
       })
     }
     else {
@@ -119,7 +120,7 @@ Page({
   },
   //输入联系人，手机号
   bindinput(e){
-    var name = e.currentTarget.dataset.name;
+    var id = e.currentTarget.id;
     this.setData({
       [name]: e.detail.value
     })
@@ -132,7 +133,7 @@ Page({
       });
       return false;
     }
-    if (!mobileReg.test(this.data.contacttel)) {
+    if (!mobileReg.test(this.data.contactTel)) {
       wx.showToast({
         title: "请输入正确的联系方式",
         icon: 'none'
@@ -142,7 +143,7 @@ Page({
     return true;
   },
   //支付
-  par(){
+  pay(){
     if(this.check()){
       this.createOrder();
     }
@@ -167,7 +168,7 @@ Page({
       use_date: bookModel.BookInfo.useDate, 
       total_count: this.data.key, 
       contact_name: this.data.contactor, 
-      contact_tel: this.data.contacttel, 
+      contact_tel: this.data.contactTel, 
       pay_amount_due: bookModel.PriceInfo.Price, 
       vehicle_type: bookModel.PriceInfo.VehicleType, 
       price_mark: bookModel.PriceMark 

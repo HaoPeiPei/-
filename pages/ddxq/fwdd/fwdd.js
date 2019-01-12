@@ -11,7 +11,7 @@ Page({
     header_text: {
       "left_icon": "../../images/back-b.png",
       "title_text": "订单管理",
-      "right_icon": "",
+      "right_icon": "../../images/dh-b.png",
     },
     key: 0,
     orderList_1:[], //放置返回数据的数组
@@ -21,7 +21,19 @@ Page({
     status: '', //设置的条件
     memberId: '',
     action: 'orderPage',
-    url: '/weixin/jctnew/ashx/service.ashx',
+  },
+  //返回
+  catchBackChange: function (e) {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   loadingOrderList: function () {
     var _this = this;
@@ -37,6 +49,7 @@ Page({
       "userid": memberId,
       "action": "orderPage"
     };
+    var url = "/weixin/jctnew/ashx/service.ashx";
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
       if (res.Data == '0') {
         wx.showLoading({
@@ -69,11 +82,6 @@ Page({
         wx.hideLoading()
       }, 2000)
     });
-  },
-  catchBackChange: function() {
-    wx.navigateBack({
-      delta: 1,
-    })
   },
   bindNavChange: function (e) {
     var status = e.currentTarget.dataset.status;

@@ -63,7 +63,7 @@ Page({
   catchLjyy:function(){
     var _this = this;
     var id = _this.data.id;
-    var url = "weixin/miniprogram/ashx/service.ashx";
+    var url = "/weixin/jctnew/ashx/service.ashx";
     var memberId = app.globalData.memberId;
     var params = { action: "getservicebyid", id: id, memberId: memberId };
 
@@ -80,7 +80,7 @@ Page({
   loadServiceImg:function(id){
     var _this = this;
     var header_text = _this.data.header_text;
-    var url = "weixin/miniprogram/ashx/service.ashx";
+    var url = "/weixin/jctnew/ashx/service.ashx";
     var memberId = app.globalData.memberId;
     var params = { action: "getserviceimg", id: id, memberId: memberId };
 
@@ -99,7 +99,7 @@ Page({
   //载入服务
   loadService:function(id){
     var _this = this;
-    var url = "weixin/miniprogram/ashx/service.ashx";
+    var url = "/weixin/jctnew/ashx/service.ashx";
     var memberId = app.globalData.memberId;
     var params = {action: "getservicebyid", id: id, memberId: memberId};
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {

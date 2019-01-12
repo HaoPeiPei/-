@@ -76,6 +76,10 @@ App({
     memberId:'7530',//6711
     openId : 'oZDU-wbLV1EJkwy4Xdt-dt7HQIm8',//oZDU-wVTjVXuwwKYWsD4f1RuOXYc
     userInfo: {},
+    user: {
+      realName: '沛',
+      mobile: '18971570000',
+    },
     airportCode:'SZX',
     airportName:'深圳宝安国际机场',
   },

@@ -51,7 +51,7 @@ Page({
     var that = this;
     var memberId = app.globalData.memberId;
     wx.request({
-      url: wwwRoot + "/weixin/miniprogram/ashx/service.ashx",
+      url: wwwRoot + "/weixin/jctnew/ashx/service.ashx",
       data: {
         memberId: app.globalData.memberId,
         action: "getorderbyid",

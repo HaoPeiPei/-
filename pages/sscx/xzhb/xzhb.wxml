@@ -1,7 +1,7 @@
 <!--pages/sscx/xzhb/xzhb.wxml-->
 <import src="../../../template/template.wxml" />
 <!-- 添加航班信息 -->
-<view class='wrap' wx:if='{{inBind_1}}'>
+<view class='wrap'>
   <template is="header_content_noBackod" data="{{...header_text_1}}" />
   <view class='box box-f1 backgd-f box-ver' style='margin-bottom:80rpx;'>
     <view class='box box-f1 border-b-1 margin-lr-1 box-ac padding-tb-1'>
@@ -60,7 +60,8 @@
       <view class='' style='background:url(../../images/hbxx_icon.png) no-repeat center center;background-size:cover;width:30rpx;height:30rpx;'></view>
       <view class='box font-15 margin-l-1 color-9'>乘机人</view>
       <view class='box font-11 color-9 box-ae margin-l-1'>已选乘客：
-        <text>{{selectPasseners.length}}</text>人</view>
+        <text>{{selectPasseners.length}}</text>人
+      </view>
       <view class='box box-pe box-f1 font-13 '>
         <text class='border-2' bindtap='addPassengers'>+添加乘机人</text>
       </view>
@@ -75,7 +76,7 @@
               <view class='box box-f1 color-3'>{{item.name}}</view>
             </view>
             <view class='box box-f1 box-hor margin-l-1 padding-tb-2'>
-              <view class='left-title-1 color-9'>身份证：</view>
+              <view class='left-title-1 color-9'>{{item.certType}}:</view>
               <view class='box box-f1 color-3'>{{item.cert_no}}</view>
             </view>
           </view>

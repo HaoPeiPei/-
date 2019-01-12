@@ -83,6 +83,7 @@ Page({
       var data = JSON.parse(res.Data);
       selectPasseners = [];
       for (var j = 0; j < data.length; j++) {
+        data[j]['certType'] = that.getCertType(data[j]);
         if(selectPassenerIds.indexOf(data[j]['id'])!=-1){
           selectPasseners = selectPasseners.concat(data[j]);
           data[j]['active'] = true;
@@ -97,8 +98,6 @@ Page({
   },
    //选择旅客页面添加乘机人跳转至详情页
    addPassener:function(){
-    var passengerListShow = this.data.passengerListShow;
-    var editPassenerShow = this.data.editPassenerShow;
     this.setData({
       passengerListShow: false,
       editPassenerShow: true,
@@ -110,7 +109,6 @@ Page({
     var that = this;
     var passenerId = e.currentTarget.dataset.passenerid;
     var passeners = that.data.passeners;
-    var editPassener = that.data.editPassener;
     var passener = {}; 
     for (let i = 0; i < passeners.length; i++) {
       if(passenerId == passeners[i].id){
@@ -140,8 +138,6 @@ Page({
   //选择旅客页面确认操作
   confirmPassener: function(){
     var selectPasseners = this.data.selectPasseners;
-    var passengerListShow = this.data.passengerListShow;
-    var editPassenerShow = this.data.editPassenerShow;
     if (selectPasseners.length == 0) {
       wx.showToast({
         title: '请先选择乘机人',
@@ -150,7 +146,6 @@ Page({
       return false;
     };
     var pages = getCurrentPages();
-    var currPage = pages[pages.length - 1]; //当前页
     var prevPage = pages[pages.length -2]; //上一个页面
     prevPage.setData({
       selectPasseners: selectPasseners
@@ -235,8 +230,6 @@ Page({
         wx.hideLoading();
         if (res.Success) {
           that.loadPassenerInfo();
-          var passengerListShow = that.data.passengerListShow;
-          var editPassenerShow = that.data.editPassenerShow;
           that.setData({
             passengerListShow: true,
             editPassenerShow: false,
@@ -278,6 +271,16 @@ Page({
           }
         }
       })
+    }
+  },
+  getCertType(item) {
+    if (item.cert_type == "1") {
+      return "身份证";
+    }
+    else if (item.cert_type == "2") {
+        return "护照";
+    } else {
+        return "其他";
     }
   },
   /**

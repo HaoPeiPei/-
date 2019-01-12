@@ -24,9 +24,6 @@ Page({
     serviceName: "",
     selectPasseners: [],
     disabled:true,
-    certificate: ["身份证", "护照", "其他"],
-    picker_index: 0, 
-    passengerModel:'',
     flyDateShow: false,
     currentDate: '',
     minDate:'',
@@ -96,7 +93,6 @@ Page({
     var passenerid = e.currentTarget.dataset.passenerid;
     var selectPasseners = this.data.selectPasseners;
     var passener = selectPasseners.filter(v=>passenerid==v.id)[0] || {};
-    var newSelectPasseners = [];
     if(JSON.stringify(passener) != '{}'){
       var selectPasseners = selectPasseners.filter(v=> v.id!=passener.id);
       this.setData({
@@ -248,7 +244,7 @@ Page({
           bookInfo.PassengerInfo = selectPasseners;
           bookInfo.FlightNo = flightNo;
           wx.navigateTo({
-            url: "xdzf/xdzf?bookInfo=" + JSON.stringify(bookInfo)
+            url: "../xdzf/xdzf?bookInfo=" + JSON.stringify(bookInfo)
           });
       }
     }
@@ -342,18 +338,29 @@ Page({
   },
   //初始化数据
   initData(options){
-    var flight = this.data.flight;
-    flight['startCityName'] = this.getCityName(options.cityCode);
-    var nowDate = new Date();
-    var minDate = nowDate.getTime();
-    var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-    var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
-    this.setData({
-      currentDate: minDate,
-      minDate,
-      maxDate,
-      flight
-    });
+    var serviceId = options.id;
+    var cityCode = options.cityCode;
+    var serviceName = decodeURIComponent(options.serviceName);
+    if (serviceId != null && cityCode != null && serviceName != null) {
+      var flight = this.data.flight;
+      flight['startCityName'] = this.getCityName(cityCode);
+      var nowDate = new Date();
+      var minDate = nowDate.getTime();
+      var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+      var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
+      this.setData({
+        currentDate: minDate,
+        minDate,
+        maxDate,
+        flight,
+        serviceId,
+        serviceName
+      });
+    } else {
+        wx.navigateTo({
+          url: '../wycx'
+        })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

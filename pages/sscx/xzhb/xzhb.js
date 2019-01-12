@@ -1,10 +1,6 @@
 // pages/sscx/xzhb/xzhb.js
 //航班号正则判断规则
 var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
-//乘机人姓名正则判断规则
-var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?:[A-Za-z]{1,49}\s[A-Za-z]{2,50}\/[A-Za-z]{2,50})|(?:[A-Za-z]{2,50}\/[A-Za-z]{2,50}\s[A-Za-z]{1,49}))$/;
-//联系手机正则
-var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 var app = getApp();
 var httpRequst = require("../../../utils/requst.js");
 var {addDate, getDateDiff, getNowFormatDate, getFormatDate } = require("../../../utils/util.js");
@@ -22,15 +18,8 @@ Page({
     inCaTch: false,
     serviceId: "",
     serviceName: "",
-    passeners: [],
     selectPasseners: [],
-    editPassener: {}, //编辑或者新增的乘机人
-    inBind_1: true,
-    inBind_2: false,
-    inBind_3:false,
     disabled:true,
-    certificate: ["身份证", "护照", "其他"],
-    picker_index: 0,
     flyDateShow: false,
     currentDate: "",
     minDate: "",
@@ -318,7 +307,7 @@ Page({
           bookInfo.PassengerInfo = selectPasseners;
           bookInfo.FlightNo = flightNo;
           wx.navigateTo({
-            url: "xdzf/xdzf?bookInfo=" + JSON.stringify(bookInfo)
+            url: "../xdzf/xdzf?bookInfo=" + JSON.stringify(bookInfo)
           });
       }
     }
@@ -345,10 +334,9 @@ Page({
       });
     } else {
         wx.navigateTo({
-          url: '../../sscx/sscx'
+          url: '../sscx'
         })
     }
-    
   },
   /**
    * 生命周期函数--监听页面加载

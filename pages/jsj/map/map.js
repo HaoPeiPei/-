@@ -71,13 +71,15 @@ Page({
   //选择地址
   selectSeek(e){
     var address = e.currentTarget.dataset.address;
+    var addressName = e.currentTarget.dataset.addressname;
     var location = e.currentTarget.dataset.location.split(',');
     var lat = location.length > 1 && location[0];
-    var lng = location.length > 2 && location[1];
+    var lng = location.length >= 2 && location[1];
     var pages = getCurrentPages();
     var prevPage = pages[pages.length -2]; //上一个页面
     prevPage.setData({
       address,
+      addressName,
       lat,
       lng,
      });

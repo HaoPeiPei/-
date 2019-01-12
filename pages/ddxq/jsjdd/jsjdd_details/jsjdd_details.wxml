@@ -14,7 +14,7 @@
         </view>
         <view class='box box-f1 box-pe font-12 color-9 box-ac'>
           <view>购买日期</view>
-          <view class='margin-l-20'>{{Order.create_time}}</view>
+          <view class='margin-l-20'>{{order.create_time}}</view>
         </view>
       </view>
       <view class='box box-f1 padding-tb-30'>
