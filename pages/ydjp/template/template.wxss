@@ -412,4 +412,5 @@ con-mess-l.font-size-34{
 }
 .endorseModal .title .text.active{
     border-bottom: solid 5rpx #f4393c;
+    opacity: 1;
 }

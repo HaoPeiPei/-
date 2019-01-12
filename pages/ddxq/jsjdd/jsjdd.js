@@ -12,7 +12,7 @@ Page({
     header_text: {
       "left_icon": "../../images/back-b.png",
       "title_text": "订单管理",
-      "right_icon": "",
+      "right_icon": "../../images/dh-b.png",
     },
     
     key: 0,
@@ -25,10 +25,18 @@ Page({
     memberId: '',
     action: 'orderPage',
   },
-  catchBackChange: function() {
+  //返回
+  catchBackChange: function () {
     wx.navigateBack({
       delta: 1,
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   bindNavChange: function(e) {
     var status = e.currentTarget.dataset.status;

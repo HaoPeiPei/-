@@ -111,13 +111,13 @@
 <view class='footer' wx:if="{{OrderMain.order_status==0}}">
   <view class='box box-f1'>
     <view class='box box-f1 box-apc lxkf-btn' bindtap='bindCancelOrder'>取消订单</view>
-    <view class='box box-f1 box-apc zlyd-btn' bindtap='payOrder'>立即支付</view>
+    <view class='box box-f1 box-apc zlyd-btn' bindtap='createPayPara'>立即支付</view>
   </view>
 </view>
 <view class='footer' wx:elif="{{OrderMain.order_status==1||OrderMain.order_status==2}}">
   <view class='box box-f1'>
     <view class='box box-f1 box-apc lxkf-btn' bindtap='bindApplyRefund'>申请退款</view>
-    <view class='box box-f1 box-apc zlyd-btn' bindtap="qrcode">订单二维码</view>
+    <view class='box box-f1 box-apc zlyd-btn' bindtap="showQrcodeModal">订单二维码</view>
   </view>
 </view>
 <view class='footer' wx:else>
@@ -126,3 +126,6 @@
     <view class='box box-f1 box-apc zlyd-btn' bindtap='bindReturnIndex'>再来一单</view>
   </view>
 </view>
+
+<!-- 订单二维码 -->
+<template is="qrcodeModal" data="{{qrcodeModalShow, qrcodeImg, orderId}}" />

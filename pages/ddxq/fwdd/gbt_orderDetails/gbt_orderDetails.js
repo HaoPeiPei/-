@@ -20,7 +20,9 @@ Page({
     orderId: '',
     OrderFlightInfos: '',
     OrderPassengerInfos: '',
-    ind: ''
+    ind: '',
+    qrcodeImg:'',
+    qrcodeModalShow: false,
   },
   //返回
   catchBackChange: function (e) {
@@ -72,7 +74,7 @@ Page({
       wx.showLoading({
           title: '数据加载中...',
       });
-      httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/service.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
+      httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/service.ashx', { action: "createwxpaypara", orderId: this.data.orderId } , "POST",function(res){
           wx.hideLoading()
           if (res.Success) {
               var parameObj = JSON.parse(res.Data);
@@ -85,48 +87,48 @@ Page({
           }
       });
   }
-},
-//调用微信JS api 支付
-jsApiCall(params, orderId) {
-  var that = this;
-  wx.requestPayment(
-      {
-      'timeStamp': params.timeStamp,
-      'nonceStr': params.nonceStr,
-      'package': params.package,
-      'signType': params.signType,
-      'paySign': params.paySign ,
-      'success':function(res){
-          if (res.err_msg == "get_brand_wcpay_request:ok") {
-              that.payOrder(orderId);
-          }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-              wx.showModal({
-                  title: "温馨提示", 
-                  content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
-                  success(res) {
-                    if (res.confirm) {
-                    } else if (res.cancel) {
-                      that.jsApiCall(params, orderId);
+  },
+  //调用微信JS api 支付
+  jsApiCall(params, orderId) {
+    var that = this;
+    wx.requestPayment(
+        {
+        'timeStamp': params.timeStamp,
+        'nonceStr': params.nonceStr,
+        'package': params.package,
+        'signType': params.signType,
+        'paySign': params.paySign ,
+        'success':function(res){
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                that.payOrder(orderId);
+            }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                wx.showModal({
+                    title: "温馨提示", 
+                    content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+                    success(res) {
+                      if (res.confirm) {
+                      } else if (res.cancel) {
+                        that.jsApiCall(params, orderId);
+                      }
                     }
-                  }
-              });
-          }else {
-              wx.showToast({
-                  title: '支付失败!',
-                  icon: 'none'
-              });
-          }
-      },
-      'fail':function(res){
-          wx.showToast({
-              title: '支付失败!',
-              icon: 'none'
-          });
-      }
-  });
-},
-//支付的订单
-payOrder(orderId){
+                });
+            }else {
+                wx.showToast({
+                    title: '支付失败!',
+                    icon: 'none'
+                });
+            }
+        },
+        'fail':function(res){
+            wx.showToast({
+                title: '支付失败!',
+                icon: 'none'
+            });
+        }
+    });
+  },
+  //支付的订单
+  payOrder(orderId){
   var that = this;
     wx.showLoading({
         title: '数据加载中...',
@@ -215,6 +217,18 @@ payOrder(orderId){
         } 
       }
     })
+  },
+  //显示二维码
+  showQrcodeModal(){
+    this.setData({
+      qrcodeModalShow: true
+    });
+  },
+  //关闭订单二维码
+  hideQrcodeModal(){
+    this.setData({
+      qrcodeModalShow: false
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -21,7 +21,8 @@ Page({
     OrderFlightInfos:'',
     OrderPassengerInfos:'',
     ind:'',
-    qrcodeImg:''
+    qrcodeImg:'',
+    qrcodeModalShow: false,
   },
   //返回
   catchBackChange: function (e) {
@@ -81,7 +82,7 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/service.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
+        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/service.ashx', { action: "createwxpaypara", orderId: this.data.orderId } , "POST",function(res){
             wx.hideLoading()
             if (res.Success) {
                 var parameObj = JSON.parse(res.Data);
@@ -225,9 +226,17 @@ Page({
       }
     })
   },
-  //二维码
-  qrcode(){
-    
+  //显示二维码
+  showQrcodeModal(){
+    this.setData({
+      qrcodeModalShow: true
+    });
+  },
+  //关闭订单二维码
+  hideQrcodeModal(){
+    this.setData({
+      qrcodeModalShow: false
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

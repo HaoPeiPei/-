@@ -342,6 +342,9 @@ Page({
             },
             "POST",
             res=> {
+                if(!res){
+                    return
+                }
                 var service_info = htmlspecialchars_decode(res.service_info);
                 var buy_info = htmlspecialchars_decode(res.buy_info);
                 var refund_info = htmlspecialchars_decode(res.refund_info);

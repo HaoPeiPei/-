@@ -168,24 +168,24 @@
   </view>
 </view>
 <view class='footer' wx:if="{{state==0||state==5||state==6||state==7}}">
-  <view class='box box-f1 box-apc submit-btn-1 lxkf-btn'>联系客服</view>
+  <view class='box box-f1 box-apc submit-btn-1 lxkf-btn' data-phonenumber="400-700-7355" catchtap="telephone">联系客服</view>
 </view>
 <view class='footer' wx:elif="{{state==1}}">
   <view class='box box-f1 box-apc'>
-    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn'>取消订单</view>
-    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn'>确认支付</view>
+    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' bindtap='bindCancelOrder'>取消订单</view>
+    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='createPayPara'>立即支付</view>
   </view>
 </view>
 <view class='footer' wx:elif="{{state==2||state==3}}">
   <view class='box box-f1 box-apc'>
-    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn'>申请退款</view>
-    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn'>再来一张</view>
+    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' bindtap='bindApplyRefund'>申请退款</view>
+    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一张</view>
   </view>
 </view>
 <view class='footer' wx:else="{{state==4}}">
   <view class='box box-f1 box-apc'>
-    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn'>联系客服</view>
-    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn'>再来一张</view>
+    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' data-phonenumber="400-700-7355" catchtap="telephone">联系客服</view>
+    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一张</view>
   </view>
 </view>
 <!--订单价格  -->

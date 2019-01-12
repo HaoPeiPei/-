@@ -253,7 +253,7 @@
 <template is="mulLineModal" data="{{mulLineModalShow,flightInfos}}" />
 
 <view class="c-bg-000 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
-    <view class="pop-full" style="width: 70%;">
+    <view class="pop-full" >
         <text class="pop-full-close" catchtap="hideWorryFreeModal"><i></i></text>
         <view class="pop-content">
             <view class="title b-line">

@@ -162,3 +162,27 @@
     </view>
   </view>
 </template>
+
+<!-- 订单二维码 -->
+<template name="qrcodeModal" >
+  <view class="c-bg-000 flex qrcodeModal {{qrcodeModalShow?'':'none'}}">
+    <view class="pop-full">
+        <text class="pop-full-close" catchtap="hideQrcodeModal"><i></i></text>
+        <view class="pop-content">
+          <view class="title b-line">
+              <view class="c-align font-size-15">扫一扫，出行乐轻松</view>
+          </view>
+          <view class="content font-size-15">
+            <view class='qrcodeImg c-align' style="padding: 20rpx 0; ">
+              <image src='{{qrcodeImg}}' style='width:394rpx;'  mode='widthFix'/>
+            </view>
+            <view class="font-12 c-align">订单号：{{orderId}}</view>
+            <view class="font-12 c-f47f39 c-align" style="padding: 50rpx 0 20rpx 0;">
+              <i class="icon-hint ico-spac"></i>
+              <text>使用时请出示二维码，扫码使用</text>
+            </view>
+          </view>
+        </view>
+    </view>
+</view>
+</template>
