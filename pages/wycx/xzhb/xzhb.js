@@ -156,6 +156,11 @@ Page({
       var flightNo = flight.flightNo;
       var depDate = flight.flyDate;
       var startCity = flight.startCity;
+      this.setData({
+        flight: Object.assign(flight,{
+          oldFlightNo: flightNo
+        })
+      });
       var param = { action: "getStopCity", depDate: depDate, flightNo: flightNo, startCity: startCity, air_type: 2 };
       wx.showLoading({
         title: '数据加载中...',
@@ -163,14 +168,12 @@ Page({
       httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', param , "POST",function(res){
         wx.hideLoading();
         if (res.Status == 1) {
-            var flight = that.data.flight;
             var resFlight = res.FlightInfos[0];
             var resFlight = Object.assign(flight,resFlight);
             var depTime = resFlight.DepTime;
             if(depTime != '' && depTime != null && depTime.length > 3){
               resFlight['flyDate'] = depTime.trim().substring(0,depTime.length-3);
             }
-            resFlight['oldFlightNo'] = flightNo;
             that.setData({
               flight: resFlight
             });

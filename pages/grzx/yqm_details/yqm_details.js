@@ -12,14 +12,22 @@ Page({
     {
       "left_icon": "../../images/back-f.png",
       "title_text": "我的邀请码",
-      "right_icon": "",
+      "right_icon": "../../images/dh-b.png",
     },
     user: {}
   },
-  catchBackChange: function () {
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
+  },
+   //拨打电话
+   telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   bindNavChange: function () {
     wx.navigateTo({

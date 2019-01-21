@@ -58,7 +58,7 @@
 <!--无优惠券  -->
 <view class='box box-f1 box-apc box-ver {{coupons.length == "0"?"":"none"}}' style='margin-top:250rpx;'>
   <view>
-    <image src='../../../../images/noyhj_img.png' style='width:260rpx;' mode='widthFix'></image>
+    <image src='../../images/noyhj_img.png' style='width:260rpx;' mode='widthFix'></image>
   </view>
   <view class='box font-15 margin-t-20'>没有可用的优惠券</view>
 </view>

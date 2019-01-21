@@ -18,14 +18,15 @@ Page({
     service: {},
     coupon: {},
     coupontype: 0,
-    contactor:"",
-    contactTel:"",
+    contactor: app.globalData.user.realName,
+    contactTel: app.globalData.user.mobile,
     totalPrice: 0,
     couponCount: 0,
     isShare: 0,
     currentDate: '',
     minDate: "",
     maxDate: "",
+    payType: 0, //支付方式 1:微信、0:钱包支付
   },
   bindDateChange:function(e){
     var val = e.detail.value;
@@ -247,6 +248,7 @@ Page({
     orderModel.TotalPrice = this.data.totalPrice;
     orderModel.Contactor = this.data.contactor;
     orderModel.ContactTel = this.data.contactTel;
+    orderModel.PayType  = this.data.payType;
     wx.showLoading({
       title: '数据加载中...',
     });

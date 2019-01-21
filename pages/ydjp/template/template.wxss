@@ -371,7 +371,7 @@ con-mess-l.font-size-34{
 .comfortableTravel-server .service-seat text.active{
     color: #fff;
     background-color: #F03929;
-    opacity: 1;
+    opacity: 1 !important;
 }
 .comfortableTravel-server .service-seat-info{
     height: 480rpx;
@@ -412,5 +412,5 @@ con-mess-l.font-size-34{
 }
 .endorseModal .title .text.active{
     border-bottom: solid 5rpx #f4393c;
-    opacity: 1;
+    opacity: 1 !important;
 }

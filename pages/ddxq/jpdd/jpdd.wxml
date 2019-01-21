@@ -3,7 +3,7 @@
 <template is="header_content_noBackod" data="{{...header_text}}" />
 
 <view class='box box-f1 backgd-f font-13'>
-  <view class='box box-f1 box-apc padding-tb-20 chack {{status==""?"chack-true":""}}' bindtap='bindNavChange' data-status="0">全部订单</view>
+  <view class='box box-f1 box-apc padding-tb-20 chack {{status==""?"chack-true":""}}' bindtap='bindNavChange' data-status="">全部订单</view>
   <view class='box box-f1 box-apc padding-tb-20 chack {{status=="待支付"?"chack-true":""}}' bindtap='bindNavChange' data-status="待支付">待支付</view>
   <view class='box box-f1 box-apc padding-tb-20 chack {{status=="待出行"?"chack-true":""}}' bindtap='bindNavChange' data-status="待出行">待出行</view>
   <view class='box box-f1 box-apc padding-tb-20 chack {{status=="退款"?"chack-true":""}}' bindtap='bindNavChange' data-status="退款">退款</view>

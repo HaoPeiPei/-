@@ -12,11 +12,12 @@ Page({
       {
         "left_icon": "../../images/back-b.png",
         "title_text": "优惠卷",
-        "right_icon": "",
+        "right_icon": "../../images/dh-b.png",
       },
     isUsed: 0,
     yhi_gs: "",
     coupons: [],
+    couponTip: '',
     conttent_text:
       [
         { backImg_url: "../../images/wycx_yhj.png", backImg_url_1: "../../images/wycx_yhj_1.png", yhxm: "无忧出行", start_item: "2017.08.19", end_item: "2017.09.27", price: "30", },
@@ -24,10 +25,18 @@ Page({
         { backImg_url: "../../images/dbc_yhj.png", backImg_url_1: "../../images/dbc_yhj_1.png", yhxm: "代泊车", start_item: "2017.08.19", end_item: "2017.09.27", price: "80", }
       ]
   },
+  //返回
   catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
+  },
+   //拨打电话
+   telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   bindTapChage: function (e) {
     var isUsed = e.currentTarget.dataset.isused;
@@ -39,14 +48,26 @@ Page({
   //加载优惠券信息
   loadCoupon(){
     var _this = this;
+    var isUsed = this.data.isUsed;
     var params = {
       "action": "coupon",
       "isUsed": this.data.isUsed,
       "openId": app.globalData.openId 
     }
     httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
-      debugger
       if (res.Success) {
+        if (res.Data == "") {
+          var couponTip = '';
+          if (isUsed == 1) {
+            couponTip = "没有已使用的优惠券";
+          } else {
+            couponTip = "没有可用的优惠券";
+          }
+          _this.setData({
+            couponTip,
+            coupons: []
+          });
+      }else{
         var obj = JSON.parse(res.Data);
         if (obj.length > 0) {
           var  coupons = obj.map(item=>{
@@ -57,6 +78,7 @@ Page({
             coupons
           });
         } 
+      } 
       } else {
         //todo 跳转到登陆页面
         wx.navigateTo({

@@ -147,7 +147,7 @@ Page({
     var ticketAdultPrice = 0;       //成人票价
     var ticketChildPrice = 0;       //儿童票价
     var ticketBabyPrice = 0;        //婴儿票价
-    var tax = 0;                    //税费
+    var taxes = 0;                    //税费
     var insurance_price = 0;//保险
     var refund = 0;                 //现返
     var servicePrice = 0;               
@@ -162,7 +162,7 @@ Page({
     for (var i = 0; i < adultPriceArr.length; i++) {
         refund += adultPriceArr[i].refund;
         ticketAdultPrice += adultPriceArr[i].sale_price;
-        tax += adultPriceArr[i].fee + passengs[i].tax;
+        taxes += adultPriceArr[i].fee + passengs[i].tax;
         insurance_price += adultPriceArr[i].insurance_count * 40;
         tmpCert_no = adultPriceArr[i].cert_no;
         tmpName = adultPriceArr[i].passenger_name;
@@ -219,7 +219,7 @@ Page({
             babyCount,
             insurance_price,
             delivery_price,
-            tax,
+            taxes,
             refund,
             servicePrice,
         })
@@ -254,7 +254,8 @@ Page({
 //生成微信支付参数
 createPayPara() {
   var that = this;
-  if (this.data.orderId != null && this.data.orderId != "") {
+  var orderId = that.data.orderId
+  if (orderId != null && orderId != "") {
       wx.showLoading({
           title: '数据加载中...',
       });

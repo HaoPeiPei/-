@@ -9,13 +9,21 @@ Page({
     {
       "left_icon": "../../../images/back-b.png",
       "title_text": "活动规则",
-      "right_icon": "",
+      "right_icon": "../../../images/dh-b.png",
     },
   },
-  catchBackChange:function(){
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
-      delta:1
+      delta: 1
     })
+  },
+   //拨打电话
+   telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   /**
    * 生命周期函数--监听页面加载

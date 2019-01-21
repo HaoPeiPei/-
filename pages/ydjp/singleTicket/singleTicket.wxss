@@ -66,12 +66,12 @@
     align-self: stretch;
     color: #fff;
     background-color: #f4393c;
-    align-items: center;
     justify-content: center;
 }
 .singleTicket .main .search-cur text{
     font-size: 26.84rpx;
     color: #fff;
+    line-height: 75rpx;
 }
 .singleTicket .main .displayFliInfo-list .displayFliInfo-item{
     margin-top: 20rpx;

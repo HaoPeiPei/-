@@ -236,7 +236,6 @@ Page({
       });
       httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', param , "POST",function(res){
         wx.hideLoading();
-        var flight = that.data.flight;
         if (res.Status == 1) {
             var resFlight = res.FlightInfos[0];
             var resFlight = Object.assign(flight,resFlight);

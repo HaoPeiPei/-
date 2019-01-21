@@ -69,7 +69,8 @@ Page({
   //生成微信支付参数
   createPayPara() {
     var that = this;
-    if (this.data.orderId != null && this.data.orderId != "") {
+    var orderId= this.data.orderId;
+    if (orderId != null && orderId != "") {
       wx.showLoading({
           title: '数据加载中...',
       });
