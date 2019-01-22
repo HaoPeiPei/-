@@ -5,21 +5,13 @@
 <view class='box box-f1 backgd-f padding-tb-25'>
   <view class='box box-f1 margin-lr-30 box-ver'>
     <view class='box box-f1 box-hor box-ac'>
-<<<<<<< HEAD:pages/wycx/xdzf/xdzf.wxml
       <i class="icon-information font-20"></i>
-=======
-      <view style='background-image:url(../../../images/hnhk_icon.png)' class='icon-hb'></view>
->>>>>>> wycx:pages/wycx/xzhb/xdzf/xdzf.wxml
       <view class='box box-f1 font-13 margin-l-10 color-3'>{{carrier.FlightInfo.CarrierName}} {{carrier.FlightNo}}</view>
     </view>
     <view class='box box-f1 padding-t-20 box-apc'>
       <view class='box box-ver box-apc box-f1'>
         <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>{{carrier.FlightInfo.depTime}}</view>
-<<<<<<< HEAD:pages/wycx/xdzf/xdzf.wxml
         <view class='box font-15 padding-tb-10 color-9'>{{carrier.FlightInfo.DepCityName}}</view>
-=======
-        <view class='box font-15 padding-tb-10 color-9'>{{carrier.FlightInfo.DepCityName}}({{carrier.FlightInfo.BeginTerm}})</view>
->>>>>>> wycx:pages/wycx/xzhb/xdzf/xdzf.wxml
         <view class='box font-13 color-9'>{{carrier.FlightInfo.depDate}} {{carrier.FlightInfo.depWeek}}</view>
       </view>
       <view >
@@ -27,11 +19,7 @@
       </view>
       <view class='box box-ver box-apc box-f1'>
         <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>{{carrier.FlightInfo.arrTime}}</view>
-<<<<<<< HEAD:pages/wycx/xdzf/xdzf.wxml
-        <view class='box font-15 padding-tb-10 color-9'>{{carrier.FlightInfo.ArrCityName}}</view>
-=======
         <view class='box font-15 padding-tb-10 color-9'>{{carrier.FlightInfo.ArrCityName}}({{carrier.FlightInfo.EndTerm}})</view>
->>>>>>> wycx:pages/wycx/xzhb/xdzf/xdzf.wxml
         <view class='box font-13 color-9'>{{carrier.FlightInfo.arrDate}} {{carrier.FlightInfo.arrWeek}}</view>
       </view>
     </view>
@@ -40,7 +28,6 @@
 
 <!--区域选择  -->
 <view class='box box-f1 margin-t-10 backgd-f'>
-<<<<<<< HEAD:pages/wycx/xdzf/xdzf.wxml
     <view class='box box-f1 margin-lr-30 box-ver color-3'>
       <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1'>
         <i class="icon-trip ico-spac font-15"></i>
@@ -54,20 +41,6 @@
         <view class='box box-ac'>
           <image src='../../images/yjt_icon_c.png' style='width:16rpx;margin-top:6rpx;' mode='widthFix'></image>
         </view>
-=======
-  <view class='box box-f1 margin-lr-30 box-ver color-3'>
-    <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1'>
-      <view style='background-image:url(../../../images/qyxz_icon.png)' class='icon-hb enlarge-1'></view>
-      <view class='box box-f1 font-15 margin-l-10 color-3'>区域选择</view>
-    </view>
-    <view class='box box-f1 box-hor box-ac padding-tb-25 font-13 ' bindtap='bindQyxzChange'>
-      <view class='box box-f1' style='margin-left:40rpx;'>
-        <text>{{position}}</text>
-        <text class='margin-l-20'>{{area}}</text>
-      </view>
-      <view class='box box-ac'>
-        <image src='../../../images/yjt_icon_c.png' style='width:16rpx;margin-top:6rpx;' mode='widthFix'></image>
->>>>>>> wycx:pages/wycx/xzhb/xdzf/xdzf.wxml
       </view>
     </view>
   </view>
@@ -84,11 +57,8 @@
       </view>
     </view>
     <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1' style='margin-left:40rpx;'>
-<<<<<<< HEAD:pages/wycx/xdzf/xdzf.wxml
-=======
       <view style='background-image:url(../../../images/dellist_icon.png)' class='icon-hb enlarge-2'>
       </view>
->>>>>>> wycx:pages/wycx/xzhb/xdzf/xdzf.wxml
       <view class='box box-f1 box-ver font-14 margin-l-20' wx:for="{{carrier.PassengerInfo}}" wx:key="*this">
         <view class='box box-f1 box-ac'>
           <view style='width:120rpx;' class='color-9'>姓名:</view>
@@ -116,12 +86,7 @@
     <view class='box box-f1 font-15 padding-tb-25 color-3' >
         <i class="icon-phone font-15 c-999"></i>
         <view style='width:120rpx;color:#999999;'>手机号</view>
-<<<<<<< HEAD:pages/wycx/xdzf/xdzf.wxml
         <input type="text" class='box box-f1' id='contactTel'  bindinput="bindinput" value="{{contactTel}}" />
-=======
-        <input type="text" class='box box-f1' id="contactTel" bindinput="bindinput" value="{{contactTel}}" />
-      </view>
->>>>>>> wycx:pages/wycx/xzhb/xdzf/xdzf.wxml
     </view>
   </view>
 </view>

@@ -17,15 +17,19 @@ Page({
     },
     state:"",
     single_return:"",
-    inBind_1:false,
-    inBind_2:false,
-    inBind_3:false,
+    priceDetailModalShow: false,
+    endorseType: 0,
+    endorseModalShow: false,
+    mulLineModalShow: false,
     order: {},
     depDate:'',
     depWeek:'',
-    arrDate:'',
+    arrDate:'', 
     arrWeek:'',
-    price: {}
+    price: {},
+    endorseModalContent: '',
+    comeEndorseTitle: '',
+    backEndorseTitle: ''
   },
   //返回
   catchBackChange: function (e) {
@@ -41,19 +45,96 @@ Page({
     });
   },
   // 价格预览
-  bianPriceChange:function(e){
-    var inBind_1 = this.data.inBind_1;
+  showPriceDetailModal:function(e){
     this.setData({
-      inBind_1: !inBind_1
+      priceDetailModalShow: true
     });
   },
-  catchBackChange1: function () {
-    var inBind_1 = "";
+  hidePriceDetailModal: function () {
     this.setData({
-      inBind_1: inBind_1
+      priceDetailModalShow: false
     });
   },
-  // 退改详情
+  //显示退改详情
+  showEndorse(carrier, sType){
+    var that = this;
+    httpRequst.HttpRequst(
+      true,
+      '/weixin/jctnew/ashx/airTicket.ashx',
+      {
+        "sdate": carrier.DepDate,
+        "carrier": carrier.Carrier,
+        "cab": carrier.CabInfos.Class,
+        "action": "endorse"
+      },
+      "POST",
+      res=> {
+        var endorseModalContent = '';
+        if (res.Success) {
+            endorseModalContent ="<p>" + res.Data.replace(/\r\n/g, '</p><p>') + "</p>";
+        }
+        else {
+            endorseModalContent ="<p>暂无此舱位退改签信息,请致电客服进行了解</p>";
+        };
+        that.setData({
+            endorseModalContent: WxParse.wxParse('endorseModalContent', 'html', endorseModalContent, that, 5)
+        });
+    }); 
+  },
+  //显示单程退改详情
+  showSingleEndorse(){
+      this.setData({
+          endorseModalShow: true,
+          comeEndorseTitle: '退改签详情',
+      });
+      if (this.data.endorseModalContent == "") {
+          this.showEndorse(this.data.order.airticketOrder.FlightInfoExts[0], "0");
+      }
+  },
+  //显示往返退改详情
+  showMultiEndorse(){
+      this.setData({
+          endorseType: 0,
+          endorseModalShow: true,
+          comeEndorseTitle: '去程退改签',
+          backEndorseTitle: '回程退改签',
+      });
+      if (this.data.endorseModalContent == "") {
+          this.showEndorse(this.data.order.airticketOrder.FlightInfoExts[0], "0");
+      }
+  },
+  //切换去回程改签详情
+  endorseTypeChange(e){
+      var endorseType = e.currentTarget.dataset.endorsetype;
+      this.setData({
+          endorseType: endorseType,
+          endorseModalShow: true,
+          comeEndorseTitle: '去程退改签',
+          backEndorseTitle: '回程退改签',
+      });
+      if(endorseType == 0){
+          if(this.data.endorseModalContent == ''){
+              this.showEndorse(this.data.order.airticketOrder.FlightInfoExts[0], "0");
+          }
+      }else if(endorseType == 1){
+          if(this.data.endorseModalContent == ''){
+              this.showEndorse(this.data.order.airticketOrder.FlightInfoExts[1], "1");
+          }
+      }
+  },
+ //显示往返机票详情
+  showMulLineModal(){
+    this.setData({
+        mulLineModalShow: true
+    });
+  },
+  //隐藏往返机票信息
+  hideMulLineModal(e){
+    this.setData({
+        mulLineModalShow: false,
+    });
+  },
+  /* // 退改详情
   bianRetreatingChange:function(){
     var inBind_2 = this.data.inBind_2;
     this.setData({
@@ -77,7 +158,7 @@ Page({
     this.setData({
       inBind_3: inBind_3
     });
-  },
+  }, */
   //加载订单详情
   loadOrderDetail(){
     var _this = this;

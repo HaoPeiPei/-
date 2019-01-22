@@ -32,53 +32,63 @@
   <!--行程 -->
   <view class='box box-f1 margin-t-10 backgd-f'>
     <view class='box box-f1 margin-lr-20 box-ver'>
-      <view class='box box-f1 box-ver' wx:if="{{order.airticketOrder.FlightInfos.length==1}}">
-        <view class='box box-f1 font-13 box-ac padding-tb-20'>
-          <view style='background-image:url("../../../images/hnhk_icon.png")' class='background-icon'></view>
-          <view class='box box-f1 box-ac margin-l-10'>
-            <view>{{order.airticketOrder.FlightInfoExts[0].CarrierName + ' ' + order.airticketOrder.FlightInfos[0].flight_no}}</view>
-            <view style='background-image:url("../../../images/2_38.png")' class='background-icon-1 margin-lr-10'></view>
-            <view>{{order.airticketOrder.FlightInfoExts[0].CabName + '(' + order.airticketOrder.FlightInfos[0].cab + ')'}}</view>
+      <!-- 单程 -->
+      <block wx:if="{{order.airticketOrder.FlightInfos.length==1}}">
+        <view class='box box-f1 box-ver' >
+          <view class='box box-f1 font-13 box-ac padding-tb-20'>
+            <view style='background-image:url("../../../images/hnhk_icon.png")' class='background-icon'></view>
+            <view class='box box-f1 box-ac margin-l-10'>
+              <view>{{order.airticketOrder.FlightInfoExts[0].CarrierName + ' ' + order.airticketOrder.FlightInfos[0].flight_no}}</view>
+              <view style='background-image:url("../../../images/2_38.png")' class='background-icon-1 margin-lr-10'></view>
+              <view>{{order.airticketOrder.FlightInfoExts[0].CabName + '(' + order.airticketOrder.FlightInfos[0].cab + ')'}}</view>
+            </view>
+          </view>
+          <view class='box box-f1 padding-b-20 box-ac border-b-1'>
+            <view class='box box-f1 box-ver box-apc'>
+              <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].dep_time}}</view>
+              <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].dep_city_name + '(' + order.airticketOrder.FlightInfos[0].start_terminal + ')'}}</view>
+              <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].depWeek}}</view>
+            </view>
+            <view style='background-image:url("../../../images/dd_icon.png")' class='background-icon-2'></view>
+            <view class='box box-f1 box-ver box-apc'>
+              <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].arr_time}}</view>
+              <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].arr_city_name + '(' + order.airticketOrder.FlightInfos[0].end_terminal + ')'}}</view>
+              <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].arrDate}} {{order.airticketOrder.FlightInfos[0].arrWeek}}</view>
+            </view>
           </view>
         </view>
-        <view class='box box-f1 padding-b-20 box-ac border-b-1'>
-          <view class='box box-f1 box-ver box-apc'>
-            <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].dep_time}}</view>
-            <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].dep_city_name + '(' + order.airticketOrder.FlightInfos[0].start_terminal + ')'}}</view>
-            <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].depWeek}}</view>
-          </view>
-          <view style='background-image:url("../../../images/dd_icon.png")' class='background-icon-2'></view>
-          <view class='box box-f1 box-ver box-apc'>
-            <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].arr_time}}</view>
-            <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].arr_city_name + '(' + order.airticketOrder.FlightInfos[0].end_terminal + ')'}}</view>
-            <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].arrDate}} {{order.airticketOrder.FlightInfos[0].arrWeek}}</view>
-          </view>
-        </view>
-      </view>
-      <view class='box box-f1' wx:else>
-        <view class='box box-f1 box-ver padding-tb-20 border-b-1'>
-          <view class='box box-f1 box-ac'>
-            <view class='font-10 prompt-btn'>去程</view>
-            <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].dep_time}} {{order.airticketOrder.FlightInfos[0].flight_no}}</view>
-            <view style='background-image:url("../../../images/wfxq_icon_1.png")' class='background-icon-6' bindtap='bianReturnChange'></view>
-          </view>
-          <view class='box box-f1 box-ac'>
-            <view class='font-10 prompt-btn'>返程</view>
-            <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[1].arrDate}} {{order.airticketOrder.FlightInfos[1].dep_time}} {{order.airticketOrder.FlightInfos[1].flight_no}}</view>
-          </view>
-        </view>
-      </view>
-      <view class='box box-f1 padding-tb-20 font-12'>
-        <view class='box box-f1 box-ac'>
-          <view class='box'>订单金额</view>
-          <view class='box margin-lr-20 color-f4'>{{order.airticketOrder.Order.total_price}}</view>
-          <view style='background-image:url("../../../images/xl_icon_1.png")' class='background-icon-3' bindtap='bianPriceChange'></view>
-        </view>
-        <view class='box box-ac' bindtap='bianRetreatingChange'>
+        <view class='box box-ac' bindtap='showSingleEndorse'>
           <view class='color-3e margin-r-10'>退改详情</view>
           <view style='background-image:url("../../../images/arrow_r.png");margin-top:5rpx;' class='background-icon-4'></view>
         </view>
-      </view>
+      </block>
+      <block wx:else>
+        <!-- 往返 -->
+        <view class='box box-f1' >
+          <view class='box box-f1 box-ver padding-tb-20 border-b-1'>
+            <view class='box box-f1 box-ac'>
+              <view class='font-10 prompt-btn'>去程</view>
+              <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].dep_time}} {{order.airticketOrder.FlightInfos[0].flight_no}}</view>
+              <view style='background-image:url("../../../images/wfxq_icon_1.png")' class='background-icon-6' bindtap='bianReturnChange'></view>
+            </view>
+            <view class='box box-f1 box-ac'>
+              <view class='font-10 prompt-btn'>返程</view>
+              <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[1].arrDate}} {{order.airticketOrder.FlightInfos[1].dep_time}} {{order.airticketOrder.FlightInfos[1].flight_no}}</view>
+            </view>
+          </view>
+        </view>
+        <view class='box box-f1 padding-tb-20 font-12'>
+          <view class='box box-f1 box-ac'>
+            <view class='box'>订单金额</view>
+            <view class='box margin-lr-20 color-f4'>{{order.airticketOrder.Order.total_price}}</view>
+            <view style='background-image:url("../../../images/xl_icon_1.png")' class='background-icon-3' bindtap='showPriceDetailModal'></view>
+          </view>
+          <view class='box box-ac' bindtap='showMultiEndorse'>
+            <view class='color-3e margin-r-10'>退改详情</view>
+            <view style='background-image:url("../../../images/arrow_r.png");margin-top:5rpx;' class='background-icon-4'></view>
+          </view>
+        </view>
+      </block>
     </view>
   </view>
   <!--值机区域  -->
@@ -189,7 +199,7 @@
   </view>
 </view>
 <!--订单价格  -->
-<view class='popup-class' wx:if="{{inBind_1}}" catchtap='catchBackChange1'>
+<!-- <view class='popup-class none' wx:if="{{inBind_1}}" catchtap='catchBackChange1'>
   <view class='box box-f1 box-apc height-100'>
     <view class='popup-content'>
       <view class='box box-f1 box-ver margin-40'>
@@ -246,9 +256,51 @@
       </view>
     </view>
   </view>
+</view> -->
+<view class="c-bg-000 flex priceDetailModal {{priceDetailModalShow?'':'none'}}">
+    <view class="pop-full">
+        <text class="pop-full-close" catchtap="hidePriceDetailModal"><i></i></text>
+        <view class="pop-content">
+            <view class="priceDetail">
+                <view class="flex b-line adult-price price-group">
+                    <view class="col-1">成人票价</view>
+                    <view class="c-f4393c"><text>¥{{price.ticketAdultPrice}}</text><text class="c-999">×{{price.adultCount}}</text></view>
+                </view>
+                <view class="flex b-line child-price price-group">
+                    <view class="col-1">儿童票价</view>
+                    <view class="c-f4393c"><text>¥{{price.childCount}}</text><text class="c-999">×{{price.childCount}}</text></view>
+                </view>
+                <view class="flex b-line baby-price price-group">
+                    <view class="col-1">婴儿票价</view>
+                    <view class="c-f4393c"><text>¥{{price.ticketBabyPrice}}</text><text class="c-999">×{{price.babyCount}}</text></view>
+                </view>
+                <view class="flex b-line fee price-group">
+                    <view class="col-1">机建+燃油</view>
+                    <view class="c-f4393c">￥{{price.taxes}}</text><text class="c-999">X0</text></view>
+                </view>
+                <view class="flex b-line insurance price-group">
+                    <view class="col-1">保险</view>
+                    <view class="c-f4393c"><text>¥{{insurancePrice}}</text><text class="c-999">X{{insuranceCount}}</text></view>
+                </view>
+                <view class="flex b-line express price-group">
+                    <view class="col-1">快递</view>
+                    <view class="c-f4393c"><text>¥{{expressPrice}}</text></view>
+                </view>
+                <view class="flex b-line refund price-group">
+                    <view class="col-1">现返</view>
+                    <view class="c-f4393c"><text>¥{{refund}}</text></view>
+                </view>
+                <view class="flex service price-group">
+                    <view class="col-1">无忧出行</view>
+                    <view class="c-f4393c"><text>¥{{servicePrice}}</text></view>
+                </view>
+            </view>
+        </view>
+    </view>
 </view>
+
 <!--退改详情  -->
-<view class='popup-class' wx:if="{{inBind_2}}" catchtap='catchBackChange2'>
+<!-- <view class='popup-class' wx:if="{{inBind_2}}" catchtap='catchBackChange2'>
   <view class='box box-f1 box-apc height-100'>
     <view class='popup-content'>
       <view class='box box-f1 box-ver margin-40'>
@@ -281,9 +333,28 @@
       </view>
     </view>
   </view>
+</view> -->
+<view class="endorseModal c-bg-000 flex {{endorseModalShow?'':'none'}}">
+  <view class="pop-full font-size-30">
+      <view class="pop-full-close" catchtap="hideEndorseModal"><i></i></view>
+      <view class="pop-content">
+          <view wx-if="{{flightInfos&&flightInfos.length == 2}}">
+              <view class="title flex padding0" >
+                  <view  class="text col-1 {{endorseType==0?'active':''}}" data-endorsetype="0" catchtap="endorseTypeChange">{{comeEndorseTitle}}</view>
+                  <view  class="text col-1 {{endorseType==1?'active':''}}" data-endorsetype="1"  catchtap="endorseTypeChange">{{backEndorseTitle}}</view>
+              </view>
+          </view>
+          <view wx:else >
+              <view class="title">退改签说明</view>
+          </view>
+          <view class="content font-size-30">
+              <template is="wxParse" data="{{wxParseData:endorseModalContent.nodes}}"/>
+          </view>
+      </view>
+  </view>    
 </view>
 <!--往返详情  -->
-<view class='popup-class' wx:if="{{inBind_3}}" catchtap='catchBackChange3'>
+<!-- <view class='popup-class' wx:if="{{inBind_3}}" catchtap='catchBackChange3'>
   <view class='box box-f1 box-apc height-100'>
     <view class='popup-content'>
       <view class='box box-f1 box-ver margin-40'>
@@ -338,4 +409,33 @@
       </view>
     </view>
   </view>
+</view> -->
+<view class="div_mulLine c-bg-000 flex {{mulLineModalShow?'':'none'}}">
+    <view class="pop-full"  >
+        <text class="pop-full-close" catchtap="hideMulLineModal"><i></i></text>
+        <view class="pop-content font-size-13">
+            <view class="main-con" wx:for="{{order.airticketOrder.FlightInfos}}" wx:for-index="index" wx:for-item="flight">
+                <view class="flex t-title align-center c-000">
+                    <i class="airsmall_{{flight.FlightNoIcon}}" ></i>
+                    <text>{{flight.CarrierName}} {{flight.FlightNo}}</text>
+                    <i class="line"></i>
+                    <text>{{flight.CabInfos.ClassName}}({{flight.CabInfos.Class}})</text>
+                    <text class="line-type c-bg-3eabff c-fff font-size-10" >{{index == 0 ? '去程' : '回程'}}</text>
+                </view>
+                <view class="div-flight flex font-size-13 c-999 c-align align-center">
+                    <view class="col-1">
+                        <view class="font-size-18 c-000"><b data-bind="text: BeginTime">{{flight.BeginTime}}</b></view>
+                        <view data-bind="text: DepCityName + '(' + BeginTerm + ')'">{{flight.DepCityName}}({{flight.BeginTerm}})</view>
+                        <view data-bind="text: getMD(DepDate) + ' ' + GetWeek(DepDate)">{{flight.depDate}} {{flight.depWeek}}</view>
+                    </view>
+                    <i class="icon-toArror font-size-18"></i>
+                    <view class="col-1">
+                        <view class="font-size-18 c-000">{{flight.EndTime}}</view>
+                        <view>{{flight.ArrCityName}}({{flight.EndTerm}})</view>
+                        <view>{{flight.arrDate}} {{flight.arrWeek}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
 </view>

@@ -70,6 +70,7 @@ Page({
         refund_info: "",
         areaList: areaList,
         linkRegionShow: false,
+        payType: 0, //支付方式 1:微信、0:钱包支付
     },
     //返回
     catchBackChange: function () {
@@ -249,33 +250,11 @@ Page({
             })
         });
     },
-    //显示单程退改详情
-    showSingleEndorse(){
-        this.setData({
-            endorseModalShow: true,
-            comeEndorseTitle: '退改签详情',
-        });
-        if (this.data.endorseModalContent == "") {
-            this.showEndorse(this.data.flightInfos[0], "0");
-        }
-    },
     //显示往返机票详情
     showMulLineModal(){
         this.setData({
             mulLineModalShow: true
         });
-    },
-    //显示往返退改详情
-    showMultiEndorse(){
-        this.setData({
-            endorseType: 0,
-            endorseModalShow: true,
-            comeEndorseTitle: '去程退改签',
-            backEndorseTitle: '回程退改签',
-        });
-        if (this.data.endorseModalContent == "") {
-            this.showEndorse(this.data.flightInfos[0], "0");
-        }
     },
     //显示退改详情
     showEndorse(carrier, sType){
@@ -302,6 +281,28 @@ Page({
                 endorseModalContent: WxParse.wxParse('endorseModalContent', 'html', endorseModalContent, that, 5)
             });
         }); 
+    },
+    //显示单程退改详情
+    showSingleEndorse(){
+        this.setData({
+            endorseModalShow: true,
+            comeEndorseTitle: '退改签详情',
+        });
+        if (this.data.endorseModalContent == "") {
+            this.showEndorse(this.data.flightInfos[0], "0");
+        }
+    },
+    //显示往返退改详情
+    showMultiEndorse(){
+        this.setData({
+            endorseType: 0,
+            endorseModalShow: true,
+            comeEndorseTitle: '去程退改签',
+            backEndorseTitle: '回程退改签',
+        });
+        if (this.data.endorseModalContent == "") {
+            this.showEndorse(this.data.flightInfos[0], "0");
+        }
     },
     //切换去回程改签详情
     endorseTypeChange(e){
@@ -491,11 +492,12 @@ Page({
         var passener = selectPasseners.filter(v=>passenerid==v.id)[0] || {};
         var newSelectPasseners = [];
         if(JSON.stringify(passener) != '{}'){
-        var selectPasseners = selectPasseners.filter(v=> v.id!=passener.id);
-        this.setData({
-            selectPasseners: selectPasseners
-        });
-        }
+            var selectPasseners = selectPasseners.filter(v=> v.id!=passener.id);
+            this.setData({
+                selectPasseners: selectPasseners
+            });
+        };
+       this.caculatePirce(); 
     },
     //验证
     check(){
@@ -635,6 +637,13 @@ Page({
         }
         return true;
     },
+    //切换钱包支付,微信支付
+    payTypeSelect(e){
+        var payType = e.currentTarget.dataset.paytype == 1 ? 0: 1;
+        this.setData({
+        payType
+        });
+    },
     //创建订单
     createOrder(){
         var that = this;
@@ -688,6 +697,7 @@ Page({
             orderModel.ContactTel = this.data.contactTel;
             orderModel.MemberId = app.globalData.memberId;
             orderModel.TotalPrice = this.data.price.totalPrice;
+            orderModel.PayType  = this.data.payType;
             var serviceModel = {};
             var temp = [];
             if (this.data.buySingleService == 1) {

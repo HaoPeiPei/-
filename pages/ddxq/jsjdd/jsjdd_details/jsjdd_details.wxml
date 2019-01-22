@@ -8,7 +8,8 @@
       <view class='box box-f1 padding-tb-20 border-b-1'>
         <view style='width:300rpx;'>
           <view class='box box-f1 box-ac'>
-            <view style='background-image:url(../../../images/sscx_icon_1.png)' class='background-icon'></view>
+            <h4 class="flex t-title align-center b-line">
+            <!-- <view style='background-image:url(../../../images/sscx_icon_1.png)' class='background-icon'></view> -->
             <view class='font-15 margin-l-10'>接送机</view>
           </view>
         </view>

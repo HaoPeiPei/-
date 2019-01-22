@@ -274,7 +274,7 @@ Page({
           recentList = recentList.concat(recentCity);
         }
       };
-      wx.setStorageSync('recentList', recentList);
+      wx.setStorageSync('recentCityListForFlight', recentList);
     }
   },
   //点击选择城市并返回首页
@@ -298,7 +298,7 @@ Page({
   },
   //缓存获取搜索历史城市
   getStorageRecentList: function(){
-    var recentList = wx.getStorageSync('recentList') || [];
+    var recentList = wx.getStorageSync('recentCityListForFlight') || [];
     if(recentList.length > 6){
       recentList.splice(6, 1);
     }

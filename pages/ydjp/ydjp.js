@@ -39,10 +39,10 @@ Page({
     var maxDateStr = (nowDate.getFullYear()+1)+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
     var maxDate = new Date(addDate(maxDateStr,0).replace(/-/g,  "/")).getTime();
     var depDateStr = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-    depDateStr = addDate(depDateStr,0);
+    depDateStr = addDate(depDateStr,1);
     var depDate = getChineseFormatDate(depDateStr);
     var depWeek = getWeek(depDateStr);
-    var arrDateStr = addDate(depDateStr,1);
+    var arrDateStr = addDate(depDateStr,2);
     var arrDate = getChineseFormatDate(arrDateStr) ;
     var arrWeek = getWeek(arrDateStr);
     var arrDateCurrentDate = new Date(addDate(arrDateStr,0).replace(/-/g,  "/")).getTime();
