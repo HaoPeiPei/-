@@ -3,6 +3,7 @@ var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var httpRequst = require("../../../../utils/requst.js");
 const { getMD, getWeek } = require('../../../../utils/util.js');
+var WxParse = require('../../../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -62,9 +63,9 @@ Page({
       true,
       '/weixin/jctnew/ashx/airTicket.ashx',
       {
-        "sdate": carrier.DepDate,
-        "carrier": carrier.Carrier,
-        "cab": carrier.CabInfos.Class,
+        "sdate": carrier.depDate,
+        "carrier": carrier.carrier,
+        "cab": carrier.cab,
         "action": "endorse"
       },
       "POST",
@@ -88,7 +89,7 @@ Page({
           comeEndorseTitle: '退改签详情',
       });
       if (this.data.endorseModalContent == "") {
-          this.showEndorse(this.data.order.airticketOrder.FlightInfoExts[0], "0");
+          this.showEndorse(this.data.order.airticketOrder.FlightInfos[0], "0");
       }
   },
   //显示往返退改详情
@@ -100,7 +101,7 @@ Page({
           backEndorseTitle: '回程退改签',
       });
       if (this.data.endorseModalContent == "") {
-          this.showEndorse(this.data.order.airticketOrder.FlightInfoExts[0], "0");
+          this.showEndorse(this.data.order.airticketOrder.FlightInfos[0], "0");
       }
   },
   //切换去回程改签详情
@@ -114,11 +115,11 @@ Page({
       });
       if(endorseType == 0){
           if(this.data.endorseModalContent == ''){
-              this.showEndorse(this.data.order.airticketOrder.FlightInfoExts[0], "0");
+              this.showEndorse(this.data.order.airticketOrder.FlightInfos[0], "0");
           }
       }else if(endorseType == 1){
           if(this.data.endorseModalContent == ''){
-              this.showEndorse(this.data.order.airticketOrder.FlightInfoExts[1], "1");
+              this.showEndorse(this.data.order.airticketOrder.FlightInfos[1], "1");
           }
       }
   },
@@ -134,31 +135,13 @@ Page({
         mulLineModalShow: false,
     });
   },
-  /* // 退改详情
-  bianRetreatingChange:function(){
-    var inBind_2 = this.data.inBind_2;
+  //隐藏退改详情
+  hideEndorseModal(e){
     this.setData({
-      inBind_2: !inBind_2
+        endorseModalShow: false,
     });
   },
-  catchBackChange2: function () {
-    var inBind_2 = "";
-    this.setData({
-      inBind_2: inBind_2
-    });
-  },
-  bianReturnChange:function(){
-    var inBind_3 = this.data.inBind_3;
-    this.setData({
-      inBind_3: !inBind_3
-    });
-  },
-  catchBackChange3: function () {
-    var inBind_3 = "";
-    this.setData({
-      inBind_3: inBind_3
-    });
-  }, */
+ 
   //加载订单详情
   loadOrderDetail(){
     var _this = this;
