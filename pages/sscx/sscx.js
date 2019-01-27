@@ -74,7 +74,7 @@ Page({
     var url = "/weixin/jctnew/ashx/service.ashx";
     var memberId = app.globalData.memberId;
     var params = { action: "getservicebyid", id: id, memberId: memberId };
-
+    
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
       if(res.Success){
         var obj = JSON.parse(res.Data);
