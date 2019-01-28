@@ -15,73 +15,59 @@ Page({
         right_icon:"",
         background_url:"../images/login_bg.png"
     },
-    key:'',
-    
   },
   catchBackChange:function(){
     wx.navigateBack({
-      delta:2
+      delta:1
     })
   },
   formSubmit:function(e){
     var _this= this;
     var mobile = e.detail.value.mobile;
     var password = e.detail.value.password;
-    var url = "weixin/miniprogram/ashx/login.ashx";
-    var action = "login";
-    var unionid = "ojVAM1Bh4TS4VV_buGp7Io0_gSgU";
-    var params = {
-      mobile: mobile,
-      password: password,
-      action: action,
-      unionid: unionid
-    };
-    httpRequst.HttpRequst(true, url, params,"POST",function(res){
-      var Data = JSON.parse(res.Data);
-      app.globalData.memberId = Data.id;
-      var key = _this.data.key;
-      if (key == 1) {
-           wx.navigateTo({
-             url: '../ddxq/fwdd/fwdd'
-           })
-      } else if (key == 2){
-           wx.navigateTo({
-             url: '../ddxq/jsjdd/jsjdd'
-           })
-      } else if (key == 3) {
-        wx.navigateTo({
-          url: '../ddxq/jpdd/jpdd'
-        })
-      } else if (key == 4) {
-        wx.navigateTo({
-          url: '../ddxq/dbcdd/dbcdd'
-        })
-      } else if (key == 5) {
-        var id = _this.data.id;
-        wx.navigateTo({
-          url: '../wycx/wycx?id='+id
-        })
-      }else if (key ==6) {
-        var id = _this.data.id;
-        wx.navigateTo({
-          url: '../sscx/sscx?id='+id
-        })
-      }
-    }); 
+    if(this.check(mobile, password)){
+      var params = {
+        mobile: mobile,
+        password: password,
+        action: 'login',
+        openId: app.globalData.openId,
+        unionid: app.globalData.unionid
+      };
+      wx.showLoading();
+      httpRequst.HttpRequst(true, "/weixin/jctnew/ashx/login.ashx", params,"POST",function(res){
+        wx.hideLoading();
+        if(res.Success > 0){
+          wx.navigateBack({
+            delta: 1
+          })
+        };
+      }); 
+    }
   },
+  //验证
+  check(mobile, password) {
+    if (!mobileReg.test(mobile)) {
+      wx.showToast({
+        title: '请输入正确的手机号码',
+        icon: 'none',
+      });
+      return false;
+    }
+    if (password == "") {
+      wx.showToast({
+        title: '请输入密码',
+        icon: 'none',
+      });
+      return false;
+    }
+    return true;
+},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this;
-    var key = options.key;
-    var id = options.id;
-   _this.setData({
-     key: key,
-     id: id
-   });
+    
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
