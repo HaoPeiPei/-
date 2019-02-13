@@ -67,7 +67,8 @@ App({
     imgRoot: "http://www.51jct.cn/weixin/miniprogram",
     remoteUrl: "https://www.51jct.cn",
     memberId:'7530',//6711
-    openId : 'oZDU-wbLV1EJkwy4Xdt-dt7HQIm8',//oZDU-wVTjVXuwwKYWsD4f1RuOXYc
+    openId : 'oZDU-wbLV1EJkwy4Xdt-dt7HQIm8',
+    unionid : 'ojVAM1Bh4TS4VV_buGp7Io0_gSgU',//
     userInfo: {},
     user: {
       realName: '沛',

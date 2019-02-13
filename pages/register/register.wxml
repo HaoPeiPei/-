@@ -7,26 +7,26 @@
   <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
     <view style='width:150rpx;' class='font-15 color-9b'>手机号</view>
     <view class='box box-f1 font-15'>
-      <input type='number' placeholder='请输入手机号' placeholder-class="checkd-colo"></input>
+      <input type='number' placeholder='请输入手机号' placeholder-class="checkd-colo" name="mobile"></input>
     </view>
   </view>
   <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
     <view style='width:150rpx;' class='font-15 color-9b'>验证码</view>
     <view class='box box-f1 font-15'>
-      <input type='number' placeholder='请输入验证码' placeholder-class="checkd-colo"></input>
+      <input type='number' placeholder='请输入验证码' placeholder-class="checkd-colo" name="verifyCode"></input>
     </view>
-    <view class='yzm-btn font-15'>发送验证码</view>
+    <view class='yzm-btn font-15' catchtap="sendVerify">发送验证码</view>
   </view>
-  <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
+  <!-- <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
     <view style='width:150rpx;' class='font-15 color-9b'>密码</view>
     <view class='box box-f1 font-15'>
-      <input type='text' password='true' placeholder='请输入密码' placeholder-class="checkd-colo"></input>
+      <input type='text' password='true' placeholder='请输入密码' placeholder-class="checkd-colo" name=""></input>
     </view>
-  </view>
+  </view> -->
   <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
     <view style='width:150rpx;' class='font-15 color-9b'>邀请码</view>
     <view class='box box-f1 font-15'>
-      <input type='text' placeholder='选填' placeholder-class="checkd-colo"></input>
+      <input type='text' placeholder='请输入邀请码' placeholder-class="checkd-colo" name="invitation"></input>
     </view>
   </view>
   <view class='box box-f1 margin-lr-30 '>
