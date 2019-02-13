@@ -100,7 +100,7 @@
       </view>
     </li>
     <li  wx:if="{{user_rights==0}}">
-      <view class='li-view box box-f1 box-ac' bindtap='bindEwmChange'>
+      <view class='li-view box box-f1 box-ac' > <!-- bindtap='bindEwmChange' -->
         <view class='box margin-r-1'>
           <image src='../images/wdewm_icon_1.png' class='image-1' />
         </view>

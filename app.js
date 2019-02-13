@@ -19,24 +19,17 @@ App({
       }
     })
   },
-  getOpenId: function(code) {
-    let url = "https://api.weixin.qq.com/sns/oauth2/access_token";
+  getOpenId: function(code) {//'https://api.weixin.qq.com/sns/jscode2session?appid='+d.appid+'&secret='+d.secret+'&js_code='+res.code+'&grant_type=authorization_code';
+    var that = this;  
+    var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx9766d9666a9dd73d&secret=313d0ece56ad563fd0da66a7e4cd473e&js_code='+code+'&grant_type=authorization_code';
     wx.request({
       url: url,
-      method: "POST",
-      data: {
-        appid : "wx95a1e8c05c84caca",
-        secret : "0d543d50dddebd2e3718adc47dfbd2c8",
-        js_code : code,
-        grant_type : "authorization_code"
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
+      method: "get",
       success: res => {
         let statusCode = res.statusCode
         if (200 === statusCode) {
-          console.log(res)
+          that.globalData.openId == res.data.openid;
+          debugger
         } else {
           console.log('获取 openId 失败')
         }
@@ -71,7 +64,7 @@ App({
   },
   globalData: {
     wwwRoot: "https://www.51jct.cn",
-    imgRoot: "https://www.51jct.cn",
+    imgRoot: "http://www.51jct.cn/weixin/miniprogram",
     remoteUrl: "https://www.51jct.cn",
     memberId:'7530',//6711
     openId : 'oZDU-wbLV1EJkwy4Xdt-dt7HQIm8',//oZDU-wVTjVXuwwKYWsD4f1RuOXYc

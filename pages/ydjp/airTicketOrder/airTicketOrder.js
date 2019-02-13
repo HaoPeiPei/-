@@ -1,6 +1,7 @@
 
 // pages/ydjp/airTicketOrder/airTicketOrder.js
 var app = getApp();
+var timer; // 确认订单计时器
 var httpRequst = require("../../../utils/requst.js");
 var Hub = require("../../../utils/miniProgramSignalr.js");
 var WxParse = require('../../../wxParse/wxParse.js');
@@ -876,6 +877,28 @@ Page({
             console.log(res);
         });
     }, 
+    //订单确认
+    orderConfirme(){
+        timer = setTimeout(function () {
+            wx.showLoading({
+                title: '数据加载中...',
+            });
+            httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airticket.ashx', { action: "getorderbyid", orderId: orderId }, "POST",function(res){
+                wx.hideLoading()
+                if (res.Success) {
+                    wx.showToast({
+                        title: res.Message || '支付成功',
+                        icon: 'none'
+                    });
+                } else {
+                    wx.showToast({
+                        title: res.Message,
+                        icon: 'none'
+                    });
+                }
+            });
+          }, 5000);
+    },
     onLoad:function(options){
         // 生命周期函数--监听页面加载
         this.initDate(options);
