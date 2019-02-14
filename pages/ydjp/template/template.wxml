@@ -263,7 +263,8 @@
     <view id="js-alert-box" class="c-bg-000 flex {{jsAlertModalShow?'':'none'}}">
 		<view class="alert-box">
 			<view id="alert_head" class="alert-head">
-                <view class="svg" width="104" height="104" ></view>           
+                <!-- <canvas class="svg" style="width: 208rpx; height: 208rpx;" canvas-id="secondCanvas"></canvas> -->
+                <view class="svg" width="104" height="104" >{{currentTime}}</view>       
 				<view id="js-sec-text" class="alert-sec-text"></view>
 			</view>
 			<view class="alert-body">

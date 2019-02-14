@@ -3,7 +3,7 @@
 <block wx:for='{{discover}}'>
 <view class='view-imag'>
   <view class='view-2'>
-    <image src='{{imgRoot+item.path}}' class='widthHeight-100'></image>
+    <image src='{{wwwRoot+item.path}}' class='widthHeight-100'></image>
   </view>
   <view class='box box-f1 box-ver backgr-w padding-tb-2 view-1'>
     <view class='box box-f1 box-ac font-12 margin-l-1 color-3'>{{item.main_title}}</view>

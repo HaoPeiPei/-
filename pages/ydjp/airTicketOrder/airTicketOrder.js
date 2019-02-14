@@ -3,7 +3,8 @@
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
-var timer; // 确认订单计时器
+var orderConfirmeTimer; // 确认订单计时器
+var countDownTimer; //倒计时计时器
 var httpRequst = require("../../../utils/requst.js");
 var Hub = require("../../../utils/miniProgramSignalr.js");
 var WxParse = require('../../../wxParse/wxParse.js');
@@ -75,6 +76,7 @@ Page({
         areaList: areaList,
         linkRegionShow: false,
         payType: 0, //支付方式 1:微信、0:钱包支付
+        currentTime: 60
     },
     //返回
     catchBackChange: function () {
@@ -749,6 +751,7 @@ Page({
                 wx.hideLoading()
                 if (res.Success == true) {
                     that.orderConfirme(res.Data);
+                    that.countDown(); //开始倒计时
                     //that.sendSignalR(res.Data);
                 } else {
     
@@ -881,27 +884,37 @@ Page({
             console.log(res);
         });
     }, 
+    //倒计时
+    countDown(){
+        var that = this;
+        countDownTimer =  setInterval(function () {
+            var currentTime = 0;
+            if(that.data.currentTime<0){
+                currentTime = 60
+            }else{
+                currentTime = that.data.currentTime-1;
+            }
+            that.setData({
+                currentTime
+            })
+        }, 1000);
+    },
     //订单确认
     orderConfirme(orderId){
-        timer = setTimeout(function () {
-            wx.showLoading({
-                title: '数据加载中...',
-            });
+        var that = this;
+        orderConfirmeTimer = setTimeout(function () {
             httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airticket.ashx', { action: "getorderbyid", orderId: orderId }, "POST",function(res){
-                wx.hideLoading()
                 if (res.Success) {
-                    wx.showToast({
-                        title: res.Message || '支付成功',
-                        icon: 'none'
-                    });
-                } else {
-                    wx.showToast({
-                        title: res.Message,
-                        icon: 'none'
-                    });
+                    if(true){
+                        clearInterval(orderConfirmeTimer);
+                        clearInterval(countDownTimer);
+                    }else{
+                        that.orderConfirmeTimer();
+                    }
                 }
             });
           }, 5000);
+          orderConfirmeTimer();
     },
 
     onLoad:function(options){

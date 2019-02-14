@@ -55,22 +55,22 @@ Page({
   },
   //倒计时
   time(o) {
+    var that = this;
     if (wait == 0) {
-      this.setData({
+      that.setData({
         waitStyle: 'c-bg-f4393c',
         waitMsg: '发送验证码',
         wait: 120,
       });
     } else {
-      this.setData({
+      that.setData({
         waitStyle: 'c-bg-ccc',
         waitMsg: '发送验证码(' + wait + ')',
         wait: wait--,
       });
       setTimeout(function () {
-            time(o)
-        },
-      000);
+        that.time(o)
+      },1000);
     }
   },
   //注册

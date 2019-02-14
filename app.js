@@ -29,7 +29,6 @@ App({
         let statusCode = res.statusCode
         if (200 === statusCode) {
           that.globalData.openId == res.data.openid;
-          debugger
         } else {
           console.log('获取 openId 失败')
         }
