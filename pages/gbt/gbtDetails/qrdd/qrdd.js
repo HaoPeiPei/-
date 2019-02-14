@@ -29,7 +29,7 @@ Page({
     currentDate: '',
     minDate: "",
     maxDate: "",
-    payType: 0, //支付方式 1:微信、0:钱包支付
+    payType: 1, //支付方式 1:微信
   },
   bindDateChange:function(e){
     var val = e.detail.value;

@@ -27,7 +27,7 @@ Page({
     totalPrice: 0,
     rechargeAmount : 0,//充值余额
     presentAmonut  : 0,//充值余额
-    payType: 0, //支付方式 1:微信、0:钱包支付
+    payType: 1, //支付方式 1:微信、
     contactor: app.globalData.user.realName,
     contactTel: app.globalData.user.mobile,
     position: "随机",
@@ -218,13 +218,6 @@ Page({
     var salesType = (e.currentTarget.dataset.salestype == 1 ? 0: 1);
     this.setData({
       salesType
-    });
-  },
-  //切换钱包支付,微信支付
-  payTypeSelect(e){
-    var payType = e.currentTarget.dataset.paytype == 1 ? 0: 1;
-    this.setData({
-      payType
     });
   },
   //输入联系人，手机号

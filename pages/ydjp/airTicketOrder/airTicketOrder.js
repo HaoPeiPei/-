@@ -75,7 +75,7 @@ Page({
         refund_info: "",
         areaList: areaList,
         linkRegionShow: false,
-        payType: 0, //支付方式 1:微信、0:钱包支付
+        payType: 1, //支付方式 1:微信、
         currentTime: 60
     },
     //返回
@@ -642,13 +642,6 @@ Page({
             }
         }
         return true;
-    },
-    //切换钱包支付,微信支付
-    payTypeSelect(e){
-        var payType = e.currentTarget.dataset.paytype == 1 ? 0: 1;
-        this.setData({
-        payType
-        });
     },
     //创建订单
     createOrder(){
