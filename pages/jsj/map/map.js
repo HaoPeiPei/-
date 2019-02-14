@@ -1,4 +1,7 @@
 // pages/jsj/map/map.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var amap = require("../../../utils/amap");
 var bmap = require("../../../utils/bmap-wx.min.js");
 Page({
@@ -9,10 +12,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../images/back-f.png",
+      "left_icon": imgRoot+"/images/back-f.png",
       "title_text": "接送地址",
-      "right_icon": "../../images/dh-f.png"
+      "right_icon": imgRoot+"/images/dh-f.png"
     },
+    imgRoot: imgRoot,
     longitude: 0,
     latitude: 0,
     seekList: []

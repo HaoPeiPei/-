@@ -15,23 +15,23 @@
       <view class='box box-f1'>
         <view class='box box-f1 box-ac'>
           <view class='location-icon'>
-            <image src="../images/dw.png"></image>
+            <image src="{{imgRoot}}/images/dw.png"></image>
           </view>
           <view class='box box-f1 box-ac' bindtap='cityList'>
             <view class='box box-f1 box-ac'>
               <view class='location-icon ss'>
-                <image src="../images/ss.png"></image>
+                <image src="{{imgRoot}}/images/ss.png"></image>
                 <text class='font-12'>{{airportName}}</text>
               </view>
             </view>
             <view class='location-icon bottoms'>
-              <image src="../images/xlan.png" style=''></image>
+              <image src="{{imgRoot}}/images/xlan.png" style=''></image>
             </view>
           </view>
         </view>
       </view>
       <view class='location-icon'>
-        <image src="../images/dh.png" style=''></image>
+        <image src="{{imgRoot}}/images/dh.png" style=''></image>
       </view>
     </view>
   </view>
@@ -233,10 +233,10 @@
   <view class='box box-f1 padding-1 box-ver'>
     <view class='box box-f1 box-apc font-10 color-9 margin-b-2'>为你推荐</view>
     <view class='box box-f1 box-apc' style='height:40rpx;'>
-      <view class='back-2' style='background:url(../images/2_38.png) no-repeat;background-size:100% 100%;'></view>
-      <!-- <image src='../images/2_38.png' style='height:40rpx;width:5rpx;margin-right:10rpx'></image> -->
+      <view class='back-2' style='background:url({{imgRoot}}/images/2_38.png) no-repeat;background-size:100% 100%;'></view>
+      <!-- <image src='{{imgRoot}}/images/2_38.png' style='height:40rpx;width:5rpx;margin-right:10rpx'></image> -->
       <view class='font-13 rmfu'>热门服务</view>
-      <view class='back-2' style='background:url(../images/2_38.png) no-repeat;background-size:100% 100%;'></view>
+      <view class='back-2' style='background:url({{imgRoot}}/images/2_38.png) no-repeat;background-size:100% 100%;'></view>
     </view>
   </view>
   <block wx:for='{{hotServiceProject}}' wx:key="*this">

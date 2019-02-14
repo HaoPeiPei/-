@@ -1,5 +1,7 @@
 // pages/dwcs/dwcs.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst.js");
 import {FlightCityList} from '../../../utils/city.js';
 Page({
@@ -7,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imgRoot: imgRoot,
     characterCity:[],
     recentList: [],
     d_r: [],

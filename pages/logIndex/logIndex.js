@@ -1,6 +1,7 @@
 // pages/logIndex/logIndex.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
 Page({
 
@@ -10,11 +11,12 @@ Page({
   data: {
     header_text:
     {
-        left_icon:"../images/back-f.png",
+        left_icon: imgRoot+"/images/back-f.png",
         title_text:"登陆",
         right_icon:"",
-        background_url:"../images/login_bg.png"
+        background_url: imgRoot+"/images/login_bg.png"
     },
+    imgRoot: imgRoot,
   },
   catchBackChange:function(){
     wx.navigateBack({

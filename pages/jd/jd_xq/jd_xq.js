@@ -1,5 +1,7 @@
 // pages/jd/jd_xq/jd_xq.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst");
 Page({
   /**
@@ -8,11 +10,12 @@ Page({
   data: {
     header_text:
     {
-      "imgUrls": ["../../images/hotel_bg.png", "../../images/worryFree.png"],
-      "left_icon": "../../images/back-f.png",
+      "imgUrls": [imgRoot+"/images/hotel_bg.png", imgRoot+"/images/worryFree.png"],
+      "left_icon": imgRoot+"/images/back-f.png",
       "title_text": "",
-      "right_icon": "../../images/dh-f.png"
+      "right_icon": imgRoot+"/images/dh-f.png"
     },
+    imgRoot: imgRoot,
     hotelId: '',
     hotelInfo: {},
     hotelImg: [],

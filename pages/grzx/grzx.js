@@ -1,6 +1,7 @@
 // pages/grzx/grzx.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
 Page({
 
@@ -10,10 +11,11 @@ Page({
   data: {
     personal:
     [
-      { 'src': '../images/yqm_icon_1.png', 'personalTitle': '邀请码', 'url':'yqm_details/yqm_details'},
-      { 'src': '../images/yhj_icon_1.png', 'personalTitle': '优惠卷', 'url': 'yhj_details/yhj_details' },
-      { 'src': '../images/zwkf_icon_1.png', 'personalTitle': '暂未开放', 'url': '' }
+      { 'src': imgRoot+'/images/yqm_icon_1.png', 'personalTitle': '邀请码', 'url':'yqm_details/yqm_details'},
+      { 'src': imgRoot+'/images/yhj_icon_1.png', 'personalTitle': '优惠卷', 'url': 'yhj_details/yhj_details' },
+      { 'src': imgRoot+'/images/zwkf_icon_1.png', 'personalTitle': '暂未开放', 'url': '' }
     ],
+    imgRoot: imgRoot,
     login_state:'1', //0 未登录 1登录
     user_rights:"0",  //0 员工版 1用户版 
     inBind:false,

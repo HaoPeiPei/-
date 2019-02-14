@@ -39,7 +39,7 @@
     <view class='box box-f1 box-ac color-f4 font-13'>{{title_text}}</view>
     <view class='box box-f1 box-ac box-pe' catchtap='bindChageTk' data-key="1">
       <view class='font-11 color-45 box box-ac margin-r-2 '>{{right_text}}</view>
-      <view style='background:url(../images/arrow_r.png) no-repeat center center;background-size:cover;width:20rpx;height:20rpx'></view>
+      <view style='background:url(http://www.51jct.cn/weixin/miniprogram/images/arrow_r.png) no-repeat center center;background-size:cover;width:20rpx;height:20rpx'></view>
     </view>
   </view>
 </template>

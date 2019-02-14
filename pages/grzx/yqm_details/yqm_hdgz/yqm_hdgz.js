@@ -1,4 +1,7 @@
 // pages/grzx/yqm_details/yqm_hdgz/yqm_hdgz.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
@@ -7,10 +10,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../../images/back-b.png",
-      "title_text": "活动规则",
-      "right_icon": "../../../images/dh-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
+      "title_text": imgRoot+"活动规则",
+      "right_icon": imgRoot+"/images/dh-b.png",
     },
+    imgRoot: imgRoot,
   },
   //返回
   catchBackChange: function (e) {

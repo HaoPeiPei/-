@@ -2,8 +2,8 @@
 <view class='box box-f1 box-apc view-grzx font-15'>个人中心</view>
 <view class='box box-f1 box-hor padding-tb-1 padding-lr-1 grxx'>
   <view class='tuoxiang'>
-    <image src='../images/personal_pic.png' wx:if="{{login_state==1}}"></image>
-    <image src='../images/personal_pic.png' wx:else></image>
+    <image src='{{imgRoot}}/images/personal_pic.png' wx:if="{{login_state==1}}"></image>
+    <image src='{{imgRoot}}/images/personal_pic.png' wx:else></image>
   </view>
   <view class='box box-f1 box-ver margin-l-1' wx:if="{{login_state==1}}">
     <view class='box box-f1 box-ac font-14'>
@@ -12,7 +12,7 @@
         <view class='box box-f1 box-hor box-pe'>
           <view class='box box-apc'>退出</view>
           <view class='box box-apc margin-l-10'>
-            <image src='../images/tc_icon_1.png' style='width:30rpx;height:30rpx;margin-top:10rpx;'></image>
+            <image src='{{imgRoot}}/images/tc_icon_1.png' style='width:30rpx;height:30rpx;margin-top:10rpx;'></image>
           </view>
         </view>
       </view>
@@ -52,12 +52,12 @@
       <navigator style='width:100%;' url='gnjs_details/gnjs_details' hover-class='none'>
         <view class='li-view box box-f1 box-ac' bindtap='bindListChange' data-list="0">
           <view class='box margin-r-1'>
-            <image src='../images/gljs_icon_1.png' class='image-1' />
+            <image src='{{imgRoot}}/images/gljs_icon_1.png' class='image-1' />
           </view>
         
           <view class='box box-f1 font-12'>功能介绍</view>
           <view class='box'>
-            <image src='../images/yjt_icon_c.png' class='image-2' />
+            <image src='{{imgRoot}}/images/yjt_icon_c.png' class='image-2' />
           </view>
         </view>
       </navigator>
@@ -66,11 +66,11 @@
     <navigator style='width:100%;' url='sysc_details/sysc_details' hover-class='none'>
       <view class='li-view box box-f1 box-ac' bindtap='bindListChange' data-list="1">
         <view class='box margin-r-1'>
-          <image src='../images/sysc_icon_1.png' class='image-1' />
+          <image src='{{imgRoot}}/images/sysc_icon_1.png' class='image-1' />
         </view>
         <view class='box box-f1 font-12'>使用手册</view>
         <view class='box'>
-          <image src='../images/yjt_icon_c.png' class='image-2' />
+          <image src='{{imgRoot}}/images/yjt_icon_c.png' class='image-2' />
         </view>
       </view>
       </navigator>
@@ -79,11 +79,11 @@
       <navigator style='width:100%;' url='yhxy_details/yhxy_details' hover-class='none'>
           <view class='li-view box box-f1 box-ac'  bindtap='bindListChange' data-list="2">
             <view class='box margin-r-1'>
-              <image src='../images/yhxy_icon_1.png' class='image-1' />
+              <image src='{{imgRoot}}/images/yhxy_icon_1.png' class='image-1' />
             </view>
             <view class='box box-f1 font-12'>用户协议</view>
             <view class='box'>
-              <image src='../images/yjt_icon_c.png' class='image-2' />
+              <image src='{{imgRoot}}/images/yjt_icon_c.png' class='image-2' />
             </view>
           </view>
       </navigator>
@@ -91,22 +91,22 @@
     <li wx:if="{{user_rights==0}}">
       <view class='li-view box box-f1 box-ac' bindtap='bindListChange' data-list="3">
         <view class='box margin-r-1'>
-          <image src='../images/ygtd_icon_1.png' class='image-1' />
+          <image src='{{imgRoot}}/images/ygtd_icon_1.png' class='image-1' />
         </view>
         <view class='box box-f1 font-12'>员工通道</view>
         <view class='box'>
-          <image src='../images/yjt_icon_c.png' class='image-2' />
+          <image src='{{imgRoot}}/images/yjt_icon_c.png' class='image-2' />
         </view>
       </view>
     </li>
     <li  wx:if="{{user_rights==0}}">
       <view class='li-view box box-f1 box-ac' > <!-- bindtap='bindEwmChange' -->
         <view class='box margin-r-1'>
-          <image src='../images/wdewm_icon_1.png' class='image-1' />
+          <image src='{{imgRoot}}/images/wdewm_icon_1.png' class='image-1' />
         </view>
         <view class='box box-f1 font-12'>我的二维码</view>
         <view class='box'>
-          <image src='../images/yjt_icon_c.png' class='image-2' />
+          <image src='{{imgRoot}}/images/yjt_icon_c.png' class='image-2' />
         </view>
       </view>
     </li>
@@ -120,7 +120,7 @@
         <view class='box box-f1 box-ver margin-t-20 back-0 box-apc padding-tb-50'>
             <view class='font-17'>扫描二维码</view>
             <view class='padding-tb-20'>
-              <image src='../images/qrcode.png' mode='widthFix' style='width:400rpx;'></image>
+              <image src='{{imgRoot}}/images/qrcode.png' mode='widthFix' style='width:400rpx;'></image>
             </view>
             <view class='box box-f1 font-17 color-eb'>
               <view>关注公众号</view>

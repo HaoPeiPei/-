@@ -6,7 +6,7 @@
 <view class='box box-f1 box-ver backgd-f padding-tb-25'>
   <view class='box box-f1 box-ver margin-lr-1 position-rel'>
     <view style='position:absolute;right:50rpx;top:-40rpx;'>
-      <image src='../../images/jx_icon.png' style='width:60rpx;' mode='widthFix' />
+      <image src='{{imgRoot}}/images/jx_icon.png' style='width:60rpx;' mode='widthFix' />
     </view>
     <view class='box box-f1 font-16 margin-b-1'>卓怿头等舱休息室</view>
     <view class='box box-f1 font-13 box-ae color-9 margin-b-2'>服务时间：

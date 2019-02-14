@@ -3,6 +3,7 @@ var app = getApp();
 var httpRequst = require("../../../utils/requst");
 var { addDate, getDateDiff, compareDate, returnDate, formatTimestamp, getFormatDate } = require("../../../utils/util.js");
 var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
+var imgRoot = app.globalData.imgRoot;
 Page({
   /**
    * 页面的初始数据
@@ -10,10 +11,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "选择航班",
-      "right_icon": "../../images/dh-b.png",
+      "right_icon": imgRoot+"/images/dh-b.png",
     },
+    imgRoot: imgRoot,
     airPort: 'SZX',
     date: '',
     time: '',

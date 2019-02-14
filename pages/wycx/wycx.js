@@ -1,6 +1,7 @@
 // pages/sscx/sscx.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
 
 Page({
@@ -12,14 +13,15 @@ Page({
     header_text:
     {
       "imgUrls": "",
-      "left_icon": "../images/back-1.png",
+      "left_icon": imgRoot+"/images/back-1.png",
       "title_text": "无忧出行", 
-      "right_icon": "../images/dh.png"
+      "right_icon": imgRoot+"../images/dh.png"
     },
+    imgRoot: imgRoot,
     setMealPage: 
     [
-      { "setMeal_icon": "../images/yldjp_icon.png", "setMeal_title": "换登机牌", "setMeal_cont": "提前办理登机牌，不排队安心登机" },
-      { "setMeal_icon": "../images/sscj_icon.png", "setMeal_title": "舒适乘机", "setMeal_cont": "优选喜欢座位(协助办理经济舱前排)" }    
+      { "setMeal_icon": imgRoot+"/images/yldjp_icon.png", "setMeal_title": "换登机牌", "setMeal_cont": "提前办理登机牌，不排队安心登机" },
+      { "setMeal_icon": imgRoot+"/images/sscj_icon.png", "setMeal_title": "舒适乘机", "setMeal_cont": "优选喜欢座位(协助办理经济舱前排)" }    
     ],
     purchaseNotice:
     [

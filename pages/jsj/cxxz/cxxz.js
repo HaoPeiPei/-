@@ -1,5 +1,7 @@
 // pages/jsj/cxxz/cxxz.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst");
 Page({
 
@@ -9,16 +11,17 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "车型选择",
-      "right_icon": "../../images/dh-b.png"
+      "right_icon": imgRoot+"/images/dh-b.png"
     },
+    imgRoot: imgRoot,
     // 车型
     carModel:
     [
-      { "imagUrl": "../../images/jingjixing.png", "tk_scopeOfUse": "锋范 伊兰特等同级车", "scopeOfUse": "经济型", "price": "43", "keyWord": ["经济", "实惠"] },
-      { "imagUrl": "../../images/shangwuche.png", "tk_scopeOfUse": "别克GL8 奥德赛等同级车", "scopeOfUse": "商务型", "price": "46", "keyWord": ["舒适", "大空间"] },
-      { "imagUrl": "../../images/haohuache.png", "tk_scopeOfUse": "奔驰 奥迪A6系列等同级车", "scopeOfUse": "豪华型", "price": "53", "keyWord": ["品味", "享受"] },
+      { "imagUrl": imgRoot+"/images/jingjixing.png", "tk_scopeOfUse": "锋范 伊兰特等同级车", "scopeOfUse": "经济型", "price": "43", "keyWord": ["经济", "实惠"] },
+      { "imagUrl": imgRoot+"/images/shangwuche.png", "tk_scopeOfUse": "别克GL8 奥德赛等同级车", "scopeOfUse": "商务型", "price": "46", "keyWord": ["舒适", "大空间"] },
+      { "imagUrl": imgRoot+"/images/haohuache.png", "tk_scopeOfUse": "奔驰 奥迪A6系列等同级车", "scopeOfUse": "豪华型", "price": "53", "keyWord": ["品味", "享受"] },
     ],
     rentCars: [],
     queryInfo: "",
@@ -93,13 +96,13 @@ Page({
   },
   getImg(item){
     if (item.VehicleType == "1") {
-      return "../../images/jingjixing.png";
+      return imgRoot+"/images/jingjixing.png";
     }
     else if (item.VehicleType == "2") {
-        return "../../images/shangwuche.png";
+        return imgRoot+"/images/shangwuche.png";
     }
     else if (item.VehicleType == "3") {
-        return "../../images/haohuache.png";
+        return imgRoot+"/images/haohuache.png";
     }
   },
   getCarType(item) {

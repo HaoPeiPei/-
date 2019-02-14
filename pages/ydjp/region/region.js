@@ -1,4 +1,7 @@
 // pages/wycx/xzhb/xdzf/qyxz/qyxz.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
@@ -7,10 +10,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "区域选择",
-      "right_icon": "../../images/dh-b.png"
+      "right_icon": imgRoot+"/images/dh-b.png"
     },
+    imgRoot: imgRoot,
     key: 0,
     types: 0,
     wz: "随机",

@@ -2,7 +2,7 @@
 <scroll-view scroll-y class='src' scroll-into-view="{{text}}">
   <view class='box box-f1 padding-tb-1 box-ac' style='background-color:#ff4d4d'>
     <view style='width:30rpx;height:100%;' class='margin-l-1' bindtap='bindBackChange' >
-      <image src='../images/back-f.png' style='width:22rpx;height:30rpx;'></image>
+      <image src='{{imgRoot}}/images/back-f.png' style='width:22rpx;height:30rpx;'></image>
     </view>
     <view class='box box-f1 box-apc color-f font-16'>城市选择</view>
     <view style='width:30rpx;height:100%' class='margin-r-1'></view>

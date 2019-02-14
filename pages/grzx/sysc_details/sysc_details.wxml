@@ -1,2 +1,2 @@
 <!--pages/grzx/sysc_details/sysc_details.wxml-->
-<image src='../../images/instructionmanual.jpg' mode='widthFix' style='width:100%;'></image>
+<image src='{{imgRoot}}/images/instructionmanual.jpg' mode='widthFix' style='width:100%;'></image>

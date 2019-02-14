@@ -6,6 +6,8 @@ var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?
 //联系手机正则
 var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst.js");
 var {addDate, getDateDiff, getNowFormatDate, getFormatDate} = require("../../../utils/util.js");
 Page({
@@ -15,10 +17,11 @@ Page({
    */
   data: {
     header_text_1: {
-      "left_icon": "../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "选择航班",
-      "right_icon": "../../images/dh-b.png"
+      "right_icon": imgRoot+"/images/dh-b.png"
     },
+    imgRoot: imgRoot,
     inCaTch: false,
     serviceId: "",
     serviceName: "",

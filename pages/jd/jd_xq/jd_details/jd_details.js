@@ -1,6 +1,9 @@
 // pages/jd/jd_xq/jd_details/jd_details.js
 var httpRequst = require("../../../../utils/requst");
 var WxParse = require('../../../../wxParse/wxParse.js');
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
@@ -9,17 +12,18 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "酒店详情",
       "right_icon": "",
     },
     hotel_facilities:
     [
-      { fac_icon: "../../../images/tcc_icon.png", fac_name:"停车场"},
-      { fac_icon: "../../../images/wiff_icon.png", fac_name: "WLFI" },
-      { fac_icon: "../../../images/ct_icon.png", fac_name: "餐厅" },
-      { fac_icon: "../../../images/js_icon.png", fac_name: "健身" },
+      { fac_icon: imgRoot+"/images/tcc_icon.png", fac_name:"停车场"},
+      { fac_icon: imgRoot+"/images/wiff_icon.png", fac_name: "WLFI" },
+      { fac_icon: imgRoot+"/images/ct_icon.png", fac_name: "餐厅" },
+      { fac_icon: imgRoot+"/images/js_icon.png", fac_name: "健身" },
     ],
+    imgRoot: imgRoot,
     hotelInfo: {},
   },
   //初始化数据

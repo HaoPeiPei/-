@@ -1,5 +1,7 @@
 // pages/gbt/gbtDetails/qrdd/qrdd.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst.js");
 Page({
   /**
@@ -8,10 +10,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "确认订单", 
-      "right_icon": "../../../images/dh-b.png"
+      "right_icon": imgRoot+"/images/dh-b.png"
     },
+    imgRoot: imgRoot,
     useDate:"",
     service: {},
     coupon: {},

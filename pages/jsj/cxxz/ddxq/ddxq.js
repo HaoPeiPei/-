@@ -1,5 +1,7 @@
 // pages/jsj/cxxz/ddxq/ddxq.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../../utils/requst.js");
 //乘机人姓名正则判断规则
 var nameReg = /^[\u4E00-\u9fA5]{2,20}$|^(?:(?:[A-Za-z]{2,53}\/[A-Za-z]{2,53})|(?:[A-Za-z]{1,49}\s[A-Za-z]{2,50}\/[A-Za-z]{2,50})|(?:[A-Za-z]{2,50}\/[A-Za-z]{2,50}\s[A-Za-z]{1,49}))$/;
@@ -13,10 +15,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "确认订单",
-      "right_icon": "../../../images/dh-b.png"
+      "right_icon": imgRoot+"/images/dh-b.png"
     },
+    imgRoot: imgRoot,
     order_details:
     {
       "vehicle_type":"经济型",

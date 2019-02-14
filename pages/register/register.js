@@ -6,6 +6,8 @@ var regVerify = /^\d{6}$/;
 //邀请码正则
 var invitCodeReg = /^[0-9|a-z|A-Z]{3,8}$/;
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
@@ -14,10 +16,11 @@ Page({
   data: {
     header_text:
     {
-      left_icon: "../images/back-b.png",
+      left_icon: imgRoot+"/images/back-b.png",
       title_text: "注册",
       right_icon: "",
     },
+    imgRoot: imgRoot,
     wait: 120,
     waitStyle: 'c-bg-ccc',
     waitMsg: '发送验证码',

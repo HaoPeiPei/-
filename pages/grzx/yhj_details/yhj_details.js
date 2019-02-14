@@ -1,6 +1,7 @@
 // pages/grzx/yhj_details/yhj_details.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst.js");
 Page({
 
@@ -10,19 +11,20 @@ Page({
   data: {
     header_text:
       {
-        "left_icon": "../../images/back-b.png",
+        "left_icon": imgRoot+"/images/back-b.png",
         "title_text": "优惠卷",
-        "right_icon": "../../images/dh-b.png",
+        "right_icon": imgRoot+"/images/dh-b.png",
       },
+    imgRoot: imgRoot,  
     isUsed: 0,
     yhi_gs: "",
     coupons: [],
     couponTip: '',
     conttent_text:
       [
-        { backImg_url: "../../images/wycx_yhj.png", backImg_url_1: "../../images/wycx_yhj_1.png", yhxm: "无忧出行", start_item: "2017.08.19", end_item: "2017.09.27", price: "30", },
-        { backImg_url: "../../images/sscx_yhj.png", backImg_url_1: "../../images/sscx_yhj_1.png", yhxm: "舒适出行", start_item: "2017.08.19", end_item: "2017.09.27", price: "50", },
-        { backImg_url: "../../images/dbc_yhj.png", backImg_url_1: "../../images/dbc_yhj_1.png", yhxm: "代泊车", start_item: "2017.08.19", end_item: "2017.09.27", price: "80", }
+        { backImg_url: imgRoot+"/images/wycx_yhj.png", backImg_url_1: imgRoot+"/images/wycx_yhj_1.png", yhxm: "无忧出行", start_item: "2017.08.19", end_item: "2017.09.27", price: "30", },
+        { backImg_url: imgRoot+"/images/sscx_yhj.png", backImg_url_1: imgRoot+"/images/sscx_yhj_1.png", yhxm: "舒适出行", start_item: "2017.08.19", end_item: "2017.09.27", price: "50", },
+        { backImg_url: imgRoot+"/images/dbc_yhj.png", backImg_url_1: imgRoot+"/images/dbc_yhj_1.png", yhxm: "代泊车", start_item: "2017.08.19", end_item: "2017.09.27", price: "80", }
       ]
   },
   //返回

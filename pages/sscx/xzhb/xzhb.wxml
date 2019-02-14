@@ -5,7 +5,7 @@
   <template is="header_content_noBackod" data="{{...header_text_1}}" />
   <view class='box box-f1 backgd-f box-ver' style='margin-bottom:80rpx;'>
     <view class='box box-f1 border-b-1 margin-lr-1 box-ac padding-tb-1'>
-      <view class='' style='background:url(../../images/hbxx_icon.png) no-repeat center center;background-size:cover;width:30rpx;height:30rpx;'></view>
+      <view class='' style='background:url({{imgRoot}}/images/hbxx_icon.png) no-repeat center center;background-size:cover;width:30rpx;height:30rpx;'></view>
       <view class='box box-f1 font-15 margin-l-1 color-9'>航班信息</view>
     </view>
     <view class='box box-f1 margin-lr-1'>
@@ -57,7 +57,7 @@
     </view>
     <view class='height-10'></view>
     <view class='box box-f1 border-b-1 margin-lr-1 box-ac padding-tb-1 '>
-      <view class='' style='background:url(../../images/hbxx_icon.png) no-repeat center center;background-size:cover;width:30rpx;height:30rpx;'></view>
+      <view class='' style='background:url({{imgRoot}}/images/hbxx_icon.png) no-repeat center center;background-size:cover;width:30rpx;height:30rpx;'></view>
       <view class='box font-15 margin-l-1 color-9'>乘机人</view>
       <view class='box font-11 color-9 box-ae margin-l-1'>已选乘客：
         <text>{{selectPasseners.length}}</text>人
@@ -69,7 +69,7 @@
     <block class='{{selectPasseners.length==0?"none":""}}' wx:for="{{selectPasseners}}" wx:key="*this">
       <view class='box box-f1 margin-lr-1'>
         <view class='box box-f1 margin-l-5 font-13 border-b-1 padding-tb-1 box-ac {{inCaTch?"none":""}}'>
-          <view style='background:url(../../images/back-y.png) no-repeat center center;background-size:cover;width:48rpx;height:48rpx;' data-passenerid='{{item.id}}' catchtap='onSelectPassener'></view>
+          <view style='background:url({{imgRoot}}/images/back-y.png) no-repeat center center;background-size:cover;width:48rpx;height:48rpx;' data-passenerid='{{item.id}}' catchtap='onSelectPassener'></view>
           <view class='box box-f1 box-ver'>
             <view class='box box-f1 box-hor margin-l-1 padding-tb-2'>
               <view class='left-title-1 color-9'>姓名：</view>

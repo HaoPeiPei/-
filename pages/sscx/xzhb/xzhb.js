@@ -2,6 +2,8 @@
 //航班号正则判断规则
 var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst.js");
 var {addDate, getDateDiff, getNowFormatDate, getFormatDate } = require("../../../utils/util.js");
 Page({
@@ -11,10 +13,11 @@ Page({
    */
   data: {
     header_text_1: {
-      "left_icon": "../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "选择航班",
-      "right_icon": "../../images/dh-b.png"
+      "right_icon": imgRoot+"/images/dh-b.png"
     },
+    imgRoot: imgRoot,
     inCaTch: false,
     serviceId: "",
     serviceName: "",

@@ -8,7 +8,7 @@
   <view class='box box-f1 backgd-f margin-t-1'>
     <view class='box box-f1 margin-lr-1 box-ver'>
       <view class='box box-f1 box-ac padding-tb-1 border-b-1'>
-        <view style='background:url(../../../images/ddxq_icon_b.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
+        <view style='background:url({{imgRoot}}/images/ddxq_icon_b.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
         </view>
         <view class='box box-f1 font-15 margin-l-1'>订单详情</view>
       </view>
@@ -35,12 +35,12 @@
   <!--用车人数  -->
   <view class='box box-f1 backgd-f margin-t-1 box-ver'>
     <view class='box box-f1 margin-lr-1 padding-tb-1 box-ac {{inBind?"border-b-1":""}}'>
-      <view style='background:url(../../../images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'></view>
+      <view style='background:url({{imgRoot}}/images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'></view>
       <view class='box box-f1 margin-l-1'>
         <view class='font-14 color-9'>用车人数</view>
         <view class='rsys-back margin-l-5 xz'>{{key}}</view>
       </view>
-      <view style='background:url(../../../images/xl_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:20rpx;' bindtap='bindXlChage'></view>
+      <view style='background:url({{imgRoot}}/images/xl_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:20rpx;' bindtap='bindXlChage'></view>
     </view>
     <view class='box box-f1 margin-lr-1 padding-tb-3 box-ac {{inBind?"":"none"}}'>
       <view style='width:100%'>
@@ -64,7 +64,7 @@
   <view class='box box-f1 backgd-f margin-t-1'>
     <view class='box box-f1 margin-lr-1 box-ver'>
       <view class='box box-f1 box-ac padding-tb-1 border-b-1'>
-        <view style='background:url(../../../images/lxr_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
+        <view style='background:url({{imgRoot}}/images/lxr_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
         </view>
         <view class='box box-f1 box-ac font-14 margin-l-1'>
           <view class='color-9' style='width:120rpx;'>联系人</view>
@@ -86,12 +86,12 @@
   <!--优惠券  -->
   <view class='box box-f1 backgd-f margin-t-1 box-ver'>
     <view class='box box-f1 margin-lr-1 padding-tb-1 box-ac'>
-      <view style='background:url(../../../images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'></view>
+      <view style='background:url({{imgRoot}}/images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'></view>
       <view class='box box-f1 margin-l-1' >
         <view class='font-14 color-9'>优惠券</view>
         <view class='rsys-back margin-l-5 {{yhi_gs>0?"yhj":""}}'>{{yhi_gs}}</view>
       </view>
-      <!-- <view style='background:url(../../../images/yjt_icon_c.png) no-repeat center center;background-size:100% 100%;width:20rpx;height:30rpx;' ></view> -->
+      <!-- <view style='background:url({{imgRoot}}/images/yjt_icon_c.png) no-repeat center center;background-size:100% 100%;width:20rpx;height:30rpx;' ></view> -->
     </view>
   </view>
 
@@ -99,16 +99,16 @@
   <view class='box box-f1 backgd-f margin-t-1'>
     <view class='box box-f1 margin-lr-1 box-ver'>
       <view class='box box-f1 box-ac padding-tb-1 border-b-1'>
-        <view style='background:url(../../../images/zffs_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
+        <view style='background:url({{imgRoot}}/images/zffs_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
         </view>
         <view class='box box-f1 font-14 margin-l-1 color-9'>支付方式</view>
-        <!-- <view style='background:url(../../../images/yjt_icon_c.png) no-repeat center center;background-size:100% 100%;width:20rpx;height:30rpx;' bindtap=''></view> -->
+        <!-- <view style='background:url({{imgRoot}}/images/yjt_icon_c.png) no-repeat center center;background-size:100% 100%;width:20rpx;height:30rpx;' bindtap=''></view> -->
       </view>
 
       <view class='box box-f1 margin-l-4 padding-tb-1 box-ac font-14'>
         <view class='color-9 box box-f1'>微信支付</view>
         <view class="box box-pc">
-          <image src='../../../images/wxzf_icon.png' style='width:40rpx;margin-top:10rpx;' mode='widthFix'></image>
+          <image src='{{imgRoot}}/images/wxzf_icon.png' style='width:40rpx;margin-top:10rpx;' mode='widthFix'></image>
         </view>
       </view>
     </view>

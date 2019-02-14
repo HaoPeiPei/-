@@ -1,5 +1,7 @@
 // pages/wycx/xzhb/xdzf/xdzf.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst");
 var { getWeek, getMD } = require("../../../utils/util.js");
 Page({
@@ -10,10 +12,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "无忧出行",
-      "right_icon": "../../images/dh-b.png",
+      "right_icon": imgRoot+"/images/dh-b.png",
     },
+    imgRoot: imgRoot,
     couponType: 0,
     salesType: 1,
     carrier: {},

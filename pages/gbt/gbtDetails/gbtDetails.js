@@ -1,5 +1,7 @@
 // pages/gbt/gbtDetails/gbtDetails.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst.js");
 var WxParse = require('../../../wxParse/wxParse.js');
 Page({
@@ -9,21 +11,22 @@ Page({
   data: {
     header_text:
     {
-      "imgUrls": ["../../images/vipHall_1.png", "../../images/valet_bg.png", "../../images/vipHall_1.png"],
-      "left_icon": "../../images/back-b.png",
-      "title_text": "", "right_icon": "../../images/dh-b.png"
+      "imgUrls": [imgRoot+"/images/vipHall_1.png", imgRoot+"/images/valet_bg.png", imgRoot+"/images/vipHall_1.png"],
+      "left_icon": imgRoot+"/images/back-b.png",
+      "title_text": "", "right_icon": imgRoot+"/images/dh-b.png"
     },
     equipment:
     [
-      { icon_url: "../../images/jbxxs_icon.png", icon_title: "嘉宾休息室" },
-      { icon_url: "../../images/xc_icon.png", icon_title: "小吃" },
-      { icon_url: "../../images/hbxsq_icon.png", icon_title: "航班显示器" },
-      { icon_url: "../../images/ds_icon.png", icon_title: "电视" },
-      { icon_url: "../../images/gbtxdj_icon.png", icon_title: "广播提醒登机" },
-      { icon_url: "../../images/csyl_icon.png", icon_title: "茶水/饮料" },
-      { icon_url: "../../images/tsj_icon.png", icon_title: "台式机" },
-      { icon_url: "../../images/bgzz_icon.png", icon_title: "报刊杂志" },
+      { icon_url: imgRoot+"/images/jbxxs_icon.png", icon_title: "嘉宾休息室" },
+      { icon_url: imgRoot+"/images/xc_icon.png", icon_title: "小吃" },
+      { icon_url: imgRoot+"/images/hbxsq_icon.png", icon_title: "航班显示器" },
+      { icon_url: imgRoot+"/images/ds_icon.png", icon_title: "电视" },
+      { icon_url: imgRoot+"/images/gbtxdj_icon.png", icon_title: "广播提醒登机" },
+      { icon_url: imgRoot+"/images/csyl_icon.png", icon_title: "茶水/饮料" },
+      { icon_url: imgRoot+"/images/tsj_icon.png", icon_title: "台式机" },
+      { icon_url: imgRoot+"/images/bgzz_icon.png", icon_title: "报刊杂志" },
     ],
+    imgRoot: imgRoot,
     service_info: "",
     buy_info: "",
     refund_info: "",

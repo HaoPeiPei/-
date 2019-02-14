@@ -19,7 +19,7 @@
       </view>
       <view class='box box-f1 padding-tb-30'>
         <view style='width:300rpx;height:200rpx;'>
-          <image src='../../../images/sscx_img_1.png' style='width:100%;height:100%'></image>
+          <image src='{{imgRoot}}/images/sscx_img_1.png' style='width:100%;height:100%'></image>
         </view>
         <view class='box box-f1 box-ver margin-l-20 font-13'>
           <view class='box box-f1 box-as'>
@@ -52,7 +52,7 @@
   <view class='box box-f1 backgd-f margin-t-10'>
     <view class='box box-f1 margin-lr-20 box-ver'>
       <view class='box box-f1 padding-tb-30 box-ac border-b-1'>
-        <view style='background-image:url(../../../images/dd-9.png)' class='background-icon'></view>
+        <view style='background-image:url({{imgRoot}}/images/dd-9.png)' class='background-icon'></view>
         <view class='font-15 margin-l-10 color-9'>订单信息</view>
       </view>
       <view class='box box-f1 padding-tb-30 font-15 border-b-1'>

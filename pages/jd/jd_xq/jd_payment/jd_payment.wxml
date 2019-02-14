@@ -14,7 +14,7 @@
       <view class='box box-f1 margin-lr-20 border-b-1 padding-tb-30'>
         <view style='width:160rpx;' class='font-14'>
           <view class='box box-f1 box-hor box-ac'>
-            <view style='background:url(../../../images/data_icon_1.png) no-repeat center center;background-size:100% 100%;width:26rpx;height:26rpx;'></view>
+            <view style='background:url({{imgRoot}}/images/data_icon_1.png) no-repeat center center;background-size:100% 100%;width:26rpx;height:26rpx;'></view>
             <view class='box margin-l-10'>入住时间</view>
           </view>
         </view>
@@ -22,7 +22,7 @@
           <picker mode="date" style='width:100%' start="2018-06-20" end="2018-12-30" placeholder="请选择入住房时间"  bindchange='bindDateChange_1'>
             <view class='box box-f1 box-hor box-ac'>
               <view class='box box-f1 box-ac box-pe margin-r-10 color-3'>{{start_date}}</view>
-              <view style='background:url(../../../images/arrow_r_1.png) no-repeat center center;background-size:100% 100%;width:14rpx;height:24rpx;'></view>
+              <view style='background:url({{imgRoot}}/images/arrow_r_1.png) no-repeat center center;background-size:100% 100%;width:14rpx;height:24rpx;'></view>
             </view>
           </picker>
         </view>
@@ -30,7 +30,7 @@
       <view class='box box-f1 margin-lr-20 padding-tb-30'>
         <view style='width:160rpx;' class='font-14'>
           <view class='box box-f1 box-hor box-ac'>
-            <view style='background:url(../../../images/data_icon_1.png) no-repeat center center;background-size:100% 100%;width:26rpx;height:26rpx;'></view>
+            <view style='background:url({{imgRoot}}/images/data_icon_1.png) no-repeat center center;background-size:100% 100%;width:26rpx;height:26rpx;'></view>
             <view class='box margin-l-10'>离店时间</view>
           </view>
         </view>
@@ -38,7 +38,7 @@
           <picker mode="date" style='width:100%' start="2018-06-20" end="2018-12-30" placeholder="请选择离店房时间" bindchange='bindDateChange_2'>
             <view class='box box-f1 box-hor box-ac'>
               <view class='box box-f1 box-ac box-pe margin-r-10 color-3'>{{end_date}}</view>
-              <view style='background:url(../../../images/arrow_r_1.png) no-repeat center center;background-size:100% 100%;width:14rpx;height:24rpx;'></view>
+              <view style='background:url({{imgRoot}}/images/arrow_r_1.png) no-repeat center center;background-size:100% 100%;width:14rpx;height:24rpx;'></view>
             </view>
           </picker>
         </view>
@@ -51,7 +51,7 @@
           <view class='box box-f1'>
             <text>{{indexs}}</text> 间</view>
           <view style='padding:10rpx 20rpx;' bindtap='bindListChange'>
-            <view style='background:url(../../../images/xl_icon.png) no-repeat center center;background-size:100% 100%;width:24rpx;height:14rpx;' ></view>
+            <view style='background:url({{imgRoot}}/xl_icon.png) no-repeat center center;background-size:100% 100%;width:24rpx;height:14rpx;' ></view>
           </view>
         </view>
         <view class='box box-f1 box-hor padding-tb-30 font-13 box-ac border-b-1 {{inBind?"":"none"}}'>
@@ -76,7 +76,7 @@
               </view>
             </block>
           </view>
-          <view style='background:url(../../../images/add_icon_1.png) no-repeat center center;background-size:100% 100%;width:40rpx;height:40rpx;margin-left:36rpx;' catchtap="addPassengers" ></view>
+          <view style='background:url({{imgRoot}}/images/add_icon_1.png) no-repeat center center;background-size:100% 100%;width:40rpx;height:40rpx;margin-left:36rpx;' catchtap="addPassengers" ></view>
         </view>
 
         <view class='box box-f1 box-hor font-13 padding-tb-30 color-9 border-b-1 box-ac'>

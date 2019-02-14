@@ -1,5 +1,7 @@
 // pages/ydjp/ydjp.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var {getWeek, getChineseFormatDate, compareDate, addDate, returnDate, getFormatDate} = require("../../utils/util.js");
 Page({
 
@@ -9,11 +11,12 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../images/back-f.png",
+      "left_icon": imgRoot+"/images/back-f.png",
       "title_text": "国内机票",
-      "right_icon": "../images/dh-f.png",
-      "background_url": "../images/worryFree.png"
+      "right_icon": imgRoot+"/images/dh-f.png",
+      "background_url": imgRoot+"/images/worryFree.png"
     },
+    imgRoot: imgRoot,
     ticketType: 0,
     minDate: '',
     maxDate: '',

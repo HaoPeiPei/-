@@ -1,4 +1,7 @@
 // pages/index/ydjp/ydjp.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
@@ -7,11 +10,12 @@ Page({
   data: {
     header_text:
       {
-        left_icon: "../../images/back-f.png",
+        left_icon: imgRoot+"/images/back-f.png",
         title_text: "国内机票",
-        right_icon: "../../images/dh-f.png",
-        background_url: "../../images/sscx_img_1.png"
-      }
+        right_icon: imgRoot+"/images/dh-f.png",
+        background_url: imgRoot+"/images/sscx_img_1.png"
+      },
+      imgRoot: imgRoot,
   },
 
   /**

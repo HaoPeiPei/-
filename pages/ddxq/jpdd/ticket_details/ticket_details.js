@@ -1,6 +1,7 @@
 // pages/ddxq/jpdd/ticket_details/ticket_details.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../../utils/requst.js");
 const { getMD, getWeek } = require('../../../../utils/util.js');
 var WxParse = require('../../../../wxParse/wxParse.js');
@@ -12,10 +13,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "国内机票下单",
       "right_icon": "",
     },
+    imgRoot: imgRoot,
     state:"",
     single_return:"",
     priceDetailModalShow: false,

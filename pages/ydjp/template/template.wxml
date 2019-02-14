@@ -158,7 +158,7 @@
         <view class="wait"></view>
         <view class="wait_logo">
             <view class="absolute-Center">
-                <image src="../../images/animatedEllipse.gif" alt="" ></image>
+                <image src="http://www.51jct.cn/weixin/miniprogram/images/animatedEllipse.gif" alt="" ></image>
             </view>
         </view>
     </view>

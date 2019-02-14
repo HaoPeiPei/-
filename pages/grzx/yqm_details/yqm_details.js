@@ -1,6 +1,7 @@
 // pages/grzx/yqm_details/yqm_details.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst.js");
 Page({
 
@@ -10,10 +11,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../images/back-f.png",
+      "left_icon": imgRoot+"/images/back-f.png",
       "title_text": "我的邀请码",
-      "right_icon": "../../images/dh-b.png",
+      "right_icon": imgRoot+"/images/dh-b.png",
     },
+    imgRoot: imgRoot,
     user: {}
   },
   //返回

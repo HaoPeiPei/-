@@ -1,5 +1,6 @@
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../../utils/requst.js");
 
 Page({
@@ -10,13 +11,14 @@ Page({
   data: {
     header_text:
       {
-        "left_icon": "../../../images/back-b.png",
+        "left_icon": imgRoot+"/images/back-b.png",
         "title_text": "订单详情",
-        "right_icon": "../../../images/dh-b.png",
+        "right_icon": imgRoot+"/images/dh-b.png",
       },
     coupon: '',
     Order: '',
-    orderId: ''
+    orderId: '',
+    imgRoot: imgRoot
   },
   //返回
   catchBackChange: function () {

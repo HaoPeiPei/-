@@ -10,14 +10,14 @@
   <view class='seek-text'>
     <view class='box box-f1 box-ac' style='height:100%'>
       <view class='box box-ac' style='height:100%;margin-left:40rpx;'>
-        <image src='../../images/seek_f.png' style='width:40rpx;' mode='widthFix'></image>
+        <image src='{{imgRoot}}/images/seek_f.png' style='width:40rpx;' mode='widthFix'></image>
       </view>
       <view class='box box-ac box-f1 margin-l-1'>
         <view class='seek-input'>
           <view class='box box-f1 height-100 box-hor'>
             <view class='padding-lr-1 font-16 color-3 height-100 ' style='line-height:60rpx;'>深圳</view>
             <view class='box box-as height-100'>
-              <image src='../../images/yjt_3.png' style='width:16rpx;' mode='widthFix'></image>
+              <image src='{{imgRoot}}/images/yjt_3.png' style='width:16rpx;' mode='widthFix'></image>
             </view>
             <view class='box box-f1 box-ac margin-l-1 font-14'>
               <input type='text' data-pagenum="1" bindinput="autoSearch" placeholder='请输入地址...' style='width:90%;'></input>

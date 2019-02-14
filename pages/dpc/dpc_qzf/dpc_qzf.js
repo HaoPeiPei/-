@@ -1,5 +1,6 @@
 // pages/dpc/dpc_qzf/dpc_qzf.js
 var app = getApp();
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst");
 Page({
 
@@ -9,9 +10,9 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "订单详情",
-      "right_icon": "../../images/dh-b.png",
+      "right_icon": imgRoot+"/images/dh-b.png",
     },
     ddxq:
     [
@@ -28,6 +29,7 @@ Page({
       { "title": "爱车型号", "dataVehicle": "奥迪A6" },
       { "title": "爱车颜色", "dataVehicle": "黑色" },
     ],
+    imgRoot: imgRoot,
     ddxqsStart:[],
     arrayTitle:[],
     arrays:[],

@@ -9,7 +9,7 @@
 
 <view style='width:100%;' class='{{key==0?"":"none"}}'>
   <block wx:for="{{conttent_text}}">
-    <view style='width:90%;margin:50rpx auto;background:url(../../images/wycx_yhj.png) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
+    <view style='width:90%;margin:50rpx auto;background:url({{imgRoot}}/images/wycx_yhj.png) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
       <view class='box box-f1 padding-tb-20 color-f'>
         <view class='box box-f1 box-ver' style='margin-left:80rpx;'>
           <view class='box box-f1 font-16 box-ac'>{{item.yhxm}}</view>

@@ -10,7 +10,7 @@
 
   <view style='width:100%;' class='{{isUsed==0?"":"none"}}'>
     <block wx:for="{{coupons}}">
-      <view style='width:90%;margin:50rpx auto;background:url(../../images/wycx_yhj.png) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
+      <view style='width:90%;margin:50rpx auto;background:url({{imgRoot}}/images/wycx_yhj.png) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
         <view class='box box-f1 padding-tb-20 color-f'>
           <view class='box box-f1 box-ver' style='margin-left:80rpx;'>
             <view class='box box-f1 font-16 box-ac'>{{item.servicetype_name}}</view>
@@ -33,7 +33,7 @@
 
   <view style='width:100%;' class='{{isUsed==1?"":"none"}}'>
     <block wx:for="{{coupons}}">
-      <view style='width:90%;margin:50rpx auto;background:url(../../images/wycx_yhj_1.png) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
+      <view style='width:90%;margin:50rpx auto;background:url({{imgRoot}}/images/wycx_yhj_1.png) no-repeat center center;background-size:100% 100%;border-rdaius:10rpx;'>
         <view class='box box-f1 padding-tb-20 color-f'>
           <view class='box box-f1 box-ver' style='margin-left:80rpx;'>
             <view class='box box-f1 font-16 box-ac'>{{item.servicetype_name}}</view>
@@ -58,7 +58,7 @@
 <!--无优惠券  -->
 <view class='box box-f1 box-apc box-ver {{coupons.length == "0"?"":"none"}}' style='margin-top:250rpx;'>
   <view>
-    <image src='../../images/noyhj_img.png' style='width:260rpx;' mode='widthFix'></image>
+    <image src='{{imgRoot}}/images/noyhj_img.png' style='width:260rpx;' mode='widthFix'></image>
   </view>
   <view class='box font-15 margin-t-20'>没有可用的优惠券</view>
 </view>

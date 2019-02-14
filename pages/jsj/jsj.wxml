@@ -5,11 +5,11 @@
 <view class='box box-f1 margin-lr-1 aa box-ver'>
   <view class='box box-f1 font-16'>
     <view class='box box-f1'>
-      <view style='background:url({{tripType==1?"../images/xzys_icon.png":"../images/wxzys_icon.png"}}) no-repeat center center;background-size:cover;width:100%;height:102rpx;;text-align:center;line-height:102rpx;{{tripType==1?"color:#333333":"color:#ffffff"}}' bindtap='bindTapChage'
+      <view style='background:url({{tripType==1?"{{imgRoot}}/images/xzys_icon.png":"{{imgRoot}}/images/wxzys_icon.png"}}) no-repeat center center;background-size:cover;width:100%;height:102rpx;;text-align:center;line-height:102rpx;{{tripType==1?"color:#333333":"color:#ffffff"}}' bindtap='bindTapChage'
         data-triptype="1">接机</view>
     </view>
     <view class='box box-f1'>
-      <view style='background:url({{tripType==2?"../images/xzys_r_icon.png":"../images/wxzys_icon.png"}}) no-repeat center center;background-size:cover;width:100%;height:102rpx;;text-align:center;line-height:102rpx;{{tripType==2?"color:#333333":"color:#ffffff"}};' bindtap='bindTapChage'
+      <view style='background:url({{tripType==2?"{{imgRoot}}/images/xzys_r_icon.png":"{{imgRoot}}/images/wxzys_icon.png"}}) no-repeat center center;background-size:cover;width:100%;height:102rpx;;text-align:center;line-height:102rpx;{{tripType==2?"color:#333333":"color:#ffffff"}};' bindtap='bindTapChage'
         data-triptype="2">送机</view>
     </view>
   </view>

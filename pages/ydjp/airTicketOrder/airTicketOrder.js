@@ -1,6 +1,8 @@
 
 // pages/ydjp/airTicketOrder/airTicketOrder.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var timer; // 确认订单计时器
 var httpRequst = require("../../../utils/requst.js");
 var Hub = require("../../../utils/miniProgramSignalr.js");
@@ -13,6 +15,7 @@ var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 import areaList from "../../../utils/area";
 Page({
     data:{
+        imgRoot: imgRoot,
         airTicketOrderShow: true,
         endorseModalShow: false,
         priceDetailShow: false,
@@ -745,7 +748,8 @@ Page({
             httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createOrder", orderModel: JSON.stringify(orderModel) }, "POST",function(res){
                 wx.hideLoading()
                 if (res.Success == true) {
-                    that.sendSignalR(res.Data);
+                    that.orderConfirme(res.Data);
+                    //that.sendSignalR(res.Data);
                 } else {
     
                 }
@@ -878,7 +882,7 @@ Page({
         });
     }, 
     //订单确认
-    orderConfirme(){
+    orderConfirme(orderId){
         timer = setTimeout(function () {
             wx.showLoading({
                 title: '数据加载中...',
@@ -899,6 +903,7 @@ Page({
             });
           }, 5000);
     },
+
     onLoad:function(options){
         // 生命周期函数--监听页面加载
         this.initDate(options);

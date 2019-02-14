@@ -1,20 +1,28 @@
 // pages/fjdp/fjdp.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    header_text: { "left_icon": "../images/back-1.png", "title_text": "国内机票", "right_icon": "../images/dh.png", "background_url": "../images/worryFree.png"},
+    header_text: 
+      { "left_icon": imgRoot+"/images/back-1.png", 
+      "title_text": "国内机票", 
+      "right_icon": imgRoot+"/images/dh.png", 
+      "background_url": imgRoot+"/images/worryFree.png"
+      },
     inBinden:false,
-    key:0
+    key:0,
+    imgRoot: imgRoot,
   },
   bindChage:function(e){
     var key = e.currentTarget.dataset.key
     this.setData({
       key:key
     })
-    
   },
   /**
    * 生命周期函数--监听页面加载

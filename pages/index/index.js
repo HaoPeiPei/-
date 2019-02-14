@@ -2,6 +2,7 @@
 
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
 Page({
 
@@ -13,42 +14,43 @@ Page({
     isSZX: true,
     airportCode:'SZX',
     airportName:'深圳宝安国际机场',
+    imgRoot: imgRoot,
     url: [
-      '../images/7_26.png',
-      '../images/7_28.png'
+      imgRoot+'/images/7_26.png',
+      imgRoot+'/images/7_28.png'
     ],
     hotServiceProject: [{
         'id': '1',
-        'src': '../images/7_39.png',
-        'src_1': '../images/3_43.png',
-        'src_2': '../images/3_46.png',
+        'src': imgRoot+'/images/7_39.png',
+        'src_1': imgRoot+'/images/3_43.png',
+        'src_2': imgRoot+'/images/3_46.png',
         'serviceTime': '05:30--23:00',
         'url': '../wycx/wycx',
         href_code:"WYCX"
       },
       {
         'id': '2',
-        'src': '../images/7_48.png',
-        'src_1': '../images/3_43.png',
-        'src_2': '../images/3_46.png',
+        'src': imgRoot+'/images/7_48.png',
+        'src_1': imgRoot+'/images/3_43.png',
+        'src_2': imgRoot+'/images/3_46.png',
         'serviceTime': '05:30--23:00',
         'url': '../sscx/sscx',
         href_code: "SSCX"
       },
       {
         'id': '3',
-        'src': '../images/7_50.png',
-        'src_1': '../images/3_43.png',
-        'src_2': '../images/3_46.png',
+        'src': imgRoot+'/images/7_50.png',
+        'src_1': imgRoot+'/images/3_43.png',
+        'src_2': imgRoot+'/images/3_46.png',
         'serviceTime': '05:30--23:00',
         'url': '../dpc/dpc',
         href_code: "DBC"
       },
       {
         'id': '4',
-        'src': '../images/7_52.png',
-        'src_1': '../images/3_43.png',
-        'src_2': '../images/3_46.png',
+        'src': imgRoot+'/images/7_52.png',
+        'src_1': imgRoot+'/images/3_43.png',
+        'src_2': imgRoot+'/images/3_46.png',
         'serviceTime': '05:30--23:00',
         'url': '../jsj/jsj',
         href_code: "JSJ"

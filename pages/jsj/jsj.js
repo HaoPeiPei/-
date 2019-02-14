@@ -1,6 +1,8 @@
 // pages/jsj/jsj.js
 var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst");
 var { formatTimestamp, addDate, getDateDiff, getNowFormatDate, formatDate, getFormatDate } = require("../../utils/util.js");
 var flightNoReg = /^[0-9a-zA-Z]{2}[0-9]{3,4}$/;
@@ -12,11 +14,12 @@ Page({
   data: {
     header_text:
     {
-      "background_url": "../images/a.png",
-      "left_icon": "../images/back-1.png",
+      "background_url": imgRoot+"/images/a.png",
+      "left_icon": globalData+"/images/back-1.png",
       "title_text": "舒适出行",
-      "right_icon": "../images/dh.png"
+      "right_icon": globalData+"/images/dh.png"
     },
+    imgRoot: imgRoot,
     flyDateShow: false,
     flyDatecurrentDate: '',
     flyDate: "",

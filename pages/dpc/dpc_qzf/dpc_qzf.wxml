@@ -16,7 +16,7 @@
       <view class='box box-f1 box-ac box-hor'>
         <view class='box box-ac'>
           <view class='img-text'>
-            <image src='../../images/valet_bg.png'></image>
+            <image src='{{imgRoot}}/images/valet_bg.png'></image>
           </view>
         </view>
         <view class='box box-f1 box-ver font-size-30' style='height:240rpx;margin-left:30rpx'>

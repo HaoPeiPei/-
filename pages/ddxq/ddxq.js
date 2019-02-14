@@ -1,4 +1,6 @@
 // pages/ddxq/ddxq.js
+var app = getApp();
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
@@ -7,11 +9,11 @@ Page({
   data: {
     orderDetails:
     [
-      { src_1: '../images/gbtd.png', orderTitle: '服务订单', src_2: '../images/3_46.png', nav_URL:"fwdd/fwdd"},
-      { src_1: '../images/ydjp.png', orderTitle: '机票订单', src_2: '../images/3_46.png', nav_URL: "jpdd/jpdd" },
-      { src_1: '../images/jd.png', orderTitle: '酒店订单', src_2: '../images/3_46.png', nav_URL: "sx/sx"},
-      { src_1: '../images/dpc.png', orderTitle: '代泊车订单', src_2: '../images/3_46.png', nav_URL: "dbcdd/dbcdd" },
-      { src_1: '../images/jsj.png', orderTitle: '接送机订单', src_2: '../images/3_46.png', nav_URL: "jsjdd/jsjdd" }
+      { src_1: imgRoot+'/images/gbtd.png', orderTitle: '服务订单', src_2: imgRoot+'/images/3_46.png', nav_URL:"fwdd/fwdd"},
+      { src_1: imgRoot+'/images/ydjp.png', orderTitle: '机票订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "jpdd/jpdd" },
+      { src_1: imgRoot+'/images/jd.png', orderTitle: '酒店订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "sx/sx"},
+      { src_1: imgRoot+'/images/dpc.png', orderTitle: '代泊车订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "dbcdd/dbcdd" },
+      { src_1: imgRoot+'/images/jsj.png', orderTitle: '接送机订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "jsjdd/jsjdd" }
     ]
   },
   bindOrderChange:function(){

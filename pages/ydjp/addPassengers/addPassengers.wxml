@@ -6,7 +6,7 @@
         <view class='header-con'>
           <view class='box box-f1 box-hor  margin-lr-1'>
             <view class='header-left' bindtap='bindBackChange'>
-              <image src='../../images/back-b.png' style='width:16rpx;' mode='widthFix' />
+              <image src='{{imgRoot}}/images/back-b.png' style='width:16rpx;' mode='widthFix' />
             </view>
             <view class='box box-f1 box-apc font-15'>选择旅客</view>
             <view class='header-right'>
@@ -18,7 +18,7 @@
     </view>
     <view class='box box-f1 box-ver padding-tb-6 backgd-f' bindtap='addPassener'>
       <view class='box box-f1 box-apc '>
-        <view style='background:url(../../images/addList.png) no-repeat center center;background-size:cover;width:80rpx;height:80rpx;' ></view>
+        <view style='background:url({{imgRoot}}/images/addList.png) no-repeat center center;background-size:cover;width:80rpx;height:80rpx;' ></view>
       </view>
       <view class='box box-f1 box-apc font-13'>添加</view>
     </view>
@@ -52,7 +52,7 @@
       <view class='header-con'>
         <view class='box box-f1 box-hor  margin-lr-1'>
           <view class='header-left' bindtap='hidEditPassener'>
-            <image src='../../images/back-b.png' style='width:16rpx;' mode='widthFix' />
+            <image src='{{imgRoot}}/images/back-b.png' style='width:16rpx;' mode='widthFix' />
           </view>
           <view class='box box-f1 box-apc font-15'>{{!editPassener.id?"新增乘机人":"编辑乘机人"}}</view>
           <view class='header-right'>
@@ -80,7 +80,7 @@
             <input type='text' value="{{pasType_index}}" class="none" data-key="type" name='type'/>
         </view>
         <view class='box bxo-ac'>
-            <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
+            <view style='background:url({{imgRoot}}/images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
         </view>
         </view>
       </picker>
@@ -92,7 +92,7 @@
             <input type='text' value="{{certificate_index}}" class="none" data-key="cert_type" name='cert_type'/>
           </view>
           <view class='box bxo-ac'>
-            <view style='background:url(../../images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
+            <view style='background:url({{imgRoot}}/images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
           </view>
         </view>
       </picker>

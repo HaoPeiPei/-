@@ -1,5 +1,7 @@
 // pages/jd/jd.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
 Page({
 
@@ -9,10 +11,11 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "机场酒店",
-      "right_icon": "../images/dh-b.png",
+      "right_icon": imgRoot+"/images/dh-b.png",
     },
+    imgRoot: imgRoot,
     cityCode: "SZX",
     hotels: [],
     imgRoot: app.globalData.imgRoot,
@@ -50,7 +53,7 @@ Page({
   },
   //
   getLevel(item){
-    return "../images/hotel_level" + item.Rank + ".png";
+    return imgRoot+"/images/hotel_level" + item.Rank + ".png";
   },
   /**
    * 生命周期函数--监听页面加载

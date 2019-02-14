@@ -8,32 +8,32 @@
     <view class='font-11 back-e'>豪华</view>
     <view class='box box-f1 font-13 box-pe color-3e box-ac' bindtap='bindHotelDetails'>
       <view class='margin-r-20'>酒店详情</view>
-      <view style='background:url(../../images/arrow_r.png) no-repeat center center;background-size:100% 100%;width:16rpx;height:26rpx;'></view>
+      <view style='background:url({{imgRoot}}/images/arrow_r.png) no-repeat center center;background-size:100% 100%;width:16rpx;height:26rpx;'></view>
     </view>
   </view>
   <view class='box box-f1 margin-lr-20'>
     <view style='padding:30rpx 0rpx;width:100%;'>
       <view class='float-l'>
         <view class='box box-f1 box-hor'>
-          <view style='background:url(../../images/tcc_icon.png) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
+          <view style='background:url({{imgRoot}}/images/tcc_icon.png) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
           <view class='font-12 margin-l-20'>停车场</view>
         </view>
       </view>
       <view class='float-l'>
         <view class='box box-f1 box-hor'>
-          <view style='background:url(../../images/wiff_icon.png) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
+          <view style='background:url({{imgRoot}}/images/wiff_icon.png) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
           <view class='font-12 margin-l-20'>WLFI</view>
         </view>
       </view>
       <view class='float-l'>
         <view class='box box-f1 box-hor'>
-          <view style='background:url(../../images/ct_icon.png) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
+          <view style='background:url({{imgRoot}}/images/ct_icon.png) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
           <view class='font-12 margin-l-20'>餐厅</view>
         </view>
       </view>
       <view class='float-l'>
         <view class='box box-f1 box-hor'>
-          <view style='background:url(../../images/js_icon.png) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
+          <view style='background:url({{imgRoot}}/images/js_icon.png) no-repeat center center;background-size:100% 100%;width:36rpx;height:36rpx;'></view>
           <view class='font-12 margin-l-20'>健身</view>
         </view>
       </view>
@@ -42,7 +42,7 @@
 </view>
 <view class='box box-f1 box-apc backgd-f'>
   <view class='margin-lr-20 box box-f1 box-apc box-hor padding-tb-40'>
-    <view style='background:url(../../images/dw_1_icon.png) no-repeat center center;background-size:100% 100%;width:26rpx;height:36rpx;'></view>
+    <view style='background:url({{imgRoot}}/images/dw_1_icon.png) no-repeat center center;background-size:100% 100%;width:26rpx;height:36rpx;'></view>
     <view class='box box-f1 box-ver margin-l-20'>
       <view class='font-13'>深圳机场大酒店位于宝安机场6道</view>
       <view class='font-11 color-9 margin-t-10'>{{hotelInfo.Address}}</view>

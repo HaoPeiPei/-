@@ -11,7 +11,7 @@
         <text>深圳</text>
       </view>
       <view class='icon-1'>
-        <image src='../images/dc_jt.png' />
+        <image src='{{imgRoot}}/images/dc_jt.png' />
       </view>
       <view class='box box-f1 box-pe box-ac border-b margin-lr-1'>
         <text>上海</text>
@@ -35,7 +35,7 @@
         <text>深圳</text>
       </view>
       <view class='icon-1'>
-        <image src='../images/wf_jt.png' />
+        <image src='{{imgRoot}}/images/wf_jt.png' />
       </view>
       <view class='box box-f1 box-pe box-ac border-b margin-lr-1'>
         <text>上海</text>

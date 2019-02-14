@@ -1,11 +1,14 @@
 // pages/dwcs/dwcs.js
 var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    imgRoot: imgRoot,
     hotCity:
     [
       { data_id: "SZX", data_type: "sz", data_value: "深圳宝安国际机场", city:"深圳"},

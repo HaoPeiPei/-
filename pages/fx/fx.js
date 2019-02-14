@@ -1,6 +1,7 @@
 // pages/fx/fx.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
 Page({
 
@@ -10,9 +11,10 @@ Page({
   data: {
     discover: {},
     wwwRoot: wwwRoot,
+    imgRoot: imgRoot,
     fx:
     [
-      { 'src': '../images/1.png', 'fxTitle': '注册有礼', 'fxContent': '邀好友注册,各赢大奖'}
+      { 'src': imgRoot+'/images/1.png', 'fxTitle': '注册有礼', 'fxContent': '邀好友注册,各赢大奖'}
     ]
   },
   //加载发现数据

@@ -15,7 +15,7 @@
         <view class='box font-13 color-9'>{{carrier.FlightInfo.depDate}} {{carrier.FlightInfo.depWeek}}</view>
       </view>
       <view >
-        <image src='../../images/dd_icon.png' style='width:150rpx;' mode='widthFix'></image>
+        <image src='{{imgRoot}}/images/dd_icon.png' style='width:150rpx;' mode='widthFix'></image>
       </view>
       <view class='box box-ver box-apc box-f1'>
         <view class='box color-3' style='line-height:60rpx;font-size:60rpx;'>{{carrier.FlightInfo.arrTime}}</view>
@@ -39,7 +39,7 @@
           <text class='margin-l-20'> {{area}}</text>
         </view>
         <view class='box box-ac'>
-          <image src='../../images/yjt_icon_c.png' style='width:16rpx;margin-top:6rpx;' mode='widthFix'></image>
+          <image src='{{imgRoot}}/images/yjt_icon_c.png' style='width:16rpx;margin-top:6rpx;' mode='widthFix'></image>
         </view>
       </view>
     </view>
@@ -57,7 +57,7 @@
       </view>
     </view>
     <view class='box box-f1 box-hor box-ac padding-tb-25 border-b-1' style='margin-left:40rpx;'>
-      <view style='background-image:url(../../../images/dellist_icon.png)' class='icon-hb enlarge-2'>
+      <view style='background-image:url({{imgRoot}}/images/dellist_icon.png)' class='icon-hb enlarge-2'>
       </view>
       <view class='box box-f1 box-ver font-14 margin-l-20' wx:for="{{carrier.PassengerInfo}}" wx:key="*this">
         <view class='box box-f1 box-ac'>
@@ -139,7 +139,7 @@
     <view class='box box-f1 font-15 box-ac padding-tb-20' style='margin-left:40rpx;'>
       <view class='color-9' style='width:120rpx;'>微信支付</view>
        <view class='box box-f1 box-ac'>
-        <view style='background:url(../../images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
+        <view style='background:url({{imgRoot}}/images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
       </view> 
       <view class='box box-pe box-ac'>
         <text class="switch {{payType==1?'on':''}}" data-paytype="{{payType}}" catchtap="payTypeSelect">
@@ -150,7 +150,7 @@
     <view class='box box-f1 font-15 box-ac padding-tb-20' style='margin-left:40rpx;'>
       <view class='color-9' style='width:120rpx;'>钱包支付</view>
        <view class='box box-f1 box-ac'>
-        <view style='background:url(../../images/con_wallet@3x.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
+        <view style='background:url({{imgRoot}}/images/con_wallet@3x.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
       </view> 
       <view class='box box-pe box-ac'>
         <text class="switch {{payType==0?'on':''}}" data-paytype="{{payType}}" catchtap="payTypeSelect">

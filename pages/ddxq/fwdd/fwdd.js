@@ -1,6 +1,7 @@
 // pages/ddxq/fwdd/fwdd.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../../utils/requst.js");
 Page({
 
@@ -9,9 +10,9 @@ Page({
    */
   data: {
     header_text: {
-      "left_icon": "../../images/back-b.png",
+      "left_icon": imgRoot+"/images/back-b.png",
       "title_text": "订单管理",
-      "right_icon": "../../images/dh-b.png",
+      "right_icon": imgRoot+"/images/dh-b.png",
     },
     key: 0,
     orderList_1:[], //放置返回数据的数组
@@ -21,6 +22,7 @@ Page({
     status: '', //设置的条件
     memberId: '',
     action: 'orderPage',
+    imgRoot: imgRoot
   },
   //返回
   catchBackChange: function (e) {

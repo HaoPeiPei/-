@@ -1,4 +1,7 @@
 // pages/dpc/dpc.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
@@ -7,11 +10,12 @@ Page({
   data: {
     header_text:
     {
-      "left_icon": "../images/back-f.png",
+      "left_icon": imgRoot+"/images/back-f.png",
       "title_text": "订单详情",
-      "right_icon": "../images/dh-f.png",
-      "background_url": "../images/valet_bg.png"
+      "right_icon": imgRoot+"/images/dh-f.png",
+      "background_url": imgRoot+"/images/valet_bg.png"
     },
+    imgRoot: imgRoot,
   },
    //返回
    catchBackChange: function (e) {

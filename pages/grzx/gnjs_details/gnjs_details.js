@@ -1,11 +1,14 @@
 // pages/grzx/gnjs_details/gnjs_details.js
+var app = getApp();
+var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    imgRoot: imgRoot
   },
 
   /**

@@ -177,7 +177,7 @@ input[type="radio"] {
 input + del {
   width: 1.125em;
   height: 1.125em;
-  background: url(images/clear.png) no-repeat center;
+  background: url(http://www.51jct.cn/weixin/miniprogram/clear.png) no-repeat center;
   -webkit-background-size: 100% 100%;
   outline: none;
 }

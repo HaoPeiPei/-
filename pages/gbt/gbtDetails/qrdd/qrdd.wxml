@@ -6,7 +6,7 @@
 <view class='box box-f1 backgd-f margin-t-10'>
   <view class='box box-f1 box-ver margin-lr-20'>
     <view class='box box-f1 box-ac padding-tb-20 border-b-1'>
-      <view style='background:url(../../../images/ddxq_icon_b.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
+      <view style='background:url({{imgRoot}}/images/ddxq_icon_b.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
       <view class='box box-f1 box-ac font-15 margin-l-10'>订单详情</view>
     </view>
     <view class='box box-f1 margin-l-35 padding-tb-1 border-b-1 box-ac font-14'>
@@ -43,7 +43,7 @@
   <view class='box box-f1 margin-lr-1 box-ver'>
     <view class='box box-f1 box-ac padding-tb-1 border-b-1'>
       <i class="icon-contacts font-size-19 c-999"></i>
-      <!-- <view style='background:url(../../../images/lxr_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
+      <!-- <view style='background:url(../{{imgRoot}}/images/lxr_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>
       </view> -->
       <view class='box box-f1 box-ac font-14  margin-l-1'>
         <view class='color-9' style='width:120rpx;'>联系人</view>
@@ -65,7 +65,7 @@
 <!--优惠券  -->
 <view class='box box-f1 backgd-f margin-t-1 box-ver font-14'>
   <view class='box box-f1 margin-lr-1 padding-tb-1 box-ac'>
-    <view style='background:url(../../../images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'></view>
+    <view style='background:url({{imgRoot}}/images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'></view>
     <view class='box box-f1 margin-l-1' >
       <view class='font-14 color-9'>优惠券</view>
       <view class='yhj-back margin-l-1 {{couponCount>0?"yy":""}}'>{{couponCount}}张</view>
@@ -80,7 +80,7 @@
 <view class='box box-f1 backgd-f margin-t-10'>
   <view class='box box-f1 box-ver margin-lr-20'>
     <view class='box box-f1 box-ac padding-tb-20 border-b-1'>
-      <view style='background:url(../../../images/zffs_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
+      <view style='background:url({{imgRoot}}/images/zffs_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>
       <view class='box box-f1 box-ac font-15 margin-l-10'>
         <view class='color-9' style='width:120rpx;'>支付方式</view>
       </view>
@@ -88,7 +88,7 @@
     <view class='box box-f1 font-15 margin-l-35 box-ac padding-tb-15'>
       <view class='color-9' style='width:120rpx;'>微信支付</view>
        <view class='box box-f1 box-ac box-pe'>
-        <view style='background:url(../../../images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:50rpx;height:50rpx;'></view>
+        <view style='background:url({{imgRoot}}/images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:50rpx;height:50rpx;'></view>
       </view> 
     </view>
   </view>

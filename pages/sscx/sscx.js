@@ -1,6 +1,7 @@
 // pages/sscx/sscx.js
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
+var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
 Page({
   /**
@@ -9,19 +10,19 @@ Page({
   data: {
     header_text:
     {
-      "imgUrls": ["../images/worryFree.png", "../images/worryFree.png"],
-      "left_icon": "../images/back-1.png",
+      "imgUrls": [imgRoot+"/images/worryFree.png", imgRoot+"/images/worryFree.png"],
+      "left_icon": imgRoot+"/images/back-1.png",
       "title_text": "舒适出行",
-      "right_icon": "../images/dh.png"
+      "right_icon": imgRoot+"/images/dh.png"
     },
     setMealPage:
     [
-      { "setMeal_icon": "../images/yldjp_icon.png", "setMeal_title": "预留登机牌", "setMeal_cont": "提前办理登机牌，不排队安心登机"},
-      { "setMeal_icon": "../images/sscj_icon.png", "setMeal_title": "舒适乘机", "setMeal_cont": "优选喜欢座位(保障经济舱前三排)"},
-      { "setMeal_icon": "../images/xlfw_icon.png", "setMeal_title": "行李服务", "setMeal_cont": "专人协助办理行李打包,托运服务" },
-      { "setMeal_icon": "../images/dpcfw_icon.png", "setMeal_title": "电瓶车服务", "setMeal_cont": "电瓶车从安检口送至登机口服务" },
-      { "setMeal_icon": "../images/hkbz_icon.png", "setMeal_title": "航空保障", "setMeal_cont": "赠送价值70万元的航空y意外险一份" },
-      { "setMeal_icon": "../images/yhydfw_icon.png", "setMeal_title": "迎候引导服务", "setMeal_cont": "专人出发厅迎候" },
+      { "setMeal_icon": imgRoot+"/images/yldjp_icon.png", "setMeal_title": "预留登机牌", "setMeal_cont": "提前办理登机牌，不排队安心登机"},
+      { "setMeal_icon": imgRoot+"/images/sscj_icon.png", "setMeal_title": "舒适乘机", "setMeal_cont": "优选喜欢座位(保障经济舱前三排)"},
+      { "setMeal_icon": imgRoot+"/images/xlfw_icon.png", "setMeal_title": "行李服务", "setMeal_cont": "专人协助办理行李打包,托运服务" },
+      { "setMeal_icon": imgRoot+"/images/dpcfw_icon.png", "setMeal_title": "电瓶车服务", "setMeal_cont": "电瓶车从安检口送至登机口服务" },
+      { "setMeal_icon": imgRoot+"/images/hkbz_icon.png", "setMeal_title": "航空保障", "setMeal_cont": "赠送价值70万元的航空y意外险一份" },
+      { "setMeal_icon": imgRoot+"/images/yhydfw_icon.png", "setMeal_title": "迎候引导服务", "setMeal_cont": "专人出发厅迎候" },
     ],
     purchaseNotice:
     [
@@ -29,6 +30,7 @@ Page({
       { "title_text": "服务时间", "content_text": "5:30--22:30;如航班延误，则至最后一班飞机起飞" },
       { "title_text": "行李托运", "content_text": "超重行李费用自理，如有贵重、易碎等物品需本人签署免责协议(工作人员恕不代办)" },
     ],
+    imgRoot: imgRoot,
     inBind:true,
     id:'',
     key:""
