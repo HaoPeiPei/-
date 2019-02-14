@@ -82,7 +82,7 @@ con-mess-l.font-size-34{
     background-color: #f4393c;
 }
 
-.endorseModal, .hintModal, .div_mulLine, .worryFreeModal{
+.endorseModal, .hintModal, .div_mulLine, .worryFreeModal, .jsAlertModal{
     position: fixed;
     top: 0rpx;
     bottom: 0rpx;
@@ -135,7 +135,6 @@ con-mess-l.font-size-34{
 .pop-full .pop-content .content .wxParse-p {
     overflow:hidden;
 }
-
 .priceDetail-wrap{
     position: fixed;
     top: 0;
@@ -413,4 +412,60 @@ con-mess-l.font-size-34{
 .endorseModal .title .text.active{
     border-bottom: solid 5rpx #f4393c;
     opacity: 1 !important;
+}
+.alert-box {
+    margin: auto;
+    width: 70%;
+    color: #FFF;
+    background-color: #FFF;
+    text-align: center;
+    z-index: 101;
+    border-radius: 48rpx;
+}
+.alert-box .alert-head {
+    color: #242424; 
+    font-size: 42rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    position: relative;
+    margin: 72rpx 0 0 0;
+    height: 208rpx;
+}
+canvas {
+    width: 208rpx; 
+    height: 208rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.alert-body{
+    margin: 36rpx 0;
+}
+.alert-body-title{
+    width: 100%;
+    color: #242424;
+    font-size: 42rpx;
+}
+.alert-concent{
+    text-align: left;
+    margin: 24rpx 20rpx;
+    color: #7B7B7B;
+    font-size: 28rpx;
+    text-indent: 2em;
+}
+.alert-btn{
+    display: block;
+    border-radius: 24rpx;
+    background-color: rgb(240,57,41);
+    height: 72rpx;
+    line-height: 72rpx;
+    color: #FFF;
+    font-size: 30rpx;
+    text-decoration: none;
+    letter-spacing: 4rpx;
+    margin: 0rem 48rpx;
 }

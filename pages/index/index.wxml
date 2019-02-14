@@ -194,7 +194,19 @@
         </view>
       </li>
     </view>
-    <view wx:if="{{isSZX}}"> 
+    <view>
+        <li class='{{item.style}}'>
+          <view class='box bof-1 box-apc box-ver colors'>
+            <view class='box box-f1 box-apc'>
+              <i class="icon-hotel font-size-30"></i>
+            </view>
+            <view class='box font-13'>
+              <text>酒店</text>
+            </view>
+          </view>
+        </li>
+      </view>
+    <!-- <view wx:if="{{isSZX}}"> 
       <navigator url="../jd/jd" hover-class="none">
         <li class='{{item.style}}'>
           <view class='box bof-1 box-apc box-ver color-3'>
@@ -207,7 +219,7 @@
           </view>
         </li>
       </navigator>
-    </view>
+    </view> 
     <view wx:else> 
       <li class='{{item.style}}'>
         <view class='box bof-1 box-apc box-ver colors'>
@@ -219,7 +231,7 @@
           </view>
         </view>
       </li>
-    </view>
+    </view>-->
   </ul>
   <view class='flex'>
     <scroll-view style='height:100%' scroll-x='true'>

@@ -260,19 +260,18 @@
 
 <!-- 订单需客服确认 -->
 <template name="jsAlertModal">
-    <view id="js-alert-box" class="c-bg-000 flex {{jsAlertModalShow?'':'none'}}">
+    <view  class="c-bg-000 flex jsAlertModal {{jsAlertModalShow?'':'none'}}"><!--  -->
 		<view class="alert-box">
-			<view id="alert_head" class="alert-head">
-                <!-- <canvas class="svg" style="width: 208rpx; height: 208rpx;" canvas-id="secondCanvas"></canvas> -->
-                <view class="svg" width="104" height="104" >{{currentTime}}</view>       
-				<view id="js-sec-text" class="alert-sec-text"></view>
+			<view class="alert-head">
+                <canvas  canvas-id="countDown1" id="countDown1">
+                </canvas> 
+                <canvas canvas-id="countDown2" id="countDown2">
+                </canvas> 
 			</view>
 			<view class="alert-body">
-				<view id="js-alert-head" class="alert-head"></view>
-				<view class="alert-concent">
-					<view>为了不影响您的出行，订单需客服确认有票才可支付</view>
-				</view>
-				<a id="js-alert-btn" class="alert-btn" href="javascript:;">立即前往订单页</a>
+                <view class="alert-body-title">确认订单</view>
+				<view class="alert-concent">为了不影响您的出行，订单需客服确认有票才可支付</view>
+				<a id="js-alert-btn" class="alert-btn" href="javascript:;" catchtap="toOrderManager">立即前往订单页</a>
 			</view>
 		</view>
 	</view>

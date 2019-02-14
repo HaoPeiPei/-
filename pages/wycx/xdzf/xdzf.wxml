@@ -138,7 +138,7 @@
     </view>
     <view class='box box-f1 font-15 box-ac padding-tb-20' style='margin-left:40rpx;'>
       <view class='color-9' style='width:120rpx;'>微信支付</view>
-       <view class='box box-f1 box-ac'>
+       <view class='box box-f1 box-ac box-pe'>
         <view style='background:url({{imgRoot}}/images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
       </view> 
     </view>

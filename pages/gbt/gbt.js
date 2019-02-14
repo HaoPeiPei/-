@@ -20,6 +20,7 @@ Page({
       { imgUrl: imgRoot+"/images/vipHall_1.png", title_text: "卓怿头等舱休息室", start_item: "08:00", end_item: "24:00", address:"深圳机场T3航站楼"},
       { imgUrl: imgRoot+"/images/vipHall_2.png", title_text: "卓怿头等舱休息室", start_item: "08:00", end_item: "24:00", address: "深圳机场T3航站楼" },
     ],
+    wwwRoot: wwwRoot,
     imgRoot: imgRoot,
     cityCode: "",
     vipHall: [],

@@ -65,12 +65,12 @@ App({
     wwwRoot: "https://www.51jct.cn",
     imgRoot: "http://www.51jct.cn/weixin/miniprogram",
     remoteUrl: "https://www.51jct.cn",
-    memberId:'7530',//6711
+    memberId: 7530,//6711
     openId : 'oZDU-wbLV1EJkwy4Xdt-dt7HQIm8',
     unionid : 'ojVAM1Bh4TS4VV_buGp7Io0_gSgU',//
     userInfo: {},
     user: {
-      realName: '沛',
+      realName: '郝沛沛',
       mobile: '18971570000',
     },
     airportCode:'SZX',

@@ -19,7 +19,7 @@ Page({
     useDate: '',
     useDateShow: false,
     service: {},
-    coupon: {},
+    coupon: null,
     coupontype: 0,
     contactor: app.globalData.user.realName,
     contactTel: app.globalData.user.mobile,
@@ -123,7 +123,7 @@ Page({
     }
     //优惠金额
     var disAmount = 0;
-    if (JSON.stringify(this.data.coupon) != '{}') {
+    if (JSON.stringify(this.data.coupon) != '{}' && this.data.coupon != null) {
         disAmount = this.data.coupon.denomination;
     }
     var totalPrice = price - disAmount;
@@ -243,6 +243,7 @@ Page({
     this.book();
   },
   book(){
+    var that = this;
     var orderModel = {};
     orderModel.MemberId = app.globalData.memberId;
     orderModel.usedDate = this.data.useDate;
@@ -257,7 +258,6 @@ Page({
     });
     var param = {
       action: "createorder", 
-      MemberId: app.globalData.memberId,
       orderInfo: JSON.stringify(orderModel) 
     }
     httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", param, "POST",res => {
@@ -265,11 +265,11 @@ Page({
       if (res.Success) {
         var orderId = res.Data;
         if (res.Message == "true") {
-          payOrder(orderId);          //无需调用微信支付,直接更改后台支付状态
+          that.payOrder(orderId);          //无需调用微信支付,直接更改后台支付状态
         }
         else {
             //todo 调用微信支付
-            createPayPara(orderId);
+            that.createPayPara(orderId);
         }
       } else {
         wx.showToast({
@@ -277,7 +277,7 @@ Page({
           icon: "none",
         });
         wx.navigateTo({
-          url: '../../gbt',
+          url: '../../gbt/gbt',
         });
       }
     });
@@ -289,7 +289,7 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
+        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/service.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
             wx.hideLoading()
             if (res.Success) {
                 var parameObj = JSON.parse(res.Data);

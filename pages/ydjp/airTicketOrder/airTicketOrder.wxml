@@ -230,17 +230,18 @@
             <!--支付方式  -->
             <view class='box box-f1 backgd-f margin-t-10 main-con' >
                 <view class='box box-f1 box-ver margin-lr-30'>
-                <view class='box t-title box-f1 box-ac padding-tb-25 border-b-1'>
-                    <i class="icon-payment font-20 c-f4393c"></i>
-                    <view class='box box-f1 box-ac font-15 margin-l-10'>
-                    <view class='color-9' style='width:120rpx;'>支付方式</view>
+                    <view class='box t-title box-f1 box-ac padding-tb-25 border-b-1'>
+                        <i class="icon-payment font-20 c-f4393c"></i>
+                        <view class='box box-f1 box-ac font-15 margin-l-10'>
+                        <view class='color-9' style='width:120rpx;'>支付方式</view>
+                        </view>
                     </view>
-                </view>
-                <view class='box t-title  box-f1 font-15 box-ac ' style='margin-left:24rpx;'>
-                    <view class='color-9' style='width:120rpx;'>微信支付</view>
-                    <view class='box box-f1 box-ac'>
-                        <view style='background:url({{imgRoot}}/images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
-                    </view> 
+                    <view class='box t-title  box-f1 font-15 box-ac ' style='margin-left:24rpx;'>
+                        <view class='color-9' style='width:120rpx;'>微信支付</view>
+                        <view class='box box-f1 box-ac box-pe'>
+                            <view style='background:url({{imgRoot}}/images/wxzf_icon.png) no-repeat center center;background-size:100% 100%;width:46rpx;height:46rpx;margin-left: 5rpx;'></view>
+                        </view> 
+                    </view>
                 </view>
             </view>
         </view>

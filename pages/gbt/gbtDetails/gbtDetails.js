@@ -76,7 +76,7 @@ Page({
       if (res.Success) {
         var data = JSON.parse(res.Data);
         var imgUrls = data.map(function(item){
-          var imgUrl = app.globalData.imgRoot+item.img_url
+          var imgUrl = wwwRoot+item.img_url
           return imgUrl
         });
         this.setData({

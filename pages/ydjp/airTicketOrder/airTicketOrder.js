@@ -742,10 +742,12 @@ Page({
             });
             httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createOrder", orderModel: JSON.stringify(orderModel) }, "POST",function(res){
                 wx.hideLoading()
-                if (res.Success == true) {
+                if (res.Success) {
+                    that.setData({
+                        jsAlertModalShow: true
+                    });
                     that.orderConfirme(res.Data);
                     that.countDown(); //开始倒计时
-                    //that.sendSignalR(res.Data);
                 } else {
     
                 }
@@ -831,83 +833,80 @@ Page({
             }
         });
     },
-    sendSignalR(){
-        let that = this;
-        let negotiateUrl = "https://www.51jct.cn/signalr/negotiate?clientProtocol=1.5&connectionData="+encodeURIComponent('[{"name":"messagehub"}]')+"&_="+(Date.parse(new Date())/1000);
-        wx.request({
-            url: negotiateUrl,
-            data: {},
-            method: 'GET', 
-            async: false,
-            success: res => {
-                that.setData({
-                    negotiateResponese: res.data
-                });
-                that.startSocket();
-            },
-            fail: function(res) {
-                console.log(res);
-                return
-            }
-        })
-    },
-    startSocket(){
-        let that = this;
-        let _url = "https://www.51jct.cn/signalr/connect?transport=serverSentEvents&clientProtocol=1.5&connectionToken="+encodeURIComponent(that.data.negotiateResponese.ConnectionToken)+"&connectionData="+encodeURIComponent('[{"name":"MessageHub"}]')+"&tid=9";
-        _url = _url.replace(/http/,"ws");
-        if(this.data.messageHub != null && this.openStatus){
-            return
-        }
-        let connection = wx.connectSocket({
-            url: _url,
-            header: {
-            'content-type': 'application/json'
-            },
-            protocols: ['protocol1'],
-            method: 'GET'
-        });
-        that.setData({
-            messageHub: connection
-        });
-        connection.onOpen(res => {
-            console.log('websocket connectioned');
-        });
-        wx.onSocketError(function (res) {
-            console.log('WebSocket连接打开失败，请检查！');
-            console.log(res);
-        });
-    }, 
     //倒计时
     countDown(){
         var that = this;
+        var w = 104;
+        var h = 104;
+        var context1 = wx.createCanvasContext('countDown1');
+        var context2 = wx.createCanvasContext('countDown2');
+        wx.createSelectorQuery().select('#countDown1').boundingClientRect(function (rect) { //监听canvas的宽高
+            w = parseInt(rect.width / 2); //获取canvas宽的的一半
+            h = parseInt(rect.height / 2); //获取canvas高的一半，
+        }).exec();            
+        function drawInnerCircle() {    // 绘制固定内圈圆
+        context1.arc(w, h, w - 8, 0, 2 * Math.PI, true);  // arc-创建一条弧线；参数-arc(圆心x坐标，圆心y坐标，圆半径，起始弧度，终止弧度，弧度方向是否是逆时针)
+        context1.setLineWidth("14");     // setLineWidth-设置线条宽度；参数-setLineWidth(线条宽度，单位px)
+        context1.setLineCap("butt");	//圆环结束断点的样式  butt为平直边缘 round为圆形线帽  square为正方形线帽
+        context1.setStrokeStyle("#f7f7f7"); //圆环线条的颜色
+        context1.stroke();            // stroke-画出当前路径的边框，默认颜色为黑色
+        context1.restore();           // restore-恢复之前保存的绘图上下文
+        context1.draw();    // draw-将之前在绘图上下文中的描述(路径，变形，样式)画到canvas中
+        }
+        function run(c, w, h) {  //c是圆环进度百分比   w，h是圆心的坐标
+            let that = this;
+            var num = (2 * Math.PI / 60 * c) - 0.5 * Math.PI;
+            //圆环的绘制
+            context2.arc(w, h, w - 8, -0.5 * Math.PI, num); //绘制的动作
+            context2.setStrokeStyle("#ff0000"); //圆环线条的颜色
+            context2.setLineWidth("10");	//圆环的粗细
+            context2.setLineCap("butt");	//圆环结束断点的样式  butt为平直边缘 round为圆形线帽  square为正方形线帽
+            context2.stroke();
+            //开始绘制百分比数字
+            context2.beginPath();
+            context2.setFontSize(33); // 字体大小 注意不要加引号
+            context2.setFillStyle("#000");	 // 字体颜色
+            context2.setTextAlign("center");	 // 字体位置
+            context2.setTextBaseline("middle");	 // 字体对齐方式
+            context2.fillText(c , w, h);	 // 文字内容和文字坐标
+            context2.draw();
+        }
         countDownTimer =  setInterval(function () {
             var currentTime = 0;
-            if(that.data.currentTime<0){
-                currentTime = 60
+            if(that.data.currentTime<=0){
+                currentTime = 59
             }else{
                 currentTime = that.data.currentTime-1;
             }
             that.setData({
                 currentTime
-            })
+            });
+            drawInnerCircle();
+            run(currentTime, w, h);
         }, 1000);
+    },
+    //跳转订单详情
+    toOrderManager(){
+        wx.switchTab({
+            url: '../../ddxq/ddxq'
+          })
     },
     //订单确认
     orderConfirme(orderId){
         var that = this;
         orderConfirmeTimer = setTimeout(function () {
-            httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airticket.ashx', { action: "getorderbyid", orderId: orderId }, "POST",function(res){
+            httpRequst.HttpRequst(false, '/weixin/jctnew/ashx/airticket.ashx', { action: "getorderbyid", orderId: orderId }, "POST",function(res){
                 if (res.Success) {
-                    if(true){
+                    if(false){
                         clearInterval(orderConfirmeTimer);
                         clearInterval(countDownTimer);
                     }else{
-                        that.orderConfirmeTimer();
+                        clearInterval(orderConfirmeTimer);
+                        that.orderConfirme(orderId);
                     }
                 }
             });
           }, 5000);
-          orderConfirmeTimer();
     },
 
     onLoad:function(options){
@@ -928,6 +927,8 @@ Page({
     },
     onUnload:function(){
         // 生命周期函数--监听页面卸载
+        clearInterval(orderConfirmeTimer);
+        clearInterval(countDownTimer);
         
     },
     onPullDownRefresh: function() {
