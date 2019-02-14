@@ -248,6 +248,7 @@ con-mess-l.font-size-34{
     border-radius: 8rpx; 
     background-color: #f3393c;
     font-size: 24rpx;
+    align-self: center;
 }
 .selectAir .main .cabInfo-list .cabInfo-item .cabInfo-right{
     padding: 0 0 0 25rpx;
