@@ -104,7 +104,6 @@ Page({
    loadPassenerInfo: function(){
     var that = this;
     var memberId = app.globalData.memberId;
-    var passeners = that.data.passeners;
     var selectPasseners = that.data.selectPasseners;
     var selectPassenerIds = [];
     for (var i = 0; i < selectPasseners.length; i++) {
@@ -135,12 +134,11 @@ Page({
   },
    //选择旅客页面添加乘机人跳转至详情页
    addPassener:function(){
-    var passengerListShow = this.data.passengerListShow;
-    var editPassenerShow = this.data.editPassenerShow;
     this.setData({
       passengerListShow: false,
       editPassenerShow: true,
-      editPassener: {}
+      editPassener: {},
+      picker_index: 0
     });
   },
   //选择旅客页面编辑乘机人跳转至详情页
@@ -154,12 +152,15 @@ Page({
         passener = passeners[i];
       }
     }
-    var currentDate = new Date(addDate(passener.birthday,0).replace(/-/g,  "/")).getTime();
+    var currentDate = 0;
+    if(passener.birthday!=''&&passener.birthday!=null){
+      currentDate = new Date(addDate(passener.birthday,0).replace(/-/g,  "/")).getTime();
+    }
     this.setData({
       passengerListShow: false,
       editPassenerShow: true,
       editPassener: passener,
-      certificate_index: passener.cert_type, 
+      certificate_index: passener.cert_type-1, 
       pasType_index: passener.type, 
       birthday: passener.birthday,
       currentDate 

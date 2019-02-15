@@ -14,11 +14,12 @@ Page({
   data: {
     header_text:
     {
-      "background_url": +"/images/a.png",
+      "background_url": imgRoot+"/images/a.png",
       "left_icon": imgRoot+"/images/back-1.png",
       "title_text": "舒适出行",
       "right_icon": imgRoot+"/images/dh.png"
     },
+    wwwRoot: wwwRoot,
     imgRoot: imgRoot,
     flyDateShow: false,
     flyDatecurrentDate: '',

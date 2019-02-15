@@ -1,7 +1,8 @@
 //app.js
 
 App({
-  getUserInfo:function(){
+  //初始化全局参数
+  initGlobalData:function(){
     var that = this;
     wx.login({
       success: res => {
@@ -19,7 +20,8 @@ App({
       }
     })
   },
-  getOpenId: function(code) {//'https://api.weixin.qq.com/sns/jscode2session?appid='+d.appid+'&secret='+d.secret+'&js_code='+res.code+'&grant_type=authorization_code';
+  //获取openid
+  getOpenId: function(code) {
     var that = this;  
     var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx9766d9666a9dd73d&secret=313d0ece56ad563fd0da66a7e4cd473e&js_code='+code+'&grant_type=authorization_code';
     wx.request({
@@ -29,10 +31,27 @@ App({
         let statusCode = res.statusCode
         if (200 === statusCode) {
           that.globalData.openId == res.data.openid;
+          that.getUserInfo()
         } else {
           console.log('获取 openId 失败')
         }
       },
+    })
+  },
+  //获取用户信息
+  getUserInfo: function(){
+    var that = this;
+    wx.request({
+      url: this.globalData.wwwRoot +'/weixin/jctnew/ashx/user.ashx?action=getUserInfo&openId='+that.globalData.openId,
+      method: "get",
+      success: res => {
+        let statusCode = res.statusCode
+        if (200 === statusCode) {
+          that.globalData.openId == res.data.openid;
+        } else {
+          console.log('获取用户信息失败')
+        }
+      }
     })
   },
   onLaunch: function () {
@@ -40,7 +59,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    this.getUserInfo();
+    this.initGlobalData();
     // 获取用户信息
     wx.getSetting({
       success: res => {

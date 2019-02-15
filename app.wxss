@@ -747,3 +747,8 @@ page {
 .padding0{
   padding: 0 !important;
 }
+/*  van--start-- */
+.van-picker{
+  z-index: 9999;
+}
+/*  van--end-- */

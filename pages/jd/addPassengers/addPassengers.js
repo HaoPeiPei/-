@@ -105,7 +105,8 @@ Page({
     this.setData({
       passengerListShow: false,
       editPassenerShow: true,
-      editPassener: {}
+      editPassener: {},
+      picker_index: 0
     });
   },
   //选择旅客页面编辑乘机人跳转至详情页
@@ -123,7 +124,8 @@ Page({
     this.setData({
       passengerListShow: false,
       editPassenerShow: true,
-      editPassener: passener
+      editPassener: passener,
+      picker_index: parseInt(passener.cert_type)-1
     });
   },
   //选择旅客页面选择乘机人

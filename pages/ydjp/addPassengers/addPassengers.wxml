@@ -117,7 +117,7 @@
             />
           </van-popup>
           <view class='box box-f1 color-3' bindtap='birthdayChange'>
-            <input type='text' placeholder='生日格式：yyyy-MM-dd' style='width:100%' value="{{birthday}}" />
+            <input type='text' placeholder='生日格式：yyyy-MM-dd' style='width:100%' disabled value="{{birthday}}" />
           </view>
           <i class="icon-arror-r"></i>
         </view>

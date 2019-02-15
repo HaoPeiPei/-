@@ -39,7 +39,7 @@
                     />
                   </van-popup>
                   <view class='box box-f1 color-3' bindtap='flyDateChange'>
-                    <input type='text' placeholder='请选择使用日期' style='width:100%' value="{{flight.flyDate}}" />
+                    <input type='text' placeholder='请选择使用日期' style='width:100%' disabled value="{{flight.flyDate}}" />
                   </view>
                   <i class="icon-arror-r"></i>
                 </view>

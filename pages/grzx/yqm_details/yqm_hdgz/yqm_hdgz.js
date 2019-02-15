@@ -11,7 +11,7 @@ Page({
     header_text:
     {
       "left_icon": imgRoot+"/images/back-b.png",
-      "title_text": imgRoot+"活动规则",
+      "title_text": "活动规则",
       "right_icon": imgRoot+"/images/dh-b.png",
     },
     imgRoot: imgRoot,

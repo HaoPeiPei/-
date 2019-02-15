@@ -21,10 +21,18 @@ Page({
     latitude: 0,
     seekList: []
   },
-  bindBackChages: function (e) {
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   //初始化数据
   initData(){
@@ -32,7 +40,6 @@ Page({
     this.BMap = new bmap.BMapWX({
       ak: '32nOnN3jF3mfT0encQETVs3M'
     });
-
     amap.getRegeo()
       .then(d => {
         let { name, desc, latitude, longitude } = d[0];
