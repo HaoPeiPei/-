@@ -8,8 +8,6 @@ App({
       success: res => {
         var code = res.code;
         if (code) {
-          console.log('code :' + code)
-          console.log('res :' + res)
           this.getOpenId(code)
         } else {
           console.log('获取用户登录态失败！' + res.errMsg);
@@ -23,7 +21,7 @@ App({
   //获取openid
   getOpenId: function(code) {
     var that = this;  
-    var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx9766d9666a9dd73d&secret=313d0ece56ad563fd0da66a7e4cd473e&js_code='+code+'&grant_type=authorization_code';
+    var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx9766d9666a9dd73d&secret=8fad507c06b6078916c019eb3ccf4613&js_code='+code+'&grant_type=authorization_code';
     wx.request({
       url: url,
       method: "get",

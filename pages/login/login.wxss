@@ -1,1 +1,40 @@
 /* pages/login/login.wxss */
+
+ 
+.header {
+    margin: 90rpx 0 90rpx 50rpx;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    width: 650rpx;
+    height: 300rpx;
+    line-height: 450rpx;
+}
+ 
+.header open-data {
+    width: 250rpx;
+    height: 250rpx;
+    border-radius: 50%; 
+    display: inline-block;
+    overflow: hidden;
+}
+ 
+.content {
+    margin-left: 50rpx;
+    margin-bottom: 90rpx;
+}
+ 
+.content text {
+    display: block;
+    color: #9d9d9d;
+    margin-top: 40rpx;
+}
+ 
+.bottom {
+    height: 80rpx;
+    line-height: 80rpx;
+    margin: 70rpx 50rpx;
+    font-size: 35rpx;
+    border-radius: 80rpx;
+    overflow: hidden;
+    -webkit-appearance: inherit;
+}
