@@ -3,7 +3,6 @@
 @import "../../template/template.wxss";
 .header-content{
   width: 100%;
-  
 }
 .header-back-img{
   position: relative;

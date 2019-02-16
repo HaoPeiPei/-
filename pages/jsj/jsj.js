@@ -16,7 +16,7 @@ Page({
     {
       "background_url": imgRoot+"/images/a.png",
       "left_icon": imgRoot+"/images/back-1.png",
-      "title_text": "舒适出行",
+      "title_text": "接送机",
       "right_icon": imgRoot+"/images/dh.png"
     },
     wwwRoot: wwwRoot,

@@ -45,12 +45,13 @@ App({
       url: this.globalData.wwwRoot +'/weixin/jctnew/ashx/user.ashx?action=getUserInfo&openId='+that.globalData.openId,
       method: "get",
       success: res => {
-        let statusCode = res.statusCode
+        console.log(res);
+        /* let statusCode = res.statusCode
         if (200 === statusCode) {
           that.globalData.openId == res.data.openid;
         } else {
           console.log('获取用户信息失败')
-        }
+        } */
       }
     })
   },

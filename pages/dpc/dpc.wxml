@@ -15,7 +15,7 @@
           <view class='li-view border-b-1'>
             <view class='box box-f1 box-ver padding-b-10'>
             <view class='box box-f1 font-13 color-9 padding-b-10'>服务机场</view>
-            <view class='box box-f1 font-17 padding-b-10'>深圳宝安国际机场</view>
+            <view class='box box-f1 font-17 padding-b-10'>深圳宝安国际机场<text class="c-f4393c font-17" >(已满)</text></view>
             </view>
           </view>
         </li>
@@ -23,7 +23,7 @@
           <view class='li-view border-b-1 padding-t-30 '>
             <view class='box box-f1 box-ver padding-b-10'>
             <view class='box box-f1 font-13 color-9 padding-tb-10'>收费标准</view>
-            <view class='box box-f1 font-17 color-z padding-tb-10 '>40元/天</view>
+            <view class='box box-f1 font-17 color-z padding-tb-10 c-f4393c'>35元/天</view>
             </view>
           </view>
         </li>

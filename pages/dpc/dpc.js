@@ -11,7 +11,7 @@ Page({
     header_text:
     {
       "left_icon": imgRoot+"/images/back-f.png",
-      "title_text": "订单详情",
+      "title_text": "代泊车",
       "right_icon": imgRoot+"/images/dh-f.png",
       "background_url": imgRoot+"/images/valet_bg.png"
     },
@@ -31,8 +31,12 @@ Page({
     });
   },
   makeAnAppointment:function(){
-    wx.navigateTo({
+    /* wx.navigateTo({
       url: 'dpc_qcxx/dpc_qcxx',
+    }) */
+    wx.showToast({
+      title: '应供应商变动，暂停预约',
+      icon: 'none'
     })
   },
   /**

@@ -13,7 +13,7 @@ Page({
     header_text:
     {
       "left_icon": imgRoot+"/images/back-b.png",
-      "title_text": "无忧出行",
+      "title_text": "舒适出行",
       "right_icon": imgRoot+"/images/dh-b.png",
     },
     imgRoot: imgRoot,
@@ -35,18 +35,8 @@ Page({
   },
   //返回
   catchBackChange: function () {
-    wx.showModal({
-      title: '温馨提示',
-      content: '您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回？',
-      success: function (res) {
-        if (res.confirm) {
-          wx.navigateBack({
-            delta: 1
-          })
-        } else if (res.cancel) {
-
-        }
-      }
+    wx.navigateBack({
+      delta: 1
     })
   },
   //拨打电话
@@ -78,7 +68,6 @@ Page({
       });
       this.loadService();
       this.loadCouponCount();
-      this.loadBalance();
     }
   },
   //载入服务
@@ -156,30 +145,6 @@ Page({
         });
         wx.navigateTo({
           url: '../../index/index',
-        });
-      }
-    });
-  },
-  //加载用户钱包信息
-  loadBalance() {
-    var param = {
-      action: "getInfo", 
-      memberId: app.globalData.memberId 
-    }
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/wallet.ashx", param, "POST",res => {
-      wx.hideLoading();
-      if (res.Success) {
-        var userInfo = JSON.parse(res.Data);
-        var rechargeAmount = userInfo.rechargeBalance;
-        var presentAmonut = userInfo.presentBalance;
-        this.setData({
-          rechargeAmount,
-          presentAmonut,
-        });
-      } else {
-        wx.showToast({
-          title: res.Message,
-          icon: "none",
         });
       }
     });

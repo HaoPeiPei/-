@@ -36,14 +36,12 @@ Page({
     console.log("userInfo:"+e.detail.userInfo);
     var iv = e.detail.iv;
     var encryptedData = e.detail.encryptedData;
-    console.log("iv:"+e.detail.iv);
-    console.log("encryptedData:"+e.detail.encryptedData);
     wx.login({
       success:function(res){
         var code = res.code;
         console.log("code:"+res.code);
         wx.request({
-          url: "https://www.51jct.cn/weixin/miniprogram/ashx/user.ashx",
+          url: "https://www.51jct.cn/weixin/ashx/user.ashx",
           data:
           {
             code:code,

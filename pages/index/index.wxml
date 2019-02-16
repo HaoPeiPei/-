@@ -25,13 +25,13 @@
               </view>
             </view>
             <view class='location-icon bottoms'>
-              <image src="{{imgRoot}}/images/xlan.png" style=''></image>
+              <image src="{{imgRoot}}/images/xlan.png"></image>
             </view>
           </view>
         </view>
       </view>
       <view class='location-icon'>
-        <image src="{{imgRoot}}/images/dh.png" style=''></image>
+        <image src="{{imgRoot}}/images/dh.png" ></image>
       </view>
     </view>
   </view>
@@ -236,7 +236,7 @@
   <view class='flex'>
     <scroll-view style='height:100%' scroll-x='true'>
       <block wx:for='{{url}}' wx:key="*this">
-        <view class='back-1' style='inline-block;background:url({{item}}) no-repeat;background-size:100% 100%;'>
+        <view class='back-1' style='display:inline-block;background:url({{item}}) no-repeat;background-size:100% 100%;'>
         </view>
         <view class='advert-line'></view>
       </block>
@@ -246,31 +246,89 @@
     <view class='box box-f1 box-apc font-10 color-9 margin-b-2'>为你推荐</view>
     <view class='box box-f1 box-apc' style='height:40rpx;'>
       <view class='back-2' style='background:url({{imgRoot}}/images/2_38.png) no-repeat;background-size:100% 100%;'></view>
-      <!-- <image src='{{imgRoot}}/images/2_38.png' style='height:40rpx;width:5rpx;margin-right:10rpx'></image> -->
       <view class='font-13 rmfu'>热门服务</view>
       <view class='back-2' style='background:url({{imgRoot}}/images/2_38.png) no-repeat;background-size:100% 100%;'></view>
     </view>
   </view>
-  <block wx:for='{{hotServiceProject}}' wx:key="*this">
-    <navigator url='{{item.url}}' wx:if="{{item.href_code=='JSJ'?inHref:true&&item.href_code=='DBC'?inHref:true}}">
-      <view class='box box-f1 box-ver'>
-        <view class='image-2'>
-          <image src='{{item.src}}' class='widthHeight-100'></image>
+  <!-- 无忧出行 -->
+  <navigator wx:if="{{wycx.isNone}}" url="{{wycx.href}}"  hover-class="none">
+    <view class='box box-f1 box-ver'>
+      <view class='image-2'>
+        <image src='{{imgRoot}}/images/7_39.png' class='widthHeight-100'></image>
+      </view>
+      <view class='box box-f1 margin-b-1 view-2'>
+        <view class=' margin-l-1 box box-apc' style='height:100%;'>
+          <view class='back-3' style='background:url({{imgRoot}}/images/3_43.png) no-repeat;background-size:100% 100%;'></view>
         </view>
-        <view class='box box-f1 margin-b-1 view-2'>
-          <view class=' margin-l-1 box box-apc' style='height:100%;'>
-            <view class='back-3' style='background:url({{item.src_1}}) no-repeat;background-size:100% 100%;'></view>
-          </view>
-          <view class='box box-f1 font-12 box-ac margin-l-2'>服务时间：{{item.serviceTime}}</view>
-          <view class='inline box box-hor view-1 padding-lr-1'>
-            <view class='box box-apc font-12 margin-r-2'>详情</view>
-            <view class='box box-apc view-1'>
-              <image src='{{item.src_2}}' class='inline image-3'></image>
-            </view>
+        <view class='box box-f1 font-12 box-ac margin-l-2'>服务时间：{{wycx.serviceTime}}</view>
+        <view class='inline box box-hor view-1 padding-lr-1'>
+          <view class='box box-apc font-12 margin-r-2'>详情</view>
+          <view class='box box-apc view-1'>
+            <image src='{{imgRoot}}/images/3_46.png' class='inline image-3'></image>
           </view>
         </view>
       </view>
-    </navigator>
-  </block>
+    </view>
+  </navigator>
+  <!-- 舒适出行 -->
+  <navigator wx:if="{{sscx.isNone}}" url='{{sscx.href}}' hover-class="none">
+    <view class='box box-f1 box-ver'>
+      <view class='image-2'>
+        <image src='{{imgRoot}}/images/7_48.png' class='widthHeight-100'></image>
+      </view>
+      <view class='box box-f1 margin-b-1 view-2'>
+        <view class=' margin-l-1 box box-apc' style='height:100%;'>
+          <view class='back-3' style='background:url({{imgRoot}}/images/3_43.png) no-repeat;background-size:100% 100%;'></view>
+        </view>
+        <view class='box box-f1 font-12 box-ac margin-l-2'>服务时间：{{sscx.serviceTime}}</view>
+        <view class='inline box box-hor view-1 padding-lr-1'>
+          <view class='box box-apc font-12 margin-r-2'>详情</view>
+          <view class='box box-apc view-1'>
+            <image src='{{imgRoot}}/images/3_46.png' class='inline image-3'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+  <!-- 代泊车 -->
+  <navigator wx:if="{{isSZX}}" url="../dpc/dpc"  hover-class="none">
+    <view class='box box-f1 box-ver'>
+      <view class='image-2'>
+        <image src='{{imgRoot}}/images/7_50.png' class='widthHeight-100'></image>
+      </view>
+      <view class='box box-f1 margin-b-1 view-2'>
+        <view class=' margin-l-1 box box-apc' style='height:100%;'>
+          <view class='back-3' style='background:url({{imgRoot}}/images/3_43.png) no-repeat;background-size:100% 100%;'></view>
+        </view>
+        <view class='box box-f1 font-12 box-ac margin-l-2'>服务时间：06:30~22:30</view>
+        <view class='inline box box-hor view-1 padding-lr-1'>
+          <view class='box box-apc font-12 margin-r-2'>详情</view>
+          <view class='box box-apc view-1'>
+            <image src='{{imgRoot}}/images/3_46.png' class='inline image-3'></image>
+          </view>
+        </view>
+      </view>
+    </view>                       
+  </navigator>
+  <!-- 接送机 -->
+  <navigator url='../jsj/jsj' hover-class="none">
+    <view class='box box-f1 box-ver'>
+      <view class='image-2'>
+        <image src='{{imgRoot}}/images/7_52.png' class='widthHeight-100'></image>
+      </view>
+      <view class='box box-f1 margin-b-1 view-2'>
+        <view class=' margin-l-1 box box-apc' style='height:100%;'>
+          <view class='back-3' style='background:url({{imgRoot}}/images/3_43.png) no-repeat;background-size:100% 100%;'></view>
+        </view>
+        <view class='box box-f1 font-12 box-ac margin-l-2'>服务时间：06:30~22:30</view>
+        <view class='inline box box-hor view-1 padding-lr-1'>
+          <view class='box box-apc font-12 margin-r-2'>详情</view>
+          <view class='box box-apc view-1'>
+            <image src='{{imgRoot}}/images/3_46.png' class='inline image-3'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </navigator>
 </view>
 <!--服务部分end  -->
