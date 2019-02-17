@@ -21,8 +21,8 @@ Page({
     service: {},
     coupon: null,
     coupontype: 0,
-    contactor: app.globalData.user.realName,
-    contactTel: app.globalData.user.mobile,
+    contactor: '',
+    contactTel: '',
     totalPrice: 0,
     couponCount: 0,
     isShare: 0,
@@ -84,6 +84,8 @@ Page({
       currentDate: minDate,
       minDate,
       maxDate,
+      contactor: app.globalData.user.realName,
+      contactTel: app.globalData.user.mobile,
     });
     this.getService(serviceId);
     this.loadCouponCount(serviceId);
@@ -289,7 +291,7 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/service.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
+        httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/service.ashx', { action: "createwxpaypara", orderId: orderId, openId: app.globalData.openId } , "POST",function(res){
             wx.hideLoading()
             if (res.Success) {
                 var parameObj = JSON.parse(res.Data);

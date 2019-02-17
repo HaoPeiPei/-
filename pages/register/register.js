@@ -8,6 +8,7 @@ var invitCodeReg = /^[0-9|a-z|A-Z]{3,8}$/;
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
+var httpRequst = require("../../utils/requst");
 Page({
 
   /**
@@ -25,6 +26,7 @@ Page({
     waitStyle: 'c-bg-ccc',
     waitMsg: '发送验证码',
     mobile: '',
+    verifyCode: '',
     invitationCode: '',
   },
   catchBackChange:function(){
@@ -34,7 +36,7 @@ Page({
   },
   //发送验证码
   sendVerify(){
-    if (wait == 120) {
+    if (this.data.wait == 120) {
       var params = {
         action: "exists", 
         mobile: this.data.mobile
@@ -42,7 +44,8 @@ Page({
       wx.showLoading({
         title: '加载中',
       });
-      httpRequst.HttpRequst(true, url, params,"POST",function(res){
+      httpRequst.HttpRequst(true, "/weixin/miniprogram/ashx/login.ashx", params,"POST",function(res){
+        debugger
         wx.hideLoading()
         wx.showToast({
           title: res.Message
@@ -78,22 +81,23 @@ Page({
     var _this= this;
     var mobile = e.detail.value.mobile;
     var verifyCode = e.detail.value.verifyCode;
-    var invitation = e.detail.value.invitation;
-    if (!checkMobile(mobile)) {
+    var invitation = '1234';
+    //var invitation = e.detail.value.invitation;
+    if (!this.checkMobile(mobile)) {
       wx.showToast({
         title: '请输入正确的手机号!',
         icon: 'none',
       });
       return false;
     }
-    else if (!checkVerify(verifyCode)) {
+    else if (!this.checkVerify(verifyCode)) {
       wx.showToast({
         title: '验证码应为6位数字!',
         icon: 'none',
       });
       return false;
     }
-    else if (invitation != "" && !checkInvitCode(invitation)) {
+    else if (invitation != "" && !this.checkInvitCode(invitation)) {
       wx.showToast({
         title: '请输入正确的邀请码!',
         icon: 'none',
@@ -108,54 +112,11 @@ Page({
         openId: app.globalData.openId,
         unionid: app.globalData.unionid,
       };
-      httpRequst.HttpRequst(true, "weixin/miniprogram/ashx/login.ashx", params,"POST",function(res){
-        if (!checkMobile()) {
-          layer.msg("请输入正确的手机号!");
-          return false;
-        }
-        else if (!checkVerify()) {
-            layer.msg("验证码应为6位数字!");
-            return false;
-        }
-        else if ($.trim($(".invitation").val()) != "" && !checkInvitCode()) {
-                layer.msg("请输入正确的邀请码!");
-                return false;
-        } else {
-          wx.showLoading();
-          $.ajax({
-              url: "/weixin/jctnew/ashx/login.ashx",
-              type: "post",
-              data: {
-                  action: "register",
-                  mobile: $(".mobile").val(),
-                  verifyCode: $(".verifyCode").val(),
-                  invitCode: $(".invitation").val(),
-                  openId: openId,
-                  unionId: unionId
-              },
-              success: function(data) {
-                  var obj = JSON.parse(data);
-                  layer.close(load);
-                  layer.alert(obj.Message, function (index) {
-                      if (obj.Success) {
-                          if (obj.Data == "2") {
-                            wx.navigateTo({
-                              url: '/grzx'
-                            })
-                              window.location = "../Preferential/WatchUs.aspx";
-                          } else {
-                              window.location = returnUrl;
-                          }
-                          //window.location = returnUrl;
-                      } else {
-                          window.location.reload();
-                      }
-                  });
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                  layer.close(load);
-              }
-          });
+      httpRequst.HttpRequst(true, "/weixin/miniprogram/ashx/login.ashx", params,"POST",function(res){
+        if(res.Success){
+          wx.navigateBack({
+            delta: 1, 
+          })
         }
       }); 
     }
@@ -169,6 +130,13 @@ Page({
   checkInvitCode(invitation) {
     return invitCodeReg.test(invitation) ? true : false;
   },
+  //输入验证码，手机号
+  bindinput(e){
+    var id = e.currentTarget.id;
+    this.setData({
+      [id]: e.detail.value
+    })
+  },
   //初始化页面参数
   initData(options){
     var invitationCode = options.invitationCode;
@@ -180,7 +148,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    initData(options);
+    this.initData(options);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

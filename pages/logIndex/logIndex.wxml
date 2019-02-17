@@ -18,7 +18,7 @@
         </view>
       </view>
       <view class='box box-f1 font-12 color-3 margin-t-20'>
-        <view class='box box-f1'>立即注册</view>
+        <navigator class='box box-f1' url="../register/register"  hover-class="none">立即注册</navigator>
         <view class='box box-f1 box-pe'>忘记密码?</view>
       </view>
       <view class='box box-f1 margin-t-80'>

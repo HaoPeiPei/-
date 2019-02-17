@@ -19,7 +19,8 @@ Page({
     login_state:'1', //0 未登录 1登录
     user_rights:"0",  //0 员工版 1用户版 
     inBind:false,
-    user: {}
+    user: {},
+    userInfo: {}
   },
   bindEwmChange:function(){
     var inBind = this.data.inBind;
@@ -32,9 +33,9 @@ Page({
     var _this = this;
     var params = {
       "action": "get",
-      "openId": app.globalData.openId
+      "memberId": app.globalData.memberId
     }
-    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
+    httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/preferential.ashx', params, 'POST', function (res) {
       if (res.Success) {
         _this.setData({
           user: JSON.parse(res.Data)
@@ -50,12 +51,15 @@ Page({
   //初始化参数
   initData(){
     this.loadUser();
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initData();
+    
   },  
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -68,7 +72,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.initData();
   },
 
   /**

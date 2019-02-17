@@ -16,7 +16,8 @@ Page({
       "right_icon": imgRoot+"/images/dh-b.png",
     },
     imgRoot: imgRoot,
-    user: {}
+    user: {},
+    userInfo: {}
   },
   //返回
   catchBackChange: function (e) {
@@ -44,18 +45,21 @@ Page({
     var _this = this;
     var params = {
       "action": "get",
-      "openId": app.globalData.openId
+      "memberId": app.globalData.memberId
     }
-    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
+    httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/preferential.ashx', params, 'POST', function (res) {
       if (res.Success) {
-        var user = JSON.parse(res.Data)
+        /* var user = JSON.parse(res.Data)
         var title = user.UserInfoJson.nickname + "为您推荐了环球机场通,速来领取200元出行大礼包吧!";
-        var shareImg = user.UserInfoJson.headimgurl;
+        var shareImg = user.UserInfoJson.headimgurl; 
         _this.setData({
           user: Object.assign(user, {
             title,
             shareImg,
           })
+        })*/
+        _this.setData({
+          user: JSON.parse(res.Data)
         })
       } else {
         //todo 跳转到登陆页面
@@ -68,6 +72,9 @@ Page({
   //初始化参数
   initData(){
     this.loadUser();
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
   },
   /**
    * 生命周期函数--监听页面加载

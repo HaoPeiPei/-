@@ -31,7 +31,7 @@
           />
         </van-popup>
         <view class='box box-f1 color-3' bindtap='useDateChange'>
-          <input type='text' placeholder='请输入用车日期' style='width:100%' value="{{useDate}}" />
+          <input type='text' placeholder='请输入用车日期' style='width:100%' disabled value="{{useDate}}" />
         </view>
       </view>
     </view>

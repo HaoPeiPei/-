@@ -21,14 +21,16 @@ App({
   //获取openid
   getOpenId: function(code) {
     var that = this;  
-    var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx9766d9666a9dd73d&secret=8fad507c06b6078916c019eb3ccf4613&js_code='+code+'&grant_type=authorization_code';
+    //var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx9766d9666a9dd73d&secret=8fad507c06b6078916c019eb3ccf4613&js_code='+code+'&grant_type=authorization_code';
+    var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx95a1e8c05c84caca&secret=0d543d50dddebd2e3718adc47dfbd2c8&js_code='+code+'&grant_type=authorization_code';
     wx.request({
       url: url,
       method: "get",
       success: res => {
-        let statusCode = res.statusCode
+        let statusCode = res.statusCode;
         if (200 === statusCode) {
-          that.globalData.openId == res.data.openid;
+          that.globalData.openId = res.data.openid;
+          that.globalData.unionid= res.data.unionid;
           that.getUserInfo()
         } else {
           console.log('获取 openId 失败')
@@ -40,16 +42,15 @@ App({
   getUserInfo: function(){
     var that = this;
     wx.request({
-      url: this.globalData.wwwRoot +'/weixin/jctnew/ashx/user.ashx?action=getUserInfo&openId='+that.globalData.openId,
+      url: this.globalData.wwwRoot +'/weixin/jctnew/ashx/user.ashx?action=getUserInfo&UnionId='+that.globalData.unionid,
       method: "get",
       success: res => {
-        console.log(res);
-        /* let statusCode = res.statusCode
-        if (200 === statusCode) {
-          that.globalData.openId == res.data.openid;
-        } else {
-          console.log('获取用户信息失败')
-        } */
+        if(res.statusCode == 200 && res.data.Success){
+          var resDate = JSON.parse(res.data.Data);
+          that.globalData.memberId = resDate.id;
+          that.globalData.unionid= resDate.UnionId;
+          that.globalData.user = resDate;
+        }
       }
     })
   },
@@ -83,14 +84,11 @@ App({
     wwwRoot: "https://www.51jct.cn",
     imgRoot: "http://www.51jct.cn/weixin/miniprogram",
     remoteUrl: "https://www.51jct.cn",
-    memberId: 7530,//6711
-    openId : 'oZDU-wbLV1EJkwy4Xdt-dt7HQIm8',
-    unionid : 'ojVAM1Bh4TS4VV_buGp7Io0_gSgU',//
+    memberId: '',//6711
+    openId : '',
+    unionid : '',//
+    user: {},
     userInfo: {},
-    user: {
-      realName: '郝沛沛',
-      mobile: '18971570000',
-    },
     airportCode:'SZX',
     airportName:'深圳宝安国际机场',
   },

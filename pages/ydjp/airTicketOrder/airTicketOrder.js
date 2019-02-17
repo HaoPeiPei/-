@@ -51,8 +51,8 @@ Page({
         linkPhone: "",
         linkRegion: "",
         linkAddress: "",
-        contactor: app.globalData.user.realName,
-        contactTel: app.globalData.user.mobile,
+        contactor: '',
+        contactTel: '',
         ticketPrice: {},
         passenger: {},
         passeners: [],
@@ -105,7 +105,9 @@ Page({
                 element['aduOilTax'] = (parseInt(element.AduOil) + parseInt(element.Tax));
             };
             this.setData({
-                flightInfos
+                flightInfos,
+                contactor: app.globalData.user.realName,
+                contactTel: app.globalData.user.mobile,
             });
             this.loadService();
             this.caculatePirce();
@@ -761,7 +763,7 @@ Page({
             wx.showLoading({
                 title: '数据加载中...',
             });
-            httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
+            httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/airTicket.ashx', { action: "createwxpaypara", orderId: orderId, openId: app.globalData.openId  } , "POST",function(res){
                 wx.hideLoading()
                 if (res.Success) {
                     var parameObj = JSON.parse(res.Data);
@@ -793,6 +795,7 @@ Page({
                         content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
                         success(res) {
                           if (res.confirm) {
+                              
                           } else if (res.cancel) {
                             jsApiCall(params, orderId);
                           }
@@ -897,9 +900,11 @@ Page({
         orderConfirmeTimer = setTimeout(function () {
             httpRequst.HttpRequst(false, '/weixin/jctnew/ashx/airticket.ashx', { action: "getorderbyid", orderId: orderId }, "POST",function(res){
                 if (res.Success) {
-                    if(false){
+                    var resData = JSON.parse(res.Data);
+                    if(resData.airticketOrder.Order.status==1){
                         clearInterval(orderConfirmeTimer);
                         clearInterval(countDownTimer);
+                        that.createPayPara(orderId);
                     }else{
                         clearInterval(orderConfirmeTimer);
                         that.orderConfirme(orderId);

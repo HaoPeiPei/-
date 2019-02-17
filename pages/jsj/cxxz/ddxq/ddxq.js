@@ -41,8 +41,8 @@ Page({
     toAddress: '',
     useTime: '',
     totalPrice: 0,
-    contactor: app.globalData.user.realName,
-    contactTel: app.globalData.user.mobile,
+    contactor: '',
+    contactTel: '',
   },
   bindBackChange:function(e){
     wx.showModal({
@@ -101,7 +101,9 @@ Page({
         toAddress,
         useTime,
         totalPrice,
-        carType
+        carType,
+        contactor: app.globalData.user.realName,
+        contactTel: app.globalData.user.mobile,
       })
     }
     else {

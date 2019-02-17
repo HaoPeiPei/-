@@ -3,6 +3,8 @@ var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
+//联系手机正则
+var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 Page({
 
   /**
@@ -38,7 +40,8 @@ Page({
       wx.showLoading();
       httpRequst.HttpRequst(true, "/weixin/jctnew/ashx/login.ashx", params,"POST",function(res){
         wx.hideLoading();
-        if(res.Success > 0){
+        if(res.Success){
+          _this.getUserInfo();
           wx.navigateBack({
             delta: 1
           })
@@ -63,6 +66,22 @@ Page({
       return false;
     }
     return true;
+},
+//获取用户信息
+getUserInfo: function(){
+  var that = this;
+  wx.request({
+    url: app.globalData.wwwRoot +'/weixin/jctnew/ashx/user.ashx?action=getUserInfo&UnionId='+app.globalData.unionid,
+    method: "get",
+    success: res => {
+      if(res.statusCode == 200 && res.data.Success){
+        var resDate = JSON.parse(res.data.Data);
+        app.globalData.memberId = resDate.id;
+        app.globalData.unionid= resDate.UnionId;
+        app.globalData.user = resDate;
+      }
+    }
+  })
 },
   /**
    * 生命周期函数--监听页面加载

@@ -3,17 +3,17 @@
 <template is="header_content_noBackod" data="{{...header_text}}"/>
 
 <view>
-<form>
+<form bindsubmit='formSubmit' >
   <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
     <view style='width:150rpx;' class='font-15 color-9b'>手机号</view>
     <view class='box box-f1 font-15'>
-      <input type='number' placeholder='请输入手机号' placeholder-class="checkd-colo" name="mobile"></input>
+      <input type='number' placeholder='请输入手机号' id="mobile"  bindinput="bindinput" placeholder-class="checkd-colo" name="mobile"></input>
     </view>
   </view>
   <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
     <view style='width:150rpx;' class='font-15 color-9b'>验证码</view>
     <view class='box box-f1 font-15'>
-      <input type='number' placeholder='请输入验证码' placeholder-class="checkd-colo" name="verifyCode"></input>
+      <input type='number' placeholder='请输入验证码' id="verifyCode"  bindinput="bindinput" placeholder-class="checkd-colo" name="verifyCode"></input>
     </view>
     <view class='yzm-btn font-15' catchtap="sendVerify">发送验证码</view>
   </view>
@@ -30,7 +30,7 @@
     </view>
   </view>
   <view class='box box-f1 margin-lr-30 '>
-    <button class='submit-btn'>注册</button>
+    <button form-type='submit'  class='submit-btn'>注册</button>
   </view>
   
 </form>

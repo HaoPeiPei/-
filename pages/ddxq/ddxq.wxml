@@ -10,7 +10,7 @@
             
           </view>
           <view class='box box-f1 font-12'>
-          <navigator url='{{item.nav_URL}}' open-type="navigate" style='width:100%;' bindtap='bindOrderChange' hover-class='none'>
+          <navigator url='{{item.nav_URL}}' open-type="navigate" style='width:100%;'  hover-class='none'>
           {{item.orderTitle}}
           </navigator>
           </view>

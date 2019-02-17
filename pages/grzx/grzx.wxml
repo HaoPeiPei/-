@@ -2,12 +2,11 @@
 <view class='box box-f1 box-apc view-grzx font-15'>个人中心</view>
 <view class='box box-f1 box-hor padding-tb-1 padding-lr-1 grxx'>
   <view class='tuoxiang'>
-    <image src='{{imgRoot}}/images/personal_pic.png' wx:if="{{login_state==1}}"></image>
-    <image src='{{imgRoot}}/images/personal_pic.png' wx:else></image>
+    <image src='{{userInfo.avatarUrl}}'></image>
   </view>
   <view class='box box-f1 box-ver margin-l-1' wx:if="{{login_state==1}}">
     <view class='box box-f1 box-ac font-14'>
-      <view class='box box-f1 box-ac'>{{user.UserInfoJson.nickname}}</view>
+      <view class='box box-f1 box-ac'>{{userInfo.nickName}}</view>
       <view class='box box-f1 '>
         <view class='box box-f1 box-hor box-pe'>
           <view class='box box-apc'>退出</view>
@@ -88,7 +87,7 @@
           </view>
       </navigator>
     </li>
-    <li wx:if="{{user_rights==0}}">
+    <li class="none" wx:if="{{user_rights==0}}">
       <view class='li-view box box-f1 box-ac' bindtap='bindListChange' data-list="3">
         <view class='box margin-r-1'>
           <image src='{{imgRoot}}/images/ygtd_icon_1.png' class='image-1' />
@@ -99,7 +98,7 @@
         </view>
       </view>
     </li>
-    <li  wx:if="{{user_rights==0}}">
+    <li class="none" wx:if="{{user_rights==0}}">
       <view class='li-view box box-f1 box-ac' > <!-- bindtap='bindEwmChange' -->
         <view class='box margin-r-1'>
           <image src='{{imgRoot}}/images/wdewm_icon_1.png' class='image-1' />

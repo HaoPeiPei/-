@@ -35,3 +35,17 @@ page{
   border-radius: 10rpx;
   padding: 10rpx 0rpx;
 }
+.tuoxiang{
+  position: relative;
+  width: 200rpx;
+  
+}
+.tuoxiang image{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -70rpx;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+}

@@ -28,8 +28,8 @@ Page({
     rechargeAmount : 0,//充值余额
     presentAmonut  : 0,//充值余额
     payType: 1, //支付方式 1:微信
-    contactor: app.globalData.user.realName,
-    contactTel: app.globalData.user.mobile,
+    contactor: '',
+    contactTel: '',
     position: "随机",
     area: "左侧前方",
   },
@@ -64,7 +64,9 @@ Page({
           serviceId: serviceId,
           serviceName: serviceName
         }),
-        carrier: carrier
+        carrier: carrier,
+        contactor: app.globalData.user.realName,
+        contactTel: app.globalData.user.mobile,
       });
       this.loadService();
       this.loadCouponCount();

@@ -16,16 +16,20 @@ Page({
       { src_1: imgRoot+'/images/jsj.png', orderTitle: '接送机订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "jsjdd/jsjdd" }
     ]
   },
-  bindOrderChange:function(){
-
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
-
+  //检查memberID,无去登陆页面
+  toLogin(){
+    if(app.globalData.memberId == ''){
+      wx.navigateTo({
+        url: '../logIndex/logIndex',
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -37,7 +41,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.toLogin();
   },
 
   /**

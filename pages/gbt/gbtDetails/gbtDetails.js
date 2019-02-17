@@ -40,9 +40,14 @@ Page({
   },
   //立即预约
   catchLjyy:function(){
-    wx.navigateTo({
-      url: 'qrdd/qrdd?id='+this.data.service.id,
-    })
+    var memberId = app.globalData.memberId;
+    if(memberId == ""){
+      this.toLogin();
+    }else{
+      wx.navigateTo({
+        url: 'qrdd/qrdd?id='+this.data.service.id,
+      })
+    }
   },
   //返回
   catchBackChange:function(){
@@ -120,6 +125,14 @@ Page({
         });
       }
     });
+  },
+  //检查memberID,无去登陆页面
+  toLogin(){
+    if(app.globalData.memberId == ''){
+      wx.navigateTo({
+        url: '../../logIndex/logIndex',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

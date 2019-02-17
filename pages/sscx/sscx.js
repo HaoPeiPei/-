@@ -92,19 +92,22 @@ Page({
     var header_text = _this.data.header_text;
     var url = "/weixin/jctnew/ashx/service.ashx";
     var memberId = app.globalData.memberId;
-    var params = { action: "getserviceimg", id: id, memberId: memberId };
-
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      var obj = JSON.parse(res.Data);
-      var img_url = [];
-      for(var i =0 ;i<obj.length;i++){
-        img_url.push(wwwRoot+obj[i].img_url);
-      }
-      var str = "header_text.imgUrls"
-      _this.setData({
-        [str]:img_url
+    if(memberId == ""){
+      _this.toLogin();
+    }else{
+      var params = { action: "getserviceimg", id: id, memberId: memberId };
+      httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
+        var obj = JSON.parse(res.Data);
+        var img_url = [];
+        for(var i =0 ;i<obj.length;i++){
+          img_url.push(wwwRoot+obj[i].img_url);
+        }
+        var str = "header_text.imgUrls"
+        _this.setData({
+          [str]:img_url
+        });
       });
-    });
+    }
   },
   //载入服务
   loadService:function(id){
@@ -127,6 +130,14 @@ Page({
     });
     this.loadServiceImg(id);
     this.loadService(id);
+  },
+  //检查memberID,无去登陆页面
+  toLogin(){
+    if(app.globalData.memberId == ''){
+      wx.navigateTo({
+        url: '../logIndex/logIndex',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

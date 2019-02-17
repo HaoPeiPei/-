@@ -72,15 +72,19 @@ Page({
     var id = _this.data.id;
     var url = "/weixin/jctnew/ashx/service.ashx";
     var memberId = app.globalData.memberId;
-    var params = { action: "getservicebyid", id: id, memberId: memberId };
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      if(res.Success){
-        var obj = JSON.parse(res.Data);
-        wx.navigateTo({
-          url: 'xzhb/xzhb?id=' + obj.id + '&cityCode=' + obj.airport_code + '&serviceName=' + encodeURIComponent(obj.service_name),
-        })
-      }
-    });
+    if(memberId == ""){
+      _this.toLogin();
+    }else{
+      var params = { action: "getservicebyid", id: id, memberId: memberId };
+      httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
+        if(res.Success){
+          var obj = JSON.parse(res.Data);
+          wx.navigateTo({
+            url: 'xzhb/xzhb?id=' + obj.id + '&cityCode=' + obj.airport_code + '&serviceName=' + encodeURIComponent(obj.service_name),
+          })
+        }
+      });
+    }
   },
   //载入轮播图片
   loadServiceImg:function(id){
@@ -122,6 +126,14 @@ Page({
     });
     this.loadServiceImg(id);
     this.loadService(id);
+  },
+  //检查memberID,无去登陆页面
+  toLogin(){
+    if(app.globalData.memberId == ''){
+      wx.navigateTo({
+        url: '../logIndex/logIndex',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
