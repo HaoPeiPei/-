@@ -12,10 +12,10 @@ Page({
   data: {
     header_text:
     {
-      "imgUrls": "",
+      "imgUrls": [imgRoot+"/images/worryFree.png"],
       "left_icon": imgRoot+"/images/back-1.png",
       "title_text": "无忧出行", 
-      "right_icon": imgRoot+"../images/dh.png"
+      "right_icon": imgRoot+"/images/dh-f.png",
     },
     imgRoot: imgRoot,
     setMealPage: 

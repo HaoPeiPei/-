@@ -10,17 +10,24 @@ page{
   width: 100%;
   background: #f43931;
   color: #ffffff;
-  border:0px solid #ffffff;
-  border-radius: 10rpx;
-  line-height: 2;
+  border:0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-radius: 0;
+  height: 80rpx; 
+  line-height: 80rpx;
 }
 button{
   -webkit-appearance:none;
-
+}
+.margin-l-25 {
+  margin-left: 25rpx;
 }
 .margin-tb-80{
   margin: 80rpx 0rpx;
 }
+
 .margin-t-80{
   margin-top: 80rpx;
 }

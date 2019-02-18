@@ -76,8 +76,6 @@
   </view>
 </template>
 
-
-
 <template name="pos_fixed_b">
   <view class='box box-f1 box-apc font-16 color-f padding-tb-1 ' style='background:red;position:fixed;bottom:0;width:100%;z-index: 999;' catchtap='catchLjyy'>{{text}}</view>
 </template>

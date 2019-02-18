@@ -44,20 +44,18 @@ Page({
     contactor: '',
     contactTel: '',
   },
-  bindBackChange:function(e){
-    wx.showModal({
-      title: '温馨提示',
-      content: '您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回？',
-      success: function (res) {
-        if (res.confirm) {
-          wx.navigateBack({
-            delta:1
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
+  //返回
+  catchBackChange: function () {
+    wx.navigateBack({
+      delta: 1
     })
+  },
+   //拨打电话
+   telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   catchRsChage:function(e){
     var key = e.currentTarget.dataset.key;
@@ -208,16 +206,16 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/rentcar.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
+        httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/rentcar.ashx', { action: "createwxpaypara", orderId: orderId, openId: app.globalData.openId  }, "POST",function(res){
             wx.hideLoading()
             if (res.Success) {
-                var parameObj = JSON.parse(res.Data);
-                that.jsApiCall(parameObj, orderId);
+              var parameObj = JSON.parse(res.Data);
+              that.jsApiCall(parameObj, orderId);
             } else {
-                wx.showToast({
-                    title: '创建支付参数失败,请联系客服',
-                    icon: 'none'
-                });
+              wx.showToast({
+                  title: '创建支付参数失败,请联系客服',
+                  icon: 'none'
+              });
             }
         });
     }
@@ -236,24 +234,33 @@ Page({
             if (res.err_msg == "get_brand_wcpay_request:ok") {
               that.updateOrder(orderId);
             }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-                wx.showModal({
-                    title: "温馨提示", 
-                    content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
-                    success(res) {
-                      if (res.confirm) {
-                        wx.navigateTo({
-                          url: '../../ddxq/jsjdd/jsjdd'
-                        })
-                      } else if (res.cancel) {
-                        that.jsApiCall(params, orderId);
-                      }
+              wx.showModal({
+                  title: "温馨提示", 
+                  content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+                  success(res) {
+                    if (res.confirm) {
+                      wx.navigateTo({
+                        url: '../../ddxq/jsjdd/jsjdd'
+                      })
+                    } else if (res.cancel) {
+                      that.jsApiCall(params, orderId);
                     }
-                });
+                  }
+              });
             }else {
-                wx.showToast({
-                    title: '支付失败!',
-                    icon: 'none'
-                });
+              wx.showModal({
+                title: "温馨提示", 
+                content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+                success(res) {
+                  if (res.confirm) {
+                    wx.navigateTo({
+                      url: '../../ddxq/jsjdd/jsjdd'
+                    })
+                  } else if (res.cancel) {
+                    that.jsApiCall(params, orderId);
+                  }
+                }
+            });
             }
         },
         'fail':function(res){

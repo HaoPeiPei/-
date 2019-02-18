@@ -48,6 +48,10 @@ Page({
         queryInfo
       });
       this.loadRentCars();
+    }else{
+      wx.navigateTo({
+        url: '../jsj'
+      })
     }
   },
   //获取车辆

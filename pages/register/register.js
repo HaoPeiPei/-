@@ -9,6 +9,7 @@ var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst");
+var timer;
 Page({
 
   /**
@@ -17,64 +18,88 @@ Page({
   data: {
     header_text:
     {
-      left_icon: imgRoot+"/images/back-b.png",
+      left_icon: imgRoot+"/images/back-f.png",
       title_text: "注册",
-      right_icon: "",
+      right_icon: imgRoot+"/images/dh-f.png",
+      "background_url": imgRoot+"/images/login_bg.png"
     },
     imgRoot: imgRoot,
     wait: 120,
-    waitStyle: 'c-bg-ccc',
+    waitStyle: 'c-bg-f4393c',
     waitMsg: '发送验证码',
     mobile: '',
     verifyCode: '',
     invitationCode: '',
   },
-  catchBackChange:function(){
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
-      delta:1
+      delta: 1
     })
+  },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   //发送验证码
   sendVerify(){
+    var that = this;
+    var mobile = this.data.mobile;
+    if (!this.checkMobile(mobile)) {
+      wx.showToast({
+        title: '请输入正确的手机号!',
+        icon: 'none',
+      });
+      return false;
+    }
     if (this.data.wait == 120) {
+      that.countDown();
       var params = {
         action: "exists", 
-        mobile: this.data.mobile
+        mobile: mobile
       };
       wx.showLoading({
         title: '加载中',
       });
       httpRequst.HttpRequst(true, "/weixin/miniprogram/ashx/login.ashx", params,"POST",function(res){
-        debugger
         wx.hideLoading()
         wx.showToast({
-          title: res.Message
+          title: res.Message,
+          icon: 'none'
         });
-        if (res.Success) {
-            time(0);
+        if (!res.Success) {
+          clearInterval(timer);
+          that.setData({
+            waitStyle: 'c-bg-f4393c',
+            waitMsg: '发送验证码',
+            wait: 120,
+          });
         }
       });
     }
   },
   //倒计时
-  time(o) {
+  countDown() {
     var that = this;
-    if (wait == 0) {
-      that.setData({
-        waitStyle: 'c-bg-f4393c',
-        waitMsg: '发送验证码',
-        wait: 120,
-      });
-    } else {
-      that.setData({
-        waitStyle: 'c-bg-ccc',
-        waitMsg: '发送验证码(' + wait + ')',
-        wait: wait--,
-      });
-      setTimeout(function () {
-        that.time(o)
-      },1000);
-    }
+    timer = setInterval(res=>{
+      if (that.data.wait == 0) {
+        that.setData({
+          waitStyle: 'c-bg-f4393c',
+          waitMsg: '发送验证码',
+          wait: 120,
+        });
+        clearInterval(timer);
+      } else {
+        that.setData({
+          waitStyle: 'c-bg-ccc',
+          waitMsg: `发送验证码(${that.data.wait--}s)`,
+          wait: that.data.wait--,
+        });
+      };
+    },1000)
   },
   //注册
   formSubmit:function(e){

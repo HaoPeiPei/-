@@ -21,7 +21,6 @@ App({
   //获取openid
   getOpenId: function(code) {
     var that = this;  
-    //var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx9766d9666a9dd73d&secret=8fad507c06b6078916c019eb3ccf4613&js_code='+code+'&grant_type=authorization_code';
     var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx95a1e8c05c84caca&secret=0d543d50dddebd2e3718adc47dfbd2c8&js_code='+code+'&grant_type=authorization_code';
     wx.request({
       url: url,

@@ -1,7 +1,6 @@
 <!--pages/register/register.wxml-->
 <import src="../../template/template.wxml" />
-<template is="header_content_noBackod" data="{{...header_text}}"/>
-
+<template is="header_content_backod" data="{{...header_text}}" />
 <view>
 <form bindsubmit='formSubmit' >
   <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
@@ -15,7 +14,7 @@
     <view class='box box-f1 font-15'>
       <input type='number' placeholder='请输入验证码' id="verifyCode"  bindinput="bindinput" placeholder-class="checkd-colo" name="verifyCode"></input>
     </view>
-    <view class='yzm-btn font-15' catchtap="sendVerify">发送验证码</view>
+    <view class='yzm-btn font-13 {{waitStyle}}' catchtap="sendVerify">{{waitMsg}}</view>
   </view>
   <!-- <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
     <view style='width:150rpx;' class='font-15 color-9b'>密码</view>
@@ -29,9 +28,7 @@
       <input type='text' placeholder='请输入邀请码' placeholder-class="checkd-colo" name="invitation"></input>
     </view>
   </view>
-  <view class='box box-f1 margin-lr-30 '>
-    <button form-type='submit'  class='submit-btn'>注册</button>
-  </view>
+  <button form-type='submit'  class='submit-btn font-16' >注册</button>
   
 </form>
 </view>

@@ -10,7 +10,7 @@ Page({
   data: {
     header_text:
     {
-      "imgUrls": [imgRoot+"/images/worryFree.png", imgRoot+"/images/worryFree.png"],
+      "imgUrls": [imgRoot+"/images/worryFree.png"],
       "left_icon": imgRoot+"/images/back-1.png",
       "title_text": "舒适出行",
       "right_icon": imgRoot+"/images/dh.png"

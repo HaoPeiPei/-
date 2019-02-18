@@ -13,18 +13,27 @@ Page({
   data: {
     header_text:
     {
-        left_icon: imgRoot+"/images/back-f.png",
-        title_text:"登陆",
-        right_icon:"",
-        background_url: imgRoot+"/images/login_bg.png"
+      left_icon: imgRoot+"/images/back-f.png",
+      title_text: "登陆",
+      right_icon: imgRoot+"/images/dh-f.png",
+      background_url: imgRoot+"/images/login_bg.png"
     },
     imgRoot: imgRoot,
   },
-  catchBackChange:function(){
+  //返回
+  catchBackChange: function (e) {
     wx.navigateBack({
-      delta:1
+      delta: 1
     })
   },
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
+  },
+  //登陆
   formSubmit:function(e){
     var _this= this;
     var mobile = e.detail.value.mobile;

@@ -305,20 +305,20 @@ Page({
   createPayPara(orderId) {
     var that = this;
     if (orderId != null && orderId != "") {
-        wx.showLoading({
-            title: '数据加载中...',
-        });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
-            wx.hideLoading()
-            if (res.Success) {
-                var parameObj = JSON.parse(res.Data);
-                that.jsApiCall(parameObj, orderId);
-            } else {
-                wx.showToast({
-                    title: '创建支付参数失败,请联系客服',
-                    icon: 'none'
-                });
-            }
+      wx.showLoading({
+        title: '数据加载中...',
+      });
+      httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/service.ashx', { action: "createwxpaypara", orderId: orderId, openId: app.globalData.openId } , "POST",function(res){
+          wx.hideLoading()
+          if (res.Success) {
+            var parameObj = JSON.parse(res.Data);
+            that.jsApiCall(parameObj, orderId);
+          } else {
+            wx.showToast({
+              title: '创建支付参数失败,请联系客服',
+              icon: 'none'
+            });
+          }
         });
     }
   },
@@ -326,40 +326,61 @@ Page({
   jsApiCall(params, orderId) {
     var that = this;
     wx.requestPayment(
-        {
-        'timeStamp': params.timeStamp,
-        'nonceStr': params.nonceStr,
-        'package': params.package,
-        'signType': params.signType,
-        'paySign': params.paySign ,
-        'success':function(res){
-            if (res.err_msg == "get_brand_wcpay_request:ok") {
-              that.payOrder(orderId);
-            }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-                wx.showModal({
-                    title: "温馨提示", 
-                    content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
-                    success(res) {
-                      if (res.confirm) {
-                      } else if (res.cancel) {
-                        that.jsApiCall(params, orderId);
-                      }
-                    }
-                });
-            }else {
-                wx.showToast({
-                    title: '支付失败!',
-                    icon: 'none'
-                });
-            }
-        },
-        'fail':function(res){
-            wx.showToast({
-                title: '支付失败!',
-                icon: 'none'
+      {
+      'timeStamp': params.timeStamp,
+      'nonceStr': params.nonceStr,
+      'package': params.package,
+      'signType': params.signType,
+      'paySign': params.paySign ,
+      'success':function(res){
+          if (res.err_msg == "get_brand_wcpay_request:ok") {
+            that.payOrder(orderId);
+          }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+            wx.showModal({
+              title: "温馨提示", 
+              content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+              success(res) {
+                  if (res.confirm) {
+                      wx.switchTab({
+                          url: '../../ddxq/fwdd/fwdd'
+                      });
+                  } else if (res.cancel) {
+                      that.jsApiCall(params, orderId);
+                  }
+              }
+            });
+          }else {
+            wx.showModal({
+              title: "温馨提示", 
+              content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+              success(res) {
+                  if (res.confirm) {
+                      wx.switchTab({
+                          url: '../../ddxq/fwdd/fwdd'
+                      });
+                  } else if (res.cancel) {
+                    that.jsApiCall(params, orderId);
+                  }
+              }
             });
         }
-    });
+      },
+      'fail':function(res){
+        wx.showModal({
+          title: "温馨提示", 
+          content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+          success(res) {
+              if (res.confirm) {
+                  wx.switchTab({
+                      url: '../../ddxq/fwdd/fwdd'
+                  });
+              } else if (res.cancel) {
+                that.jsApiCall(params, orderId);
+              }
+          }
+        });
+      }
+    })
   },
   //支付的订单
   payOrder(orderId){
