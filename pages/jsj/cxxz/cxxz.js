@@ -28,7 +28,7 @@ Page({
     priceMark: '',
   },
   //返回
-  bindBackChange: function (e) {
+  catchBackChange: function () {
     wx.navigateBack({
       delta: 1
     })
