@@ -8,11 +8,11 @@
   <view class='header'>
     <view class='header-content box box-hor'>
       <view class='header-left box box-apc'  bindtap='bindBackChage'>
-        <image src='{{icon_left}}'></image>
+        <image src='{{icon_left}}' mode="widthFix"></image>
       </view>
       <view class='header-text box box-f1 box-apc'>{{title_text}}</view>
       <view class='header-right box box-apc'>
-        <image src='{{icon_right}}'></image>
+        <image src='{{icon_right}}' mode="widthFix"></image>
       </view>
     </view>
   </view>
@@ -22,11 +22,11 @@
   <view class='header'>
     <view class='header-content box box-hor'>
       <view class='header-left box box-apc' bindtap='bindBackChage'>
-        <image src='{{icon_left}}'></image>
+        <image src='{{icon_left}}' mode="widthFix"></image>
       </view>
       <view class='header-text box box-f1 box-apc'>{{title_text}}</view>
       <view class='header-right box box-apc' bindtap='bindDelChage'>
-        <image src='{{icon_right}}'></image>
+        <image src='{{icon_right}}' mode="widthFix"></image>
       </view>
     </view>
   </view>
@@ -43,35 +43,32 @@
     <view class='header-backgd-text'>
       <view class='box box-f1 box-hor'>
         <view class='left-icon' bindtap='bindBackChage'>
-          <image src='{{left_icon}}'></image>
+          <image src='{{left_icon}}' mode="widthFix"></image>
         </view>
         <view class='box box-f1 box-apc font-12 color-f'>{{title_text}}</view>
         <view class='right-icon'>
-          <image src='{{right_icon}}'></image>
+          <image src='{{right_icon}}' mode="widthFix"></image>
         </view>
       </view>
     </view>
     <view class='header-backgd-img'>
-      <image src='{{background_url}}'></image>
+      <image src='{{background_url}}' mode="widthFix"></image>
     </view>
   </view>
 </template>
 
 <!--
   不带背景和电话
-  icon_left：url,返回
+  left_icon：url,返回
   title_text:string,
   -->
 <template name="header-content-rNone">
-  <view class='header'>
-    <view class='header-content box box-hor'>
+  <view class='header header_backod'>
+    <view class='box header-con box-hor'>
       <view class='header-left box box-apc' bindtap='bindBackChage'>
-        <image src='{{icon_left}}'></image>
+        <image src='{{left_icon}}' style='width:16rpx;height: auto;' mode="widthFix"></image>
       </view>
       <view class='header-text box box-f1 box-apc'>{{title_text}}</view>
-      <view class='header-right box box-apc'>
-        <!-- <image src='{{icon_right}}'></image> -->
-      </view>
     </view>
   </view>
 </template>
@@ -142,7 +139,7 @@
       <swiper indicator-dots='true' autoplay='false' style='height:380rpx'>
         <block wx:for="{{imgUrls}}" wx:for-item="it" wx:key="*this">
           <swiper-item>
-            <image src='{{it}}' style='width:100%;height:100%;' />
+            <image src='{{it}}' style='width:100%;height:100%;' mode="widthFix" />
           </swiper-item>       
         </block>
       </swiper>

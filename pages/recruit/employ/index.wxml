@@ -1,0 +1,130 @@
+<view class="header header-coupon" style="background-color: #F03929;">
+    <view>
+        <text class="back"></text>
+        <text class="title">
+            <view>
+                <asp:Label runat="server" style="color:#ffffff" ID="name">加入我们</asp:Label>
+            </view>
+        </text>
+    </view>
+</view>
+<view class="container">
+    <view class="detail orderfill-cont orderfill-cont-walk">
+        <view class="payfor-konw payfor-fill">
+            <view>
+                <text class="left">所属机场</text>
+                <text class="right">
+                    <input class="MODcolor" type="text" id="airport" name="airport" readonly="readonly" style="text-transform: uppercase;" placeholder="请选择所属机场" />
+                    <input type="hidden" id="citycode" name="citycode" value="" />
+                </text>
+            </view>
+            <view>
+                <text colspan="2" class="hr" style="height: 2rpx;"></text>
+            </view>
+            <view>
+                <text class="left">所属公司</text>
+                <text class="right user">
+                    <input id="company" name="company" style="color: #000000;" placeholder="请输入所属公司" class="MODcolor" type="text" />
+                </text>
+            </view>
+            <view>
+                <text colspan="2" class="hr" style="height: 2rpx;"></text>
+            </view>
+            <view>
+                <text class="left">姓名</text>
+                <text class="right user">
+                    <input id="username" name="username" style="color: #000000;" placeholder="请输入您的姓名" class="MODcolor" type="text" />
+                </text>
+            </view>
+            <view>
+                <text colspan="2" class="hr" style="height: 2rpx;"></text>
+            </view>
+            <view>
+                <text class="left" style="position: relative; top: 30rpx;">服务项目</text>
+                <text class="right">
+                    <view class="per-list" style="margin-top: 100rpx">
+                        <text>
+                            <view class="checkbox" data-value="预留登机牌"></view>
+                            <text>预留登机牌
+                                <image src="http://www.51jct.cn/weixin/jichangtong/img/question.png" bindsubmit="showSeviceRole(0);" style="vertical-align:bottom; float: right" width="32rpx" height="32rpx" ></image>
+                            </text>
+                        </text>
+                        <text>
+                            <view class="checkbox" data-value="送机服务"></view>
+                            <text>送机服务
+                                <image src="http://www.51jct.cn/weixin/jichangtong/img/question.png" bindsubmit="showSeviceRole(1);" style="vertical-align: bottom; float: right" width="32rpx" height="32rpx" ></image>
+                            </text>
+                        </text>
+                    </view>
+                </text>
+            </view>
+            <view>
+                <text colspan="2" class="hr" style="height: 2rpx;"></text>
+            </view>
+            <view>
+                <text class="left" style="position: relative; top: 30rpx;">备注</text>
+                <text class="right">
+                    <textarea id="memo" name="memo" class="rich-text" rows="6" placeholder="请备注您能提供的其他服务项目,例如:行李托运" style="overflow: auto;">
+                    </textarea>
+                </text>
+            </view>
+            <view>
+                <text colspan="2" class="hr" style="height: 2rpx;"></text>
+            </view>
+            <view>
+                <text class="left">请上传材料</text>
+                <text class="right user"></text>
+            </view>
+            <view>
+                <text colspan="2">
+                    <view id="imglist" class="imglist">
+                        <view>
+                            <text>
+                                <view style="text-align: center">工作证</view>
+                                <view>
+                                    <image src="http://www.51jct.cn/weixin/jichangtong/images/noneimg.jpg" style="width: 100%; margin: 50rpx" id="idCardPositiveImg" ></image>
+                                </view>
+                            </text>
+
+                        </view>
+                    </view>
+                </text>
+            </view>
+            <view>
+                <text colspan="2">
+                    <view id="chkRole" class="checkbox" data-value="注册条款" style="margin-bottom: 20rpx;"></view>
+                    <text style="vertical-align: top;">我已阅读并接受
+                        <navigator url="./serviceNotice/serviceNotice" hover-class="none">合伙人须知</navigator>和
+                        <navigator url="./serviceRole/serviceRole" hover-class="none">合伙人条款</navigator>
+                    </text>
+                </text>
+            </view>
+        </view>
+    </view>
+    <view class="applyRef">
+    </view>
+    <view id="applyRef-info-one" class="applyRef-info">
+        <view id="contactService-one" class="contactService">
+            <view>服务标准</view>
+            <view style="text-align: left; font-size: 28rpx;">1、接收订单,根据客户需求办理登机牌,15分钟内完成订单.</view>
+            <view style="text-align: left; font-size: 28rpx;">2、发送短信,告知旅客登机牌领取地点.</view>
+            <view>
+                <text style="width: 100%"><a href="#" bindsubmit="cancel()">确定</a></text>
+            </view>
+        </view>
+    </view>
+    <view id="applyRef-info-two" class="applyRef-info">
+        <view id="contactService-two" class="contactService">
+            <view>服务标准</view>
+            <view style="text-align: left; font-size: 28rpx;">1、接受订单,15分钟内处理订单.</view>
+            <view style="text-align: left; font-size: 28rpx;">2、发送短信,告知旅客登机牌领取地点.</view>
+            <view style="text-align: left; font-size: 28rpx;">3、协助旅客办理相关乘机手续,陪送旅客至登机口.</view>
+            <view>
+                <text style="width: 100%"><a href="#" bindsubmit="canceltwo()">确定</a></text>
+            </view>
+        </view>
+    </view>
+    <input type="hidden" value="<%=mobile%>" id="mobile" />
+    <input type="hidden" value="<%=invitationCode%>" id="invitationCode" />
+    <input id="btnSub" type="button" class="button" value="立即加入" />
+</view>

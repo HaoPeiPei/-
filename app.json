@@ -5,6 +5,11 @@
     
     "pages/index/index",
 
+    "pages/recruit/index",
+    "pages/recruit/employ/index",
+    "pages/recruit/serviceNotice/index",
+    "pages/recruit/serviceRole/index",
+
     "pages/wycx/xzhb/xzhb",
     "pages/wycx/xdzf/xdzf",
     "pages/wycx/yhj/yhj",
@@ -66,19 +71,13 @@
     "pages/jsj/cxxz/ddxq/ddxq",
     "pages/jsj/cxxz/ddxq/yhj/yhj",
     
-
-    
-    
-   
     "pages/fjdp/fjdp",
     
     "pages/dpc/dpc",
     "pages/dpc/dpc_qzf/dpc_qzf",
     "pages/dpc/dpc_qcxx/dpc_qcxx",
     
-    
     "pages/fx/fx",
-    
 
     "pages/ydjp/ydjp",
     "pages/ydjp/dwcs/dwcs",
@@ -90,7 +89,6 @@
     "pages/ydjp/addPassengers/addPassengers",
     "pages/gbtd/gbtd",
     
-    
     "pages/logs/logs"
     
   ],
@@ -100,7 +98,7 @@
     "navigationBarBackgroundColor": "#3f3a3a",
     "navigationBarTitleText": "环球机场通",
     "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": false
   },
   "tabBar": {
     "color": "#fff",

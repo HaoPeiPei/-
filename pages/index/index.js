@@ -78,7 +78,13 @@ Page({
     });
 
   },
-
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
+  },
   // 载入首页轮播图片
   loadAdvertise: function() {
     var _this = this;

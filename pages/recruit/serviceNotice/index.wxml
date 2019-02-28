@@ -1,0 +1,45 @@
+<import src="../../../template/template.wxml" />
+<template is="header-content-rNone" data="{{...header_text}}" />
+<view class="container">
+    <view class="detail">
+        <view>
+            <text class="title">合伙人须知</text>
+        </view>
+        <view>
+            <text class="right">1. 合伙人通过审核后即可线上接单，自己所在城市机场有订单时会有短信提示，并且可以在“环球机场通”微信看到订单，以及订单详情。</text>
+        </view>
+        <view>
+            <text class="right">2. 短信接收订单消息时，可以在“环球机场通”微信公众号，订单详情里点击抢单按钮参与抢单。</text>
+        </view>
+        <view>
+            <text class="right">3. 抢单成功后及时按服务标准完成相应的服务，联系客人并赶到客人所在地点，为客人提供服务。</text>
+        </view>
+        <view>
+            <text class="title">服务规范</text>
+        </view>
+        <view>
+            <text class="right">1. 申请机场合伙人做单过程中需穿着正常上班的着装，不允许说脏话、抽烟等陋习。</text>
+        </view>
+        <view>
+            <text class="right">2. 与客人沟通过程中需要使用礼貌用语，并且能主动为客人拿行李。</text>
+        </view>
+        <view>
+            <text class="right">3. 开始服务前和服务结束前需要自报环球机场通专属服务人员，让客人清楚明白的消费。</text>
+        </view>
+        <view>
+            <text class="right">4. 每完成一个服务操作时，应立即点击处理订单，以便服务流程的畅通。</text>
+        </view>
+        <view>
+            <text class="title">管理规定</text>
+        </view>
+        <view>
+            <text class="right">1. 开通上岗后服务提供最有10分服务分，当不符合管理规定及服务规范时，或遭到客人投诉时，都会扣除相应的服务分，服务分扣完10分则冻结账户。服务分每年恢复一次至10分，恢复时间为开通上岗日期。</text>
+        </view>
+        <view>
+            <text class="right">2. 服务不能无故拒单和取消订单，杜绝在接单之后，不为客人提供服务，一旦出现接单之后由于个人原因，导致客人误机等情况，造成的损失由合伙人承担全部责任。</text>
+        </view>
+        <view>
+            <text class="right">3. 合伙人需要在平台上保持一定的活跃度，平台会定期对合伙人活跃度进行考查，考查结果较差的会有相应处罚。</text>
+        </view>                        
+    </view>
+</view>

@@ -14,7 +14,7 @@
     <view class='box box-f1 box-hor box-ac' style='height:100%'>
       <view class='box box-f1'>
         <view class='box box-f1 box-ac'>
-          <view class='location-icon'>
+          <view class='location-icon' >
             <image src="{{imgRoot}}/images/dw.png"></image>
           </view>
           <view class='box box-f1 box-ac' bindtap='cityList'>
@@ -30,7 +30,7 @@
           </view>
         </view>
       </view>
-      <view class='location-icon'>
+      <view class='location-icon' data-phonenumber="400-700-7355" catchtap="telephone">
         <image src="{{imgRoot}}/images/dh.png" ></image>
       </view>
     </view>

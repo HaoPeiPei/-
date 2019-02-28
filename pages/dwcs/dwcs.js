@@ -3,6 +3,7 @@ var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
 var httpRequst = require("../../utils/requst.js");
+var amap = require("../../utils/amap");
 Page({
   /**
    * 页面的初始数据
@@ -233,26 +234,13 @@ Page({
   //获取当前地理位置
   getLocal: function(longitude, latitude){
     var that = this;
-    var url = 'https://api.map.baidu.com/geocoder/v2/?ak=32nOnN3jF3mfT0encQETVs3M&location=' + latitude + ',' + longitude + '&output=json&coordtype=wgs84'
-     wx.request({
-      url: url,
-      data: {},
-      header: {
-      'Content-Type': 'application/json'  
-      },
-      success: function (res) {
-        var city = res.data.result.addressComponent.city;
+    amap.getRegeo()
+      .then(d => {
+        let { city } = d[0].regeocodeData.addressComponent;
         that.setData({
           currentCityName: city.split('市')[0]
         });
-      },
-      fail: function () {
-      // fail 
-      },
-      complete: function () {
-      // complete 
-      }
-     })
+      })
   },
   //是否存在搜索历史城市
   isCityInRecent(recentCity) {

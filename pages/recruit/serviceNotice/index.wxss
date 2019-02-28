@@ -1,0 +1,20 @@
+@import "../../../template/template.wxss";
+page{
+    background-color: #fff;
+}
+.container .detail {
+    padding: 0 30rpx 150rpx 30rpx;
+    line-height: 1.5;
+    font-size: 28rpx;
+}
+.container .detail .title{
+    color: #000000;
+    font-weight: bold;
+    height: 68rpx;
+    padding: 12rpx 0 0 0;
+    display: inline-block;
+}
+.container .detail .right{
+    padding: 12rpx 0 0 0;
+    display: inline-block;
+}

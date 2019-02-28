@@ -26,6 +26,7 @@ swiper {
   position: absolute;
   top: 0rpx;
   left: 0rpx;
+  z-index: 999;
 }
 
 .location-icon {

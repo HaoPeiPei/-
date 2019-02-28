@@ -6,12 +6,7 @@ App({
     var that = this;
     wx.login({
       success: res => {
-        var code = res.code;
-        if (code) {
-          this.getOpenId(code)
-        } else {
-          console.log('获取用户登录态失败！' + res.errMsg);
-        }
+        that.getOpenId(res.code)
       },
       fail: function (res) {
         console.log('登录失败');
@@ -34,7 +29,7 @@ App({
         } else {
           console.log('获取 openId 失败')
         }
-      },
+      }
     })
   },
   //获取用户信息
@@ -50,6 +45,17 @@ App({
           that.globalData.unionid= resDate.UnionId;
           that.globalData.user = resDate;
         }
+        wx.showModal({
+          title: 'app.js',
+          content: that.globalData.memberId,
+          success(res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
       }
     })
   },

@@ -4,7 +4,7 @@
 <template is="header_content_noBackod" data="{{...header_text}}" />
 
 <view class='dt-map'>
-  <map longitude="{{longitude}}" latitude="{{latitude}}" scale="16" id="map" bindtap="bindtap" show-location></map>
+  <map longitude="{{longitude}}" latitude="{{latitude}}" scale="16" id="map" markers="{{markers}}"></map>
 </view>
 <view class='seek-con'>
   <view class='seek-text'>

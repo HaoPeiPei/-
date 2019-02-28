@@ -1,0 +1,20 @@
+<view class="img_wrap">
+    <image src="http://www.51jct.cn/weixin/jichangtong/img/01.jpg" mode="widthFix"></image>
+    <image src="http://www.51jct.cn/weixin/jichangtong/img/02.jpg" mode="widthFix"></image>
+ </view>
+<form bindsubmit='formSubmit'>
+    <view>
+        <view class="sendVerify">
+            <input type='number' placeholder='请输入手机号' id="mobile"  bindinput="bindinput" placeholder-class="checkd-colo" name="mobile" class="tel" />
+            <a id="btn" class="sendVerify_btn {{waitStyle}}"  catchtap="sendVerify">{{waitMsg}}</a>
+        </view>
+        <view><input type="text" id="yanz" placeholder='请输入短信验证码' id="verifyCode"  bindinput="bindinput" placeholder-class="checkd-colo" name="verifyCode"/></view>
+        <view><button form-type='submit'  class='submit_btn' >申请成为机场通合伙人</button></view>
+        <view class="aboutUs">
+            <view>
+                <view class="pic"><image src="http://www.51jct.cn/weixin/jichangtong/img/tel.png" mode="widthFix"> </image></view>
+                <view class="tel"><a href="tel:400-700-7355">400-700-7355</a></view>
+            </view>
+        </view>
+    </view>
+</form>

@@ -1,0 +1,108 @@
+page{
+    background-color:#e8e8e8
+}
+.checkd-colo{
+    color: #cccccc;
+  }
+.img_wrap image{
+    border: none;
+    vertical-align: top;
+    width: 100%;
+}
+form {
+    text-align: center;
+    position: relative;
+    background-color: #e8e8e8;
+}
+form input {
+    width: 80%;
+    display:inline-block;
+    height: 90rpx;
+    line-height: normal;
+    font-size: 28rpx;
+    background-color: #fff;
+    border: 1px solid #bfbfbf;
+    color: #333;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    outline: 0;
+    padding-left: 20rpx;
+    font-family: "微软雅黑";
+    vertical-align: top;
+    margin-bottom: 15rpx;
+    text-align: left;
+}
+form .sendVerify{
+    position: relative;
+}
+form .sendVerify_btn {
+    width: 190rpx;
+    border: none;
+    line-height: 60rpx;
+    position: absolute;
+    top: 13rpx;
+    right: 97rpx;
+    background: #da251d;
+    color: #fff;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    font-family: "微软雅黑";
+    outline: 0;
+    font-size: 24rpx;
+    text-align: center;
+    z-index: 999;
+}
+form .submit_btn{
+    width: 80%;
+    height: 90rpx;
+    line-height: 90rpx;
+    background: #d9605a;
+    color: #fff;
+    font-size: 28rpx;
+    border-radius: 8rpx;
+    border-radius: 8rpx;
+    -webkit-appearance: initial;
+}
+form .submit_btn::after{
+    border: none;
+}
+form .aboutUs {
+    margin-top: 42rpx;
+    font-weight: bold;
+    color: #000;
+    background-color: #e8e8e8;
+    font-size: 28rpx;
+    height: 187rpx;
+}
+form .aboutUs .pic
+{
+    width: 30%;
+    float: left;
+}
+
+form .aboutUs .pic image
+{
+    margin-top: 4rpx;
+    margin-right: 8rpx;
+    width: 30%;
+    float: right;
+    vertical-align: middle;
+}
+
+form .aboutUs .tel
+{
+    width: 70%;
+    float: right;
+    text-align: left;
+}
+
+form .aboutUs .tel a
+{
+    font-family: "微软雅黑";
+    font-style: normal;                
+    font-size: 48rpx;
+    color: red;
+    vertical-align: middle;
+}

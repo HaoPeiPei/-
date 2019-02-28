@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 25,
+			"current": 28,
 			"list": [
 				{
 					"id": -1,
@@ -188,6 +188,23 @@
 					"name": "cxxz",
 					"pathName": "pages/jsj/cxxz/cxxz",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "recruit",
+					"pathName": "pages/index/recruit/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "recruit",
+					"pathName": "pages/recruit/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "serviceNotice",
+					"pathName": "pages/recruit/serviceNotice/index"
 				}
 			]
 		}

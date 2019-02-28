@@ -1,0 +1,27 @@
+.container .payfor-de {
+    border-bottom: none;
+}
+
+.container .detail h3 {
+    color: #000000;
+    font-size: 1.6rem;
+}
+
+.container .payfor-konw .right {
+    padding-bottom: 0.5rem;
+}
+
+.container .payfor-konw .left {
+    height: 2.8rem;
+    line-height: 1.5;
+}
+
+.container .payfor-konw .right {
+    height: 2.8rem;
+    line-height: 1.5;
+}
+
+.container .orderdetail td {
+    height: 2.8rem;
+    line-height: 2.8rem;
+}

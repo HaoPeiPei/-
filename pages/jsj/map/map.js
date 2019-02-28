@@ -3,7 +3,6 @@ var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
 var amap = require("../../../utils/amap");
-var bmap = require("../../../utils/bmap-wx.min.js");
 Page({
 
   /**
@@ -19,7 +18,8 @@ Page({
     imgRoot: imgRoot,
     longitude: 0,
     latitude: 0,
-    seekList: []
+    seekList: [],
+    markers: []
   },
   //返回
   catchBackChange: function (e) {
@@ -36,16 +36,22 @@ Page({
   },
   //初始化数据
   initData(){
-    this.mapCtx = wx.createMapContext('map');
-    this.BMap = new bmap.BMapWX({
-      ak: '32nOnN3jF3mfT0encQETVs3M'
-    });
+    var that = this;
     amap.getRegeo()
       .then(d => {
+        var marker = [{
+          id: d[0].id,
+          latitude: d[0].latitude,
+          longitude: d[0].longitude,
+          iconPath: d[0].iconPath,
+          width: d[0].width,
+          height: d[0].height
+        }]
         let { name, desc, latitude, longitude } = d[0];
         let { city } = d[0].regeocodeData.addressComponent;
         let seekList = d[0].regeocodeData.pois || [];
-        this.setData({
+        that.setData({
+          markers: marker,
           city,
           latitude,
           longitude,
@@ -53,24 +59,22 @@ Page({
         });
       })
       .catch(e => {
-        this.setData({ 
+        that.setData({ 
           latitude: 114.06777,//纬度
           longitude: 22.547331,//经度
         }); 
-        //this.regeocoder();
       })
-
   },
   //输入提示
   autoSearch(e) {
-    var pageNum = e.currentTarget.dataset.pagenum;
+    var that = this;
     var cityName = "深圳";
     var keywords = e.detail.value;
     if (keywords) {
       amap.getInputtips(cityName, '', keywords)
         .then(d => {
             var seekList = d.tips || [];
-            this.setData({
+            that.setData({
               seekList
             });
         })

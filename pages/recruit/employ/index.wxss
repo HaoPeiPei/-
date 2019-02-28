@@ -1,0 +1,73 @@
+.container {
+    padding-bottom: 6.0rem;
+}
+
+    .container .detail p {
+        padding-top: 0;
+    }
+
+
+
+.imglist ul {
+    width: 100%;
+}
+
+.imglist li {
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    width: 100%; /*如果显示三列 则width改为70px*/
+    float: left;
+    display: block;
+}
+
+.imglist img {
+    display: inline-block;
+    width: 50vw;
+    height: 50vw;
+    border: 1px solid #EEEEEE;
+    background-color: #FFFFFF;
+}
+
+.textarea {
+    font-size: 1.3rem;
+    margin-top: 1.0rem;
+    margin-bottom: 1.0rem;
+    width: 105%; /*自动适应父布局宽度*/
+    overflow: auto;
+    word-break: break-all;
+    border: 1px solid;
+    border-color: #e5e3e4 #dcdcdc #dcdcdc #e5e3e4;
+    box-shadow: 0 0 0;
+    float: left;
+    /*在ie中解决断行问题(防止自动变为在一行显示，主要解决ie兼容问题，ie8中当设宽度为100%时，文本域类容超过一行时，  
+当我们双击文本内容就会自动变为一行显示，所以只能用ie的专有断行属性“word-break或word-wrap”控制其断行)*/
+}
+
+.checkbox {
+    border: 1px solid #E8E8E8;
+    border-radius: 4px;
+    display: inline-block;
+    height: 20px;
+    vertical-align: middle;
+    width: 20px;
+}
+
+.checked {
+    border: 1px solid #f03929;
+    background: #f03929;
+    position: relative;
+}
+
+    .checked:after {
+        content: "";
+        width: 10px;
+        height: 5px;
+        position: absolute;
+        top: 4px;
+        left: 3px;
+        border: 1px solid #FFF;
+        border-width: 0 0 3px 3px;
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
