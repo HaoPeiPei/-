@@ -2,26 +2,27 @@
 <import src="../../template/template.wxml" />
 <template is="header_content_backod" data="{{...header_text}}"/>
 
-<view class=' margin-tb-80' style='width:100%'>
+<view style='width:100%'>
   <form bindsubmit='formSubmit' style='width:100%'>
-    <view class='box box-f1 margin-lr-100 box-ver'>
+    <view class='box box-f1 margin-lr-70 box-ver'>
       <view class='box box-f1 padding-tb-20 border-b-1'>
-        <i class="icon-IPhone font-15"></i>
+        <view style='width:150rpx;' class='font-15 color-9b'>手机号</view>
         <view class='box box-f1'>
           <input type='number' placeholder='请输入手机号' name="mobile" class='font-15 margin-l-25'></input>
         </view>
       </view>
-      <view class='box box-f1 padding-tb-20 border-b-1'>
-        <i class="icon-lock font-15"></i>
-        <view class='box box-f1'>
-          <input type='text' password='true' placeholder='请输入密码' name="password" class='font-15 margin-l-25'></input>
+      <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>
+        <view style='width:150rpx;' class='font-15 color-9b'>验证码</view>
+        <view class='box box-f1 font-15'>
+          <input type='number' placeholder='请输入验证码' id="verifyCode"  bindinput="bindinput" placeholder-class="checkd-colo" name="verifyCode"></input>
         </view>
+        <view class='yzm-btn font-13 {{waitStyle}}' catchtap="sendVerify">{{waitMsg}}</view>
       </view>
-      <view class='box box-f1 font-15 c-999 margin-t-20'>
+      <view class='box box-f1 font-15 c-999 padding-tb-20'>
         <navigator class='box box-f1' url="../register/register"  hover-class="none">立即注册</navigator>
         <view class='box box-f1 box-pe'>忘记密码?</view>
       </view>
-      <button form-type='submit' class='submit-btn'>登录</button>
+      <button form-type='submit' class='submit-btn'>登入</button>
     </view>
   </form>
 </view>

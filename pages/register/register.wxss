@@ -3,17 +3,20 @@
 page{
   background: #ffffff;
 }
-.margin-lr-30{
-  margin: 0rpx 30rpx;
+.margin-lr-55{
+  margin: 0rpx 55rpx;
 }
 .checkd-colo{
   color: #cccccc;
+}
+.padding-tb-25{
+  padding: 25rpx 0;
 }
 .color-9b{
   color: #9b9b9b;
 }
 .yzm-btn{
-  padding: 10rpx 20rpx;
+  padding: 8rpx 20rpx;
   color: #ffffff;
   border-radius: 10rpx;
 }

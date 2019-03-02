@@ -3,20 +3,29 @@
 page{
   background: #ffffff;
 }
-.margin-lr-100{
-  margin: 0rpx 100rpx;
+.margin-lr-70{
+  margin: 0rpx 70rpx;
+}
+form{
+  position: fixed;
+  left: 0;
+  bottom: 115rpx;
+  right: 0;
+}
+.yzm-btn{
+  padding: 8rpx 20rpx;
+  color: #ffffff;
+  border-radius: 10rpx;
 }
 .submit-btn{
   width: 100%;
   background: #f43931;
   color: #ffffff;
   border:0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  border-radius: 0;
-  height: 80rpx; 
-  line-height: 80rpx;
+  border-radius: 8rpx;
+  height: 88rpx; 
+  line-height: 88rpx;
+  margin-top: 36rpx;
 }
 button{
   -webkit-appearance:none;

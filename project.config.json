@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 28,
+			"current": 29,
 			"list": [
 				{
 					"id": -1,
@@ -204,7 +204,13 @@
 				{
 					"id": -1,
 					"name": "serviceNotice",
-					"pathName": "pages/recruit/serviceNotice/index"
+					"pathName": "pages/recruit/serviceNotice/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "logIndex",
+					"pathName": "pages/logIndex/logIndex"
 				}
 			]
 		}
