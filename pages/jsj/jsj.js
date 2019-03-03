@@ -254,6 +254,14 @@ Page({
       }
     });
   },
+  //检查memberID,无去登陆页面
+  toLogin(){
+    if(app.globalData.memberId == ''){
+      wx.navigateTo({
+        url: '../logIndex/logIndex',
+      })
+    }
+  },
   checkTime(flyTime, useTime, flyType) {
     var curDate = formatDate(getNowFormatDate(), "yyyy-mm-dd");             //当前日期
     var curHour = formatDate(getNowFormatDate(), "hour");                   //当前小时
@@ -409,7 +417,9 @@ Page({
     })
   },
   book() {
-    if(this.check()){
+    if(app.globalData.memberId == ""){
+      this.toLogin();
+    }else if(this.check()){
       var queryModel = { 
         tripType: this.data.tripType, 
         flightNo: this.data.flightNo, 

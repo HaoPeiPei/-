@@ -11,7 +11,7 @@ Page({
     [
       { src_1: imgRoot+'/images/gbtd.png', orderTitle: '服务订单', src_2: imgRoot+'/images/3_46.png', nav_URL:"fwdd/fwdd"},
       { src_1: imgRoot+'/images/ydjp.png', orderTitle: '机票订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "jpdd/jpdd" },
-      { src_1: imgRoot+'/images/jd.png', orderTitle: '酒店订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "sx/sx"},
+      /* { src_1: imgRoot+'/images/jd.png', orderTitle: '酒店订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "sx/sx"}, */
       { src_1: imgRoot+'/images/dpc.png', orderTitle: '代泊车订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "dbcdd/dbcdd" },
       { src_1: imgRoot+'/images/jsj.png', orderTitle: '接送机订单', src_2: imgRoot+'/images/3_46.png', nav_URL: "jsjdd/jsjdd" }
     ]
@@ -22,11 +22,17 @@ Page({
   onLoad: function (options) {
     
   },
-  //检查memberID,无去登陆页面
-  toLogin(){
+  //跳转到订单列表
+  toOrderList(e){
+    //检查memberID,无去登陆页面
     if(app.globalData.memberId == ''){
       wx.navigateTo({
         url: '../logIndex/logIndex',
+      })
+    }else{
+      let url = e.currentTarget.dataset.url;
+      wx.navigateTo({
+        url: url,
       })
     }
   },
@@ -41,7 +47,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.toLogin();
   },
 
   /**

@@ -22,27 +22,79 @@ Page({
       success: function (res) {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          that.getUserInfo();
+          wx.getUserInfo({
+            withCredentials:true,
+            success: function (res) {
+              let encryptedData = res.encryptedData;
+              let iv = res.iv;
+              let userInfo = res.userInfo;
+              app.globalData.userInfo= userInfo;
+              that.getOpenId(encryptedData, iv);
+            },
+            fail:function(){
+              console.log("失败");
+            }
+          })
         }
       }
     })
   },
+  //点击授权
   bindGetUserInfo:function (e) {
     var that = this;
-    that.getUserInfo();
+    let encryptedData = e.detail.encryptedData;
+    let iv = e.detail.iv;
+    let userInfo = e.detail.userInfo;
+    app.globalData.userInfo= userInfo;
+    that.getOpenId(encryptedData, iv);
+  },
+  //获取openid
+  getOpenId: function(encryptedData, iv) {
+    var that = this;  
+    wx.login({
+      success:function(res){
+        var code = res.code;
+        wx.request({
+          url: app.globalData.wwwRoot +"/weixin/miniprogram/ashx/user.ashx",
+          data:
+          {
+            code:code,
+            iv:iv,
+            encryptedData: encryptedData,
+            action: "getUserInfo"
+          },
+          method: 'GET',
+          header: {
+            'content-type': 'application/json'
+          },
+          success:function(res){
+            if(res.statusCode == 200 && res.data.Success){
+              var data = JSON.parse(res.data.Data);
+              app.globalData.openId = data.openId;
+              app.globalData.unionid= data.unionId;
+              that.getUserInfo()
+            }
+          }
+        })
+      }
+    })
   },
   //获取用户信息
-  getUserInfo(){
-    wx.getUserInfo({
-      withCredentials:true,
-      success: function (res) {
-        app.globalData.userInfo= res.userInfo;
+  getUserInfo: function(){
+    var that = this;
+    wx.request({
+      url: app.globalData.wwwRoot +'/weixin/jctnew/ashx/user.ashx?action=getUserInfo&UnionId='+app.globalData.unionid,
+      method: "get",
+      success: res => {
+        if(res.statusCode == 200 && res.data.Success){
+          var resDate = JSON.parse(res.data.Data);
+          app.globalData.memberId = resDate.id;
+          app.globalData.unionid= resDate.UnionId;
+          app.globalData.user = resDate;
+        }
         wx.switchTab({
           url: '../index/index',
         })
-      },
-      fail:function(){
-        console.log("失败");
       }
     })
   },

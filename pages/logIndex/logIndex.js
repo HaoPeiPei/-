@@ -7,6 +7,7 @@ var httpRequst = require("../../utils/requst.js");
 var mobileReg = /^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0-9])\d{8}$/;
 //验证码正则
 var regVerify = /^\d{6}$/;
+var timer;
 Page({
 
   /**
@@ -54,18 +55,20 @@ Page({
     if (this.data.wait == 120) {
       that.countDown();
       var params = {
-        action: "exists", 
+        action: "sendSms", 
         mobile: mobile
       };
       wx.showLoading({
         title: '加载中',
       });
       httpRequst.HttpRequst(true, "/weixin/miniprogram/ashx/login.ashx", params,"POST",function(res){
-        wx.hideLoading()
-        wx.showToast({
-          title: res.Message,
-          icon: 'none'
-        });
+        wx.hideLoading();
+        setTimeout(()=>{
+          wx.showToast({
+            title: res.Message,
+            icon: 'none',
+          });
+        },1000);
         if (!res.Success) {
           clearInterval(timer);
           that.setData({
@@ -80,7 +83,7 @@ Page({
   //倒计时
   countDown() {
     var that = this;
-    timer = setInterval(res=>{
+    timer = setInterval(()=>{
       if (that.data.wait == 0) {
         that.setData({
           waitStyle: 'c-bg-f4393c',
@@ -106,46 +109,55 @@ Page({
   },
   //登陆
   formSubmit:function(e){
-    var _this= this;
-    var mobile = e.detail.value.mobile;
-    var verifyCode = e.detail.value.verifyCode;
-    if(this.check(mobile, verifyCode)){
-      var params = {
-        mobile: mobile,
-        password: password,
-        action: 'login',
-        openId: app.globalData.openId,
-        unionid: app.globalData.unionid
+  var _this= this;
+  var mobile = e.detail.value.mobile;
+  var verifyCode = e.detail.value.verifyCode;
+  if (!this.checkMobile(mobile)) {
+    wx.showToast({
+      title: '请输入正确的手机号!',
+      icon: 'none',
+    });
+    return false;
+  }
+  else if (!this.checkVerify(verifyCode)) {
+    wx.showToast({
+      title: '验证码应为6位数字!',
+      icon: 'none',
+    });
+    return false;
+  }
+  else {
+    var params = {
+      mobile: mobile,
+      verifyCode: verifyCode,
+      action: 'login',
+      openId: app.globalData.openId,
+      unionid: app.globalData.unionid
+    };
+    wx.showLoading();
+    httpRequst.HttpRequst(true, "/weixin/jctnew/ashx/login.ashx", params,"POST",function(res){
+      wx.hideLoading();
+      if(res.Success){
+        _this.getUserInfo();
+        wx.navigateBack({
+          delta: 1
+        })
+      }else{
+        setTimeout(()=>{
+          wx.showToast({
+            title: res.Message,
+            icon: 'none',
+          });
+        },1000);
       };
-      wx.showLoading();
-      httpRequst.HttpRequst(true, "/weixin/jctnew/ashx/login.ashx", params,"POST",function(res){
-        wx.hideLoading();
-        if(res.Success){
-          _this.getUserInfo();
-          wx.navigateBack({
-            delta: 1
-          })
-        };
-      }); 
-    }
-  },
-  //验证
-  check(mobile, verifyCode) {
-    if (!mobileReg.test(mobile)) {
-      wx.showToast({
-        title: '请输入正确的手机号码',
-        icon: 'none',
-      });
-      return false;
-    }
-    if (regVerify.test(verifyCode)) {
-      wx.showToast({
-        title: '请输入密码',
-        icon: 'none',
-      });
-      return false;
-    }
-    return true;
+    }); 
+  }
+},
+checkMobile(mobile) {
+  return mobileReg.test(mobile) ? true : false;
+},
+checkVerify(verifyCode) {
+  return regVerify.test(verifyCode) ? true : false;
 },
 //获取用户信息
 getUserInfo: function(){

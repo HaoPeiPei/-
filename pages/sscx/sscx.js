@@ -75,16 +75,19 @@ Page({
     var id = _this.data.id;
     var url = "/weixin/jctnew/ashx/service.ashx";
     var memberId = app.globalData.memberId;
-    var params = { action: "getservicebyid", id: id, memberId: memberId };
-    
-    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      if(res.Success){
-        var obj = JSON.parse(res.Data);
-        wx.navigateTo({
-          url: 'xzhb/xzhb?id=' + obj.id + '&cityCode=' + obj.airport_code + '&serviceName=' + encodeURIComponent(obj.service_name),
-        })
-      }
-    });
+    if(memberId == ""){
+      _this.toLogin();
+    }else{
+      var params = { action: "getservicebyid", id: id, memberId: memberId }; 
+      httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
+        if(res.Success){
+          var obj = JSON.parse(res.Data);
+          wx.navigateTo({
+            url: 'xzhb/xzhb?id=' + obj.id + '&cityCode=' + obj.airport_code + '&serviceName=' + encodeURIComponent(obj.service_name),
+          })
+        }
+      });
+    }
   },
   //载入轮播图片
   loadServiceImg:function(id){
@@ -92,22 +95,18 @@ Page({
     var header_text = _this.data.header_text;
     var url = "/weixin/jctnew/ashx/service.ashx";
     var memberId = app.globalData.memberId;
-    if(memberId == ""){
-      _this.toLogin();
-    }else{
-      var params = { action: "getserviceimg", id: id, memberId: memberId };
-      httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-        var obj = JSON.parse(res.Data);
-        var img_url = [];
-        for(var i =0 ;i<obj.length;i++){
-          img_url.push(wwwRoot+obj[i].img_url);
-        }
-        var str = "header_text.imgUrls"
-        _this.setData({
-          [str]:img_url
-        });
+    var params = { action: "getserviceimg", id: id, memberId: memberId };
+    httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
+      var obj = JSON.parse(res.Data);
+      var img_url = [];
+      for(var i =0 ;i<obj.length;i++){
+        img_url.push(wwwRoot+obj[i].img_url);
+      }
+      var str = "header_text.imgUrls"
+      _this.setData({
+        [str]:img_url
       });
-    }
+    });
   },
   //载入服务
   loadService:function(id){

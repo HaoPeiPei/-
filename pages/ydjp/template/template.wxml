@@ -137,7 +137,7 @@
                             <text class="c-f4393c font-size-20">¥</text>
                             <text class="font-size-28 c-f4393c" >{{cabInfo.FlightLowestPrice}}</text>
                         </view>
-                        <view class="cabInfo-type font-size-22 font-weight-bold" >{{cabInfo.ClassName+ '(' + cabInfo.Class + ')'}}</view>
+                        <view class="cabInfo-type font-size-22" >{{cabInfo.ClassName+ '(' + cabInfo.Class + ')'}}</view>
                     </view>
                     <view class="cabInfo-right flex col-1">
                         <view class="col-1">

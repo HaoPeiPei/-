@@ -247,7 +247,7 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         });
-        httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
+        httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/airTicket.ashx', { action: "createwxpaypara", orderId: orderId } , "POST",function(res){
             wx.hideLoading()
             if (res.Success) {
                 var parameObj = JSON.parse(res.Data);
@@ -288,17 +288,35 @@ Page({
                     }
                 });
             }else {
-                wx.showToast({
-                    title: '支付失败!',
-                    icon: 'none'
-                });
+              wx.showModal({
+                title: "温馨提示", 
+                content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+                success(res) {
+                  if (res.confirm) {
+                    wx.navigateTo({
+                      url: '../../../ddxq/fwdd'
+                    });
+                  } else if (res.cancel) {
+                    jsApiCall(params, orderId);
+                  }
+                }
+            });
             }
         },
         'fail':function(res){
-            wx.showToast({
-                title: '支付失败!',
-                icon: 'none'
-            });
+          wx.showModal({
+            title: "温馨提示", 
+            content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+            success(res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '../../../ddxq/fwdd'
+                });
+              } else if (res.cancel) {
+                jsApiCall(params, orderId);
+              }
+            }
+        });
         }
     });
   },

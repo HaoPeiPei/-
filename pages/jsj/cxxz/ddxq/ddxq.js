@@ -125,7 +125,7 @@ Page({
   bindinput(e){
     var id = e.currentTarget.id;
     this.setData({
-      [name]: e.detail.value
+      [id]: e.detail.value
     })
   },
   check() {
@@ -260,14 +260,23 @@ Page({
                     that.jsApiCall(params, orderId);
                   }
                 }
-            });
+              });
             }
         },
         'fail':function(res){
-            wx.showToast({
-                title: '支付失败!',
-                icon: 'none'
-            });
+          wx.showModal({
+            title: "温馨提示", 
+            content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+            success(res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '../../ddxq/jsjdd/jsjdd'
+                })
+              } else if (res.cancel) {
+                that.jsApiCall(params, orderId);
+              }
+            }
+          });
         }
     });
   },

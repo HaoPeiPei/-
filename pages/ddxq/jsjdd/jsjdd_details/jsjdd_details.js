@@ -76,16 +76,18 @@ Page({
       wx.showLoading({
           title: '数据加载中...',
       });
-      httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/rentcar.ashx', { action: "createwxpaypara", orderId: this.data.orderId } , "POST",function(res){
+      httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/rentcar.ashx', { action: "createwxpaypara", orderId: this.data.orderId } , "POST",function(res){
           wx.hideLoading()
           if (res.Success) {
               var parameObj = JSON.parse(res.Data);
               that.jsApiCall(parameObj, orderId);
           } else {
+            setTimeout(()=>{
               wx.showToast({
                   title: '创建支付参数失败,请联系客服',
                   icon: 'none'
               });
+            })
           }
       });
   }
@@ -104,21 +106,15 @@ Page({
             if (res.err_msg == "get_brand_wcpay_request:ok") {
                 that.payOrder(orderId);
             }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-                wx.showModal({
-                    title: "温馨提示", 
-                    content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
-                    success(res) {
-                      if (res.confirm) {
-                      } else if (res.cancel) {
-                        that.jsApiCall(params, orderId);
-                      }
-                    }
-                });
+              wx.showToast({
+                title: '支付失败!',
+                icon: 'none'
+              });
             }else {
-                wx.showToast({
-                    title: '支付失败!',
-                    icon: 'none'
-                });
+              wx.showToast({
+                  title: '支付失败!',
+                  icon: 'none'
+              });
             }
         },
         'fail':function(res){

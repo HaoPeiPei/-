@@ -29,7 +29,6 @@ Page({
     waitMsg: '发送验证码',
     mobile: '',
     verifyCode: '',
-    invitationCode: '',
   },
   //返回
   catchBackChange: function (e) {
@@ -66,10 +65,12 @@ Page({
       });
       httpRequst.HttpRequst(true, "/weixin/miniprogram/ashx/login.ashx", params,"POST",function(res){
         wx.hideLoading()
-        wx.showToast({
-          title: res.Message,
-          icon: 'none'
-        });
+        setTimeout(()=>{
+          wx.showToast({
+            title: res.Message,
+            icon: 'none',
+          });
+        },1000)
         if (!res.Success) {
           clearInterval(timer);
           that.setData({
@@ -106,8 +107,6 @@ Page({
     var _this= this;
     var mobile = e.detail.value.mobile;
     var verifyCode = e.detail.value.verifyCode;
-    var invitation = '1234';
-    //var invitation = e.detail.value.invitation;
     if (!this.checkMobile(mobile)) {
       wx.showToast({
         title: '请输入正确的手机号!',
@@ -122,18 +121,11 @@ Page({
       });
       return false;
     }
-    else if (invitation != "" && !this.checkInvitCode(invitation)) {
-      wx.showToast({
-        title: '请输入正确的邀请码!',
-        icon: 'none',
-      });
-      return false;
-    } else {
+    else {
       var params = {
         action: 'register',
         mobile: mobile,
         verifyCode: verifyCode,
-        invitation: invitation,
         openId: app.globalData.openId,
         unionid: app.globalData.unionid,
       };
@@ -142,6 +134,13 @@ Page({
           wx.navigateBack({
             delta: 1, 
           })
+        }else{
+          setTimeout(()=>{
+            wx.showToast({
+              title: res.Message,
+              icon: 'none',
+            });
+          },1000);
         }
       }); 
     }
@@ -164,10 +163,6 @@ Page({
   },
   //初始化页面参数
   initData(options){
-    var invitationCode = options.invitationCode;
-    this.setData({
-      invitationCode
-    });
   },
   /**
    * 生命周期函数--监听页面加载

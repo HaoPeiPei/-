@@ -8,7 +8,7 @@
       <view class='box box-f1 padding-tb-20 border-b-1'>
         <view style='width:150rpx;' class='font-15 color-9b'>手机号</view>
         <view class='box box-f1'>
-          <input type='number' placeholder='请输入手机号' name="mobile" class='font-15 margin-l-25'></input>
+          <input type='number' placeholder='请输入手机号' id="mobile" name="mobile" bindinput="bindinput" class='font-15 margin-l-25'></input>
         </view>
       </view>
       <view class='box box-f1 margin-lr-30 box-ac padding-tb-20 border-b-1'>

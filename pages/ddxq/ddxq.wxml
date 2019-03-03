@@ -10,9 +10,9 @@
             
           </view>
           <view class='box box-f1 font-12'>
-          <navigator url='{{item.nav_URL}}' open-type="navigate" style='width:100%;'  hover-class='none'>
+          <view data-url='{{item.nav_URL}}' style='width:100%;'  catchtap="toOrderList">
           {{item.orderTitle}}
-          </navigator>
+          </view>
           </view>
           <view class='box'>
             <image src='{{item.src_2}}' class='image-2' />

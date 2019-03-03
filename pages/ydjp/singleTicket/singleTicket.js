@@ -393,6 +393,7 @@ Page({
     },
     //预定
     book(e){
+      this.toLogin();
       var carrier = this.data.carrier;
       var flyTime = carrier.DepDate + " " + carrier.BeginTime + ":00";
       var currNow = getNowFormatDate();
@@ -420,6 +421,14 @@ Page({
       wx.navigateTo({
         url: '../airTicketOrder/airTicketOrder?bookInfo='+JSON.stringify(bookInfo)
       });
+    },
+    //检查memberID,无去登陆页面
+    toLogin(){
+      if(app.globalData.memberId == ''){
+        wx.navigateTo({
+          url: '../../logIndex/logIndex',
+        })
+      }
     },
     /**
      * 生命周期函数--监听页面加载
