@@ -2,6 +2,8 @@
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
+var orderConfirmeTimer; // 确认订单计时器
+var countDownTimer; //倒计时计时器
 var httpRequst = require("../../../../utils/requst.js");
 const { getMD, getWeek } = require('../../../../utils/util.js');
 var WxParse = require('../../../../wxParse/wxParse.js');
@@ -32,10 +34,14 @@ Page({
     price: {},
     endorseModalContent: '',
     comeEndorseTitle: '',
-    backEndorseTitle: ''
+    backEndorseTitle: '',
+    jsAlertModalShow: false,
+    currentTime: 60
   },
   //返回
   catchBackChange: function (e) {
+    clearInterval(orderConfirmeTimer);
+    clearInterval(countDownTimer);
     wx.navigateBack({
       delta: 1
     })
@@ -146,12 +152,12 @@ Page({
  
   //加载订单详情
   loadOrderDetail(){
-    var _this = this;
+    var that = this;
     var params = {
       orderId: this.data.orderId,
       action:"getorderbyid"
     }
-    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', params, 'POST', function (res) {
+    httpRequst.HttpRequst(false, '/weixin/jctnew/ashx/airTicket.ashx', params, 'POST', function (res) {
       if(res.Success){
         var data = JSON.parse(res.Data);
         var flightInfos = data.airticketOrder.FlightInfos;
@@ -164,14 +170,26 @@ Page({
         };
         var passeners = data.airticketOrder.Passengers;
         for (var j = 0; j < passeners.length; j++) {
-          passeners[j]['TypeName'] = _this.getType(passeners[j]);
-          passeners[j]["CertTypeName"] = _this.getCertType(passeners[j]);
-          passeners[j]["CertNoCont"] = _this.getCertNo(passeners[j]);
+          passeners[j]['TypeName'] = that.getType(passeners[j]);
+          passeners[j]["CertTypeName"] = that.getCertType(passeners[j]);
+          passeners[j]["CertNoCont"] = that.getCertNo(passeners[j]);
         };
-        _this.setData({
+        that.setData({
           order:data
         });
-        _this.caculatePirce();
+        that.caculatePirce();
+      }
+      if (data.airticketOrder.Order.status == 0) {
+        that.setData({
+          jsAlertModalShow: true
+        });
+        that.countDown(); //开始倒计时
+        that.loadOrderDetail();
+        clearInterval(orderConfirmeTimer);
+      }else if (data.airticketOrder.Order.status == 1){
+        clearInterval(orderConfirmeTimer);
+        clearInterval(countDownTimer);
+        that.createPayPara();
       }
     });
   },
@@ -304,9 +322,9 @@ Page({
   },
   //初始化参数
   initData(options){
-    var _this = this;
+    var that = this;
     var orderId = options.orderId;
-    _this.setData({
+    that.setData({
       orderId: orderId,
     });
     this.loadOrderDetail();
@@ -325,7 +343,7 @@ createPayPara() {
       wx.showLoading({
           title: '数据加载中...',
       });
-      httpRequst.HttpRequst(true, '/weixin/jctnew/miniprogram/airTicket.ashx', { action: "createwxpaypara", orderId: this.data.orderId } , "POST",function(res){
+      httpRequst.HttpRequst(true, '/weixin/jctnew/miniprogram/airTicket.ashx', { action: "createwxpaypara", orderId: this.data.orderId, openId: app.globalData.openId  } , "POST",function(res){
           wx.hideLoading()
           if (res.Success) {
               var parameObj = JSON.parse(res.Data);
@@ -392,6 +410,58 @@ createPayPara() {
             });
         }
     });
+  },
+  //倒计时
+  countDown(){
+    var that = this;
+    var w = 104;
+    var h = 104;
+    var context1 = wx.createCanvasContext('countDown1');
+    var context2 = wx.createCanvasContext('countDown2');
+    wx.createSelectorQuery().select('#countDown1').boundingClientRect(function (rect) { //监听canvas的宽高
+        w = parseInt(rect.width / 2); //获取canvas宽的的一半
+        h = parseInt(rect.height / 2); //获取canvas高的一半，
+    }).exec();            
+    function drawInnerCircle() {    // 绘制固定内圈圆
+    context1.arc(w, h, w - 8, 0, 2 * Math.PI, true);  // arc-创建一条弧线；参数-arc(圆心x坐标，圆心y坐标，圆半径，起始弧度，终止弧度，弧度方向是否是逆时针)
+    context1.setLineWidth("14");     // setLineWidth-设置线条宽度；参数-setLineWidth(线条宽度，单位px)
+    context1.setLineCap("butt");	//圆环结束断点的样式  butt为平直边缘 round为圆形线帽  square为正方形线帽
+    context1.setStrokeStyle("#f7f7f7"); //圆环线条的颜色
+    context1.stroke();            // stroke-画出当前路径的边框，默认颜色为黑色
+    context1.restore();           // restore-恢复之前保存的绘图上下文
+    context1.draw();    // draw-将之前在绘图上下文中的描述(路径，变形，样式)画到canvas中
+    }
+    function run(c, w, h) {  //c是圆环进度百分比   w，h是圆心的坐标
+        let that = this;
+        var num = (2 * Math.PI / 60 * c) - 0.5 * Math.PI;
+        //圆环的绘制
+        context2.arc(w, h, w - 8, -0.5 * Math.PI, num); //绘制的动作
+        context2.setStrokeStyle("#ff0000"); //圆环线条的颜色
+        context2.setLineWidth("10");	//圆环的粗细
+        context2.setLineCap("butt");	//圆环结束断点的样式  butt为平直边缘 round为圆形线帽  square为正方形线帽
+        context2.stroke();
+        //开始绘制百分比数字
+        context2.beginPath();
+        context2.setFontSize(33); // 字体大小 注意不要加引号
+        context2.setFillStyle("#000");	 // 字体颜色
+        context2.setTextAlign("center");	 // 字体位置
+        context2.setTextBaseline("middle");	 // 字体对齐方式
+        context2.fillText(c , w, h);	 // 文字内容和文字坐标
+        context2.draw();
+    }
+    countDownTimer =  setInterval(function () {
+        var currentTime = 0;
+        if(that.data.currentTime<=0){
+            currentTime = 59
+        }else{
+            currentTime = that.data.currentTime-1;
+        }
+        that.setData({
+            currentTime
+        });
+        drawInnerCircle();
+        run(currentTime, w, h);
+    }, 1000);
   },
   //取消订单
   bindCancelOrder: function () {
@@ -488,7 +558,8 @@ createPayPara() {
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    clearInterval(orderConfirmeTimer);
+    clearInterval(countDownTimer);
   },
 
   /**

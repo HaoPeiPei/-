@@ -74,7 +74,7 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         });
-        httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/valet.ashx', { action: "createwxpaypara", orderId: this.data.orderId } , "POST",function(res){
+        httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/valet.ashx', { action: "createwxpaypara", orderId: this.data.orderId, openId: app.globalData.openId } , "POST",function(res){
             wx.hideLoading()
             if (res.Success) {
                 var parameObj = JSON.parse(res.Data);
@@ -179,7 +179,6 @@ Page({
           httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
             console.log(res);
             if (res.Success) {
-              var data = JSON.parse(res.Data);
               wx.navigateTo({
                 url: '../dbcdd',
               })
@@ -213,7 +212,6 @@ Page({
             orderId: orderId  
           }
           httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-            console.log(res);
             if (res.Success) {
               var data = JSON.parse(res.Data);
               wx.navigateTo({

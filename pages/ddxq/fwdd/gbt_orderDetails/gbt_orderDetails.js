@@ -73,7 +73,7 @@ Page({
       wx.showLoading({
           title: '数据加载中...',
       });
-      httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/service.ashx', { action: "createwxpaypara", orderId: this.data.orderId } , "POST",function(res){
+      httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/service.ashx', { action: "createwxpaypara", orderId: this.data.orderId, openId: app.globalData.openId  } , "POST",function(res){
           wx.hideLoading()
           if (res.Success) {
               var parameObj = JSON.parse(res.Data);

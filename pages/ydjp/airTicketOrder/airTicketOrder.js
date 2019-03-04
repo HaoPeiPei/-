@@ -80,6 +80,8 @@ Page({
     },
     //返回
     catchBackChange: function () {
+        clearInterval(orderConfirmeTimer);
+        clearInterval(countDownTimer);
         wx.navigateBack({
             delta: 1
         })
@@ -933,7 +935,6 @@ Page({
             });
           }, 5000);
     },
-
     onLoad:function(options){
         // 生命周期函数--监听页面加载
         this.initDate(options);

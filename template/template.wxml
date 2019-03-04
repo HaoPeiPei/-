@@ -181,3 +181,283 @@
     </view>
 </view>
 </template>
+<import src="../../../template/template.wxml" />
+<template name="filterModal">
+    <view class="c-bg-000 filterModal {{filterModalShow?'':'none'}}" >
+        <view class="air-dialog">
+            <view class="dialog-title">
+                <view class="f_left font-size-34">航空公司</view>
+                <view class="f_right cancel-filter font-size-24" catchtap="removeAllFilterModal" >清空筛选</view>
+            </view>
+            <view class="dialog-con c-fff" data-model="carrierModel"  >
+                <view class="flex width-50 {{index%2!=0?'f_right justify-content-end':'f_left justify-content-start'}}" wx:key="index"  wx:for="{{carriers}}" wx:for-item="carrier">
+                    <view class="carrier font-size-28 {{carrier.active?'c-bg-f4393c':'c-bg-ccc'}}" data-carriername='{{carrier.CarrierName}}' catchtap="selectFilterCarrier">{{carrier.CarrierName}}</view>
+                </view>
+            </view>    
+            <view class="dialog-bottom font-size-15 c-fff">
+                <view class="flex">
+                    <view class="flex justify-content-start width-50">
+                        <view class="c-bg-ccc bottom-btn" catchtap="cancelFilterModal">取消</view>
+                    </view>
+                    <view class="flex justify-content-end width-50">
+                        <view class="c-bg-f4393c bg-color-f4393c bottom-btn" catchtap="confirmFilterModal">确认</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 报销凭证 -->
+<template name="exprerss"> 
+    <view class="exprerss" wx-if="{{buyExpress==1}}" >
+        <view class="flex align-center text-item c-000 ">
+            <text class="col-title c-999">姓名</text>
+            <input type="text" class="col-1" value="{{linkName}}" bindinput="bindinput" id="linkName" placeholder="请填写收件人姓名" />
+        </view>
+        <view class="flex align-center text-item c-000 ">
+            <text class="col-title c-999">联系电话</text>
+            <input type="text" class="col-1" value="{{linkPhone}}" bindinput="bindinput" id="linkPhone" placeholder="请填写收件人联系电话" />         
+        </view>
+        <view class="flex align-center text-item c-000 ">
+            <text class="col-title c-999">所在地区</text>
+            <van-popup show="{{linkRegionShow}}"  position="bottom" >
+                <van-area 
+                    area-list="{{areaList}}"  
+                    bind:confirm="linkRegionConfirm"
+                    bind:cancel="linkRegionCancel"
+                />
+            </van-popup>
+            <view class="col-1" bindtap='linkRegionChange'>
+                <input type='text' placeholder='请选择省市区'  value="{{linkRegion}}" id="linkRegion" />
+            </view>
+            <i class="icon-arror-r"></i>
+        </view>
+        <view class="flex align-center text-item c-000 ">
+            <text class="col-title c-999">详细地址</text>
+            <input type="text" class=" col-1" value="{{linkAddress}}" bindinput="bindinput" id="linkAddress" placeholder="请填写详细地址" />
+        </view>
+    </view>
+</template>
+
+<!-- 价格明细 -->
+<template name="priceDetail" >
+    <view class="priceDetail-wrap {{priceDetailShow?'':'none'}}">
+        <view class="mark"></view>
+        <view class="priceDetail">
+            <view class="flex b-line adult-price price-group">
+                <view class="col-1">成人票价</view>
+                <view class="c-f4393c"><text>¥{{ticketAdultPrice}}</text><text class="c-999">X{{adultCount}}</text></view>
+            </view>
+            <view class="flex b-line child-price price-group">
+                <view class="col-1">儿童票价</view>
+                <view class="c-f4393c"><text>¥{{ticketChildPrice}}</text><text class="c-999">X{{childCount}}</text></view>
+            </view>
+            <view class="flex b-line baby-price price-group">
+                <view class="col-1">婴儿票价</view>
+                <view class="c-f4393c"><text>¥{{ticketBabyPrice}}</text><text class="c-999">X{{babyCount}}</text></view>
+            </view>
+            <view class="flex b-line fee price-group">
+                <view class="col-1">机建+燃油</view>
+                <view class="c-f4393c">¥<text>{{tax}}</text><text class="c-999">X{{adultCount}}</text></view>
+            </view>
+            <view class="flex b-line insurance price-group">
+                <view class="col-1">保险</view>
+                <view class="c-f4393c"><text>¥{{insurancePrice}}</text><text class="c-999">X{{insuranceCount}}</text></view>
+            </view>
+            <view class="flex b-line express price-group">
+                <view class="col-1">快递</view>
+                <view class="c-f4393c"><text>¥{{expressPrice}}</text><text class="c-999">X{{expressCount}}</text></view>
+            </view>
+            <view class="flex b-line refund price-group">
+                <view class="col-1">现返</view>
+                <view class="c-f4393c"><text>¥{{refund}}</text><text class="c-999">X{{adultCount}}</text></view>
+            </view>
+            <view class="flex service price-group">
+                <view class="col-1">无忧出行</view>
+                <view class="c-f4393c"><text>¥{{servicePrice}}</text><text class="c-999">X{{serviceCount}}</text></view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- selectAir -->
+<template name="selectAir" >
+    <view class="selectAir {{selectAirlShow?'':'none'}}">
+        <view class="header flex font-size-18 b-line c-bg-fff">
+            <i class="back icon-arror-l" catchtap="hideSelectAir"></i>
+            <view class="col-1 cityName_wrap c-align">
+                <text class="depCityName">{{carrier.DepCityName}}</text>
+                <text class="icon-airArror"></text>
+                <text class="arrCityName">{{carrier.ArrCityName}}</text>
+            </view>
+            <i class="icon-phone" data-phonenumber="400-700-7355" catchtap="telephone"></i>
+        </view>
+        <view class="main">
+            <view class="flight-wrap">
+                <view class="flight-title">{{carrier.CarrierName}} {{carrier.FlightNo}} <i class="line"></i>{{carrier.PlaneType}}</view>
+                <view class="flight-info flex ">
+                    <view class="col-1 c-align">
+                        <text class="font-size-27" data-bind="text: BeginTime">{{carrier.BeginTime}}</text>
+                        <text class="font-size-24 c-999" data-bind="text: DepCityName + BeginTerm">{{carrier.DepCityName}}({{carrier.BeginTerm}})</text>
+                        <text class="font-size-20 c-999" data-bind="text: DepCityName + BeginTerm">{{depDate}} {{depWeek}}</text>
+                    </view>
+                    <view class="c-align search-arror r_position">
+                        <i class="icon-lineArror c-999 "></i>
+                        <text class="stop c-f4393c font-size-18" data-bind="text: parseInt(Stop) > 0?'经停':''">{{Stop>0?'经停':''}}</text>
+                    </view>
+                    <view class="col-1 c-align">
+                        <text class="font-size-27" data-bind="text: EndTime">{{carrier.EndTime}}</text>
+                        <text class="font-size-24 c-999" data-bind="text: ArrCityName + EndTerm">{{carrier.ArrCityName}}({{carrier.EndTerm}})</text>
+                        <text class="font-size-20 c-999" data-bind="text: ArrCityName + EndTerm">{{arrDate}} {{arrWeek}}</text>
+                    </view>
+                </view>
+            </view>
+            <view id="flyData" class="cabInfo-list" data-model="flightModel" wx:key="index"  wx:for="{{carrier.CabInfos}}" wx:for-item="cabInfo">
+                <view class="flex cabInfo-item " data-bind="click:$root.select">
+                    <view class="cabInfo-left l-align">
+                        <view>
+                            <text class="c-f4393c font-size-20">¥</text>
+                            <text class="font-size-28 c-f4393c" >{{cabInfo.FlightLowestPrice}}</text>
+                        </view>
+                        <view class="cabInfo-type font-size-22" >{{cabInfo.ClassName+ '(' + cabInfo.Class + ')'}}</view>
+                    </view>
+                    <view class="cabInfo-right flex col-1">
+                        <view class="col-1">
+                            <text class="residue font-size-22 {{cabInfo.Num<9?'cf4393c':'c999'}}">剩余：{{cabInfo.Num}}张</text>
+                            <text class="endorse c-3eabff font-size-24" data-class="{{cabInfo.Class}}" catchtap="showEndorseModal">退改详情<i class="icon-arror-r font-size-24 c-3eabff"></i></text>
+                        </view>
+                        <view class="predetermine-btn" data-class="{{cabInfo.Class}}" catchtap="book">预定</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 航班搜索页面加载状态 -->
+<template name="wait">
+    <view class="{{waitShow?'':'none'}}">
+        <view class="wait"></view>
+        <view class="wait_logo">
+            <view class="absolute-Center">
+                <image src="http://www.51jct.cn/weixin/miniprogram/images/animatedEllipse.gif" alt="" ></image>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 航班搜索页面没有数据 -->
+<template name="noDate">
+    <view class="{{noDateShow?'':'none'}}">
+        <view class='jp-data'>没有找到符合条件的结果</view>
+    </view>
+</template>
+
+
+<!-- 订购无忧出行须知 -->
+<template name="worryFreeModal">
+    <view class="c-bg-000 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
+        <view class="pop-full">
+            <text class="pop-full-close" catchtap="hideWorryFreeModal"><i></i></text>
+            <view class="pop-content">
+                <view class="title b-line">
+                    <view class="c-align font-size-15">订购无忧出行须知</view>
+                </view>
+                <view class="content font-size-15">
+                    <view class='comfortableTravel-server'>
+                        <view class='service-seat font-size-30'>
+                            <text class="package {{worryFreeType==0?'active':''}}" data-worryfreetype="0" catchtap="worryFreeTypeChange">套餐内容</text>
+                            <text class="pay {{worryFreeType==1?'active':''}}" data-worryfreetype="1" catchtap="worryFreeTypeChange">购买须知</text>
+                            <text class="refund {{worryFreeType==2?'active':''}}" data-worryfreetype="2" catchtap="worryFreeTypeChange">退款须知</text>
+                        </view>
+                        <view class='service-seat-info' style="height:280rpx;">
+                            <view class="package {{worryFreeType==0?'':'none'}}">
+                                <text class='info'>{{service_info}}</text>
+                            </view>
+                            <view class="pay {{worryFreeType==1?'':'none'}}">
+                                <text class='info'>{{buy_info}}</text>
+                            </view>
+                            <view class="refund {{worryFreeType==2?'':'none'}}">
+                                <text class='info'>{{refund_info}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 保险提示信息 -->
+<template name="hintModal">
+    <view class="c-bg-000 flex hintModal {{hintModalShow?'':'none'}}" >
+        <view class="pop-full">
+            <text class="pop-full-close" catchtap="hideHintModal"><i></i></text>
+            <view class="pop-content" >
+                <view class="title b-line">
+                    <view class="c-align font-size-15">航空意外险</view>
+                </view>
+                <view class="content font-size-15">
+                    <view>1、保险责任：航空意外伤害保险责任320万元/航段（国航直销产品120万元/航段），指被保险人持有效机票检票并进入保单载明的合法商业运营的客运飞机客舱时起至抵达机票载明的终点离开客运飞机客舱的期间内遭受意外伤害所导致的保险责任</view>
+                    <view>2、保险费：30元/航段，计划起飞时间之前退票可退保</view>
+                    <view>3、本产品由中国人寿、新华人寿、太平洋寿险、太平养老、众安在线、阳光人寿、天安财险、华夏人寿、国华人寿、泰康在线等保险公司承保，销售服务方为携程保险代理有限公司、深圳众诚泰保险经纪公司</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 往返机票信息 -->
+<template name="mulLineModal">
+    <view class="div_mulLine c-bg-000 flex {{mulLineModalShow?'':'none'}}">
+        <view class="pop-full"  >
+            <text class="pop-full-close" catchtap="hideMulLineModal"><i></i></text>
+            <view class="pop-content font-size-13">
+                <view class="main-con" wx:for="{{flightInfos}}" wx:for-index="index" wx:for-item="flight">
+                    <view class="flex t-title align-center c-000">
+                        <i class="airsmall_{{flight.FlightNoIcon}}" ></i>
+                        <text>{{flight.CarrierName}} {{flight.FlightNo}}</text>
+                        <i class="line"></i>
+                        <text>{{flight.CabInfos.ClassName}}({{flight.CabInfos.Class}})</text>
+                        <text class="line-type c-bg-3eabff c-fff font-size-10" >{{index == 0 ? '去程' : '回程'}}</text>
+                    </view>
+                    <view class="div-flight flex font-size-13 c-999 c-align align-center">
+                        <view class="col-1">
+                            <view class="font-size-18 c-000"><b data-bind="text: BeginTime">{{flight.BeginTime}}</b></view>
+                            <view data-bind="text: DepCityName + '(' + BeginTerm + ')'">{{flight.DepCityName}}({{flight.BeginTerm}})</view>
+                            <view data-bind="text: getMD(DepDate) + ' ' + GetWeek(DepDate)">{{flight.depDate}} {{flight.depWeek}}</view>
+                        </view>
+                        <i class="icon-toArror font-size-18"></i>
+                        <view class="col-1">
+                            <view class="font-size-18 c-000">{{flight.EndTime}}</view>
+                            <view>{{flight.ArrCityName}}({{flight.EndTerm}})</view>
+                            <view>{{flight.arrDate}} {{flight.arrWeek}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 订单需客服确认 -->
+<template name="jsAlertModal">
+    <view  class="c-bg-000 flex jsAlertModal {{jsAlertModalShow?'':'none'}}"><!--  -->
+		<view class="alert-box">
+			<view class="alert-head">
+                <canvas  canvas-id="countDown1" id="countDown1">
+                </canvas> 
+                <canvas canvas-id="countDown2" id="countDown2">
+                </canvas> 
+			</view>
+			<view class="alert-body">
+                <view class="alert-body-title">确认订单</view>
+				<view class="alert-concent">为了不影响您的出行，订单需客服确认有票才可支付</view>
+				<a id="js-alert-btn" class="alert-btn" href="javascript:;" catchtap="toOrderManager">立即前往订单页</a>
+			</view>
+		</view>
+	</view>
+</template>
+
+  
