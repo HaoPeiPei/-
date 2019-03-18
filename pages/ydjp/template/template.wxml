@@ -46,7 +46,7 @@
                 />
             </van-popup>
             <view class="col-1" bindtap='linkRegionChange'>
-                <input type='text' placeholder='请选择省市区'  value="{{linkRegion}}" id="linkRegion" />
+                <input type='text' placeholder='请选择省市区'  value="{{linkRegion}}" disabled id="linkRegion" />
             </view>
             <i class="icon-arror-r"></i>
         </view>

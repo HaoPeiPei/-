@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 29,
+			"current": 30,
 			"list": [
 				{
 					"id": -1,
@@ -210,7 +210,13 @@
 				{
 					"id": -1,
 					"name": "logIndex",
-					"pathName": "pages/logIndex/logIndex"
+					"pathName": "pages/logIndex/logIndex",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "xdzf",
+					"pathName": "pages/wycx/xdzf/xdzf"
 				}
 			]
 		}
