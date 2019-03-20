@@ -29,7 +29,7 @@
     margin-top: 40rpx;
 }
  
-.bottom {
+.button {
     height: 80rpx;
     line-height: 80rpx;
     margin: 70rpx 50rpx;

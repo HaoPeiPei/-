@@ -2,7 +2,6 @@
 <import src="../../../template/template.wxml" />
 
 <template is="header_content_noBackod" data="{{...header_text}}" />
-
 <view class='dt-map'>
   <map longitude="{{longitude}}" latitude="{{latitude}}" scale="16" id="map" markers="{{markers}}"></map>
 </view>

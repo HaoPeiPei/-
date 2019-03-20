@@ -109,7 +109,7 @@ Page({
     });
   },
   //选择旅客页面编辑乘机人跳转至详情页
-  editPassener: function(e) {
+  onEditPassener: function(e) {
     var that = this;
     var passenerId = e.currentTarget.dataset.passenerid;
     var passeners = that.data.passeners;

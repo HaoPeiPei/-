@@ -358,3 +358,15 @@ page{
 .relative{position: relative;}
 .float-left{float: left}
 .float-right{float: right;}
+button {
+  border: 0;
+  outline: none;
+  background-size: 750rpx 41rpx; 
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: inherit;
+}
+button[type="warn"]{
+  background-color: red;
+}

@@ -34,7 +34,7 @@ Page({
             fail:function(){
               console.log("失败");
             }
-          })
+          });
         }
       }
     })

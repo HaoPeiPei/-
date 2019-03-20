@@ -1,102 +1,94 @@
 <!--pages/wycx/addList/addList_page/addList_page.wxml-->
 <!-- 选择旅客 -->
 <view class='selectPassenger' wx:if="{{passengerListShow}}"> 
-    <view class='header'>
-      <view class='header_noBackod border-b-1'>
-        <view class='header-con'>
-          <view class='box box-f1 box-hor  margin-lr-1'>
-            <view class='header-left' bindtap='bindBackChange'>
-              <image src='{{imgRoot}}/images/back-b.png' style='width:16rpx;' mode='widthFix' />
-            </view>
-            <view class='box box-f1 box-apc font-15'>选择旅客</view>
-            <view class='header-right'>
-              <!-- <image src='{{right_icon}}' style='width:34rpx;margin-top:12rpx;' mode='widthFix' wx:if="{{right_icon.length!=0}}"/> -->
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class='box box-f1 box-ver padding-tb-6 backgd-f' bindtap='addPassener'>
-      <view class='box box-f1 box-apc '>
-        <view style='background:url({{imgRoot}}/images/addList.png) no-repeat center center;background-size:cover;width:80rpx;height:80rpx;' ></view>
-      </view>
-      <view class='box box-f1 box-apc font-13'>添加</view>
-    </view>
-    <view class='{{passeners.length==0?"none":""}}'>
-      <view class='height-10'></view>
-      <block wx:for="{{passeners}}" wx:key="*this">
-        <view class='box box-f1 box-hor margin-lr-1 padding-tb-1 box-ac'>
-          <view class="icon-yes {{item.active? 'c-f4393c':''}} font-size-10" data-passenerid='{{item.id}}' data-index="{{index}}" catchtap='onSelectPassener'></view>
-          <view class='box box-f1 box-ver font-13 color-9 margin-lr-1'>
-            <view class='box box-f1 padding-tb-2'>
-              <view style='width:140rpx'>姓名：</view>
-              <view class='box box-f1'>{{item.name}}</view>
-            </view>
-            <view class='box box-f1 padding-tb-2'>
-              <view style='width:140rpx'>{{item.certType}}:</view>
-              <view class='box box-f1'>{{item.cert_no}}</view>
-            </view>
-          </view>
-          <view class="icon-edit  font-size-10" data-passenerid="{{item.id}}" catchtap='editPassener'></view>
-        </view>
-        <view class='height-10'></view>
-      </block>
-    </view>
-    <view class='box box-f1 box-apc font-16 color-f padding-tb-1 ' style='background:red;position:fixed;bottom:0;width:100%' catchtap='confirmPassener'>确认</view>
-</view>
-
-<!-- 添加乘机人 -->
-<view class='add-edit-passenger' wx:if="{{editPassenerShow}}">
   <view class='header'>
     <view class='header_noBackod border-b-1'>
       <view class='header-con'>
         <view class='box box-f1 box-hor  margin-lr-1'>
-          <view class='header-left' bindtap='hidEditPassener'>
-            <image src='{{imgRoot}}/images/back-b.png' style='width:16rpx;' mode='widthFix' />
-          </view>
-          <view class='box box-f1 box-apc font-15'>{{!editPassener.id?"新增乘机人":"编辑乘机人"}}</view>
-          <view class='header-right'>
-            <view class="icon-dustbin btn-delete font-size-10" data-passenerid="{{editPassener.id}}" catchtap='deletePassener'></view>
-          </view>
+          <view class='header-left icon-arror-l' bindtap='bindBackChange'></view>
+          <view class='box box-f1 box-apc font-15'>选择旅客</view>
+          <view class='header-right'></view>
         </view>
       </view>
     </view>
   </view>
-  <form bindsubmit='submitPassener' report-submit='true'>
-    <input type='text' value='{{!editPassener.id?"add":"update"}}' class="none"  name='action'/>
-    <input type='text' value="{{editPassener.id}}" class="none"  name='psgId'/>
-    <view class='box box-f1 margin-lr-1 box-ver'>
-      <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
-        <view style='width:140rpx;' class='color-3'>姓名</view>
-        <view class='box box-f1 box-ac'>
-          <input type='text' placeholder='请输入姓名' value='{{editPassener.name}}' data-key="name" name='name'/>
-        </view>
-      </view>
-      <picker bindchange="bindPickerChange" value="{{picker_index}}" range="{{certificate}}" mode='selector'>
-        <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
-          <view style='width:140rpx;' class='color-3'>证件类型</view>
-          <view class='box box-f1 box-ac'>
-            <view>{{certificate[picker_index]}}</view>
-            <input type='text' value="{{picker_index}}" class="none" data-key="cert_type" name='cert_type'/>
+  <view class='box box-f1 box-ver padding-tb-6 backgd-f  ' bindtap='addPassener'>
+    <view class='box box-f1 box-apc '>
+      <view style='background:url({{imgRoot}}/images/addList.png) no-repeat center center;background-size:cover;width:80rpx;height:80rpx;' ></view>
+    </view>
+    <view class='box box-f1 box-apc font-15'>添加</view>
+  </view>
+  <view class='{{passeners.length==0?"none":""}} c-999'>
+    <view class='height-10'></view>
+    <block wx:for="{{passeners}}" wx:key="*this">
+      <view class='box box-f1 box-hor margin-lr-1 padding-tb-1 box-ac'>
+        <view class="icon-yes {{item.active? 'c-f4393c':'c-999'}} font-22 padding-10" data-passenerid='{{item.id}}' data-index="{{index}}" catchtap='onSelectPassener'></view>
+        <view class='box box-f1 box-ver font-15 color-9 margin-lr-1'>
+          <view class='box box-f1 padding-tb-2'>
+            <view style='width:140rpx'>姓名：</view>
+            <view class='box box-f1'>{{item.name}}</view>
           </view>
-          <view class='box bxo-ac'>
-            <view style='background:url({{imgRoot}}/images/right_jt.png) no-repeat center center;background-size:cover;width:40rpx;height:40rpx;margin-top:4rpx;'></view>
+          <view class='box box-f1 padding-tb-2'>
+            <view style='width:140rpx'>{{item.certType}}:</view>
+            <view class='box box-f1'>{{item.cert_no}}</view>
           </view>
         </view>
-      </picker>
-      <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
-        <view style='width:140rpx;' class='color-3'>证件号</view>
-        <view class='box box-f1 box-ac'>
-          <input type='text' placeholder='请输入证件号' data-certType='{{picker_index}}' value='{{editPassener.cert_no}}' data-key="cert_no" name='cert_no' />
-        </view>
+        <view class="icon-edit  font-22 padding-10" data-passenerid="{{item.id}}" catchtap='onEditPassener'></view>
       </view>
-      <view class='box box-f1 box-ac font-13 padding-tb-1 border-b-1'>
-        <view style='width:140rpx;' class='color-3'>手机号</view>
-        <view class='box box-f1 box-ac'>
-          <input type='text' placeholder='请输入手机号' value='{{editPassener.tel}}' data-key="tel" name='tel'/>
-        </view>
+      <view class='height-10'></view>
+    </block>
+  </view>
+  <view class='box box-f1 box-apc font-16 color-f padding-tb-1 ' style='background:red;position:fixed;bottom:0;width:100%' catchtap='confirmPassener'>确认</view>
+</view>
+
+<!-- 添加乘机人 -->
+<view class='add-edit-passenger' wx:if="{{editPassenerShow}}">
+<view class='header'>
+  <view class='header_noBackod border-b-1'>
+    <view class='header-con'>
+      <view class='box box-f1 box-hor  margin-lr-1 font-18'>
+        <view class='header-left icon-arror-l' catchtap='hidEditPassener'></view>
+        <view class='box box-f1 box-apc font-15'>{{!editPassener.id?"新增乘机人":"编辑乘机人"}}</view>
+        <view class='header-right icon-dustbin btn-delete padding-10' data-passenerid="{{editPassener.id}}" catchtap='deletePassener'></view>
       </view>
     </view>
-      <button form-type='submit' style='background:red;position:fixed;bottom:0;width:100%;line-height:2;border:none;color:#ffffff;'>确定</button>
-    </form>
+  </view>
+</view>
+<form bindsubmit='submitPassener' report-submit='true'>
+  <input type='text' value='{{!editPassener.id?"add":"update"}}' class="none"  name='action'/>
+  <input type='text' value="{{editPassener.id}}" class="none"  name='psgId'/>
+  <view class='box box-f1 margin-lr-1 box-ver'>
+    <view class='box box-f1 box-ac font-15 padding-tb-1 border-b-1'>
+      <view style='width:140rpx;' class='color-3'>姓名</view>
+      <view class='box box-f1 box-ac'>
+        <input type='text' placeholder='请输入姓名' value='{{editPassener.name}}' data-key="name" name='name'/>
+      </view>
+    </view>
+    <picker bindchange="bindPickerChange" value="{{picker_index}}" range="{{certificate}}" mode='selector'>
+      <view class='box box-f1 box-ac font-15 padding-tb-1 border-b-1'>
+        <view style='width:140rpx;' class='color-3'>证件类型</view>
+        <view class='box box-f1 box-ac'>
+          <view>{{certificate[picker_index]}}</view>
+          <input type='text' value="{{picker_index}}" class="none" data-key="cert_type" name='cert_type'/>
+        </view>
+        <view class='box bxo-ac'>
+          <i class="icon-arror-r font-15"></i>
+        </view>
+      </view>
+    </picker>
+    <view class='box box-f1 box-ac font-15 padding-tb-1 border-b-1'>
+      <view style='width:140rpx;' class='color-3'>证件号</view>
+      <view class='box box-f1 box-ac'>
+        <input type='text' placeholder='请输入证件号' data-certType='{{picker_index}}' value='{{editPassener.cert_no}}' data-key="cert_no" name='cert_no' />
+      </view>
+    </view>
+    <view class='box box-f1 box-ac font-15 padding-tb-1 border-b-1'>
+      <view style='width:140rpx;' class='color-3'>手机号</view>
+      <view class='box box-f1 box-ac'>
+        <input type='text' placeholder='请输入手机号' value='{{editPassener.tel}}' data-key="tel" name='tel'/>
+      </view>
+    </view>
+  </view>
+    <button form-type='submit' hover-class="none" type="warn" class="box box-f1 box-apc font-16 color-f " style='position:fixed;bottom:0;width:100%;z-index: 999;height: 82rpx;'>确定</button>
+  </form>
 </view>
