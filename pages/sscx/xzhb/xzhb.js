@@ -187,7 +187,7 @@ Page({
     }
   },
   //选择航班页面验证填写航班号
-  flightNoReg: function(e) {
+  onCheckFlightNo: function(e) {
     var flightNo = e.detail.value;
     var flight = this.data.flight;
     if (flightNo != '' && !(flightNoReg.test(flightNo))){

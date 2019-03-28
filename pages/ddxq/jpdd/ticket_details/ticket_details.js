@@ -2,8 +2,8 @@
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
-var orderConfirmeTimer; // 确认订单计时器
 var countDownTimer; //倒计时计时器
+var countDownFlag = false; //倒计开关
 var httpRequst = require("../../../../utils/requst.js");
 const { getMD, getWeek } = require('../../../../utils/util.js');
 var WxParse = require('../../../../wxParse/wxParse.js');
@@ -20,7 +20,6 @@ Page({
       "right_icon": "",
     },
     imgRoot: imgRoot,
-    state:"",
     single_return:"",
     priceDetailModalShow: false,
     endorseType: 0,
@@ -40,7 +39,6 @@ Page({
   },
   //返回
   catchBackChange: function (e) {
-    clearInterval(orderConfirmeTimer);
     clearInterval(countDownTimer);
     wx.navigateBack({
       delta: 1
@@ -183,44 +181,47 @@ Page({
         that.setData({
           jsAlertModalShow: true
         });
-        that.countDown(); //开始倒计时
-        that.loadOrderDetail();
-        clearInterval(orderConfirmeTimer);
+        if(!!countDownFlag){
+          that.countDown(); //开始倒计时
+          countDownFlag = true;
+        }
+        setTimeout(() => {
+          that.loadOrderDetail();
+        }, 1000);
       }else if (data.airticketOrder.Order.status == 1){
-        clearInterval(orderConfirmeTimer);
         clearInterval(countDownTimer);
         that.createPayPara();
       }
     });
   },
   getType(item) {
-    if (item.type == "0") {
-        return "";
+    if (item.passenger_type == "0") {
+      return "";
     }
-    else if (item.type == "1") {
+    else if (item.passenger_type == "1") {
         return "(儿童)";
     } else {
         return "(婴儿)";
     }
   },
   getCertType(item) {
-    if (item.type == "0") {
-        if (item.cert_type == "1") {
-            return "身份证";
-        }
-        else if (item.cert_type == "2") {
-            return "护照";
-        } else {
-            return "其他";
-        }
+    if (item.passenger_type == "0") {
+      if (item.cert_type == "1") {
+          return "身份证";
+      }
+      else if (item.cert_type == "2") {
+          return "护照";
+      } else {
+          return "其他";
+      }
     } else {
         return "生日";
     }
   },
   getCertNo (item) {
-    if (item.type == "0") {
-        return item.cert_no;
-    }else {
+    if (item.passenger_type == "0") {
+      return item.cert_no;
+    } else {
         return item.birthday;
     }
   },
@@ -449,7 +450,7 @@ createPayPara() {
         context2.fillText(c , w, h);	 // 文字内容和文字坐标
         context2.draw();
     }
-    countDownTimer =  setInterval(function () {
+    countDownTimer =  setInterval( () => {
         var currentTime = 0;
         if(that.data.currentTime<=0){
             currentTime = 59
@@ -558,7 +559,6 @@ createPayPara() {
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    clearInterval(orderConfirmeTimer);
     clearInterval(countDownTimer);
   },
 

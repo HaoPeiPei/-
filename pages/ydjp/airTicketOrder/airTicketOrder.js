@@ -3,8 +3,8 @@
 var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
-var orderConfirmeTimer; // 确认订单计时器
 var countDownTimer; //倒计时计时器
+var countDownFlag = false; //倒计时开关
 var httpRequst = require("../../../utils/requst.js");
 var Hub = require("../../../utils/miniProgramSignalr.js");
 var WxParse = require('../../../wxParse/wxParse.js');
@@ -80,7 +80,6 @@ Page({
     },
     //返回
     catchBackChange: function () {
-        clearInterval(orderConfirmeTimer);
         clearInterval(countDownTimer);
         wx.navigateBack({
             delta: 1
@@ -919,21 +918,23 @@ Page({
     //订单确认
     orderConfirme(orderId){
         var that = this;
-        orderConfirmeTimer = setTimeout(function () {
-            httpRequst.HttpRequst(false, '/weixin/jctnew/ashx/airticket.ashx', { action: "getorderbyid", orderId: orderId }, "POST",function(res){
-                if (res.Success) {
-                    var resData = JSON.parse(res.Data);
-                    if(resData.airticketOrder.Order.status==1){
-                        clearInterval(orderConfirmeTimer);
-                        clearInterval(countDownTimer);
-                        that.createPayPara(orderId);
-                    }else{
-                        clearInterval(orderConfirmeTimer);
-                        that.orderConfirme(orderId);
+        httpRequst.HttpRequst(false, '/weixin/jctnew/ashx/airticket.ashx', { action: "getorderbyid", orderId: orderId }, "POST",function(res){
+            if (res.Success) {
+                var resData = JSON.parse(res.Data);
+                if(resData.airticketOrder.Order.status==1){
+                    clearInterval(countDownTimer);
+                    that.createPayPara(orderId);
+                }else{
+                    if(!!countDownFlag){
+                        that.countDown(); //开始倒计时
+                        countDownFlag = true;
                     }
+                    setTimeout(() => {
+                        that.orderConfirme();
+                    }, 5000);
                 }
-            });
-          }, 5000);
+            }
+        });
     },
     onLoad:function(options){
         // 生命周期函数--监听页面加载
@@ -953,7 +954,6 @@ Page({
     },
     onUnload:function(){
         // 生命周期函数--监听页面卸载
-        clearInterval(orderConfirmeTimer);
         clearInterval(countDownTimer);
         
     },

@@ -2,202 +2,208 @@
 <import src="../../../../wxParse/wxParse.wxml"/> 
 <import src="../../../../template/template.wxml" />
 <import src="../../../template/template.wxml" />
-<template is="header_content_noBackod" data="{{...header_text}}" />
-
-<!--订单状态-->
-<view style='margin-bottom:100rpx;'>
-  <view class='box box-f1 margin-t-20 backgd-f box-ver'>
-    <view class='box box-f1 margin-l-20'>
-      <view class='box box-f1 box-hor font-13 padding-tb-20'>
-        <view class='box box-f1 color-3'>订单状态</view>
-        <view class='dzf-btn' wx:if="{{state==0}}" style='background-image:url(../{{imgRoot}}/images/dzf_back_1.png)'>待确认</view>
-        <view class='dcx-btn' wx:elif="{{state==1}}" style='background-image:url(../{{imgRoot}}/images/dzf_back_1.png)'>待支付</view>
-        <view class='tk-btn' wx:elif="{{state==2}}" style='background-image:url(../{{imgRoot}}/images/dzf_back_1.png)'>已支付</view>
-        <view class='dzf-btn' wx:elif="{{state==3}}" style='background-image:url(../{{imgRoot}}/images/ycp_bacl_1.png)'>已出票</view>
-        <view class='dzf-btn' wx:elif="{{state==4}}" style='background-image:url(../{{imgRoot}}/images/qx_back_1.png)'>已取消</view>
-        <view class='dzf-btn' wx:elif="{{state==5}}" style='background-image:url(../{{imgRoot}}/images/tk_back_1.png)'>退款中</view>
-        <view class='tk-btn' wx:elif="{{state==6}}" style='background-image:url(../{{imgRoot}}/images/tk_back_1.png)'>已退款</view>
-        <view class='tk-btn' wx:elif="{{state==7}}" style='background-image:url(../{{imgRoot}}/images/tk_back_1.png)'>拒绝退款</view>
+<view class="container c-bg-f3f5f7">
+  <template is="header_content_noBackod" data="{{...header_text}}" />
+  <!--订单状态-->
+  <view style='margin-bottom:100rpx;'>
+    <view class='box box-f1 margin-t-20 backgd-f box-ver'>
+      <view class='box box-f1 margin-l-20'>
+        <view class='box box-f1 box-hor font-13 padding-tb-20'>
+          <view class='box box-f1 color-3'>订单状态</view>
+          <view class='tk-btn c-bg-f4393c' wx:if="{{order.airticketOrder.Order.status==0}}" >待确认</view>
+          <view class='tk-btn c-bg-f4393c' wx:elif="{{order.airticketOrder.Order.status==1}}" >待支付</view>
+          <view class='tk-btn c-bg-f4393c' wx:elif="{{order.airticketOrder.Order.status==2}}" >已支付</view>
+          <view class='tk-btn c-bg-ccc' wx:elif="{{order.airticketOrder.Order.status==3}}" >已取消</view>
+          <view class='tk-btn c-bg-f47f39' wx:elif="{{order.airticketOrder.Order.status==4}}" >申请退改</view>
+          <view class='tk-btn c-bg-f47f39' wx:elif="{{order.airticketOrder.Order.status==5}}" >退款中</view>
+          <view class='tk-btn c-bg-f47f39' wx:elif="{{order.airticketOrder.Order.status==6}}" >已退款</view>
+          <view class='tk-btn c-bg-f47f39' wx:elif="{{order.airticketOrder.Order.status==7}}" >拒绝退款</view>
+          <view class='tk-btn c-bg-3eabff' wx:elif="{{order.airticketOrder.Order.status==8}}" >已出票</view>
+        </view>
+      </view>
+      <view class='box box-f1 margin-lr-20 border-t-1 font-13 color-9  box-ver'>
+        <view class='box box-f1 padding-tb-20'>
+          <view style='width:150rpx;'>订单号</view>
+          <view class='box box-f1 box-pe'>{{order.airticketOrder.Order.order_id}}</view>
+        </view>
+        <view class='box box-f1 padding-b-20'>
+          <view style='width:150rpx;'>下单时间</view>
+          <view class='box box-f1 box-pe'>{{order.airticketOrder.Order.create_time}}</view>
+        </view>
       </view>
     </view>
-    <view class='box box-f1 margin-lr-20 border-t-1 font-13 color-9  box-ver'>
-      <view class='box box-f1 padding-tb-20'>
-        <view style='width:150rpx;'>订单号</view>
-        <view class='box box-f1 box-pe'>{{order.airticketOrder.Order.order_id}}</view>
-      </view>
-      <view class='box box-f1 padding-b-20'>
-        <view style='width:150rpx;'>下单时间</view>
-        <view class='box box-f1 box-pe'>{{order.airticketOrder.Order.create_time}}</view>
-      </view>
-    </view>
-  </view>
-  <!--行程 -->
-  <view class='box box-f1 margin-t-10 backgd-f'>
-    <view class='box box-f1 margin-lr-20 box-ver'>
-      <!-- 单程 -->
-      <block wx:if="{{order.airticketOrder.FlightInfos.length==1}}">
-        <view class='box box-f1 box-ver' >
-          <view class='box box-f1 font-13 box-ac padding-tb-20'>
-            <view style='background-image:url("../{{imgRoot}}/images/hnhk_icon.png")' class='background-icon'></view>
-            <view class='box box-f1 box-ac margin-l-10'>
-              <view>{{order.airticketOrder.FlightInfoExts[0].CarrierName + ' ' + order.airticketOrder.FlightInfos[0].flight_no}}</view>
-              <view style='background-image:url("../{{imgRoot}}/images/2_38.png")' class='background-icon-1 margin-lr-10'></view>
-              <view>{{order.airticketOrder.FlightInfoExts[0].CabName + '(' + order.airticketOrder.FlightInfos[0].cab + ')'}}</view>
+    <!--行程 -->
+    <view class='box box-f1 margin-t-10 backgd-f'>
+      <view class='box box-f1 margin-lr-20 box-ver'>
+        <!-- 单程 -->
+        <block wx:if="{{order.airticketOrder.FlightInfos.length==1}}">
+          <view class='box box-f1 box-ver' >
+            <view class='box box-f1 font-13 box-ac padding-tb-20'>
+              <view style='background-image:url("{{imgRoot}}/images/hnhk_icon.png")' class='background-icon'></view>
+              <view class='box box-f1 box-ac margin-l-10'>
+                <view>{{order.airticketOrder.FlightInfoExts[0].CarrierName + ' ' + order.airticketOrder.FlightInfos[0].flight_no}}</view>
+                <view style='background-image:url("{{imgRoot}}/images/2_38.png")' class='background-icon-1 margin-lr-10'></view>
+                <view>{{order.airticketOrder.FlightInfoExts[0].CabName + '(' + order.airticketOrder.FlightInfos[0].cab + ')'}}</view>
+              </view>
+            </view>
+            <view class='box box-f1 padding-b-20 box-ac border-b-1'>
+              <view class='box box-f1 box-ver box-apc'>
+                <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].dep_time}}</view>
+                <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].dep_city_name + '(' + order.airticketOrder.FlightInfos[0].start_terminal + ')'}}</view>
+                <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].depWeek}}</view>
+              </view>
+              <view style='background-image:url("{{imgRoot}}/images/dd_icon.png")' class='background-icon-2'></view>
+              <view class='box box-f1 box-ver box-apc'>
+                <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].arr_time}}</view>
+                <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].arr_city_name + '(' + order.airticketOrder.FlightInfos[0].end_terminal + ')'}}</view>
+                <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].arrDate}} {{order.airticketOrder.FlightInfos[0].arrWeek}}</view>
+              </view>
             </view>
           </view>
-          <view class='box box-f1 padding-b-20 box-ac border-b-1'>
-            <view class='box box-f1 box-ver box-apc'>
-              <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].dep_time}}</view>
-              <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].dep_city_name + '(' + order.airticketOrder.FlightInfos[0].start_terminal + ')'}}</view>
-              <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].depWeek}}</view>
-            </view>
-            <view style='background-image:url("{{imgRoot}}/images/dd_icon.png")' class='background-icon-2'></view>
-            <view class='box box-f1 box-ver box-apc'>
-              <view class='box font-24' style='line-height:46rpx;'>{{order.airticketOrder.FlightInfos[0].arr_time}}</view>
-              <view class='box font-15 color-9 padding-tb-10'>{{order.airticketOrder.FlightInfos[0].arr_city_name + '(' + order.airticketOrder.FlightInfos[0].end_terminal + ')'}}</view>
-              <view class='box font-13 color-9'>{{order.airticketOrder.FlightInfos[0].arrDate}} {{order.airticketOrder.FlightInfos[0].arrWeek}}</view>
-            </view>
-          </view>
-        </view>
-        <view class='box box-ac' bindtap='showSingleEndorse'>
-          <view class='color-3e margin-r-10'>退改详情</view>
-          <view style='background-image:url("{{imgRoot}}/images/arrow_r.png");margin-top:5rpx;' class='background-icon-4'></view>
-        </view>
-      </block>
-      <block wx:else>
-        <!-- 往返 -->
-        <view class='box box-f1' >
-          <view class='box box-f1 box-ver padding-tb-20 border-b-1'>
+          <view class='box box-f1 padding-tb-20 font-12'>
             <view class='box box-f1 box-ac'>
-              <view class='font-10 prompt-btn'>去程</view>
-              <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].dep_time}} {{order.airticketOrder.FlightInfos[0].flight_no}}</view>
-              <view style='background-image:url("{{imgRoot}}/images/wfxq_icon_1.png")' class='background-icon-6' bindtap='showMulLineModal'></view>
+              <view class='box'>订单金额</view>
+              <view class='box margin-lr-20 color-f4'>{{order.airticketOrder.Order.total_price}}</view>
+              <view style='background-image:url("{{imgRoot}}/images/xl_icon_1.png")' class='background-icon-3' bindtap='showPriceDetailModal'></view>
             </view>
+            <view class='box box-ac' bindtap='showMultiEndorse'>
+              <view class='color-3e margin-r-10' bindtap='showSingleEndorse'>退改详情</view>
+              <view style='background-image:url("{{imgRoot}}/images/arrow_r.png");margin-top:5rpx;' class='background-icon-4'></view>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <!-- 往返 -->
+          <view class='box box-f1' >
+            <view class='box box-f1 box-ver padding-tb-20 border-b-1'>
+              <view class='box box-f1 box-ac'>
+                <view class='font-10 prompt-btn'>去程</view>
+                <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[0].depDate}} {{order.airticketOrder.FlightInfos[0].dep_time}} {{order.airticketOrder.FlightInfos[0].flight_no}}</view>
+                <view style='background-image:url("{{imgRoot}}/images/wfxq_icon_1.png")' class='background-icon-6' bindtap='showMulLineModal'></view>
+              </view>
+              <view class='box box-f1 box-ac'>
+                <view class='font-10 prompt-btn'>返程</view>
+                <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[1].arrDate}} {{order.airticketOrder.FlightInfos[1].dep_time}} {{order.airticketOrder.FlightInfos[1].flight_no}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='box box-f1 padding-tb-20 font-12'>
             <view class='box box-f1 box-ac'>
-              <view class='font-10 prompt-btn'>返程</view>
-              <view class='box box-f1 font-19 margin-l-20 color-3'>{{order.airticketOrder.FlightInfos[1].arrDate}} {{order.airticketOrder.FlightInfos[1].dep_time}} {{order.airticketOrder.FlightInfos[1].flight_no}}</view>
+              <view class='box'>订单金额</view>
+              <view class='box margin-lr-20 color-f4'>{{order.airticketOrder.Order.total_price}}</view>
+              <view style='background-image:url("{{imgRoot}}/images/xl_icon_1.png")' class='background-icon-3' bindtap='showPriceDetailModal'></view>
+            </view>
+            <view class='box box-ac' bindtap='showMultiEndorse'>
+              <view class='color-3e margin-r-10'>退改详情</view>
+              <view style='background-image:url("{{imgRoot}}/images/arrow_r.png");margin-top:5rpx;' class='background-icon-4'></view>
             </view>
           </view>
-        </view>
-        <view class='box box-f1 padding-tb-20 font-12'>
-          <view class='box box-f1 box-ac'>
-            <view class='box'>订单金额</view>
-            <view class='box margin-lr-20 color-f4'>{{order.airticketOrder.Order.total_price}}</view>
-            <view style='background-image:url("{{imgRoot}}/images/xl_icon_1.png")' class='background-icon-3' bindtap='showPriceDetailModal'></view>
-          </view>
-          <view class='box box-ac' bindtap='showMultiEndorse'>
-            <view class='color-3e margin-r-10'>退改详情</view>
-            <view style='background-image:url("{{imgRoot}}/images/arrow_r.png");margin-top:5rpx;' class='background-icon-4'></view>
-          </view>
-        </view>
-      </block>
-    </view>
-  </view>
-  <!--值机区域  -->
-  <view class='box box-f1 margin-t-10 backgd-f none'>
-    <view class='box box-f1 padding-tb-20 font-15 margin-lr-20'>
-      <view class='box color-9 box-ac'>
-        <view style='background-image:url("{{imgRoot}}/images/sscx.png")' class='background-icon'></view>
-        <view class='margin-l-10'>值机区域</view>
+        </block>
       </view>
-      <view class='box box-f1 box-pe color-3'>靠窗 左侧前方</view>
     </view>
-  </view>
-  <!--乘机人-->
-  <view class='box box-f1 margin-t-10 backgd-f'>
-    <view class='box box-f1 font-15 margin-lr-20 box-ver'>
-      <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
-        <view style='background-image:url("{{imgRoot}}/images/cjr_icon_1.png")' class='background-icon'></view>
-        <view class='margin-l-10'>乘机人</view>
+    <!--值机区域  -->
+    <view class='box box-f1 margin-t-10 backgd-f none'>
+      <view class='box box-f1 padding-tb-20 font-15 margin-lr-20'>
+        <view class='box color-9 box-ac'>
+          <view style='background-image:url("{{imgRoot}}/images/sscx.png")' class='background-icon'></view>
+          <view class='margin-l-10'>值机区域</view>
+        </view>
+        <view class='box box-f1 box-pe color-3'>靠窗 左侧前方</view>
       </view>
-      <view class='box box-f1 box-ver margin-l-38 padding-tb-20 border-b-1' wx:for="{{order.airticketOrder.Passengers}}">
-        <view class='box box-f1 font-13 color-9'>
-          <view style='width:150rpx;'>姓名</view>
-          <view class='box box-f1 color-3'>
-            <text class="col-content" data-bind="text: name">{{item.passenger_name}}</text>
-            <text class="col-content c-3eabff" data-bind="text: name">{{item.TypeName}}</text>
+    </view>
+    <!--乘机人-->
+    <view class='box box-f1 margin-t-10 backgd-f'>
+      <view class='box box-f1 font-15 margin-lr-20 box-ver'>
+        <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
+          <view style='background-image:url("{{imgRoot}}/images/cjr_icon_1.png")' class='background-icon'></view>
+          <view class='margin-l-10'>乘机人</view>
+        </view>
+        <view class='box box-f1 box-ver margin-l-38 padding-tb-20 border-b-1' wx:for="{{order.airticketOrder.Passengers}}">
+          <view class='box box-f1 font-13 color-9'>
+            <view style='width:150rpx;'>姓名</view>
+            <view class='box box-f1 color-3'>
+              <text class="col-content" data-bind="text: name">{{item.passenger_name}}</text>
+              <text class="col-content c-3eabff" data-bind="text: name">{{item.TypeName}}</text>
+            </view>
+          </view>
+          <view class='box box-f1 font-13 color-9 padding-t-20'>
+            <view style='width:150rpx;'>{{item.CertTypeName}}：</view>
+            <view class='box box-f1 color-3'>{{item.CertNoCont}}</view>
           </view>
         </view>
-        <view class='box box-f1 font-13 color-9 padding-t-20'>
-          <view style='width:150rpx;'>{{item.CertTypeName}}：</view>
-          <view class='box box-f1 color-3'>{{item.CertNoCont}}</view>
+      </view>
+    </view>
+    <!--联系人-->
+    <view class='box box-f1 margin-t-10 backgd-f'>
+      <view class='box box-f1 font-15 margin-lr-20 box-ver'>
+        <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
+          <i class="icon-contacts font-20"></i>
+          <view style='width:150rpx;' class='margin-l-10'>联系人</view>
+          <view >{{order.airticketOrder.Order.contact_name}}</view>
+        </view>
+        <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
+          <i class="icon-phone ico-spac"></i>
+          <view style='width:150rpx;' class='margin-l-10'>手机号</view>
+          <view >{{order.airticketOrder.Order.contact_tel}}</view>
+        </view>
+      </view>
+    </view>
+    <!--邮寄情况-->
+    <view class='box box-f1 margin-t-10 backgd-f {{order.airticketOrder.Order.is_delivery==1?"":"none"}}'>
+      <view class='box box-f1 font-15 margin-lr-20 box-ver'>
+        <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
+          <view style='background-image:url("{{imgRoot}}/images/lxr_icon.png")' class='background-icon'></view>
+          <view class='margin-l-10'>邮寄情况</view>
+        </view>
+        <view class='box box-f1 box-ver margin-l-38 padding-tb-20 '>
+          <view class='box box-f1 font-13 color-9'>
+            <view style='width:150rpx;'>姓名</view>
+            <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_name}}</view>
+          </view>
+          <view class='box box-f1 font-13 color-9 padding-tb-20'>
+            <view style='width:150rpx;'>电话</view>
+            <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_mobile}}</view>
+          </view>
+          <view class='box box-f1 font-13 color-9'>
+            <view style='width:150rpx;'>地址</view>
+            <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_address}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--支付方式-->
+    <view class='box box-f1 margin-t-10 backgd-f' >
+      <view class='box box-f1 font-15 margin-lr-20 box-ver'>
+        <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
+          <view class='icon-payment font-size-20 c-f4393c'></view>
+          <view class='margin-l-10'>支付方式</view>
+        </view>
+        <view class='box box-f1 box-ver margin-l-38 padding-tb-20'>
+          <view class='box box-f1 font-15 color-9'>
+            <view class='box box-f1'>微信支付</view>
+            <view style='background-image:url("{{imgRoot}}/images/wxzf_icon.png")' class='background-icon-5'></view>
+          </view>
         </view>
       </view>
     </view>
   </view>
-  <!--联系人-->
-  <view class='box box-f1 margin-t-10 backgd-f'>
-    <view class='box box-f1 font-15 margin-lr-20 box-ver'>
-      <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
-        <view style='background-image:url("{{imgRoot}}/images/lxr_icon.png")' class='background-icon'></view>
-        <view class='margin-l-10'>联系人</view>
-        <view style='width:150rpx;'>{{order.airticketOrder.Order.contact_name}}</view>
-      </view>
-      <view class='box box-f1 box-ver margin-l-38 padding-tb-20'>
-        <view class='box box-f1 font-15 color-9'>
-          <view style='width:150rpx;'>{{order.airticketOrder.Order.contact_tel}}</view>
-        </view>
-      </view>
+  <view class='footer' wx:if="{{order.airticketOrder.Order.status==0||order.airticketOrder.Order.status==1}}">
+    <view class='box box-f1 box-apc'>
+      <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' bindtap='bindCancelOrder'>取消订单</view>
+      <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='createPayPara'>立即支付</view>
     </view>
   </view>
-  <!--邮寄情况-->
-  <view class='box box-f1 margin-t-10 backgd-f'>
-    <view class='box box-f1 font-15 margin-lr-20 box-ver'>
-      <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
-        <view style='background-image:url("{{imgRoot}}/images/lxr_icon.png")' class='background-icon'></view>
-        <view class='margin-l-10'>邮寄情况</view>
-      </view>
-      <view class='box box-f1 box-ver margin-l-38 padding-tb-20 '>
-        <view class='box box-f1 font-13 color-9'>
-          <view style='width:150rpx;'>姓名</view>
-          <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_name}}</view>
-        </view>
-        <view class='box box-f1 font-13 color-9 padding-tb-20'>
-          <view style='width:150rpx;'>电话</view>
-          <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_mobile}}</view>
-        </view>
-        <view class='box box-f1 font-13 color-9'>
-          <view style='width:150rpx;'>地址</view>
-          <view class='box box-f1 color-3'>{{order.airticketOrder.Order.delivery_address}}</view>
-        </view>
-      </view>
+  <view class='footer' wx:elif="{{order.airticketOrder.Order.status==2||order.airticketOrder.Order.status==3||order.airticketOrder.Order.status==4||order.airticketOrder.Order.status==5||order.airticketOrder.Order.status==6||order.airticketOrder.Order.status==7}}">
+    <view class='box box-f1 box-apc'>
+      <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' data-phonenumber="400-700-7355" catchtap="telephone">联系客服</view>
+      <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一张</view>
     </view>
   </view>
-  <!--支付方式-->
-  <view class='box box-f1 margin-t-10 backgd-f' wx:if="{{state==0||state==1}}">
-    <view class='box box-f1 font-15 margin-lr-20 box-ver'>
-      <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
-        <view style='background-image:url("{{imgRoot}}/images/zffs_icon.png")' class='background-icon'></view>
-        <view class='margin-l-10'>支付方式</view>
-      </view>
-      <view class='box box-f1 box-ver margin-l-38 padding-tb-20'>
-        <view class='box box-f1 font-15 color-9'>
-          <view class='box box-f1'>微信支付</view>
-          <view style='background-image:url("{{imgRoot}}/images/wxzf_icon.png")' class='background-icon-5'></view>
-        </view>
-      </view>
+  <view class='footer' wx:elif="{{order.airticketOrder.Order.status==8}}">
+    <view class='box box-f1 box-apc'>
+      <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' bindtap='bindApplyRefund'>申请退改</view>
+      <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一张</view>
     </view>
-  </view>
-</view>
-<view class='footer' wx:if="{{state==0||state==5||state==6||state==7}}">
-  <view class='box box-f1 box-apc submit-btn-1 lxkf-btn' data-phonenumber="400-700-7355" catchtap="telephone">联系客服</view>
-</view>
-<view class='footer' wx:elif="{{state==1}}">
-  <view class='box box-f1 box-apc'>
-    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' bindtap='bindCancelOrder'>取消订单</view>
-    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='createPayPara'>立即支付</view>
-  </view>
-</view>
-<view class='footer' wx:elif="{{state==2||state==3}}">
-  <view class='box box-f1 box-apc'>
-    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' bindtap='bindApplyRefund'>申请退款</view>
-    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一张</view>
-  </view>
-</view>
-<view class='footer' wx:else="{{state==4}}">
-  <view class='box box-f1 box-apc'>
-    <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' data-phonenumber="400-700-7355" catchtap="telephone">联系客服</view>
-    <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一张</view>
   </view>
 </view>
 <!--订单价格  -->
@@ -205,16 +211,16 @@
     <view class="pop-full font-13">
         <text class="pop-full-close" catchtap="hidePriceDetailModal"><i></i></text>
         <view class="pop-content">
-            <view class="priceDetail">
+            <view class="priceDetail" style="position:static;">
                 <view class="flex b-line adult-price price-group">
                     <view class="col-1">成人票价</view>
                     <view class="c-f4393c"><text>¥{{price.ticketAdultPrice}}</text><text class="c-999">×{{price.adultCount}}</text></view>
                 </view>
-                <view class="flex b-line child-price price-group" wx:hidden="{{price.childCount!=00}}">
+                <view class="flex b-line child-price price-group {{price.childCount==0?'none':''}}">
                     <view class="col-1">儿童票价</view>
                     <view class="c-f4393c"><text>¥{{price.childCount}}</text><text class="c-999">×{{price.childCount}}</text></view>
                 </view>
-                <view class="flex b-line baby-price price-group" wx:hidden="{{price.babyCount!=0}}">
+                <view class="flex b-line baby-price price-group {{price.babyCount==0?'none':''}}">
                     <view class="col-1">婴儿票价</view>
                     <view class="c-f4393c"><text>¥{{price.ticketBabyPrice}}</text><text class="c-999">×{{price.babyCount}}</text></view>
                 </view>

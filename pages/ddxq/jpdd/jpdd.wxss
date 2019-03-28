@@ -1,44 +1,26 @@
 /* pages/ddxq/jpdd/jpdd.wxss */
 @import "../../../template/template.wxss";
-.chack{
-  color: #999999; 
+.container{
+  min-height: 100vh;
 }
+
 .chack.chack-true{
-  color: #333333;
   border-bottom:4rpx solid #f4393c;
 }
 .border-radius{
   border-radius:10rpx; 
 }
-.dzf-btn{
+.tk-btn{
   background-position: center;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   width: 130rpx;
-  height: 40rpx;
+  height: 52rpx;
   color: #ffffff;
-  line-height: 40rpx;
+  line-height: 52rpx;
   text-align: center;
-}
-.dcx-btn{
-   background-position: center;
-   background-size: 100% 100%;
-   background-repeat: no-repeat;
-   width: 130rpx;
-   height: 40rpx;
-   color: #ffffff;
-   line-height: 40rpx;
-   text-align: center;
-}
-.tk-btn{
-   background-position: center;
-   background-size: 100% 100%;
-   background-repeat: no-repeat;
-   width: 130rpx;
-   height: 40rpx;
-   color: #ffffff;
-   line-height: 40rpx;
-   text-align: center;
+  border-top-left-radius: 26rpx;
+  border-bottom-left-radius: 26rpx;
 }
 .padding-tb-25{
   padding: 25rpx 0rpx;
