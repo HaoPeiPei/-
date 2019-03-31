@@ -102,7 +102,7 @@
     "navigationBarBackgroundColor": "#3f3a3a",
     "navigationBarTitleText": "环球机场通",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#ffffff",
+    "backgroundColor": "#f3f5f7",
     "enablePullDownRefresh": false
   },
   "tabBar": {
