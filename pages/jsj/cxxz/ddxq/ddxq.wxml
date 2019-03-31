@@ -4,7 +4,7 @@
 <template is="header_content_noBackod" data="{{...header_text}}" />
 
 <!--订单信息  -->
-<view style='margin-bottom:120rpx;'>
+<view>
   <view class='box box-f1 backgd-f margin-t-1'>
     <view class='box box-f1 margin-lr-1 box-ver'>
       <view class='box box-f1 box-ac padding-tb-1 border-b-1'>
@@ -96,7 +96,7 @@
   </view>
 
   <!--支付方式  -->
-  <view class='box box-f1 backgd-f margin-t-1'>
+  <view class='box box-f1 backgd-f margin-t-1' style="padding-bottom:110rpx;">
     <view class='box box-f1 margin-lr-1 box-ver'>
       <view class='box box-f1 box-ac padding-tb-1 border-b-1'>
         <view style='background:url({{imgRoot}}/images/zffs_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'>

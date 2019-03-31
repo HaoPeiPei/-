@@ -173,13 +173,19 @@ Page({
     });
   },
   //用车时间确认
-  useDatePopconfirm(e){
+  useDateConfirm(e){
     var useDate = formatTimestamp(e.detail);
     this.setData({
       useDate: useDate.substring(0,useDate.length-3),
       currentDate: e.detail,
       useDateShow: false,
     });
+  },
+  //用车时间取消
+  useDateCancel(e){
+    this.setData({
+      useDateShow: false,
+    })
   },
   //切换优惠券
   couponSelect: function (e) {

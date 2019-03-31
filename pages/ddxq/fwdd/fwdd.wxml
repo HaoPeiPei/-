@@ -1,192 +1,193 @@
 <!--pages/ddxq/fwdd/fwdd.wxml-->
 <import src="../../../template/template.wxml" />
+<view class="container c-bg-f3f5f7">
 <template is="header_content_noBackod" data="{{...header_text}}" />
-
-<view class='box box-f1 backgd-f font-13'>
-  <view class='box box-f1 box-apc padding-tb-20 chack {{status==""?"chack-true":""}}' bindtap='bindNavChange' data-status="">全部订单</view>
-  <view class='box box-f1 box-apc padding-tb-20 chack {{status=="待支付"?"chack-true":""}}' bindtap='bindNavChange' data-status="待支付">待支付</view>
-  <view class='box box-f1 box-apc padding-tb-20 chack {{status=="待出行"?"chack-true":""}}' bindtap='bindNavChange' data-status="待出行">待出行</view>
-  <view class='box box-f1 box-apc padding-tb-20 chack {{status=="退款"?"chack-true":""}}' bindtap='bindNavChange' data-status="退款">退款</view>
-</view>
-<!--全部订单  -->
-<view  wx:if="{{status==''}}">
-  <scroll-view style='width:100%;height:1350rpx;' bindscrolltolower="searchScrollLower" scroll-y>
-  <block wx:for="{{orderList_1}}" wx:key="*this">
-    <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
-      <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
-        <view class='box box-f1 box-ac'>{{item.service_name}}</view>
-        <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>去支付</view>
-        <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>已付款</view>
-        <view class='tk-btn' wx:elif="{{item.order_status==2}}" style='background-image:url({{imgRoot}}/images/ycp_bacl_1.png)'>待出行</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>退款中</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>已退款</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==5}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已取消</view>
-        <view class='yzf-btn' wx:else="{{item.order_status==6}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已拒绝</view>
-      </view>
-      <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>订单号</view>
-          <view class='box box-f1'>{{item.order_id}}</view>
+  <view class='box box-f1 backgd-f font-13'>
+    <view class='box box-f1 box-apc padding-tb-20 chack {{status==""?"chack-true":""}}' bindtap='bindNavChange' data-status="">全部订单</view>
+    <view class='box box-f1 box-apc padding-tb-20 chack {{status=="待支付"?"chack-true":""}}' bindtap='bindNavChange' data-status="待支付">待支付</view>
+    <view class='box box-f1 box-apc padding-tb-20 chack {{status=="待出行"?"chack-true":""}}' bindtap='bindNavChange' data-status="待出行">待出行</view>
+    <view class='box box-f1 box-apc padding-tb-20 chack {{status=="退款"?"chack-true":""}}' bindtap='bindNavChange' data-status="退款">退款</view>
+  </view>
+  <!--全部订单  -->
+  <view  wx:if="{{status==''}}">
+    <scroll-view style='width:100%;height:1350rpx;' bindscrolltolower="searchScrollLower" scroll-y>
+    <block wx:for="{{orderList_1}}" wx:key="*this">
+      <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
+        <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
+          <view class='box box-f1 box-ac'>{{item.service_name}}</view>
+          <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>去支付</view>
+          <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>已付款</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==2}}" style='background-image:url({{imgRoot}}/images/ycp_bacl_1.png)'>待出行</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>退款中</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>已退款</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==5}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已取消</view>
+          <view class='yzf-btn' wx:else="{{item.order_status==6}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已拒绝</view>
         </view>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>使用机场</view>
-          <view class='box box-f1 color-3'>{{item.short_name}}</view>
-        </view>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>使用时间</view>
-          <view class='box box-f1 color-3'>{{item.use_date}}</view>
-        </view>
-      </view>
-      <block wx:if="{{item.order_status=='0'||item.order_status=='1'||item.order_status=='2'}}">
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status=='0'}}">
-          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">去支付</view>
-        </view>
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-            <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-            <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">申请退款</view>
+        <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>订单号</view>
+            <view class='box box-f1'>{{item.order_id}}</view>
           </view>
-      </block>
-      <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-        <view class='ckxq-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">查看详情</view>
-      </view>
-    </view>
-  </block>
-  </scroll-view>
-</view>
-<!--待支付  -->
-<view  wx:if="{{status=='待支付'}}"> 
-  <block wx:for="{{orderList_1}}" wx:key="*this">
-    <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
-      <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
-        <view class='box box-f1 box-ac'>{{item.service_name}}</view>
-        <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>去支付</view>
-        <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>已付款</view>
-        <view class='tk-btn' wx:elif="{{item.order_status==2}}" style='background-image:url({{imgRoot}}/images/ycp_bacl_1.png)'>待出行</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>退款中</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>已退款</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==5}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已取消</view>
-        <view class='yzf-btn' wx:else="{{item.order_status==6}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已拒绝</view>
-      </view>
-      <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>订单号</view>
-          <view class='box box-f1'>{{item.order_id}}</view>
-        </view>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>使用机场</view>
-          <view class='box box-f1 color-3'>{{item.short_name}}</view>
-        </view>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>使用时间</view>
-          <view class='box box-f1 color-3'>{{item.use_date}}</view>
-        </view>
-      </view>
-      <block wx:if="{{item.order_status=='0'||item.order_status=='1'||item.order_status=='2'}}">
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status=='0'}}">
-          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">去支付</view>
-        </view>
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-            <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-            <view class='qzf-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">申请退款</view>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>使用机场</view>
+            <view class='box box-f1 color-3'>{{item.short_name}}</view>
           </view>
-      </block>
-      <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-        <view class='ckxq-btn' bindtap='bianGetChange' data-id="{{item.order_id}}">查看详情</view>
-      </view>
-    </view>
-  </block>
-</view>
-<!--待出行  -->
-<view wx:if="{{status=='待出行'}}">
-  <block wx:for="{{orderList_1}}" wx:key="*this">
-    <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
-      <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
-        <view class='box box-f1 box-ac'>{{item.service_name}}</view>
-        <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>去支付</view>
-        <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>已付款</view>
-        <view class='tk-btn' wx:elif="{{item.order_status==2}}" style='background-image:url({{imgRoot}}/images/ycp_bacl_1.png)'>待出行</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>退款中</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>已退款</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==5}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已取消</view>
-        <view class='yzf-btn' wx:else="{{item.order_status==6}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已拒绝</view>
-      </view>
-      <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>订单号</view>
-          <view class='box box-f1'>{{item.order_id}}</view>
-        </view>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>使用机场</view>
-          <view class='box box-f1 color-3'>{{item.short_name}}</view>
-        </view>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>使用时间</view>
-          <view class='box box-f1 color-3'>{{item.use_date}}</view>
-        </view>
-      </view>
-      <block wx:if="{{item.order_status=='0'||item.order_status=='1'||item.order_status=='2'}}">
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status=='0'}}">
-          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
-        </view>
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-            <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-            <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>使用时间</view>
+            <view class='box box-f1 color-3'>{{item.use_date}}</view>
           </view>
-      </block>
-      <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-        <view class='ckxq-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">查看详情</view>
-      </view>
-    </view>
-  </block>
-</view>
-<!--退款  -->
-<view wx:if="{{status=='退款'}}">
-  <block wx:for="{{orderList_1}}" wx:key="*this">
-    <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
-      <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
-        <view class='box box-f1 box-ac'>{{item.service_name}}</view>
-        <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>去支付</view>
-        <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>已付款</view>
-        <view class='tk-btn' wx:elif="{{item.order_status==2}}" style='background-image:url({{imgRoot}}/images/ycp_bacl_1.png)'>待出行</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>退款中</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>已退款</view>
-        <view class='yzf-btn' wx:elif="{{item.order_status==5}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已取消</view>
-        <view class='yzf-btn' wx:else="{{item.order_status==6}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已拒绝</view>
-      </view>
-      <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>订单号</view>
-          <view class='box box-f1'>{{item.order_id}}</view>
         </view>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>使用机场</view>
-          <view class='box box-f1 color-3'>{{item.short_name}}</view>
-        </view>
-        <view class='box box-f1 font-12 color-9 margin-b-10'>
-          <view style='width:150rpx;'>使用时间</view>
-          <view class='box box-f1 color-3'>{{item.use_date}}</view>
-        </view>
-      </view>
-      <block wx:if="{{item.order_status=='0'||item.order_status=='1'||item.order_status=='2'}}">
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:if="{{item.order_status=='0'}}">
-          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-          <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
-        </view>
-        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-            <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-            <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
+        <block wx:if="{{item.order_status==0||(item.order_status==1&&parseInt(item.refundable)>0)||(item.order_status==2&&parseInt(item.refundable) > 0)}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:if="{{item.order_status=='0'}}">
+            <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
+            <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
           </view>
-      </block>
-      <view class='box box-f1 padding-tb-10 font-13 margin-lr-20' wx:else>
-        <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
-        <view class='ckxq-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">查看详情</view>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:else>
+              <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
+            </view>
+        </block>
+        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-f4393c' wx:else>
+          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+          <view class='ckxq-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">查看详情</view>
+        </view>
       </view>
-    </view>
-  </block>
+    </block>
+    </scroll-view>
+  </view>
+  <!--待支付  -->
+  <view  wx:if="{{status=='待支付'}}"> 
+    <block wx:for="{{orderList_1}}" wx:key="*this">
+      <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
+        <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
+          <view class='box box-f1 box-ac'>{{item.service_name}}</view>
+          <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>去支付</view>
+          <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>已付款</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==2}}" style='background-image:url({{imgRoot}}/images/ycp_bacl_1.png)'>待出行</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>退款中</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>已退款</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==5}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已取消</view>
+          <view class='yzf-btn' wx:else="{{item.order_status==6}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已拒绝</view>
+        </view>
+        <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>订单号</view>
+            <view class='box box-f1'>{{item.order_id}}</view>
+          </view>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>使用机场</view>
+            <view class='box box-f1 color-3'>{{item.short_name}}</view>
+          </view>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>使用时间</view>
+            <view class='box box-f1 color-3'>{{item.use_date}}</view>
+          </view>
+        </view>
+        <block wx:if="{{item.order_status==0||(item.order_status==1&&parseInt(item.refundable)>0)||(item.order_status==2&&parseInt(item.refundable) > 0)}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:if="{{item.order_status=='0'}}">
+            <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
+            <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
+          </view>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:else>
+              <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
+            </view>
+        </block>
+        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-f4393c' wx:else>
+          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+          <view class='ckxq-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">查看详情</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!--待出行  -->
+  <view wx:if="{{status=='待出行'}}">
+    <block wx:for="{{orderList_1}}" wx:key="*this">
+      <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
+        <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
+          <view class='box box-f1 box-ac'>{{item.service_name}}</view>
+          <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>去支付</view>
+          <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>已付款</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==2}}" style='background-image:url({{imgRoot}}/images/ycp_bacl_1.png)'>待出行</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>退款中</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>已退款</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==5}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已取消</view>
+          <view class='yzf-btn' wx:else="{{item.order_status==6}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已拒绝</view>
+        </view>
+        <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>订单号</view>
+            <view class='box box-f1'>{{item.order_id}}</view>
+          </view>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>使用机场</view>
+            <view class='box box-f1 color-3'>{{item.short_name}}</view>
+          </view>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>使用时间</view>
+            <view class='box box-f1 color-3'>{{item.use_date}}</view>
+          </view>
+        </view>
+        <block wx:if="{{item.order_status==0||(item.order_status==1&&parseInt(item.refundable)>0)||(item.order_status==2&&parseInt(item.refundable) > 0)}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:if="{{item.order_status=='0'}}">
+            <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
+            <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
+          </view>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:else>
+              <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
+            </view>
+        </block>
+        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-f4393c' wx:else>
+          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+          <view class='ckxq-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">查看详情</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!--退款  -->
+  <view wx:if="{{status=='退款'}}">
+    <block wx:for="{{orderList_1}}" wx:key="*this">
+      <view class='box box-f1 backgd-f margin-20 border-radius box-ver'>
+        <view class='box box-f1 margin-l-20 font-13 padding-tb-25'>
+          <view class='box box-f1 box-ac'>{{item.service_name}}</view>
+          <view class='dzf-btn' wx:if="{{item.order_status==0}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>去支付</view>
+          <view class='dcx-btn' wx:elif="{{item.order_status==1}}" style='background-image:url({{imgRoot}}/images/dzf_back_1.png)'>已付款</view>
+          <view class='tk-btn' wx:elif="{{item.order_status==2}}" style='background-image:url({{imgRoot}}/images/ycp_bacl_1.png)'>待出行</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==3}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>退款中</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==4}}" style='background-image:url({{imgRoot}}/images/tk_back_1.png)'>已退款</view>
+          <view class='yzf-btn' wx:elif="{{item.order_status==5}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已取消</view>
+          <view class='yzf-btn' wx:else="{{item.order_status==6}}" style='background-image:url({{imgRoot}}/images/qx_back_1.png)'>已拒绝</view>
+        </view>
+        <view class='box box-f1 margin-lr-20 box-ver border-b-1 padding-b-20'>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>订单号</view>
+            <view class='box box-f1'>{{item.order_id}}</view>
+          </view>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>使用机场</view>
+            <view class='box box-f1 color-3'>{{item.short_name}}</view>
+          </view>
+          <view class='box box-f1 font-12 color-9 margin-b-10'>
+            <view style='width:150rpx;'>使用时间</view>
+            <view class='box box-f1 color-3'>{{item.use_date}}</view>
+          </view>
+        </view>
+        <block wx:if="{{item.order_status==0||(item.order_status==1&&parseInt(item.refundable)>0)||(item.order_status==2&&parseInt(item.refundable) > 0)}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:if="{{item.order_status=='0'}}">
+            <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
+            <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
+          </view>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:else>
+              <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
+              <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
+            </view>
+        </block>
+        <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-f4393c' wx:else>
+          <view class='box box-f1 box-ac color-f480'>￥{{item.pay_amount_due}}</view>
+          <view class='ckxq-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">查看详情</view>
+        </view>
+      </view>
+    </block>
+  </view>
 </view>

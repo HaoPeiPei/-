@@ -11,7 +11,7 @@ Page({
   data: {
     header_text: {
       "left_icon": imgRoot+"/images/back-b.png",
-      "title_text": "订单管理",
+      "title_text": "服务订单",
       "right_icon": imgRoot+"/images/dh-b.png",
     },
     key: 0,

@@ -37,7 +37,7 @@
                         </view>
                         <view class="c-align search-arror r_position">
                             <i class="icon-lineArror c-999 "></i>
-                            <text class="stop c-f4393c font-size-18" data-bind="text: parseInt(Stop) > 0?'经停':''">{{flightInfo.Stop>0?'经停':''}}</text>
+                            <text class="stop c-f4393c font-size-18" >{{flightInfo.Stop>0?'经停':''}}</text>
                         </view>
                         <view class="r-align ">
                             <text class="font-size-22 font-weight-bold" data-bind="text: EndTime">{{flightInfo.EndTime}}</text>

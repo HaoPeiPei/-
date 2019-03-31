@@ -23,7 +23,9 @@ Page({
       cabInfos = cabInfos.filter(function(item){
         if(JSON.stringify(item) != '{}'){
           var FlightLowestPrice = parseInt(item.SalePrice) - parseInt(item.Promotion);
-          return item[FlightLowestPrice] = FlightLowestPrice;}
+          var FlightNoIcon = item.FlightNo.substring(0, 2);
+          return  Object.assign(item,{FlightLowestPrice,FlightNoIcon});
+        }
       });
       carrier = Object.assign({},carrier,{
         CabInfos: cabInfos

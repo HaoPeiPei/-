@@ -223,10 +223,27 @@ con-mess-l.font-size-34{
     line-height: 40rpx;
     display: block;
 } 
+.selectAir .main .flight-wrap .flight-info .search-arror{
+    position: relative;
+    padding-top: 20rpx;
+}
 .selectAir .main .flight-wrap .flight-info .icon-lineArror{
     font-size: 75rpx;
     margin: 0 75rpx;
+    height: 100%;
 } 
+.selectAir .main .flight-wrap .flight-info .stop{
+    position:absolute;
+    top:4rpx;
+    width:100%;
+    text-align:center;
+}
+.selectAir .main .flight-wrap .flight-info .bottom{
+    position:absolute;
+    bottom:4rpx;
+    width:100%;
+    text-align:center;
+}
 .selectAir .main .cabInfo-list .cabInfo-item{
     margin-top: 20rpx;
     background-color: #fff;

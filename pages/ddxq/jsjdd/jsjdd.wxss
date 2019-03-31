@@ -1,6 +1,9 @@
 /* pages/ddxq/dbcdd/dbcdd.wxss */
 
 @import "../../../template/template.wxss";
+.container{
+  min-height: 100vh;
+}
 .chack{
   color: #999999; 
 }

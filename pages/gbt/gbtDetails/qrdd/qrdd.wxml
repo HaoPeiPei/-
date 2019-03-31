@@ -26,12 +26,13 @@
             value="{{currentDate}}"
             min-date="{{minDate}}"
             max-date="{{ maxDate }}"
-            bind:confirm="useDatePopconfirm"
-            title="请输入用车日期"
+            bind:cancel="useDateCancel"
+            bind:confirm="useDateConfirm"
+            title="请输入使用日期"
           />
         </van-popup>
         <view class='box box-f1 color-3' bindtap='useDateChange'>
-          <input type='text' placeholder='请输入用车日期' style='width:100%' disabled value="{{useDate}}" />
+          <input type='text' placeholder='请输入使用日期' style='width:100%' disabled value="{{useDate}}" />
         </view>
       </view>
     </view>
@@ -39,7 +40,7 @@
 </view>
 
 <!--联系人  -->
-<view class='box box-f1 backgd-f margin-t-1'>
+<view class='box box-f1 backgd-f border-f3f5f7-top10'>
   <view class='box box-f1 margin-lr-1 box-ver'>
     <view class='box box-f1 box-ac padding-tb-1 border-b-1'>
       <i class="icon-contacts font-size-19 c-999"></i>
@@ -63,7 +64,7 @@
 </view>
 
 <!--优惠券  -->
-<view class='box box-f1 backgd-f margin-t-1 box-ver font-14'>
+<view class='box box-f1 backgd-f margin-t-1 box-ver font-14 border-f3f5f7-top10'>
   <view class='box box-f1 margin-lr-1 padding-tb-1 box-ac'>
     <view style='background:url({{imgRoot}}/images/yh_icon.png) no-repeat center center;background-size:100% 100%;width:28rpx;height:28rpx;'></view>
     <view class='box box-f1 margin-l-1' >
@@ -77,7 +78,7 @@
       </view>
   </view>
 </view>
-<view class='box box-f1 backgd-f margin-t-10'>
+<view class='box box-f1 backgd-f margin-t-10 border-f3f5f7-top10'>
   <view class='box box-f1 box-ver margin-lr-20'>
     <view class='box box-f1 box-ac padding-tb-20 border-b-1'>
       <view style='background:url({{imgRoot}}/images/zffs_icon.png) no-repeat center center;background-size:100% 100%;width:30rpx;height:30rpx;'></view>

@@ -126,7 +126,7 @@
 </view>
 
 <!--支付方式  -->
-<view class='box box-f1 backgd-f margin-t-10' style='margin-bottom:110rpx;'>
+<view class='box box-f1 backgd-f margin-t-10' style='padding-bottom:110rpx;'>
   <view class='box box-f1 box-ver margin-lr-30'>
     <view class='box box-f1 box-ac padding-tb-25 border-b-1'>
       <i class="icon-payment font-20 c-f4393c"></i>

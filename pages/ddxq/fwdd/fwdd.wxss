@@ -1,6 +1,6 @@
 /* pages/ddxq/fwdd/fwdd.wxss */
 @import "../../../template/template.wxss";
-page{
+.container{
   min-height: 100vh;
 }
 .chack{

@@ -12,7 +12,7 @@ Page({
   data: {
     header_text: {
       "left_icon": imgRoot+"/images/back-b.png",
-      "title_text": "订单管理",
+      "title_text": "机票订单",
       "right_icon": "",
     },
     imgRoot: imgRoot, 

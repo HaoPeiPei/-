@@ -112,21 +112,25 @@
         </view>
         <view class="main">
             <view class="flight-wrap">
-                <view class="flight-title">{{carrier.CarrierName}} {{carrier.FlightNo}} <i class="line"></i>{{carrier.PlaneType}}</view>
+                <view class="flight-title">
+                    <i class="airsmall_{{carrier.FlightNoIcon}}"></i>
+                    {{carrier.CarrierName}} {{carrier.FlightNo}} <i class="line"></i>{{carrier.PlaneType}}
+                </view>
                 <view class="flight-info flex ">
                     <view class="col-1 c-align">
                         <text class="font-size-27" data-bind="text: BeginTime">{{carrier.BeginTime}}</text>
                         <text class="font-size-24 c-999" data-bind="text: DepCityName + BeginTerm">{{carrier.DepCityName}}({{carrier.BeginTerm}})</text>
-                        <text class="font-size-20 c-999" data-bind="text: DepCityName + BeginTerm">{{depDate}} {{depWeek}}</text>
+                        <text class="font-size-20 c-999" data-bind="text: DepCityName + BeginTerm">{{carrier.depDate}} {{carrier.depWeek}}</text>
                     </view>
                     <view class="c-align search-arror r_position">
+                        <text class="stop c-f4393c font-size-18" >{{carrier.Stop>0?'经停':''}}</text>
                         <i class="icon-lineArror c-999 "></i>
-                        <text class="stop c-f4393c font-size-18" data-bind="text: parseInt(Stop) > 0?'经停':''">{{Stop>0?'经停':''}}</text>
+                        <text class="bottom c-999 font-size-18" >{{carrier.Stop>0?carrier.stopCity:''}}</text>
                     </view>
                     <view class="col-1 c-align">
                         <text class="font-size-27" data-bind="text: EndTime">{{carrier.EndTime}}</text>
                         <text class="font-size-24 c-999" data-bind="text: ArrCityName + EndTerm">{{carrier.ArrCityName}}({{carrier.EndTerm}})</text>
-                        <text class="font-size-20 c-999" data-bind="text: ArrCityName + EndTerm">{{arrDate}} {{arrWeek}}</text>
+                        <text class="font-size-20 c-999" data-bind="text: ArrCityName + EndTerm">{{carrier.arrDate}} {{carrier.arrWeek}}</text>
                     </view>
                 </view>
             </view>

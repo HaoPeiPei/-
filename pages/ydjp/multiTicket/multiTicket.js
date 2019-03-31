@@ -351,10 +351,19 @@ Page({
       var depDate =  e.currentTarget.dataset.depdate;
       var carrier = carriers.filter(function(item){
         if(item.FlightNo==flightNo&&item.BeginTime==beginTime&&item.DepDate==depDate){
-          return item
+          return Object.assign(item,{ 
+            depDate: getMD(item.DepDate), 
+            depWeek: getWeek(item.DepDate), 
+            arrDate: getMD(item.ArrDate) ,
+            arrWeek: getWeek(item.ArrDate)
+          });
         }
       })[0];
-      
+
+      if((Object.keys(carrier)).length != 0){
+        parseInt(carrier.Stop) > 0 ? this.getStopCity(carrier): null
+      }
+
       this.setData({
         multiTicketShow: false,
         selectAirlShow: true,
@@ -463,6 +472,20 @@ Page({
           url: '../airTicketOrder/airTicketOrder?bookInfo='+JSON.stringify(bookInfo)
         })
       }
+    },
+    //获取经停城市
+    getStopCity(item) {
+      httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/airTicket.ashx?depDate=" + item.DepDate + "&flightNo=" + item.FlightNo + "&action=getStopCity", {} , "GET", res=> {
+        var stopCity = '';
+        if (res.Status == 1) {
+          stopCity = res.FlightInfos[0].ArrCityName;
+          this.setData({
+            carrier: Object.assign(item,{ 
+              stopCity: stopCity
+            })
+          });
+        }
+      });
     },
     //检查memberID,无去登陆页面
     toLogin(){

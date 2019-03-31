@@ -396,7 +396,10 @@ a{
 }
 .c-bg-f3f5f7{
     background-color: #f3f5f7;
-    /*background-color: red;*/
+}
+.c-bg-0000007{
+    background:rgba(0,0,0,.7) !important;
+
 }
 .c-green{
     color: rgba(0,184,0,0.8);

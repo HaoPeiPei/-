@@ -3,7 +3,6 @@
 .container{
   min-height: 100vh;
 }
-
 .chack.chack-true{
   border-bottom:4rpx solid #f4393c;
 }

@@ -33,7 +33,7 @@
       </view>
     </view>
     <!--行程 -->
-    <view class='box box-f1 margin-t-10 backgd-f'>
+    <view class='box box-f1 margin-t-20 backgd-f'>
       <view class='box box-f1 margin-lr-20 box-ver'>
         <!-- 单程 -->
         <block wx:if="{{order.airticketOrder.FlightInfos.length==1}}">
@@ -64,11 +64,11 @@
             <view class='box box-f1 box-ac'>
               <view class='box'>订单金额</view>
               <view class='box margin-lr-20 color-f4'>{{order.airticketOrder.Order.total_price}}</view>
-              <view style='background-image:url("{{imgRoot}}/images/xl_icon_1.png")' class='background-icon-3' bindtap='showPriceDetailModal'></view>
+              <view class='icon-arror-u font-12 c-f4393c' bindtap='showPriceDetailModal'></view>
             </view>
             <view class='box box-ac' bindtap='showMultiEndorse'>
               <view class='color-3e margin-r-10' bindtap='showSingleEndorse'>退改详情</view>
-              <view style='background-image:url("{{imgRoot}}/images/arrow_r.png");margin-top:5rpx;' class='background-icon-4'></view>
+              <view  class='icon-arror-r font-10 c-3eabff'></view>
             </view>
           </view>
         </block>
@@ -91,7 +91,7 @@
             <view class='box box-f1 box-ac'>
               <view class='box'>订单金额</view>
               <view class='box margin-lr-20 color-f4'>{{order.airticketOrder.Order.total_price}}</view>
-              <view style='background-image:url("{{imgRoot}}/images/xl_icon_1.png")' class='background-icon-3' bindtap='showPriceDetailModal'></view>
+              <view  class='icon-arror-u font-12 c-f4393c' bindtap='showPriceDetailModal'></view>
             </view>
             <view class='box box-ac' bindtap='showMultiEndorse'>
               <view class='color-3e margin-r-10'>退改详情</view>
@@ -102,7 +102,7 @@
       </view>
     </view>
     <!--值机区域  -->
-    <view class='box box-f1 margin-t-10 backgd-f none'>
+    <view class='box box-f1 margin-t-20 backgd-f none'>
       <view class='box box-f1 padding-tb-20 font-15 margin-lr-20'>
         <view class='box color-9 box-ac'>
           <view style='background-image:url("{{imgRoot}}/images/sscx.png")' class='background-icon'></view>
@@ -112,7 +112,7 @@
       </view>
     </view>
     <!--乘机人-->
-    <view class='box box-f1 margin-t-10 backgd-f'>
+    <view class='box box-f1 margin-t-20 backgd-f'>
       <view class='box box-f1 font-15 margin-lr-20 box-ver'>
         <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
           <view style='background-image:url("{{imgRoot}}/images/cjr_icon_1.png")' class='background-icon'></view>
@@ -134,7 +134,7 @@
       </view>
     </view>
     <!--联系人-->
-    <view class='box box-f1 margin-t-10 backgd-f'>
+    <view class='box box-f1 margin-t-20 backgd-f'>
       <view class='box box-f1 font-15 margin-lr-20 box-ver'>
         <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
           <i class="icon-contacts font-20"></i>
@@ -149,7 +149,7 @@
       </view>
     </view>
     <!--邮寄情况-->
-    <view class='box box-f1 margin-t-10 backgd-f {{order.airticketOrder.Order.is_delivery==1?"":"none"}}'>
+    <view class='box box-f1 margin-t-20 backgd-f {{order.airticketOrder.Order.is_delivery==1?"":"none"}}'>
       <view class='box box-f1 font-15 margin-lr-20 box-ver'>
         <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
           <view style='background-image:url("{{imgRoot}}/images/lxr_icon.png")' class='background-icon'></view>
@@ -172,10 +172,10 @@
       </view>
     </view>
     <!--支付方式-->
-    <view class='box box-f1 margin-t-10 backgd-f' >
+    <view class='box box-f1 margin-t-20 backgd-f' >
       <view class='box box-f1 font-15 margin-lr-20 box-ver'>
         <view class='box color-9 box-ac padding-tb-20 border-b-1 box-f1'>
-          <view class='icon-payment font-size-20 c-f4393c'></view>
+          <view class='icon-payment font-20 c-f4393c'></view>
           <view class='margin-l-10'>支付方式</view>
         </view>
         <view class='box box-f1 box-ver margin-l-38 padding-tb-20'>
@@ -196,18 +196,18 @@
   <view class='footer' wx:elif="{{order.airticketOrder.Order.status==2||order.airticketOrder.Order.status==3||order.airticketOrder.Order.status==4||order.airticketOrder.Order.status==5||order.airticketOrder.Order.status==6||order.airticketOrder.Order.status==7}}">
     <view class='box box-f1 box-apc'>
       <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' data-phonenumber="400-700-7355" catchtap="telephone">联系客服</view>
-      <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一张</view>
+      <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一单</view>
     </view>
   </view>
   <view class='footer' wx:elif="{{order.airticketOrder.Order.status==8}}">
     <view class='box box-f1 box-apc'>
       <view class='box box-f1 submit-btn-1 box-apc qxdd-btn' bindtap='bindApplyRefund'>申请退改</view>
-      <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一张</view>
+      <view class='box box-f1 submit-btn-1 box-apc lxkf-btn' bindtap='bindReturnIndex'>再来一单</view>
     </view>
   </view>
 </view>
 <!--订单价格  -->
-<view class="c-bg-000 flex priceDetailModal {{priceDetailModalShow?'':'none'}}">
+<view class="c-bg-0000007 flex priceDetailModal {{priceDetailModalShow?'':'none'}}">
     <view class="pop-full font-13">
         <text class="pop-full-close" catchtap="hidePriceDetailModal"><i></i></text>
         <view class="pop-content">
@@ -250,7 +250,7 @@
 </view>
 
 <!--退改详情  -->
-<view class="endorseModal c-bg-000 flex {{endorseModalShow?'':'none'}}">
+<view class="endorseModal c-bg-0000007 flex {{endorseModalShow?'':'none'}}">
   <view class="pop-full font-13">
       <view class="pop-full-close" catchtap="hideEndorseModal"><i></i></view>
       <view class="pop-content">
@@ -270,7 +270,7 @@
   </view>    
 </view>
 <!-- 往返信息 -->
-<view class="div_mulLine c-bg-000 flex {{mulLineModalShow?'':'none'}}">
+<view class="div_mulLine c-bg-0000007 flex {{mulLineModalShow?'':'none'}}">
     <view class="pop-full"  >
         <text class="pop-full-close" catchtap="hideMulLineModal"><i></i></text>
         <view class="pop-content font-13">

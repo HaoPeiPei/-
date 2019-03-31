@@ -13,7 +13,7 @@
     </view>
     <view class="main">
         <view class="flight-wrap">
-            <view class="flight-title">{{carrier.CarrierName}} {{carrier.FlightNo}}</view>
+            <view class="flight-title"><i class="airsmall_{{carrier.FlightNoIcon}}"></i>{{carrier.CarrierName}} {{carrier.FlightNo}}</view>
             <view class="flight-info flex ">
                 <view class="col-1 c-align">
                     <text class="font-size-27" data-bind="text: BeginTime">{{carrier.BeginTime}}</text>
