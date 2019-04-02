@@ -240,7 +240,7 @@ Page({
                   success(res) {
                     if (res.confirm) {
                       wx.navigateTo({
-                        url: '../../ddxq/jsjdd/jsjdd'
+                        url: '../../../ddxq/jsjdd/jsjdd'
                       })
                     } else if (res.cancel) {
                       that.jsApiCall(params, orderId);
@@ -254,7 +254,7 @@ Page({
                 success(res) {
                   if (res.confirm) {
                     wx.navigateTo({
-                      url: '../../ddxq/jsjdd/jsjdd'
+                      url: '../../../ddxq/jsjdd/jsjdd'
                     })
                   } else if (res.cancel) {
                     that.jsApiCall(params, orderId);
@@ -270,7 +270,7 @@ Page({
             success(res) {
               if (res.confirm) {
                 wx.navigateTo({
-                  url: '../../ddxq/jsjdd/jsjdd'
+                  url: '../../../ddxq/jsjdd/jsjdd'
                 })
               } else if (res.cancel) {
                 that.jsApiCall(params, orderId);

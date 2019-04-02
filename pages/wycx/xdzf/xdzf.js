@@ -337,12 +337,26 @@ Page({
               content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
               success(res) {
                 if (res.confirm) {
-                  wx.switchTab({
-                      url: '../../ddxq/fwdd/fwdd'
+                  wx.navigateTo({
+                    url: '../../ddxq/fwdd/fwdd',
                   });
                 } else if (res.cancel) {
                   that.jsApiCall(params, orderId);
                 }
+              }
+            });
+          }else {
+            wx.showModal({
+              title: "温馨提示", 
+              content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
+              success(res) {
+                  if (res.confirm) {
+                    wx.navigateTo({
+                      url: '../../ddxq/fwdd/fwdd',
+                    });
+                  } else if (res.cancel) {
+                    that.jsApiCall(params, orderId);
+                  }
               }
             });
           };
@@ -353,8 +367,8 @@ Page({
             content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
             success(res) {
               if (res.confirm) {
-                wx.switchTab({
-                  url: '../../ddxq/fwdd/fwdd'
+                wx.navigateTo({
+                  url: '../../ddxq/fwdd/fwdd',
                 });
               } else if (res.cancel) {
                 that.jsApiCall(params, orderId);

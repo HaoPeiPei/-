@@ -107,7 +107,7 @@ Page({
   onCheckFlightNo: function(e) {
     var flightNo = e.detail.value;
     var flight = this.data.flight;
-    if (flightNo != '' && !(flightNoReg.test(flightNo))){
+    if (flightNo != '' && !flightNoReg.test(flightNo)){
       wx.showToast({
         title: '请输入正确的航班号',
         icon: 'none'

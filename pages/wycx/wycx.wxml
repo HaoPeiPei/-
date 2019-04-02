@@ -56,7 +56,7 @@
           </view>
           <view class='box box-f1 padding-tb-1'>
             <view class='color-3' style='width:160rpx'>非自愿变更</view>
-            <view class='box box-f1 color-9'>因机型变更、时刻变更和航班取消等情况未能享受任何一项服务，请线下联系客服申请退款；如未能享受本分服务，可线下联系客服申请抵用卷(一年内有效)，再次下单使用。</view>
+            <view class='box box-f1 color-9'>因机型变更、时刻变更和航班取消等情况未能享受任何一项服务，请线下联系客服申请退款；如未能享受本分服务，可线下联系客服申请抵用券(一年内有效)，再次下单使用。</view>
           </view>
           <view class='box box-f1 padding-tb-1'>
             <view class='color-3' style='width:160rpx'>改签</view>

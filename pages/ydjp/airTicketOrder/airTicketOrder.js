@@ -4,6 +4,7 @@ var app = getApp();
 var wwwRoot = app.globalData.wwwRoot;
 var imgRoot = app.globalData.imgRoot;
 var countDownTimer; //倒计时计时器
+var orderConfirmeTimer; //倒计时计时器
 var countDownFlag = false; //倒计时开关
 var httpRequst = require("../../../utils/requst.js");
 var Hub = require("../../../utils/miniProgramSignalr.js");
@@ -76,11 +77,13 @@ Page({
         areaList: areaList,
         linkRegionShow: false,
         payType: 1, //支付方式 1:微信、
-        currentTime: 60
+        currentTime: 60,
+        orderId: null,
     },
     //返回
     catchBackChange: function () {
         clearInterval(countDownTimer);
+        clearInterval(orderConfirmeTimer);
         wx.navigateBack({
             delta: 1
         })
@@ -747,9 +750,10 @@ Page({
                 wx.hideLoading()
                 if (res.Success) {
                     that.setData({
-                        jsAlertModalShow: true
+                        jsAlertModalShow: true,
+                        orderId: res.Data
                     });
-                    that.orderConfirme(res.Data);
+                    that.orderConfirme();
                     that.countDown(); //开始倒计时
                 } else {
     
@@ -758,8 +762,9 @@ Page({
         }
     },
     //生成微信支付参数
-    createPayPara(orderId) {
+    createPayPara() {
         var that = this;
+        var orderId= this.data.orderId;
         if (orderId != null && orderId != "") {
             wx.showLoading({
                 title: '数据加载中...',
@@ -796,7 +801,7 @@ Page({
                         content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
                         success(res) {
                             if (res.confirm) {
-                                wx.switchTab({
+                                wx.navigateTo({
                                     url: '../../ddxq/jpdd/jpdd'
                                 });
                             } else if (res.cancel) {
@@ -810,7 +815,7 @@ Page({
                         content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
                         success(res) {
                           if (res.confirm) {
-                            wx.switchTab({
+                            wx.navigateTo({
                                 url: '../../ddxq/jpdd/jpdd'
                             }); 
                           } else if (res.cancel) {
@@ -826,9 +831,9 @@ Page({
                     content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",
                     success(res) {
                       if (res.confirm) {
-                        wx.switchTab({
+                        wx.navigateTo({
                             url: '../../ddxq/jpdd/jpdd'
-                        }); 
+                        });
                       } else if (res.cancel) {
                         jsApiCall(params, orderId);
                       }
@@ -911,25 +916,29 @@ Page({
     },
     //跳转订单详情
     toOrderManager(){
-        wx.switchTab({
-            url: '../../ddxq/ddxq'
-          })
+        wx.navigateTo({
+            url: '../../ddxq/jpdd/jpdd'
+        });
     },
     //订单确认
-    orderConfirme(orderId){
+    orderConfirme(){
         var that = this;
-        httpRequst.HttpRequst(false, '/weixin/jctnew/ashx/airticket.ashx', { action: "getorderbyid", orderId: orderId }, "POST",function(res){
+        httpRequst.HttpRequst(false, '/weixin/jctnew/ashx/airTicket.ashx', { action: "getorderbyid", orderId: this.data.orderId }, "POST",function(res){
             if (res.Success) {
                 var resData = JSON.parse(res.Data);
                 if(resData.airticketOrder.Order.status==1){
                     clearInterval(countDownTimer);
-                    that.createPayPara(orderId);
+                    clearInterval(orderConfirmeTimer);
+                    that.setData({
+                    jsAlertModalShow: false
+                    });
+                    that.createPayPara();
                 }else{
-                    if(!!countDownFlag){
+                    if(!countDownFlag){
                         that.countDown(); //开始倒计时
                         countDownFlag = true;
                     }
-                    setTimeout(() => {
+                    orderConfirmeTimer = setTimeout(() => {
                         that.orderConfirme();
                     }, 5000);
                 }
@@ -950,11 +959,14 @@ Page({
     },
     onHide:function(){
         // 生命周期函数--监听页面隐藏
+        clearInterval(countDownTimer);
+        clearInterval(orderConfirmeTimer);
         
     },
     onUnload:function(){
         // 生命周期函数--监听页面卸载
         clearInterval(countDownTimer);
+        clearInterval(orderConfirmeTimer);
         
     },
     onPullDownRefresh: function() {

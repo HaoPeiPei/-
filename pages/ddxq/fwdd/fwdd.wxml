@@ -38,11 +38,11 @@
           </view>
         </view>
         <block wx:if="{{item.order_status==0||(item.order_status==1&&parseInt(item.refundable)>0)||(item.order_status==2&&parseInt(item.refundable) > 0)}}">
-          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:if="{{item.order_status=='0'}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-fff' wx:if="{{item.order_status=='0'}}">
             <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
             <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
           </view>
-          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:else>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-fff' wx:else>
               <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
               <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
             </view>
@@ -84,11 +84,11 @@
           </view>
         </view>
         <block wx:if="{{item.order_status==0||(item.order_status==1&&parseInt(item.refundable)>0)||(item.order_status==2&&parseInt(item.refundable) > 0)}}">
-          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:if="{{item.order_status=='0'}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20  c-fff' wx:if="{{item.order_status=='0'}}">
             <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
             <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
           </view>
-          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:else>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-fff' wx:else>
               <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
               <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
             </view>
@@ -129,11 +129,11 @@
           </view>
         </view>
         <block wx:if="{{item.order_status==0||(item.order_status==1&&parseInt(item.refundable)>0)||(item.order_status==2&&parseInt(item.refundable) > 0)}}">
-          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:if="{{item.order_status=='0'}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-fff' wx:if="{{item.order_status=='0'}}">
             <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
             <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
           </view>
-          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:else>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20  c-fff' wx:else>
               <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
               <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
             </view>
@@ -174,11 +174,11 @@
           </view>
         </view>
         <block wx:if="{{item.order_status==0||(item.order_status==1&&parseInt(item.refundable)>0)||(item.order_status==2&&parseInt(item.refundable) > 0)}}">
-          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:if="{{item.order_status=='0'}}">
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-fff' wx:if="{{item.order_status=='0'}}">
             <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
             <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">去支付</view>
           </view>
-          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20 c-bg-f4393c c-fff' wx:else>
+          <view class='box box-f1 padding-tb-10 font-13 margin-lr-20  c-fff' wx:else>
               <view class='box box-f1 box-ac '>￥{{item.pay_amount_due}}</view>
               <view class='qzf-btn' bindtap='bianGetChange' data-code="{{item.service_type_code}}" data-id="{{item.order_id}}">申请退款</view>
             </view>

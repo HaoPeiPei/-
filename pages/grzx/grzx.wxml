@@ -36,7 +36,7 @@
         <image src='{{item.src}}' style='width:60rpx;height:60rpx;'></image>
       </view>
       <view class='box box-f1 box-apc font-12 color-3'>{{item.personalTitle}}
-        <view wx:if='{{item.personalTitle=="优惠卷" && user.CounponCount != null }}'>{{user.CounponCount}}张</view>
+        <view wx:if='{{item.personalTitle=="优惠券" && user.CounponCount != null }}'>{{user.CounponCount}}张</view>
       </view>
     </view>
     </navigator>

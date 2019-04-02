@@ -12,7 +12,7 @@ Page({
     header_text:
       {
         "left_icon": imgRoot+"/images/back-b.png",
-        "title_text": "优惠卷",
+        "title_text": "优惠券",
         "right_icon": imgRoot+"/images/dh-b.png",
       },
     imgRoot: imgRoot,  

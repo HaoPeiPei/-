@@ -331,7 +331,7 @@
 
 <!-- 订购无忧出行须知 -->
 <template name="worryFreeModal">
-    <view class="c-bg-000 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
+    <view class="c-bg-0000007 flex worryFreeModal {{worryFreeModalShow?'':'none'}}">
         <view class="pop-full">
             <text class="pop-full-close" catchtap="hideWorryFreeModal"><i></i></text>
             <view class="pop-content">
@@ -365,7 +365,7 @@
 
 <!-- 保险提示信息 -->
 <template name="hintModal">
-    <view class="c-bg-000 flex hintModal {{hintModalShow?'':'none'}}" >
+    <view class="c-bg-0000007 flex hintModal {{hintModalShow?'':'none'}}" >
         <view class="pop-full">
             <text class="pop-full-close" catchtap="hideHintModal"><i></i></text>
             <view class="pop-content" >
@@ -384,7 +384,7 @@
 
 <!-- 往返机票信息 -->
 <template name="mulLineModal">
-    <view class="div_mulLine c-bg-000 flex {{mulLineModalShow?'':'none'}}">
+    <view class="div_mulLine c-bg-0000007 flex {{mulLineModalShow?'':'none'}}">
         <view class="pop-full"  >
             <text class="pop-full-close" catchtap="hideMulLineModal"><i></i></text>
             <view class="pop-content font-size-13">
@@ -417,16 +417,16 @@
 
 <!-- 订单需客服确认 -->
 <template name="jsAlertModal">
-    <view  class="c-bg-000 flex jsAlertModal {{jsAlertModalShow?'':'none'}}"><!--  -->
+    <view catchtouchmove="return"  class="c-bg-0000007 flex jsAlertModal {{jsAlertModalShow?'':'none'}}"><!--  -->
 		<view class="alert-box">
 			<view class="alert-head">
-                <canvas  canvas-id="countDown1" id="countDown1">
-                </canvas> 
-                <canvas canvas-id="countDown2" id="countDown2">
-                </canvas> 
+        <canvas  canvas-id="countDown1" id="countDown1">
+        </canvas> 
+        <canvas canvas-id="countDown2" id="countDown2">
+        </canvas> 
 			</view>
 			<view class="alert-body">
-                <view class="alert-body-title">确认订单</view>
+          <view class="alert-body-title">确认订单</view>
 				<view class="alert-concent">为了不影响您的出行，订单需客服确认有票才可支付</view>
 				<a id="js-alert-btn" class="alert-btn" href="javascript:;" catchtap="toOrderManager">立即前往订单页</a>
 			</view>

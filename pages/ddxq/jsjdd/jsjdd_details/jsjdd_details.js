@@ -66,7 +66,6 @@ Page({
    */
   onLoad: function (options) {
     this.initData(options);
-    
   },
   //生成微信支付参数
   createPayPara() {

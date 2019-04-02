@@ -21,7 +21,7 @@
       <view style='background:url({{imgRoot}}/images/arrow_r.png) no-repeat center center;background-size:100% 100%;width:20rpx;height:26rpx;'></view>
     </view>
   </view>
-  <view class='box box-f1 margin-t-20 font-14 color-9'>每成功邀请好友，注册成为一个新用户，即可获取30元优惠卷一张，赶紧行动起来吧！</view>
+  <view class='box box-f1 margin-t-20 font-14 color-9'>每成功邀请好友，注册成为一个新用户，即可获取30元优惠券一张，赶紧行动起来吧！</view>
   <view class='box box-f1 font-17 box-apc margin-t-70 btn-1' >点击右上角“...”分享给好友</view>
   <!-- <view class='box box-f1 font-17 box-apc margin-t-70 btn-1' biantap="bindRegisterChange" wx:else>立即注册</view> -->
 </view>

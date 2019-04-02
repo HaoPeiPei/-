@@ -145,7 +145,7 @@ Page({
     wx.showLoading({
         title: '数据加载中...',
     });
-    httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/valet.ashx', { action: "pay", orderId: orderId, status: "1" }, "POST",function(res){
+    httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/valet.ashx', { action: "pay", orderId: orderId, status: "1" }, "POST",function(res){
         wx.hideLoading()
         if (res.Success) {
             wx.showToast({
