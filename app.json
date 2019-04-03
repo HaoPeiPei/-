@@ -99,7 +99,7 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#3f3a3a",
+    "navigationBarBackgroundColor": "#000000",
     "navigationBarTitleText": "环球机场通",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#f3f5f7",

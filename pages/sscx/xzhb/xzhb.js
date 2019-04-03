@@ -311,6 +311,7 @@ Page({
     var serviceName = decodeURIComponent(options.serviceName);
     if (serviceId != null && cityCode != null && serviceName != null) {
       var flight = this.data.flight;
+      flight['startCity'] = cityCode;
       flight['startCityName'] = this.getCityName(cityCode);
       var nowDate = new Date();
       var minDate = nowDate.getTime();

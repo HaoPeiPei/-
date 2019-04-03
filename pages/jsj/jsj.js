@@ -22,10 +22,12 @@ Page({
     wwwRoot: wwwRoot,
     imgRoot: imgRoot,
     flyDateShow: false,
-    flyDatecurrentDate: '',
+    sendFlyDatecurrentDate: '',
+    takeFlyDatecurrentDate: '',
     flyDate: "",
     useDateShow: false,
-    useDatecurrentDate: '',
+    takeUseDatecurrentDate: '',
+    sendUseDatecurrentDate: '',
     useDate:"",
     cityCode: "SZX",
     tripType: 2,
@@ -69,8 +71,15 @@ Page({
       url: 'cxxz/cxxz',
     })
   },
-  //到达时间和到达时间选择
-  flyDateChange(){
+  //填写航班号
+  bindinput(e){
+    var flightNo = e.detail.value;
+    this.setData({
+      flightNo
+    })
+  },
+  //送机到达时间和到达时间选择
+  sendFlyDateChange(){
     if (!flightNoReg.test(this.data.flightNo)) {
       this.setData({
         flyDateShow: false
@@ -81,30 +90,30 @@ Page({
       });
       return false;
     }
-    var flyDatecurrentDate = this.data.flyDatecurrentDate == ""? (new Date().getTime())  : this.data.flyDatecurrentDate;
+    var sendFlyDatecurrentDate = this.data.sendFlyDatecurrentDate == ""? (new Date().getTime())  : this.data.sendFlyDatecurrentDate;
     this.setData({
-      flyDatecurrentDate,
+      sendFlyDatecurrentDate,
       flyDateShow: true
     });
   },
-  //到达时间和到达时间确认
-  flyDatePopconfirm(e) {
+  //送机到达时间和到达时间确认
+  sendFlyDatePopconfirm(e) {
     var flyDate = getFormatDate(e.detail);
     this.setData({
       flyDate: flyDate,
-      flyDatecurrentDate: e.detail,
+      sendFlyDatecurrentDate: e.detail,
       flyDateShow: false,
     });
     this.search();
   },
-  //到达时间和到达时间取消
-  flyDateCancel(e){
+  //送机到达时间和到达时间取消
+  sendFlyDateCancel(e){
     this.setData({
       flyDateShow: false,
     })
   },
-  //用车时间选择
-  useDateChange(){
+  //送机用车时间选择
+  sendUseDateChange(){
     var flightNo = this.data.flightNo;
     if (!flightNoReg.test(flightNo)) {
       this.setData({
@@ -134,14 +143,14 @@ Page({
       }
       return false;
     }
-    var useDatecurrentDate =  this.data.useDatecurrentDate == ""? (new Date().getTime()) : this.data.useDatecurrentDate;
+    var sendUseDatecurrentDate =  this.data.sendUseDatecurrentDate == ""? (new Date().getTime()) : this.data.sendUseDatecurrentDate;
     this.setData({
-      useDatecurrentDate,
+      sendUseDatecurrentDate,
       useDateShow: true
     });
   },
-  //用车时间确认
-  useDatePopconfirm(e){
+  //送机用车时间确认
+  sendUseDatePopconfirm(e){
     var useDate = formatTimestamp(e.detail);
     if (!this.checkTime(this.data.flyDate, this.data.useDate, this.data.tripType)) {
       this.setData({
@@ -151,17 +160,18 @@ Page({
     }else{
       this.setData({
         useDate: useDate.substring(0,useDate.length-3),
-        useDatecurrentDate: e.detail,
+        sendUseDatecurrentDate: e.detail,
         useDateShow: false
       })
     }
   },
-   //用车时间取消
-   flyDateCancel(e){
+   //送机用车时间取消
+   sendUseDateCancel(e){
     this.setData({
-      flyDateShow: false,
+      useDateShow: false,
     })
   },
+  
   //切换接送机
   bindTapChage:function(e){
     var tripType = e.currentTarget.dataset.triptype;
@@ -173,13 +183,101 @@ Page({
       lat: "",
       useDate:"",
       flightNo:"",
+      addressName: ''
     })
   },
-  //输入航班信息
-  bindinput(e){
+  //接机到达时间和到达时间选择
+  takeFlyDateChange(){
+    if (!flightNoReg.test(this.data.flightNo)) {
+      this.setData({
+        flyDateShow: false
+      });
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }
+    var takeFlyDatecurrentDate = this.data.takeFlyDatecurrentDate == ""? (new Date().getTime())  : this.data.takeFlyDatecurrentDate;
     this.setData({
-      flightNo: e.detail.value
+      takeFlyDatecurrentDate,
+      flyDateShow: true
     });
+  },
+  //接机到达时间和到达时间确认
+  takeFlyDatePopconfirm(e) {
+    var flyDate = getFormatDate(e.detail);
+    this.setData({
+      flyDate: flyDate,
+      takeFlyDatecurrentDate: e.detail,
+      flyDateShow: false,
+    });
+    this.search();
+  },
+  //接机到达时间和到达时间取消
+  takeFlyDateCancel(e){
+    this.setData({
+      flyDateShow: false,
+    })
+  },
+  //接机用车时间选择
+  takeUseDateChange(){
+    var flightNo = this.data.flightNo;
+    if (!flightNoReg.test(flightNo)) {
+      this.setData({
+        useDateShow: false
+      });
+      wx.showToast({
+        title: '请输入正确的航班号',
+        icon: 'none'
+      });
+      return false;
+    }
+    var flyDate = this.data.flyDate;
+    if (flyDate == "") {
+      this.setData({
+        useDateShow: true
+      });
+      if (this.data.tripType == 1) {
+        wx.showToast({
+          title: '请输入到达时间',
+          icon: 'none'
+        });
+      } else {
+        wx.showToast({
+          title: '请输入出发时间',
+          icon: 'none'
+        });
+      }
+      return false;
+    }
+    var takeUseDatecurrentDate =  this.data.takeUseDatecurrentDate == ""? (new Date().getTime()) : this.data.takeUseDatecurrentDate;
+    this.setData({
+      takeUseDatecurrentDate,
+      useDateShow: true
+    });
+  },
+  //接机用车时间确认
+  takeUseDatePopconfirm(e){
+    var useDate = formatTimestamp(e.detail);
+    if (!this.checkTime(this.data.flyDate, this.data.useDate, this.data.tripType)) {
+      this.setData({
+        useDate: '',
+        useDateShow: false
+      })
+    }else{
+      this.setData({
+        useDate: useDate.substring(0,useDate.length-3),
+        takeUseDatecurrentDate: e.detail,
+        useDateShow: false
+      })
+    }
+  },
+   //接机用车时间取消
+   takeUseDateCancel(e){
+    this.setData({
+      useDateShow: false,
+    })
   },
   //地图
   bindMapChage:function(){

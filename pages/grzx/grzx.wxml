@@ -1,6 +1,6 @@
 <!--pages/grzx/grzx.wxml-->
-<view class='box box-f1 box-apc view-grzx font-15'>个人中心</view>
-<view class='box box-f1 box-hor padding-tb-1 padding-lr-1 grxx'>
+<view class='box box-f1 box-apc view-grzx font-15 c-bg-3b3636'>个人中心</view>
+<view class='box box-f1 box-hor padding-tb-1 padding-lr-1 grxx c-bg-3b3636'>
   <view class='tuoxiang'>
     <image src='{{userInfo.avatarUrl}}'></image>
   </view>

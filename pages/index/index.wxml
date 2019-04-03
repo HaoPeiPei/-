@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <!--轮播部分start-->
-<view class='swiper-content'>
+<view class='swiper-content c-bg-fff'>
   <view class='swiper'>
     <swiper indicator-dots='true' autoplay='true' circular='true' indicator-active-color='blue'>
       <block wx:for='{{imgUrls}}' wx:key="*this">
@@ -38,7 +38,7 @@
 </view>
 <!--轮播部分end-->
 <!--服务部分start  -->
-<view class='main'>
+<view class='main c-bg-fff'>
   <ul class='service'>
     <navigator  url="../ydjp/ydjp" hover-class="none">
       <li class='{{item.style}}'>

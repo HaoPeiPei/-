@@ -2,13 +2,11 @@
 @import "../../template/template.wxss";
 .view-grzx {
   height: 80rpx;
-  background-color: #000;
   color: #fff;
 }
 .grxx{
   height: 200rpx;
   padding: 0rpx 30rpx;
-  background-color: #000;
   color: #fff;
 }
 .tuoxiang{

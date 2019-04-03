@@ -38,15 +38,15 @@
             <van-popup show="{{flyDateShow}}" position="bottom" >
               <van-datetime-picker 
                 type="date"
-                value="{{flyDatecurrentDate}}"
+                value="{{takeFlyDatecurrentDate}}"
                 min-date="{{minDate}}"
                 max-date="{{maxDate}}"
-                bind:confirm="flyDatePopconfirm"
-                bind:cancel="flyDateCancel"
+                bind:confirm="takeFlyDatePopconfirm"
+                bind:cancel="takeFlyDateCancel"
                 title=""
               />
             </van-popup>
-            <view class='box box-f1 color-3' bindtap='flyDateChange'>
+            <view class='box box-f1 color-3' bindtap='takeFlyDateChange'>
               <input type='text' placeholder='请选择航班时间' style='width:100%' disabled value="{{flyDate}}" />
             </view>
             <i class="icon-arror-r"></i>
@@ -67,15 +67,15 @@
         <van-popup show="{{useDateShow}}" position="bottom" >
           <van-datetime-picker 
             type="datetime"
-            value="{{useDatecurrentDate}}"
+            value="{{takeUseDatecurrentDate}}"
             min-date="{{minDate}}"
             max-date="{{ maxDate }}"
-            bind:confirm="useDatePopconfirm"
-            bind:cancel="useDateCancel"
+            bind:confirm="takeUseDatePopconfirm"
+            bind:cancel="takeUseDateCancel"
             title="请输入用车日期"
           />
         </van-popup>
-        <view class='box box-f1 color-3' bindtap='useDateChange'>
+        <view class='box box-f1 color-3' bindtap='takeUseDateChange'>
           <input type='text' placeholder='请输入用车日期' style='width:100%' disabled value="{{useDate}}" />
         </view>
         <i class="icon-arror-r font-15"></i>
@@ -94,7 +94,7 @@
     <view class='box box-f1 margin-lr-1 font-14'>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>航班号</view>
       <view class='box box-f1 color-3 border-b-1' style='padding:40rpx 0rpx;'>
-        <input type='text' placeholder='请输入航班号' bindblur='inputBlur'  style='width:100%' value="{{flightNo}}"/>
+        <input type='text' placeholder='请输入航班号'  bindinput="bindinput"  style='width:100%' value="{{flightNo}}"/>
       </view>
     </view>
     <view class='box box-f1 margin-lr-1 font-14'>
@@ -104,15 +104,15 @@
           <van-popup show="{{flyDateShow}}" position="bottom" >
             <van-datetime-picker 
               type="date"
-              value="{{flyDatecurrentDate}}"
+              value="{{sendFlyDatecurrentDate}}"
               min-date="{{minDate}}"
               max-date="{{maxDate}}"
-              bind:confirm="flyDatePopconfirm"
-              bind:cancel="flyDateCancel"
+              bind:confirm="sendFlyDatePopconfirm"
+              bind:cancel="sendFlyDateCancel"
               title=""
             />
           </van-popup>
-          <view class='box box-f1 color-3' bindtap='flyDateChange'>
+          <view class='box box-f1 color-3' bindtap='sendFlyDateChange'>
             <input type='text' placeholder='请选择航班时间' style='width:100%' disabled value="{{flyDate}}" />
           </view>
           <i class="icon-arror-r"></i>
@@ -132,15 +132,15 @@
         <van-popup show="{{useDateShow}}" position="bottom" >
           <van-datetime-picker 
             type="datetime"
-            value="{{useDatecurrentDate}}"
+            value="{{sendUseDatecurrentDate}}"
             min-date="{{minDate}}"
             max-date="{{ maxDate }}"
-            bind:confirm="useDatePopconfirm"
-            bind:cancel="useDateCancel"
+            bind:confirm="sendUseDatePopconfirm"
+            bind:cancel="sendUseDateCancel"
             title="请输入用车日期"
           />
         </van-popup>
-        <view class='box box-f1 color-3' bindtap='useDateChange'>
+        <view class='box box-f1 color-3' bindtap='sendUseDateChange'>
           <input type='text' placeholder='请输入用车日期' style='width:100%' disabled value="{{useDate}}" />
         </view>
         <i class="icon-arror-r font-15"></i>
