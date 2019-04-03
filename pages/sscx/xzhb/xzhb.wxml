@@ -18,7 +18,7 @@
       <view class='box box-f1 margin-l-5 font-13 border-b-1 padding-tb-1 box-ac'>
         <view class='color-9 left-title'>航班号</view>
         <view class='box box-f1 color-3'>
-          <input type='text' placeholder='请输入航班号' bindblur="onCheckFlightNo" name="flightNo" value='{{flight.flightNo}}' />
+          <input type='text' placeholder='请输入航班号' bindinput="bindinput" name="flightNo" value='{{flight.flightNo}}' />
         </view>
       </view>
     </view>

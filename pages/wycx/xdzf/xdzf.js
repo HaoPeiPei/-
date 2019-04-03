@@ -53,12 +53,12 @@ Page({
       var serviceId = carrier.ServiceId;
       var serviceName = carrier.ServiceName;
       var flightInfo = carrier.FlightInfo;
+      flightInfo['depDate'] = getMD(flightInfo.DepTime.substr(0, 10));
+      flightInfo['depWeek'] = getWeek(flightInfo.DepTime.substr(0, 10));
+      flightInfo['arrDate'] = getMD(flightInfo.ArrTime.substr(0, 10));
+      flightInfo['arrWeek'] = getWeek(flightInfo.ArrTime.substr(0, 10))
       flightInfo['depTime'] = flightInfo.DepTime.substr(11, 5);
       flightInfo['arrTime'] = flightInfo.ArrTime.substr(11, 5);
-      flightInfo['depDate'] = getMD(flightInfo.DepTime);
-      flightInfo['depWeek'] = getWeek(flightInfo.DepTime);
-      flightInfo['arrDate'] = getMD(flightInfo.ArrTime);
-      flightInfo['arrWeek'] = getWeek(flightInfo.ArrTime)
       this.setData({
         service: Object.assign(this.data.service,{
           serviceId: serviceId,

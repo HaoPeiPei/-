@@ -27,7 +27,7 @@
     <view class='box box-f1 margin-lr-1 font-14 '>
       <view style='width:160rpx;padding:40rpx 0rpx;color:#9d9d9d;line-height:1.4rem;'>航班号</view>
       <view class='box box-f1 color-3 border-b-1' style='padding:40rpx 0rpx;'>
-        <input type='text' placeholder='请输入航班号' bindblur='inputBlur' style='width:100%' value="{{flightNo}}" />
+        <input type='text' placeholder='请输入航班号' bindinput="bindinput" style='width:100%' value="{{flightNo}}" />
       </view>
     </view>
     <view class='box box-f1 margin-lr-1 font-14 '>

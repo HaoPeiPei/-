@@ -175,15 +175,8 @@ Page({
       flightNo:"",
     })
   },
-
-  inputBlur(e){
-    if (!flightNoReg.test(e.detail.value)) {
-      wx.showToast({
-        title: '请输入正确的航班号',
-        icon: 'none'
-      });
-      return false;
-    }
+  //输入航班信息
+  bindinput(e){
     this.setData({
       flightNo: e.detail.value
     });

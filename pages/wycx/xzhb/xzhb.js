@@ -104,29 +104,19 @@ Page({
     }
   },
   //选择航班页面验证填写航班号
-  onCheckFlightNo: function(e) {
+  bindinput(e){
     var flightNo = e.detail.value;
-    var flight = this.data.flight;
-    if (flightNo != '' && !flightNoReg.test(flightNo)){
-      wx.showToast({
-        title: '请输入正确的航班号',
-        icon: 'none'
-      });
-      return false
-    }else{
-      var flight = this.data.flight;
-      flight['flightNo'] = flightNo;
-      this.setData({
-        flight: flight,
-        disabled: false
-      });
-    }
-  }, 
+    this.setData({
+      flight: Object.assign(this.data.flight,{
+        flightNo 
+      })
+    })
+  },
   //选择航班页面验证填写航班号和起飞时间
   checkFlightInfo: function(){
     var flightNo = this.data.flight.flightNo;
     var flyDate = this.data.flight.flyDate;
-    if (flightNo != '' && !flightNoReg.test(flightNo)) {
+    if (!flightNoReg.test(flightNo)) {
       wx.showToast({
         title: '请输入正确的航班号',
         icon: 'none'

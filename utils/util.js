@@ -213,6 +213,7 @@ const dateAddValue = (date, value) => {
 
 const getMD = (sDate) => {
     var day = new Date(Date.parse(sDate));
+    console.log(day)
     var month = day.getMonth() + 1;
     var date = day.getDate();
     date = date < 10 ? "0" + date : date;
