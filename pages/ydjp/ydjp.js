@@ -142,11 +142,15 @@ Page({
   //城市互换
   cityExchange(){
     var depCityName = this.data.depCityName;
+    var depCityCode = this.data.depCityCode;
     var arrCityName = this.data.arrCityName;
+    var arrCityCode = this.data.arrCityCode;
     this.setData({
       depCityName: arrCityName,
-      arrCityName: depCityName
-    });
+      depCityCode: arrCityCode,
+      arrCityName: depCityName,
+      arrCityCode: depCityCode
+    })
   },
   //验证
   check(){

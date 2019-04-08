@@ -173,28 +173,26 @@ Page({
   //点击选择城市并返回首页
   doReturn: function(e){
     var ticketType = this.data.ticketType;
-    var airportCode = e.currentTarget.dataset.id;
-    var airportName = e.currentTarget.dataset.value;
-    var type = e.currentTarget.dataset.type;
+    var code = e.currentTarget.dataset.id;
     var city = e.currentTarget.dataset.city;
-    app.globalData.airportCode = airportCode;
-    app.globalData.airportName = airportName;
+    var type = e.currentTarget.dataset.type;
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页
     var prevPage = pages[pages.length - 2]; //上一个页面
     if(ticketType == "depCity"){
       prevPage.setData({
         depCityName: city,
+        depCityCode: code 
       });
     }else if(ticketType == "arrCity"){
       prevPage.setData({
         arrCityName: city,
+        arrCityCode: code
       });
     }
     var recentCity = {
-      data_id: airportCode,
+      data_id: code,
       data_type: type,
-      data_value: airportName,
       city: city,
    };
    this.updateRecentList(recentCity);

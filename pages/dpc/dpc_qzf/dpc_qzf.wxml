@@ -108,7 +108,7 @@
         <view class='box box-f1 box-apc qxdd-btn' catchtap="cancelOrder">
           取消订单
         </view>
-        <view class='box box-f1 box-apc ljzf-btn' catchtap="pay">
+        <view class='box box-f1 box-apc ljzf-btn' catchtap="bindZfChange">
           立即支付
         </view>
       </view>

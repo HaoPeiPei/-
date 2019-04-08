@@ -146,17 +146,17 @@ Page({
     });
   },
   //立即支付
-  pay(){
+  bindZfChange(){
     var price = this.data.order.pay_amount_due;
     var orderId = this.data.orderId;
     if (parseInt(price) > 0) {
         this.createPayPara(orderId);
     } else {
-        this.updateOrder(orderId);
+        this.payOrder(orderId);
     }
   },
-  //修改订单 
-  updateOrder(orderId){
+  //支付订单 
+  payOrder(orderId){
     var that = this;
     if (orderId != null && orderId != "") {
         wx.showLoading({
@@ -194,10 +194,12 @@ Page({
                 var parameObj = JSON.parse(res.Data);
                 that.jsApiCall(parameObj, orderId);
             } else {
+              setTimeout(()=>{
                 wx.showToast({
                     title: '创建支付参数失败,请联系客服',
                     icon: 'none'
                 });
+              },1000);
             }
         });
     }
@@ -214,7 +216,7 @@ Page({
         'paySign': params.paySign ,
         'success':function(res){
             if (res.err_msg == "get_brand_wcpay_request:ok") {
-              that.updateOrder(orderId);
+              that.payOrder(orderId);
             }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
               wx.showModal({
                   title: "温馨提示", 
@@ -261,26 +263,6 @@ Page({
         });
         }
     });
-  },
-  //支付的订单
-  payOrder(orderId){
-      wx.showLoading({
-          title: '数据加载中...',
-      });
-      httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/valet.ashx', { action: "pay", orderId: orderId, status: "1" }, "POST",function(res){
-          wx.hideLoading()
-          if (res.Success) {
-              wx.showToast({
-                  title: res.Message || '支付成功',
-                  icon: 'none'
-              });
-          } else {
-              wx.showToast({
-                  title: res.Message,
-                  icon: 'none'
-              });
-          }
-      });
   },
   /**
    * 生命周期函数--监听页面加载

@@ -785,6 +785,7 @@ Page({
     },
     //调用微信JS api 支付
     jsApiCall(params, orderId) {
+        var that = this;
         wx.requestPayment(
             {
             'timeStamp': params.timeStamp,
@@ -794,7 +795,7 @@ Page({
             'paySign': params.paySign ,
             'success':function(res){
                 if (res.err_msg == "get_brand_wcpay_request:ok") {
-                    payOrder(orderId);
+                    that.payOrder(orderId);
                 }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
                     wx.showModal({
                         title: "温馨提示", 
@@ -805,7 +806,7 @@ Page({
                                     url: '../../ddxq/jpdd/jpdd'
                                 });
                             } else if (res.cancel) {
-                                jsApiCall(params, orderId);
+                                that.jsApiCall(params, orderId);
                             }
                         }
                     });
@@ -819,7 +820,7 @@ Page({
                                 url: '../../ddxq/jpdd/jpdd'
                             }); 
                           } else if (res.cancel) {
-                            jsApiCall(params, orderId);
+                            that.jsApiCall(params, orderId);
                           }
                         }
                     });
@@ -835,7 +836,7 @@ Page({
                             url: '../../ddxq/jpdd/jpdd'
                         });
                       } else if (res.cancel) {
-                        jsApiCall(params, orderId);
+                        that.jsApiCall(params, orderId);
                       }
                     }
                 });
@@ -853,6 +854,9 @@ Page({
                 wx.showToast({
                     title: res.Message || '支付成功',
                     icon: 'none'
+                });
+                wx.navigateTo({
+                    url: '../../ddxq/jpdd/jpdd'
                 });
             } else {
                 wx.showToast({

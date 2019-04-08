@@ -108,7 +108,8 @@ Page({
     var flightNo = e.detail.value;
     this.setData({
       flight: Object.assign(this.data.flight,{
-        flightNo 
+        flightNo,
+        oldFlightNo: flightNo 
       })
     })
   },
@@ -171,10 +172,12 @@ Page({
               flight: resFlight
             });
         } else {
-          wx.showToast({
-            title: res.ErrorMsg,
-            icon: 'none'
-          });
+          setTimeout(()=>{
+            wx.showToast({
+              title: res.ErrorMsg,
+              icon: 'none',
+            });
+          },1000);
           flight['canBook'] = false;
           that.setData({
             flight: flight

@@ -191,7 +191,8 @@ Page({
     var flightNo = e.detail.value;
     this.setData({
       flight: Object.assign(this.data.flight,{
-        flightNo 
+        flightNo,
+        oldFlightNo: flightNo 
       })
     })
   },
@@ -223,6 +224,11 @@ Page({
       var flightNo = flight.flightNo;
       var depDate = flight.flyDate;
       var startCity = flight.startCity;
+      that.setData({
+        flight: Object.assign(this.data.flight,{
+          oldFlightNo: flightNo 
+        })
+      })
       var param = { action: "getStopCity", depDate: depDate, flightNo: flightNo, startCity: startCity, air_type: 2 };
       wx.showLoading({
         title: '数据加载中...',
@@ -241,10 +247,12 @@ Page({
               flight: resFlight
             });
         } else {
-          wx.showToast({
-            title: res.ErrorMsg,
-            icon: 'none'
-          });
+          setTimeout(()=>{
+            wx.showToast({
+              title: res.ErrorMsg,
+              icon: 'none',
+            });
+          },1000);
           flight['canBook'] = false;
           that.setData({
             flight: flight

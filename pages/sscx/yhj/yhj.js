@@ -117,10 +117,10 @@ Page({
       if (coupon.is_used == "0" && !coupon.isExpriy) {
         var pages = getCurrentPages();
         var prevPage = pages[pages.length - 2];
-        prevPage.caculatePrice();
         prevPage.setData({
           coupon
         });
+        prevPage.caculatePrice();
         wx.navigateBack({
           delta: 1
         })

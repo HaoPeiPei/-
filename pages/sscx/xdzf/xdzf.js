@@ -394,6 +394,9 @@ Page({
                   title: res.Message || '支付成功',
                   icon: 'none'
               });
+              wx.navigateTo({
+                url: '../../ddxq/fwdd/fwdd',
+              });
           } else {
               wx.showToast({
                   title: res.Message,

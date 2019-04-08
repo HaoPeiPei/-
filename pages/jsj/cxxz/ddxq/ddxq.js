@@ -192,10 +192,12 @@ Page({
           that.payOrder(orderId);
         }
       } else {
-        wx.showToast({
-          title: '创建订单失败,请联系客服',
-          icon: 'none'
-        });
+        setTimeout(()=>{
+          wx.showToast({
+            title: '创建订单失败,请联系客服',
+            icon: 'none'
+          });
+        },1000);
       }
     });
   },
@@ -232,7 +234,7 @@ Page({
         'paySign': params.paySign ,
         'success':function(res){
             if (res.err_msg == "get_brand_wcpay_request:ok") {
-              that.updateOrder(orderId);
+              that.payOrder(orderId);
             }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
               wx.showModal({
                   title: "温馨提示", 

@@ -26,10 +26,19 @@ Page({
     characterCity:
     [
       { 
+        data_text: "B-start-list", 
+        data_title:"B",
+        city_information:
+        [
+          { data_id: "PEK", data_type: "bj", data_value: "北京首都国际机场", city: "北京" },
+        ]
+      },
+      { 
         data_text: "C-start-list", 
         data_title:"C",
         city_information:
         [
+          { data_id: "CTU", data_type: "cd", data_value: "成都双流国际机场", city: "成都" },
           { data_id: "CSX", data_type: "cs", data_value: "长沙黄花国际机场", city: "长沙" },
           { data_id: "CZX", data_type: "cz", data_value: "常州国际机场", city: "常州" }
         ]
@@ -101,8 +110,11 @@ Page({
         data_title: "S",
         city_information:
         [
+          { data_id: "SHA", data_type: "sh", data_value: "上海虹桥国际机场", city: "上海虹桥" },
           { data_id: "PVG", data_type: "sh", data_value: "上海浦东国际机场", city: "上海浦东" },
           { data_id: "SZX", data_type: "sz", data_value: "深圳宝安国际机场", city: "深圳" },
+          { data_id: "SHE", data_type: "sy", data_value: "沈阳桃仙国际机场", city: "沈阳" },
+          { data_id: "SYX", data_type: "sy", data_value: "三亚凤凰国际机场", city: "三亚" },
           { data_id: "SJW", data_type: "sjz", data_value: "石家庄正定国际机场", city: "石家庄" },
         ]
       },
@@ -119,6 +131,7 @@ Page({
         data_title: "W",
         city_information:
         [
+          { data_id: "WUH", data_type: "wh", data_value: "武汉天河国际机场", city: "武汉" },
           { data_id: "WNZ", data_type: "wz", data_value: "温州国际机场", city: "温州" },
           { data_id: "URC", data_type: "wlmq", data_value: "乌鲁木齐地窝堡国际机场", city: "乌鲁木齐" },
         ]

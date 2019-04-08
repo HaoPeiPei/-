@@ -303,16 +303,19 @@ Page({
                 var parameObj = JSON.parse(res.Data);
                 that.jsApiCall(parameObj, orderId);
             } else {
+              setTimeout(()=>{
                 wx.showToast({
                     title: '创建支付参数失败,请联系客服',
                     icon: 'none'
                 });
+              },1000)
             }
         });
     }
   },
   //调用微信JS api 支付
   jsApiCall(params, orderId) {
+    var that = this;
     wx.requestPayment(
         {
         'timeStamp': params.timeStamp,
@@ -322,7 +325,7 @@ Page({
         'paySign': params.paySign ,
         'success':function(res){
             if (res.err_msg == "get_brand_wcpay_request:ok") {
-                payOrder(orderId);
+              that.payOrder(orderId);
             }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
                 wx.showModal({
                     title: "温馨提示", 
@@ -333,7 +336,7 @@ Page({
                           url: '../../../ddxq/fwdd/fwdd'
                         });
                       } else if (res.cancel) {
-                        jsApiCall(params, orderId);
+                        that.jsApiCall(params, orderId);
                       }
                     }
                 });
@@ -347,7 +350,7 @@ Page({
                       url: '../../../ddxq/fwdd/fwdd'
                     });
                   } else if (res.cancel) {
-                    jsApiCall(params, orderId);
+                    that.jsApiCall(params, orderId);
                   }
                 }
             });
@@ -363,7 +366,7 @@ Page({
                   url: '../../../ddxq/fwdd/fwdd'
                 });
               } else if (res.cancel) {
-                jsApiCall(params, orderId);
+                that.jsApiCall(params, orderId);
               }
             }
         });
@@ -381,6 +384,9 @@ Page({
               wx.showToast({
                   title: res.Message || '支付成功',
                   icon: 'none'
+              });
+              wx.navigateTo({
+                url: '../../../ddxq/fwdd/fwdd'
               });
           } else {
               wx.showToast({
