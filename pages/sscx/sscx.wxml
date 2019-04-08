@@ -4,11 +4,10 @@
 <view class='box box-f1 box-ver' id="dsad">
 <template is="header_content_lunbo" data="{{...header_text}}" />
   <view class='box box-f1 box-ver backgd-f padding-b-100'>
-    <view class='box box-f1 box-ver padding-tb-2 margin-lr-1 position-rel'>
+    <view class='box box-f1 box-ver padding-tb-30 margin-lr-1 position-rel'>
       <view style='position:absolute;right:50rpx;top:-40rpx;'>
         <image src='{{imgRoot}}/images/jx_icon.png' style='width:60rpx;height:120rpx;' />
       </view>
-      <view class='box box-f1 font-14 padding-tb-2 color-3'>舒适出行</view>
       <view class='box box-f1 font-12 padding-tb-2 color-9'>服务时间
         <text class='margin-l-1'>05:30~23:00</text>
       </view>
