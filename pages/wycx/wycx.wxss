@@ -50,6 +50,9 @@
 .padding-b-100{
   padding-bottom: 100rpx;
 }
+.padding-tb-30{
+  padding: 30rpx 0;
+}
 .modal-content{
   width: 80%;
   margin: 55% auto;

@@ -15,8 +15,9 @@
       <view class='box box-f1 font-12 padding-tb-2 color-9'>
         <view class='box box-f1 box-ac'>需要在航班起飞前1个小时预约</view>
         <view class='box box-ac'>
-          <view class='font-10'>原价：￥
-            <text>188</text>/人</view>
+          <view class='font-10' style="text-decoration:line-through;">
+            ￥<text>188</text>/人
+          </view>
           <view class='color-f4 margin-l-2'>￥
             <text class='font-16'>128</text>/人</view>
         </view>
@@ -25,7 +26,7 @@
     <view class='height-10'></view>
     <!--套餐内容  -->
     <view class='box box-f1 backgd-f box-ver'>
-      <template is="title_content_2" data="{{title_text:'套餐内容',right_text:'退款须知'}}" />
+      <template is="title_content_1" data="{{title_text:'套餐内容',right_text:'退款须知'}}" />
       <view class='margin-lr-1'>
         <block wx:for="{{setMealPage}}" wx-index="index">
           <template is="setMealPage" data="{{...setMealPage[index]}}" />
@@ -49,11 +50,7 @@
 <!--退款须知  -->
 <view style='position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.3);' class='{{inBind?"none":""}}' catchtap='bindChageBack'>
   <view class='modal-content'>
-    <view class='box box-f1 box-ver box-apc {{key==0?"":"none"}}'>
-      <view class='box box-f1 padding-tb-1'>确认拨打电话：400-700-7355？</view>
-      <view class='box box-f1 padding-tb-1'>立即拨打</view>
-    </view>
-    <view class='box box-f1 box-ver {{key==1?"":"none"}}'>
+    <view class='box box-f1 box-ver'>
       <view class='box box-f1 box-hor font-12' style='padding:20rpx 0rpx 25rpx 0rpx;'>
         <view class='color-3' style='width:160rpx'>自愿变更</view>
         <view class='box box-f1 margin-l-1 color-9'>航班起飞前24小时收取20%手续费；起飞前3小时—24小时(不含)收取50%手续费；起飞3小时以内，均不退款。</view>

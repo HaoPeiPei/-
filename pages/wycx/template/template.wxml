@@ -57,7 +57,7 @@
   <view class='float-left' style='width:50%;'>
     <view class='box box-f1 box-hor font-13 padding-tb-1'>
       <view class='box padding-tb-2'>
-        <view style='background:url({{setMeal_icon}}) no-repeat center center;background-size:cover;width:25rpx;height:25rpx;margin-top:6rpx;'></view>
+        <view style='background:url({{setMeal_icon}}) no-repeat center center;background-size:cover;width:34rpx;height:34rpx;margin-top:6rpx;'></view>
       </view>
       <view class='box box-f1 box-ver margin-l-1'>
         <view class='box box-f1 color-3 padding-tb-2 box-ac '>
@@ -73,7 +73,7 @@
   <view class='float-left' style='width:100%;'>
     <view class='box box-f1 box-hor font-13 padding-tb-1 margin-l-1'>
       <view class='box padding-tb-2'>
-        <view style='background:url({{setMeal_icon}}) no-repeat center center;background-size:cover;width:25rpx;height:25rpx;margin-top:6rpx;'></view>
+        <view style='background:url({{setMeal_icon}}) no-repeat center center;background-size:cover;width:34rpx;height:34rpx;margin-top:6rpx;'></view>
       </view>
       <view class='box box-f1 box-ver margin-l-1'>
         <view class='box box-f1 color-3 padding-tb-2 box-ac '>

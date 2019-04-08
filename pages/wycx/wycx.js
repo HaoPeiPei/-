@@ -20,12 +20,12 @@ Page({
     imgRoot: imgRoot,
     setMealPage: 
     [
-      { "setMeal_icon": imgRoot+"/images/yldjp_icon.png", "setMeal_title": "换登机牌", "setMeal_cont": "提前办理登机牌，不排队安心登机" },
+      { "setMeal_icon": imgRoot+"/images/yldjp_icon.png", "setMeal_title": "换登机牌", "setMeal_cont": "提前办理登机牌" },
       { "setMeal_icon": imgRoot+"/images/sscj_icon.png", "setMeal_title": "舒适乘机", "setMeal_cont": "优选喜欢座位(协助办理经济舱前排)" }    
     ],
     purchaseNotice:
     [
-      { "title_text": "服务时间", "content_text": "5:30--22:30;如航班延误，则至最后一班飞机起飞" },
+      { "title_text": "服务时间", "content_text": "08:00—20:00 ；如航班延误，则至最后 一班飞机起飞后；" },
     ],
     inBind: true,
     key: "",
