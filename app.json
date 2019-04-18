@@ -97,6 +97,9 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
+  "navigateToMiniProgramAppIdList": [
+    "x336dcaf6a1ecf632"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000000",

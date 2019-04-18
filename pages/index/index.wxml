@@ -105,16 +105,44 @@
       </li>
     </view>
     <view>
-      <li class='{{item.style}}'>
-        <view class='box bof-1 box-apc box-ver colors'>
-          <view class='box box-f1 box-apc'>
-            <i class="icon-vipOnly font-size-30"></i>
-          </view>
-          <view class='box font-13'>
-            <text>贵宾通道</text>
-          </view>
+        <view>
+          <li class='{{item.style}}'>
+            <view class='box bof-1 box-apc box-ver colors'>
+              <view class='box box-f1 box-apc'>
+                <i class="icon-hotel font-size-30"></i>
+              </view>
+              <view class='box font-13'>
+                <text>酒店</text>
+              </view>
+            </view>
+          </li>
         </view>
-      </li>
+        <!-- <view wx:if="{{isSZX}}"> 
+          <navigator url="../jd/jd" hover-class="none">
+            <li class='{{item.style}}'>
+              <view class='box bof-1 box-apc box-ver color-3'>
+                <view class='box box-f1 box-apc'>
+                  <i class="icon-hotel font-size-30"></i>
+                </view>
+                <view class='box font-13'>
+                  <text>酒店</text>
+                </view>
+              </view>
+            </li>
+          </navigator>
+        </view> 
+        <view wx:else> 
+          <li class='{{item.style}}'>
+            <view class='box bof-1 box-apc box-ver colors'>
+              <view class='box box-f1 box-apc'>
+                <i class="icon-hotel font-size-30"></i>
+              </view>
+              <view class='box font-13'>
+                <text>酒店</text>
+              </view>
+            </view>
+          </li>
+        </view>-->
     </view>
     <view wx:if="{{sscx.isNone}}">
       <navigator url='{{sscx.href}}' hover-class="none">
@@ -195,51 +223,28 @@
       </li>
     </view>
     <view>
-        <li class='{{item.style}}'>
-          <view class='box bof-1 box-apc box-ver colors'>
-            <view class='box box-f1 box-apc'>
-              <i class="icon-hotel font-size-30"></i>
-            </view>
-            <view class='box font-13'>
-              <text>酒店</text>
-            </view>
-          </view>
-        </li>
-      </view>
-    <!-- <view wx:if="{{isSZX}}"> 
-      <navigator url="../jd/jd" hover-class="none">
+      <navigator target="miniProgram" open-type="navigate" app-id="wx336dcaf6a1ecf632" path="/page/home/index/index?wxrefid=398361335&tab=1" extra-data="" version="release" hover-class="none">
         <li class='{{item.style}}'>
           <view class='box bof-1 box-apc box-ver color-3'>
             <view class='box box-f1 box-apc'>
-              <i class="icon-hotel font-size-30"></i>
+              <i class="icon-rentcar font-size-30"></i>
             </view>
             <view class='box font-13'>
-              <text>酒店</text>
+              <text >景点</text>
             </view>
           </view>
         </li>
       </navigator>
-    </view> 
-    <view wx:else> 
-      <li class='{{item.style}}'>
-        <view class='box bof-1 box-apc box-ver colors'>
-          <view class='box box-f1 box-apc'>
-            <i class="icon-hotel font-size-30"></i>
-          </view>
-          <view class='box font-13'>
-            <text>酒店</text>
-          </view>
-        </view>
-      </li>
-    </view>-->
+    </view>
   </ul>
   <view class='flex'>
     <scroll-view style='height:100%' scroll-x='true'>
-      <block wx:for='{{url}}' wx:key="*this">
-        <view class='back-1' style='display:inline-block;background:url({{item}}) no-repeat;background-size:100% 100%;'>
-        </view>
-        <view class='advert-line'></view>
-      </block>
+      <view class='back-1' style='display:inline-block;background:url({{imgRoot}}/images/7_26.png) no-repeat;background-size:100% 100%;'>
+      </view>
+      <view class='advert-line'></view>
+      <navigator target="miniProgram" open-type="navigate" app-id="wx336dcaf6a1ecf632" path="/page/home/index/index?wxrefid=398361335&tab=1" extra-data="" class="back-1" version="release" hover-class="none">
+        <image src="{{imgRoot}}/images/7_28.png" style='display:inline-block;width:100%;height: 100%;' alt=""></image>
+      </navigator>
     </scroll-view>
   </view>
   <view class='box box-f1 padding-1 box-ver'>
