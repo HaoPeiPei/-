@@ -5,22 +5,18 @@
   color: #fff;
 }
 .grxx{
-  height: 200rpx;
-  padding: 0rpx 30rpx;
+  height: 155rpx;
+  padding: 0 30rpx 50rpx 30rpx;
   color: #fff;
 }
 .tuoxiang{
   position: relative;
-  width: 200rpx;
+  width: 180rpx;
   
 }
 .tuoxiang image{
-  position: absolute;
-  left: 0;
-  top: 50%;
-  margin-top: -70rpx;
-  width: 140rpx;
-  height: 140rpx;
+  width: 155rpx;
+  height: 155rpx;
   border-radius: 50%;
 }
 .tuichu{
@@ -98,4 +94,7 @@ ul li:last-child .li-view{
 }
 .color-eb{
   color: #eb9b00;
+}
+.padding-t-13{
+  padding: 26rpx 0 0 0;
 }

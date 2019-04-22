@@ -11,8 +11,8 @@ Page({
   data: {
     personal:
     [
-      { 'src': imgRoot+'/images/yqm_icon_1.png', 'personalTitle': '邀请码', 'url':'yqm_details/yqm_details'},
-      { 'src': imgRoot+'/images/yhj_icon_1.png', 'personalTitle': '优惠券', 'url': 'yhj_details/yhj_details' },
+      { 'src': imgRoot+'/images/yqm_icon_1.png', 'personalTitle': '邀请码', 'url':'/pages/grzx/yqm_details/yqm_details'},
+      { 'src': imgRoot+'/images/yhj_icon_1.png', 'personalTitle': '优惠券', 'url': '/pages/grzx/yhj_details/yhj_details' },
       { 'src': imgRoot+'/images/zwkf_icon_1.png', 'personalTitle': '暂未开放', 'url': '' }
     ],
     imgRoot: imgRoot,

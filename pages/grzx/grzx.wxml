@@ -4,7 +4,7 @@
   <view class='tuoxiang'>
     <image src='{{userInfo.avatarUrl}}'></image>
   </view>
-  <view class='box box-f1 box-ver margin-l-1' wx:if="{{login_state==1}}">
+  <view class='box-f1 box-ver padding-t-13' wx:if="{{login_state==1}}">
     <view class='box box-f1 box-ac font-14'>
       <view class='box box-f1 box-ac'>{{userInfo.nickName}}</view>
       <view class='box box-f1 '>

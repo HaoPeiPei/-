@@ -170,5 +170,8 @@ swiper {
 }
 
 /*服务end  */
+.padding-t25-b20{
+  padding: 50rpx 0 40rpx 0;
+}
 
 
