@@ -458,7 +458,7 @@ Page({
     wx.showLoading({
       title: '数据加载中...',
     });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "share", url: '' } , "POST",res => {
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: " ", url: '' } , "POST",res => {
       if (res.Success) {
         return {
           title: '靠窗座位人人爱，用我就对了！—环球机场通',

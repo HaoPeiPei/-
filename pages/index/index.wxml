@@ -223,7 +223,7 @@
       </li>
     </view>
     <view>
-      <navigator target="miniProgram" open-type="navigate" app-id="wx336dcaf6a1ecf632" path="/page/home/index/index?wxrefid=398361335&tab=1" extra-data="" version="release" hover-class="none">
+      <navigator target="miniProgram" open-type="navigate" app-id="wx336dcaf6a1ecf632" path="/page/home/index/index?wxrefid=398361335&tab=1" extra-data="" version="release" hover-class="none" >
         <li class='{{item.style}}'>
           <view class='box bof-1 box-apc box-ver color-3'>
             <view class='box box-f1 box-apc'>

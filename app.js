@@ -28,7 +28,7 @@ App({
   },
   globalData: {
     wwwRoot: "https://www.51jct.cn",
-    imgRoot: "http://www.51jct.cn/weixin/miniprogram",
+    imgRoot: "https://www.51jct.cn/weixin/miniprogram",
     remoteUrl: "https://www.51jct.cn",
     memberId: '',//6711
     openId : '',

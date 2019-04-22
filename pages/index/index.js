@@ -85,6 +85,19 @@ Page({
       phoneNumber: phoneNumber
     });
   },
+  toMiniProgramSuccess(res){
+      //从其他小程序返回的时候触发
+      wx.showToast({
+        title: '跳转成功'
+      })
+  },
+  toMiniProgramFail(res){
+      //从其他小程序返回的时候触发
+      console.log(res)
+      wx.showToast({
+        title: '跳转失败'
+      })
+  },
   // 载入首页轮播图片
   loadAdvertise: function() {
     var _this = this;
