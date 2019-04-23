@@ -27,7 +27,7 @@ Page({
     //检查memberID,无去登陆页面
     if(app.globalData.memberId == ''){
       wx.navigateTo({
-        url: '../logIndex/logIndex',
+        url: '/pages/logIndex/logIndex',
       })
     }else{
       let url = e.currentTarget.dataset.url;

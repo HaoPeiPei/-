@@ -64,7 +64,7 @@ Page({
       } else {
         //todo 跳转到登陆页面
         wx.navigateTo({
-          url: '../logIndex/logIndex'
+          url: '/pages/logIndex/logIndex'
         });
       }
     });

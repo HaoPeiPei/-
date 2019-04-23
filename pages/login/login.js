@@ -70,8 +70,8 @@ Page({
           success:function(res){
             if(res.statusCode == 200 && res.data.Success){
               var data = JSON.parse(res.data.Data);
-              app.globalData.openId = data.openId;
               app.globalData.unionid= data.unionId;
+              app.globalData.openId= data.openId;
               that.getUserInfo()
             }
           }
@@ -90,10 +90,11 @@ Page({
           var resDate = JSON.parse(res.data.Data);
           app.globalData.memberId = resDate.id;
           app.globalData.unionid= resDate.UnionId;
+          //app.globalData.openId= resDate.openid;
           app.globalData.user = resDate;
         }
         wx.switchTab({
-          url: '../index/index',
+          url: '/pages/index/index',
         })
       }
     })

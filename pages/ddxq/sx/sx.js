@@ -72,7 +72,7 @@ Page({
           loadMore(that);
         } else {
           wx.navigateTo({
-            url: '../../logIndex/logIndex',
+            url: '/pages/logIndex/logIndex',
           })
         }
 

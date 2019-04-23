@@ -132,7 +132,7 @@ Page({
   toLogin(){
     if(app.globalData.memberId == ''){
       wx.navigateTo({
-        url: '../logIndex/logIndex',
+        url: '/pages/logIndex/logIndex',
       })
     }
   },
