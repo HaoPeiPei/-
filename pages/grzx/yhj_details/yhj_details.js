@@ -53,10 +53,12 @@ Page({
     var isUsed = this.data.isUsed;
     var params = {
       "action": "coupon",
-      "isUsed": this.data.isUsed,
-      "openId": app.globalData.openId 
+      "isUsed": isUsed,
+      "openId": app.globalData.openId
     }
+    console.log("请求参数:"+ JSON.stringify(params))
     httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
+      console.log("响应参数:"+ JSON.stringify(res))
       if (res.Success) {
         if (res.Data == "") {
           var couponTip = '';
@@ -69,24 +71,29 @@ Page({
             couponTip,
             coupons: []
           });
-      }else{
-        var obj = JSON.parse(res.Data);
-        if (obj.length > 0) {
-          var  coupons = obj.map(item=>{
-            var useType = _this.getUseType(item);
-            return Object.assign(item,{useType})
-          });
-          _this.setData({
-            coupons
-          });
+        }else{
+          var obj = JSON.parse(res.Data);
+          if (obj.length > 0) {
+            var  coupons = obj.map(item=>{
+              var useType = _this.getUseType(item);
+              return Object.assign(item,{useType})
+            });
+            _this.setData({
+              coupons
+            });
+          } 
         } 
-      } 
       } else {
         //todo 跳转到登陆页面
         wx.navigateTo({
           url: '../logIndex/logIndex'
         });
       }
+      console.log('openid：'+app.globalData.openId);
+      console.log('unionid'+app.globalData.unionid);
+      console.log('isUsed：'+_this.data.isUsed);
+      console.log('优惠卷张数：'+ _this.data.coupons.length);
+      console.log('优惠卷张内容：'+ JSON.stringify(_this.data.coupons));
     });
   },
   //获取优惠券使用状态
