@@ -279,10 +279,8 @@ Page({
       action: "createorder", 
       orderInfo: JSON.stringify(orderModel) 
     }
-    console.log('支付请求数据'+JSON.stringify(param));
     httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", param, "POST",res => {
       wx.hideLoading();
-      console.log('支付响应数据'+JSON.stringify(res));
       if (res.Success) {
         var orderId = res.Data;
         if (res.Message == "true") {
@@ -315,10 +313,8 @@ Page({
         orderId: orderId,
         openId: app.globalData.openId
       }
-      console.log('生成微信支付参数请求数据'+JSON.stringify(param)); 
       httpRequst.HttpRequst(true, '/weixin/miniprogram/ashx/service.ashx', param , "POST",function(res){
-          wx.hideLoading()
-          console.log('生成微信支付参数响应数据'+JSON.stringify(res));
+          wx.hideLoading();
           if (res.Success) {
             var parameObj = JSON.parse(res.Data);
             that.jsApiCall(parameObj, orderId);
@@ -334,7 +330,6 @@ Page({
   //调用微信JS api 支付
   jsApiCall(params, orderId) {
     var that = this;
-    console.log('调用微信JS api请求数据'+JSON.stringify(params));
     wx.requestPayment(
       {
       'timeStamp': params.timeStamp,
@@ -343,7 +338,6 @@ Page({
       'signType': params.signType,
       'paySign': params.paySign ,
       'success':function(res){
-          console.log('调用微信JS api响应数据'+JSON.stringify(res));
           if (res.err_msg == "get_brand_wcpay_request:ok") {
             that.payOrder(orderId);
           }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
@@ -398,8 +392,13 @@ Page({
       wx.showLoading({
           title: '数据加载中...',
       });
-      httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/airTicket.ashx', { action: "pay", orderId: orderId, status: "1" }, "POST",function(res){
-          wx.hideLoading()
+      var param = { 
+        action: "pay", 
+        orderId: orderId, 
+        status: "1" 
+      }
+      httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/service.ashx', param, "POST",function(res){
+          wx.hideLoading();
           if (res.Success) {
               wx.showToast({
                   title: res.Message || '支付成功',
@@ -481,7 +480,6 @@ Page({
           path: '/pages/sscx/xzhb/xdzf',
           imageUrl: "http://www.51jct.cn/weixin/jctnew/images/logo.png",
           success: res => {
-            console.log(res)
             wx.showToast({
               title: "分享成功!",
               icon: "none",
@@ -492,7 +490,6 @@ Page({
             that.caculatePrice();
           },
           fail: err => {
-            console.log(err)
             wx.showToast({
               title: "已取消!",
               icon: "none",

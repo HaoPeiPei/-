@@ -54,11 +54,9 @@ Page({
     var params = {
       "action": "coupon",
       "isUsed": isUsed,
-      "openId": app.globalData.openId
+      "unionId": app.globalData.unionid,
     }
-    console.log("请求参数:"+ JSON.stringify(params))
     httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/preferential.ashx', params, 'POST', function (res) {
-      console.log("响应参数:"+ JSON.stringify(res))
       if (res.Success) {
         if (res.Data == "") {
           var couponTip = '';
@@ -84,16 +82,13 @@ Page({
           } 
         } 
       } else {
-        //todo 跳转到登陆页面
-        wx.navigateTo({
-          url: '/pages/logIndex/logIndex'
-        });
+        setTimeout(() => {
+          wx.showToast({
+            title: res.Message,
+            icon: 'none'
+          });
+        }, 500);
       }
-      console.log('openid：'+app.globalData.openId);
-      console.log('unionid'+app.globalData.unionid);
-      console.log('isUsed：'+_this.data.isUsed);
-      console.log('优惠卷张数：'+ _this.data.coupons.length);
-      console.log('优惠卷张内容：'+ JSON.stringify(_this.data.coupons));
     });
   },
   //获取优惠券使用状态
