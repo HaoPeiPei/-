@@ -79,30 +79,26 @@ Page({
       "action": "orderPage"
     };
     httpRequst.HttpRequst(true, '/weixin/jctnew/ashx/valet.ashx', params, 'POST', function (res) {
-      console.log(res);
       if (res.Data == '0') {
-        wx.showLoading({
-          title: '没有更多数据了...',
-        });
+        setTimeout(function () {
+          wx.showToast({
+            title: '没有订单数据了...',
+            icon: 'none'
+          });
+        }, 500)
         _this.setData({
           pageindex:1
         });
-        setTimeout(function () {
-          wx.hideLoading()
-        }, 2000)
       } else if (res.Data == '-1') {
-        wx.showLoading({
-          title: '没有订单数据了...',
-        });
         setTimeout(function () {
-          wx.hideLoading()
-        }, 2000)
+          wx.showToast({
+            title: '没有订单数据了...',
+            icon: 'none'
+          });
+        }, 500)
       } else {
         var messages = JSON.parse(res.Message);
         var orderList_1 = new Array();
-        wx.showLoading({
-          title: '加载数据中...',
-        });
         for (var i = 0; i < messages.length; i++) {
           orderList_1.push(messages[i]);
         }
@@ -110,9 +106,6 @@ Page({
           orderList_1: _this.data.orderList_1.concat(orderList_1)
         });
       }
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 2000)
     });
   },
   searchScrollLower: function () {  //上拉加载   

@@ -52,27 +52,26 @@ Page({
       "action": "orderPage"
     };
     var url = "/weixin/jctnew/ashx/service.ashx";
+    console.log("加载服务订单列表请求参数"+JSON.stringify(params));
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
+      console.log("加载服务订单列表响应参数"+JSON.stringify(res));
       if (res.Data == '0') {
-        wx.showLoading({
-          title: '没有更多数据了...',
-        });
         setTimeout(function () {
-          wx.hideLoading()
-        }, 2000)
+          wx.showToast({
+            title: '没有订单数据了...',
+            icon: 'none'
+          });
+        }, 500);
       } else if (res.Data == '-1') {
-        wx.showLoading({
-          title: '没有订单数据了...',
-        });
         setTimeout(function () {
-          wx.hideLoading()
-        }, 2000)
+          wx.showToast({
+            title: '没有订单数据了...',
+            icon: 'none'
+          });
+        }, 500);
       } else {
         var messages = JSON.parse(res.Message);
         var orderList_1 = new Array();
-        wx.showLoading({
-          title: '加载数据中...',
-        });
         for (var i = 0; i < messages.length; i++) {
           orderList_1.push(messages[i]);
         }
@@ -80,9 +79,6 @@ Page({
           orderList_1: _this.data.orderList_1.concat(orderList_1)
         });
       }
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 2000)
     });
   },
   bindNavChange: function (e) {
@@ -97,7 +93,6 @@ Page({
   bianGetChange: function (e) {
     var orderId = e.currentTarget.dataset.id;
     var service_type_code = e.currentTarget.dataset.code;
-    console.log(orderId);
     if (service_type_code =="GBT"){
       wx.navigateTo({
         url: 'gbt_orderDetails/gbt_orderDetails?orderId=' + orderId,
