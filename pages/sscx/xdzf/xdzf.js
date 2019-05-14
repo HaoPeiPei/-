@@ -22,7 +22,7 @@ Page({
     carrier: {},
     service: {},
     coupon: null,
-    isShare: 0,
+    isShare: 1,
     couponCount: 0,
     totalPrice: 0,
     rechargeAmount : 0,//充值余额
@@ -181,12 +181,12 @@ Page({
     });
   },
   //切换特惠购
-  salesSelect(e){
+  /* salesSelect(e){
     var salesType = (e.currentTarget.dataset.salestype == 1 ? 0: 1);
     this.setData({
       salesType
     });
-  },
+  }, */
   //输入联系人，手机号
   bindinput(e){
     var id = e.currentTarget.id;
@@ -225,34 +225,18 @@ Page({
             icon: 'none',
           });
           return false;
-        }//this.data.isShare
-    }
-    if (this.data.salesType != 1) {
-      var that = this;
-      wx.showModal({
-        title: '您确定不选择分享优惠吗？',
-        success(res) {
-          if (res.confirm) {
-            that.book();
-          } else if (res.cancel) {
-            return false;
-          }
         }
-      })
-    } else {
-        /* if (this.data.isShare == 0 && this.data.salesType == 1) {
-          wx.showModal({
-            title: '温馨提示',
-            content: '需要分享才享受20元优惠券(点击当前页面右上角按钮分享朋友圈)',
-            icon: 'none',
-            showCancel: false,
-            success(res) {
-            }
-          });
-            return false;
-        } */
-        this.book();
     }
+    this.book();
+    /* if (this.data.salesType == 0) {
+      that.book();
+    } else if (this.data.salesType == 1){
+      this.setData({
+        isShare: 1
+      })
+      this.caculatePrice();
+      this.book();
+    } */
   },
   //支付
   book(){
@@ -467,41 +451,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var that = this;
-    wx.showLoading({
-      title: '数据加载中...',
-    });
-    var url = "http://www.51jct.cn/weixin/jctnew/payOrder/serviceOrder.aspx?bookInfo=%7B%22FlightInfo%22%3A%7B%22DepCity%22%3A%22SZX%22%2C%22DepCityName%22%3A%22%E6%B7%B1%E5%9C%B3%22%2C%22ArrCity%22%3A%22PVG%22%2C%22ArrCityName%22%3A%22%E4%B8%8A%E6%B5%B7%E6%B5%A6%E4%B8%9C%22%2C%22DepTime%22%3A%222019-01-13%2020%3A35%3A00%22%2C%22ArrDate%22%3A%222019-01-13%22%2C%22ArrTime%22%3A%222019-01-13%2023%3A00%3A00%22%7D%2C%22ServiceId%22%3A%2236%22%2C%22ServiceName%22%3A%22%E8%88%92%E9%80%82%E5%87%BA%E8%A1%8C%22%2C%22PassengerInfo%22%3A%5B%7B%22id%22%3A7670%2C%22member_id%22%3A7530%2C%22name%22%3A%22%E6%B5%8B%E8%AF%95%22%2C%22cert_type%22%3A0%2C%22cert_no%22%3A%22%22%2C%22tel%22%3A%22%22%2C%22type%22%3A1%2C%22birthday%22%3A%222016-01-10%22%7D%5D%2C%22FlightNo%22%3A%22HU7207%22%7D&code=071sK6bx1tqs4i0w22ex1aRZax1sK6bo&state=index";
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: "share", url: encodeURIComponent(url) } , "POST",res => {
-      wx.hideLoading();
-      if (res.Success) {
-        return {
-          title: '靠窗座位人人爱，用我就对了！—环球机场通',
-          path: '/pages/sscx/xzhb/xdzf',
-          imageUrl: "http://www.51jct.cn/weixin/jctnew/images/logo.png",
-          success: res => {
-            wx.showToast({
-              title: "分享成功!",
-              icon: "none",
-            });
-            that.setData({
-              isShare : 1
-            });
-            that.caculatePrice();
-          },
-          fail: err => {
-            wx.showToast({
-              title: "已取消!",
-              icon: "none",
-            });
-          }
-        };
-      } else {
-        wx.showToast({
-          title: res.Message,
-          icon: "none",
-        });
-      }
-    });
+    
   }
 })

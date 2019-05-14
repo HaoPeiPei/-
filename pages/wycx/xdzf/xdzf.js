@@ -22,7 +22,7 @@ Page({
     carrier: {},
     service: {},
     coupon: null,
-    isShare: 0,
+    isShare: 1,
     couponCount: 0,
     totalPrice: 0,
     rechargeAmount : 0,//充值余额
@@ -181,12 +181,12 @@ Page({
     });
   },
   //切换特惠购
-  salesSelect(e){
+  /* salesSelect(e){
     var salesType = (e.currentTarget.dataset.salestype == 1 ? 0: 1);
     this.setData({
       salesType
     });
-  },
+  }, */
   //输入联系人，手机号
   bindinput(e){
     var id = e.currentTarget.id;
@@ -225,30 +225,18 @@ Page({
             icon: 'none',
           });
           return false;
-        }//this.data.isShare
-    }
-    if (this.data.salesType == 0) {
-      var that = this;
-      wx.showModal({
-        title: '您确定不选择分享优惠吗？',
-        success(res) {
-          if (res.confirm) {
-            that.book();
-          } else if (res.cancel) {
-            return false;
-          }
         }
-      })
-    } else {
-        if (this.data.isShare == 0 && this.data.salesType == 0) {
-          wx.showToast({
-            title: '需要分享才享受20元优惠券(点击当前页面右上角按钮分享朋友圈)',
-            icon: 'none',
-          });
-            return false;
-        }
-        this.book();
     }
+    this.book();
+    /* if (this.data.salesType == 0) {
+      that.book();
+    } else if (this.data.salesType == 1){
+      this.setData({
+        isShare: 1
+      });
+      this.caculatePrice();
+      this.book();
+    } */
   },
   //支付
   book(){
@@ -455,37 +443,5 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    wx.showLoading({
-      title: '数据加载中...',
-    });
-    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/service.ashx", {action: " ", url: '' } , "POST",res => {
-      if (res.Success) {
-        return {
-          title: '靠窗座位人人爱，用我就对了！—环球机场通',
-          path: '/pages/sscx/xzhb/xdzf',
-          imageUrl: "http://www.51jct.cn/weixin/jctnew/images/logo.png",
-          success: res => {
-            wx.showToast({
-              title: "分享成功!",
-              icon: "none",
-            });
-            this.setData({
-              isShare : 1
-            });
-          },
-          fail: res => {
-            wx.showToast({
-              title: "已取消!",
-              icon: "none",
-            });
-          }
-        };
-      } else {
-        wx.showToast({
-          title: res.Message,
-          icon: "none",
-        });
-      }
-    });
   }
 })

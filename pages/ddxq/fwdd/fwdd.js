@@ -52,9 +52,7 @@ Page({
       "action": "orderPage"
     };
     var url = "/weixin/jctnew/ashx/service.ashx";
-    console.log("加载服务订单列表请求参数"+JSON.stringify(params));
     httpRequst.HttpRequst(true, url, params, 'POST', function (res) {
-      console.log("加载服务订单列表响应参数"+JSON.stringify(res));
       if (res.Data == '0') {
         setTimeout(function () {
           wx.showToast({

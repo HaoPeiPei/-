@@ -114,9 +114,9 @@
       <i class="icon-preferential font-20 c-f4393c"></i>
       <view class='box box-f1 box-ae font-15 margin-l-10 color-3'>
         <view class='' style='width:120rpx;'>特惠购</view>
-        <view class='box box-ae font-12'>每人立减20元</view>
+        <view class='box box-ae font-12'>小程序下单专享优惠20元</view>
       </view>
-      <view class='box box-pe box-ac'>
+      <view class='box box-pe box-ac none' >
         <text class="switch {{salesType==1?'on':''}}" data-salestype="{{salesType}}" catchtap="salesSelect">
             <text class="switch-node"></text>
         </text>
