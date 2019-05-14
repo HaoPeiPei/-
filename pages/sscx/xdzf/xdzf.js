@@ -26,8 +26,8 @@ Page({
     couponCount: 0,
     totalPrice: 0,
     rechargeAmount : 0,//充值余额
-    presentAmonut  : 0,//充值余额
-    payType: 1, //支付方式 1:微信
+    presentAmonut  : 0,//赠送余额
+    payType: 0, //支付方式 1:微信、0:钱包支付
     contactor: '',
     contactTel: '',
     position: "随机",
@@ -70,6 +70,7 @@ Page({
       });
       this.loadService();
       this.loadCouponCount();
+      this.loadBalance();
     }
   },
   //载入服务
@@ -172,6 +173,43 @@ Page({
       couponType
     });
   },
+  //加载用户钱包信息
+  loadBalance() {
+    wx.showLoading({
+      title: '数据加载中...',
+    });
+    var param = {
+      action: "getInfo",
+      memberId: app.globalData.memberId 
+    }
+    httpRequst.HttpRequst(false, "/weixin/jctnew/ashx/wallet.ashx", param, "POST",res => {
+      wx.hideLoading();
+      if (res.Success) {
+        var userInfo = JSON.parse(res.Data);
+        var rechargeAmount = userInfo.rechargeBalance;
+        var presentAmonut = userInfo.presentBalance;
+        this.setData({
+          rechargeAmount,
+          presentAmonut
+        })
+      }else {
+        wx.showToast({
+          title: res.Message,
+          icon: "none",
+        });
+        wx.navigateTo({
+          url: '../../index/index',
+        });
+      }
+    });
+  },
+  //切换钱包支付,微信支付
+  payTypeSelect(e){
+      var payType = e.currentTarget.dataset.paytype == 1 ? 0: 1;
+      this.setData({
+        payType
+      });
+  },
    //区域选择
    areaSelect:function(){
     var position = this.data.position;
@@ -180,13 +218,6 @@ Page({
         url: '../region/region?position='+position+'&area='+area,
     });
   },
-  //切换特惠购
-  /* salesSelect(e){
-    var salesType = (e.currentTarget.dataset.salestype == 1 ? 0: 1);
-    this.setData({
-      salesType
-    });
-  }, */
   //输入联系人，手机号
   bindinput(e){
     var id = e.currentTarget.id;
@@ -228,15 +259,6 @@ Page({
         }
     }
     this.book();
-    /* if (this.data.salesType == 0) {
-      that.book();
-    } else if (this.data.salesType == 1){
-      this.setData({
-        isShare: 1
-      })
-      this.caculatePrice();
-      this.book();
-    } */
   },
   //支付
   book(){

@@ -76,7 +76,7 @@ Page({
         refund_info: "",
         areaList: areaList,
         linkRegionShow: false,
-        payType: 1, //支付方式 1:微信、
+        payType: 0,   //支付方式 1:微信、0:钱包支付
         currentTime: 60,
         orderId: null,
     },
@@ -511,6 +511,13 @@ Page({
         };
        this.caculatePirce(); 
     },
+    //切换钱包支付,微信支付
+    payTypeSelect(e){
+        var payType = e.currentTarget.dataset.paytype == 1 ? 0: 1;
+        this.setData({
+            payType
+        });
+    },
     //验证
     check(){
         var selectPasseners = this.data.selectPasseners;
@@ -654,11 +661,9 @@ Page({
         var that = this;
         if (this.check()) {
             var orderModel = {};
-            orderModel.PayType = 1;
             var selectPasseners = this.data.selectPasseners;
             var flightInfos = this.data.flightInfos;
             orderModel.FlightInfo = flightInfos;
-            orderModel.PayType = 1;
             orderModel.PassengerInfo = selectPasseners;
             //一名成人最多携带两名儿童或者一名婴儿和一名儿童
             var adlut = 0;
