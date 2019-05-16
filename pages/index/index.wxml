@@ -145,7 +145,7 @@
         </view>-->
     </view>
     <view wx:if="{{isSZX}}">
-      <navigator url="../dpc/dpc"  hover-class="none">
+      <navigator target="miniProgram" open-type="navigate" app-id="wx632f42871605116d" path="/pages/page0/page0" extra-data="" version="release" hover-class="none" >
         <li class='{{item.style}}'>
           <view class='box bof-1 box-apc box-ver color-3'>
             <view class='box box-f1 box-apc'>

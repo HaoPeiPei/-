@@ -98,7 +98,8 @@
     }
   },
   "navigateToMiniProgramAppIdList": [
-    "wx336dcaf6a1ecf632"
+    "wx336dcaf6a1ecf632",
+    "wx632f42871605116d"
   ],
   "window": {
     "backgroundTextStyle": "light",
