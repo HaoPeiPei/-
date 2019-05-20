@@ -1,0 +1,6 @@
+<!--wallet.wxml-->
+<!--pages/sscx/xzhb/xzhb.wxml-->
+<import src="../../template/template.wxml" />
+<view class='wrap'>
+    <template is="header_content_noBackod" data="{{...header_text_1}}" />
+</view>

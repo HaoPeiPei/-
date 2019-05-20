@@ -1,8 +1,10 @@
 {
   "pages": [
-
+    
     "pages/login/login",
     
+    "pages/valet/index",
+
     "pages/index/index",
 
     "pages/recruit/index",
@@ -89,6 +91,7 @@
     "pages/ydjp/addPassengers/addPassengers",
     "pages/gbtd/gbtd",
     
+    "pages/wallet/index",
     "pages/logs/logs"
     
   ],
