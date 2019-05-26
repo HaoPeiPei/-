@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 31,
+			"current": 36,
 			"list": [
 				{
 					"id": -1,
@@ -225,6 +225,35 @@
 					"name": "wallet",
 					"pathName": "pages/wallet/index",
 					"query": ""
+				},
+				{
+					"id": 32,
+					"name": "directionForUse",
+					"pathName": "pages/wallet/directionForUse/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "recharge",
+					"pathName": "pages/wallet/recharge/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "potocal",
+					"pathName": "pages/wallet/potocal/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "withdraw",
+					"pathName": "pages/wallet/withdraw/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "billDetail",
+					"pathName": "pages/wallet/billDetail/index"
 				}
 			]
 		}

@@ -1,0 +1,41 @@
+
+
+@import "../../../template/template.wxss"; 
+.m-t-10{
+    margin-top: 20rpx;
+}
+.m-b-20{
+    margin-bottom: 40rpx;
+}
+.p-l-spacing{
+  padding: 0 26rpx;  
+}
+
+.direction-content > view {
+    font-size: 30rpx;
+    color: #666;
+    line-height: 48rpx;
+  }
+  
+  .use-title {
+    font-weight: normal;
+    font-size: 36rppx;
+    color: #333;
+    line-height: 60rpx;
+    display: flex;
+    align-items: center;
+  }
+  
+  .highlight {
+    color: #111;
+    font-weight: 500;
+  }
+  
+  .promptIcon {
+    display: inline-block;
+    width: 60rpx;
+    height: 60rpx;
+    background: url("https://www.51jct.cn/weixin/jctnew/images/walletImgs/wallet/icon@2x.png") no-repeat center center;
+    background-size: cover;
+  }
+  

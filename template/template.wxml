@@ -82,6 +82,25 @@
   </view>
 </template>
 
+<!--不带背景的头部
+  left_icon：url,
+  title_text:string,
+  right_icon:string
+  -->
+  <template name="header_content_rText">
+      <view class='header'>
+        <view class='header_noBackod border-b-1'>
+          <view class='header-con'>
+            <view class='box box-f1 box-hor  margin-lr-1 font-18'>
+              <view class='header-left icon-arror-l' bindtap='catchBackChange'></view>
+              <view class='box box-f1 box-apc font-15'>{{title_center_text}}</view>
+              <view class='header-right box-apc font-15' catchtap="catchRigth">{{title_rigth_text}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </template>
+
 <!--带背景的头部
   left_icon：url,
   title_text:string,

@@ -13,7 +13,7 @@ Page({
     [
       { 'src': imgRoot+'/images/yqm_icon_1.png', 'personalTitle': '邀请码', 'url':'/pages/grzx/yqm_details/yqm_details'},
       { 'src': imgRoot+'/images/yhj_icon_1.png', 'personalTitle': '优惠券', 'url': '/pages/grzx/yhj_details/yhj_details' },
-      { 'src': imgRoot+'/images/zwkf_icon_1.png', 'personalTitle': '暂未开放', 'url': '' }
+      { 'src': wwwRoot+'/weixin/jctnew/images/walletImgs/rechange/con_wallet@3x.png', 'personalTitle': '我的钱包', 'url': '/pages/wallet/index' }
     ],
     imgRoot: imgRoot,
     login_state:'1', //0 未登录 1登录

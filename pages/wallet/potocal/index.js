@@ -1,4 +1,4 @@
-//wallet.js
+//valet.js
 var app = getApp();
 var imgRoot = app.globalData.imgRoot;
 var wwwRoot = app.globalData.wwwRoot;
@@ -6,22 +6,23 @@ Page({
   data:{
     header_text: {
       "left_icon": imgRoot+"/images/back-b.png",
-      "title_center_text": "我的钱包",
-      "title_rigth_text": "明细"
+      "title_text": "用户充值协议",
+      "right_icon": imgRoot+"/images/dh-b.png"
     },
     imgRoot: wwwRoot+"/weixin/jctnew/"
   },
-  //返回
-  catchBackChange: function (e) {
+   //返回
+   catchBackChange: function (e) {
     wx.navigateBack({
       delta: 1
     })
   },
-  //查看我的钱包明细
-  catchRigth(){
-    wx.navigateTo({
-      url: './billDetail/index',
-    })
+  //拨打电话
+  telephone(e){
+    var phoneNumber = e.currentTarget.dataset.phonenumber;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber
+    });
   },
   onLoad:function(options){
     // 生命周期函数--监听页面加载
@@ -50,5 +51,5 @@ Page({
   onReachBottom: function() {
     // 页面上拉触底事件的处理函数
     
-  },
+  }
 })

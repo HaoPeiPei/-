@@ -50,7 +50,6 @@ function withData(param){
     return [year, mont, date, hour, minu, seco];
    }
    function dateTimePicker(startYear,endYear,date) {
-       debugger
     // 返回默认显示的数组和联动数组的声明
     var dateTime = [], dateTimeArray = [[],[],[],[],[],[]];
     var start = startYear || 1978;

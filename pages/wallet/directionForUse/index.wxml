@@ -1,0 +1,42 @@
+<!--directionForUse.wxml-->
+<import src="../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+<!-- 内容开始 -->
+<view class="m-t-10 p-l-spacing ">
+    <view class="direction-content">
+        <view class="use-title">
+            <i class="promptIcon"></i>怎么才能获得赠送金额？
+        </view>
+        <view class="m-b-20">
+            <text class="highlight">充值钱包余额即可赠送，</text>在钱包页面点击充值，选择对应的金额，则能获取对应的赠送金额：充值100元可获得赠送金额10元；充值200元可获得赠送金额40元；充值500元，可获得赠送金额150元；充值1000元，可获得赠送金额400元。
+        </view>
+    </view>
+    <view class="direction-content">
+        <view class="use-title">
+            <i class="promptIcon"></i>钱包余额和赠送金额有什么区别？
+        </view>
+        <view class="m-b-20">
+            环球机场通的余额支付选项里包含了钱包余额和赠送余额两种支付方式。
+            <text class="highlight">赠送金额只可用与舒适出行和无忧出行两种服务,</text>钱包余额可用于支付所有项目。
+        </view>
+    </view>
+
+    <view class="direction-content">
+        <view class="use-title">
+            <i class="promptIcon"></i>钱包余额怎么才能提现？
+        </view>
+        <view class="m-b-20">
+            环球机场通的两种余额中
+            <text class="highlight">只有钱包余额才能提现，赠送余额不可提现。</text>用
+            户如果要提现钱包余额，可以在钱包页面点击提现，输入对应金额，点击立即提现按钮，环球机场通在3日内由专人联系您，并把余额转账至您指定的账号里。
+        </view>
+    </view>
+
+    <view class="direction-content">
+        <view class="use-title">
+            <i class="promptIcon"></i>看完还有疑惑?
+        </view>
+        <view class="m-b-20">可点击右上方的客服按钮，电话咨询。</view>
+    </view>
+</view>
+<!-- 内容开始 -->

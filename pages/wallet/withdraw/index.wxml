@@ -1,0 +1,74 @@
+<!--valet.wxml-->
+<import src="../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+<!-- 提现内容开始 -->
+<form bindsubmit='formSubmit'>
+<view >
+    <!-- 提现金额开始 -->
+    <view class="draw_price ">
+        <view class="f-s-md no-line-h">提现金额</view>
+        <view class="light_black f-s-xxl no-line-h border-b">
+            <view>￥ <input class="price" type="number" value="0" bindinput="calcServerFee" id="withdraw_amount" name="withdraw_amount"/></view>
+            <view data-model="userModel" data-bind="foreach: User">
+                <view class="font-14">可提现金额：<text class="total" data-bind="text: rechargeBalance">{{user.rechargeBalance}}</text>元</view>
+            </view>
+        </view>
+        <view class="extractable">
+            <text class="f-s-sm dark-grey">按微信平台规定扣除手续费（费率0.60%），若为非整数金额则采用四舍五入的方式收取，<text style="color:dodgerblue" id="id_serverFee">当前手续费为{{serverFee}}元</text></text> 
+        </view>
+    </view>
+    <!-- 提现金额结束 -->
+
+    <!-- 提现内容开始 -->
+    <view class="balance-list">
+        <view class="list-item p-l-spacing border-none">
+            <view class="item-wrap">
+                <view class="font-15 light-grey">填写信息</view>
+            </view>
+        </view>
+        <view class="list-item p-l-spacing border-b">
+            <view class="item-wrap"><view class="item-text">收款账号</view></view>
+            <view class="cardInput">
+                <input type="text" id="account" name="account" placeholder="请输入收款账号" />
+            </view>
+        </view>
+        <view class="list-item p-l-spacing border-b">
+            <view class="item-wrap"><view class="item-text">开户行</view></view>
+            <view class="cardInput">
+                <input type="text" id="deposit_bank" name="deposit_bank" placeholder="请输入开户行" />
+            </view>
+        </view>
+        <view class="list-item p-l-spacing ">
+            <view class="item-wrap"><view class="item-text">收款人</view></view>
+            <view class="cardInput">
+                <input type="text" name="account_name" id="account_name" placeholder="请输入收款人" />
+            </view>
+        </view>
+    </view>
+    <!-- 提现内容结束 -->
+</view>
+<!-- 提现内容结束 -->
+<view>
+    <!-- 说明开始 -->
+    <view class="ps-text bg-color">
+        <view>提现说明：</view>
+        <view class="ps_info">
+        <view>1.  </view>
+        <view>每次提现金额上限为10000元，一天内提金额为20000元，赠送金额不予提现；</view>
+        </view>
+        <view class="ps_info">
+        <view>2.  </view>
+        <view>
+            提现申请提交后，我们工作人员会处理您的提现申请，请保持电话畅通。提现金额将在3个工作日内送达您充值钱包的账户，如遇节假日顺延。
+        </view>
+        </view>
+    </view>
+    <!-- 说明结束 -->
+
+    <!-- 按钮开始 -->
+    <view class="p-l-spacing btn-wrap bg-color">
+        <button form-type='submit' class='btn bg-danger'>提交</button>
+    </view>
+    <!-- 按钮结束 -->
+</view>
+</form>

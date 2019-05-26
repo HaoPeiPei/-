@@ -1,6 +1,49 @@
 <!--wallet.wxml-->
 <!--pages/sscx/xzhb/xzhb.wxml-->
 <import src="../../template/template.wxml" />
-<view class='wrap'>
-    <template is="header_content_noBackod" data="{{...header_text_1}}" />
+<template is="header_content_rText" data="{{...header_text}}" />
+<!-- 列表信息开始 -->
+<view class="balance-list">
+    <view class="list-item p-l-spacing border-b" id="toRechange">
+      <view class="item-wrap">
+        <image class="list-icon" src="{{imgRoot}}/images/walletImgs/wallet/list_icon_recha@3x.png"></image> 
+        <view class="item-text">充值</view>
+      </view>
+      <view class="item-more-text">充值送金额，火热进行中</view>
+      <view class="detail-push">
+        <navigator url='./recharge/index' hover-class="none">
+          <image class="list-icon" src="{{imgRoot}}/images/walletImgs/wallet/list_icon_more@3x.png"></image> 
+        </navigator>
+      </view>
+    </view>
+    <view class="list-item p-l-spacing m-b-10" id="cashWithdrawal">
+      <view class="item-wrap">
+        <image class="list-icon" src="{{imgRoot}}/images/walletImgs/wallet/list_icon_wit@3x.png"></image> 
+        <view class="item-text">提现</view>
+      </view>
+      <view class="detail-push">
+        <navigator url='./withdraw/index' hover-class="none">
+          <image class="list-icon" src="{{imgRoot}}/images/walletImgs/wallet/list_icon_more@3x.png"></image> 
+        </navigator>
+      </view>
+    </view>
+    <view class="list-item p-l-spacing" id="directionForUse">
+      <view class="item-wrap">
+        <image class="list-icon" src="{{imgRoot}}/images/walletImgs/wallet/list_icon_state@3x.png"></image> 
+        <view class="item-text">使用须知</view>
+      </view>
+      <view class="detail-push">
+        <navigator url='./directionForUse/index' hover-class="none">
+            <image class="list-icon" src="{{imgRoot}}/images/walletImgs/wallet/list_icon_more@3x.png" ></image> 
+        </navigator>
+      </view>
+    </view>
 </view>
+<!-- 列表信息结束 -->
+<!-- 文字信息开始 -->
+<view class="ps-text">
+    <view>温馨提示：</view>
+    <view>[赠送金额]仅能支付出行服务 (无忧出行，舒适出行)</view>
+    <view>[钱包余额]可以支付环球机场通所有付费项目</view>
+</view>
+<!-- 文字信息结束 -->

@@ -1,0 +1,21 @@
+<!--valet.wxml-->
+<import src="../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+<view class="m-t-10"  >
+    <view  wx:if="{{bills.length>0}}" class="detail_warp">
+      <view wx:for="{{bills}}" wx:for-index="idx" wx:for-item="bill"  class="item" >
+        <view class="title">
+          <view class="font-16 light_black f-w-n" >{{bill.actionType}}</view>
+          <view class="font-12 dark-grey " >{{bill.createtime}}</view>
+        </view>
+        <view>
+          <view class="font-12 dark-grey ">
+            <text >{{bill.actionType}}</text>金额
+            <text class="c_price"> <text >{{bill.amount}}</text>元</text>
+            <text class="{{bill.actionType=='充值'&&bill.present>0?'':'none'}}" >赠送金额<text >{{bill.present}}</text>元</text>
+          </view>
+          <view class="font-16 light_black" data-bind="text: result">{{bill.result}}</view>
+        </view>
+      </view>
+    </view>
+  </view>

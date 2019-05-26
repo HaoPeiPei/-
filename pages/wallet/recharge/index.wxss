@@ -1,0 +1,149 @@
+@import "../../../template/template.wxss"; 
+.border-b {
+  border-bottom: 1px solid #d7d7d7;
+}
+.bg-fff{
+  background: #fff;
+}
+.p-l-spacing{
+  padding: 0 26rpx;
+}
+.rechang-price {
+  padding: 0 30rpx;
+}
+.rechange-ul-title {
+  margin: 50rpx 0 30rpx 0;
+  font-size: 30rpx;
+  color: #333;
+  line-height: 30rpx;
+}
+.rechange-p-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.rechange-p-content:last-of-type {
+  margin-bottom: 50rpx;
+}
+.rechange-p-content > view {
+  margin-right: 20rpx;
+  height: 140rpx;
+  background-color: #fff;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-flow: wrap column;
+  justify-content: center;
+}
+.rechange-p-content > view.backgd-3b3636{
+  background-color: #3b3636;
+}
+.rechang-price .rechange-btn-click {
+  background-color: #3b3636;
+}
+.rechang-price .rechange-btn-click .rechange-text {
+  color: #fff;
+  font-size: 36rpx;
+}
+.rechange-p-content > view:last-child {
+  margin-right: 0;
+}
+
+.balance-list {
+  padding-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+.list-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 46rpx 26rpx;
+  background-color: #fff;
+}
+.list-item .item-wrap {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.item-wrap .item-text {
+  font-size: 34rpx;
+  color: #333;
+}
+.detail-push {
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
+}
+.list-item .list-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 10rpx;
+}
+.item-more-text {
+  color: #fff;
+  width: 10.625rem;
+  height: 1.25rem;
+  display: block;
+  background-color: #dcae82;
+  font-size: 0.875rem;
+  text-align: center;
+  line-height: 1.25rem;
+}
+.rechange-text {
+  color: #666;
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+  line-height: 36rpx;
+}
+.rechange-item {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.rechange-item .item-wrap {
+  padding-top: 1.4375rem;
+  padding-bottom: 1.4375rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  font-size: 36rpx;
+  width: 100%;
+}
+.bg-danger {
+  background-color: #f4494c;
+  color: #fff;
+}
+.presenter {
+  color: #dcae82;
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+.protocol {
+  text-align: center;
+  padding-top: 30rpx;
+  padding-bottom: 140rpx;
+  background-color: #fff;
+}
+.protocol > view {
+  font-size: 28rpx;
+}
+.dark-grey {
+  color: #999;
+}
+.primary {
+  color: #3eabff;
+}
+.f-w-b {
+  font-weight: 500;
+}
+  

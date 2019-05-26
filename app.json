@@ -92,6 +92,12 @@
     "pages/gbtd/gbtd",
     
     "pages/wallet/index",
+    "pages/wallet/directionForUse/index",
+    "pages/wallet/recharge/index",
+    "pages/wallet/potocal/index",
+    "pages/wallet/withdraw/index",
+    "pages/wallet/billDetail/index",
+
     "pages/logs/logs"
     
   ],

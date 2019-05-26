@@ -613,10 +613,14 @@ pre {
 .color-9 {
   color: #999;
 }
+.light-grey {
+  color: #666;
+}
 
 .backgd-f{
   background: #ffffff;
 }
+
 .inline {
   display: inline-block;
 }

@@ -1,1 +1,56 @@
 
+@import "../../template/template.wxss"; 
+
+/* 列表信息开始 */
+.balance-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .list-item {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 46rpx 26rpx;
+    background-color: #fff;
+  }
+  .list-item .item-wrap {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .item-wrap .item-text {
+    font-size: 34rpx;
+    color: #333;
+  }
+  .detail-push {
+    flex: 3;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .list-item .list-icon {
+    width: 48rpx;
+    height: 48rpx;
+    margin-right: 10rpx;
+  }
+  .item-more-text {
+    color: #fff;
+    height: 40rpx;
+    display: block;
+    background-color: #dcae82;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 40rpx;
+  }
+  /* 列表信息结束 */
+  /* 按钮公共样式 */
+
+  .ps-text {
+    color: #999;
+    margin: 50rpx 46rpx;
+    font-size: 28rpx;
+  }
+  .ps-text view {
+    line-height: 56rpx;
+  }

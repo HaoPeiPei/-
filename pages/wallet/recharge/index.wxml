@@ -1,0 +1,54 @@
+<!--valet.wxml-->
+<import src="../../../template/template.wxml" />
+<template is="header_content_noBackod" data="{{...header_text}}" />
+<!-- 充值金额开始 -->
+<view class="rechang-price">
+    <view class="rechange-ul-title">充值金额</view>
+    <view class="rechange-p-content" b="">
+        <view catchtap="selectRechargeAmount" data-rechargeamount="100"  class="{{rechargeAmount==100?'backgd-3b3636':''}}">
+            <text class="rechange-text" >充值100元</text>
+            <text class="presenter">送10元</text>
+        </view>
+        <view catchtap="selectRechargeAmount" data-rechargeamount="200" class="{{rechargeAmount==200?'backgd-3b3636':''}}"> 
+            <text class="rechange-text" >充值200元</text>
+            <text class="presenter">送40元</text>
+        </view>
+    </view>
+    <view class="rechange-p-content">
+        <view catchtap="selectRechargeAmount" data-rechargeamount="500" class="{{rechargeAmount==500?'backgd-3b3636':''}}">
+            <text class="rechange-text" >充值500元</text>
+            <text class="presenter">送150元</text>
+        </view>
+        <view catchtap="selectRechargeAmount" data-rechargeamount="1000" class="{{rechargeAmount==1000?'backgd-3b3636':''}}">
+            <text class="rechange-text" >充值1000元</text>
+            <text class="presenter">送400元</text>
+        </view>
+    </view>
+</view>
+<!-- 充值金额结束 -->
+<!-- 支付方式开始 -->
+<view class="balance-list">
+    <view class="list-item p-l-spacing rechange-item">
+        <view class="item-wrap border-b">
+            <view class="item-text">支付方式</view>
+        </view>
+    </view>
+    <view class="list-item p-l-spacing m-b-10">
+        <view class="item-wrap"><view class="item-text">微信支付</view></view>
+        <view class="detail-push">
+        <image class="list-icon" src="{{imgRoot}}/images/walletImgs/rechange/icon_weix@@3x.png"></image>
+        </view>
+    </view>
+</view>
+<!-- 支付方式结束 -->
+<!-- 按钮开始 -->
+<view class="p-l-spacing bg-fff">
+    <view class="btn bg-danger" id="confirmed_rechange" catchtap="promptlyRecharge">立即充值</view>
+</view>
+<view class="protocol bg-fff">
+    <view class="dark-grey">点击立即充值，即表示你已经同意</view>
+    <navigator url='../potocal/index' hover-class="none">
+        <view class="primary f-w-b font-14" >《环球机场通协议》</view>
+    </navigator>
+</view>
+<!-- 按钮结束 -->

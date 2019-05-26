@@ -1,0 +1,32 @@
+
+@import "../../../template/template.wxss"; 
+.potocal-content {
+    font-size: 30rpx;
+    line-height: 50rpx;
+    padding-bottom: 30rpx;
+}
+.text-indent{
+    text-indent: 2em;
+}
+.p-l-spacing {
+    padding-left: 26rpx;
+    padding-right: 26rpx;
+}
+  .potocal-content > view {
+    color: #666;
+  }
+  
+  .potocal-title {
+    margin-top: 40rpx;
+    font-weight: bold;
+    color: #000 !important;
+  }
+  
+  .potocal-item {
+    margin-left: 60rpx;
+  }
+  
+  .c_dark{
+      color:#111;
+  }
+  
