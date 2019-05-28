@@ -62,7 +62,7 @@ Page({
   //计算手续费
   calcServerFee(e){
     this.setData({
-      serverFee: Number(e.detail.value) * 0.006.toFixed(0)+".00"
+      serverFee: (e.detail.value * 0.006).toFixed(0)+".00"
     })
   },
   //提交
@@ -107,7 +107,7 @@ Page({
       })
       return false;
     }
-    var serviceFee = (withdraw_count * 0.006).toFixed(0);
+    var serviceFee = (withdrawAmount * 0.006).toFixed(0);
     var params = { 
       action: "withdraw",
       accountName: accountName,

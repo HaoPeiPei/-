@@ -104,9 +104,15 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    border:0;
     height: 100rpx;
     font-size: 36rpx;
     width: 100%;
-    background-color: #f4494c;
+    background-color: #f43931;
     color: #fff;
+    -webkit-appearance:none;
+    border-radius: 0;
+}
+.btn::after {
+    border-radius: 0;
 }

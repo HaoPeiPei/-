@@ -9,7 +9,7 @@
         <view class="f-s-md no-line-h">提现金额</view>
         <view class="light_black f-s-xxl no-line-h border-b">
             <view>￥ <input class="price" type="number" value="0" bindinput="calcServerFee" id="withdraw_amount" name="withdraw_amount"/></view>
-            <view data-model="userModel" data-bind="foreach: User">
+            <view data-model="userModel" class="{{user.rechargeBalance>0?'':'none'}}">
                 <view class="font-14">可提现金额：<text class="total" data-bind="text: rechargeBalance">{{user.rechargeBalance}}</text>元</view>
             </view>
         </view>

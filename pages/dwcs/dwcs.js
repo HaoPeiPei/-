@@ -93,6 +93,7 @@ Page({
         city_information:
         [
           { data_id: "KHN", data_type: "nc", data_value: "南昌昌北国际机场", city: "南昌" },
+          { data_id: "NKG", data_type: "nj", data_value: "南京禄口国际机场", city: "南京" },
           { data_id: "NNG", data_type: "nn", data_value: "南宁吴圩国际机场", city: "南宁" },
           { data_id: "NGB", data_type: "nb", data_value: "宁波栎社国际机场", city: "宁波" },
         ]
@@ -153,6 +154,8 @@ Page({
         city_information:
         [
           { data_id: "INC", data_type: "yc", data_value: "银川河东国际机场  ", city: "银川" },
+          { data_id: "ENY", data_type: "ya", data_value: "延安南泥湾机场  ", city: "延安" },
+          { data_id: "UYN", data_type: "yl", data_value: "榆林榆阳机场", city: "榆林" },
         ]
       },
       {

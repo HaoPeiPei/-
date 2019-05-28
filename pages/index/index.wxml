@@ -279,7 +279,7 @@
   <navigator wx:if="{{sscx.isNone}}" url='{{sscx.href}}' hover-class="none">
     <view class='box box-f1 box-ver'>
       <view class='image-2'>
-        <image src='http://www.51jct.cn/weixin/jctnew/images/7_48.png' class='widthHeight-100'></image>
+        <image src='http://www.51jct.cn/weixin/jctnew/images/7_49.png' class='widthHeight-100'></image>
       </view>
       <view class='box box-f1 margin-b-1 view-2'>
         <view class=' margin-l-1 box box-apc' style='height:100%;'>

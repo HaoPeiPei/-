@@ -84,7 +84,7 @@ Page({
                   if (res.confirm) {
                       wx.showToast({
                         title: "支付已取消",
-                        icon: none
+                        icon: "none"
                       })
                   } else if (res.cancel) {
                       that.jsApiCall(params, orderId);
@@ -99,7 +99,7 @@ Page({
                   if (res.confirm) {
                     wx.showToast({
                       title: "支付已取消",
-                      icon: none
+                      icon: "none"
                     })
                   } else if (res.cancel) {
                     that.jsApiCall(params, orderId);
@@ -116,7 +116,7 @@ Page({
               if (res.confirm) {
                 wx.showToast({
                   title: "支付已取消",
-                  icon: none
+                  icon: "none"
                 })
               } else if (res.cancel) {
                 that.jsApiCall(params, orderId);
