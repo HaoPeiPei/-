@@ -99,9 +99,9 @@ Page({
         'signType': params.signType,
         'paySign': params.paySign ,
         'success':function(res){
-            if (res.err_msg == "get_brand_wcpay_request:ok") {
+            if (res.errMsg == "requestPayment:ok") {
                 that.payOrder(orderId);
-            }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+            }else if (res.errMsg == "requestPayment:fail cancel") {
                 wx.showModal({
                     title: "温馨提示", 
                     content: "您的订单还未完成支付，如现在退出支付，可稍后进入“订单管理”继续完成支付，请确认是否返回?",

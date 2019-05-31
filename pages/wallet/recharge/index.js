@@ -29,7 +29,6 @@ Page({
   //选择充值金额
   selectRechargeAmount(e){
     var rechargeAmount = e.currentTarget.dataset.rechargeamount;
-    console.log(rechargeAmount);
     this.setData({
       rechargeAmount
     });
@@ -74,9 +73,9 @@ Page({
       'signType': params.signType,
       'paySign': params.paySign ,
       'success':function(res){
-          if (res.err_msg == "get_brand_wcpay_request:ok") {
+          if (res.errMsg == "requestPayment:ok") {
             that.payOrder(orderId);
-          }else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+          }else if (res.errMsg == "requestPayment:fail cancel") {
             wx.showModal({
               title: "温馨提示", 
               content: "您的充值还未完成支付，请确认是否取消支付?",
@@ -130,7 +129,7 @@ Page({
   payOrder(orderId){
     var param = { 
       action: "recharge", 
-      orderId: orderId, 
+      prepayId: orderId, 
       memberId: app.globalData.memberId,
     }
     httpRequst.HttpRequst(true, 'weixin/jctnew/ashx/wallet.ashx', param, "POST", res => {
