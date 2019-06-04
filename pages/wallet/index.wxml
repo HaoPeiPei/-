@@ -2,6 +2,14 @@
 <!--pages/sscx/xzhb/xzhb.wxml-->
 <import src="../../template/template.wxml" />
 <template is="header_content_rText" data="{{...header_text}}" />
+<!-- 我的钱包金额明细开始 -->
+<view class="my-balance" >
+  <view class="balance-text-info balance-text">钱包余额(元)</view>
+  <view class="balance-price" data-bind="text: rechargeBalance">{{user.rechargeBalance}}</view>
+  <view class="balance-text-info donation-text">赠送金额</view>
+  <view class="donation-price" data-bind="text: presentBalance">{{user.presentBalance}}</view>
+</view>
+<!-- 我的钱包金额明细结束 -->
 <!-- 列表信息开始 -->
 <view class="balance-list">
     <view class="list-item p-l-spacing border-b" id="toRechange">

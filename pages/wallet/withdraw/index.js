@@ -37,6 +37,7 @@ Page({
   loadUser(){
     var params = { action: "get", openId: app.globalData.openId, }; 
     httpRequst.HttpRequst(true, 'weixin/jctnew/ashx/wallet.ashx', params, 'POST', res => {
+      console.log(res)
       if (res.Success) {
           var user = JSON.parse(res.Data);
           this.setData({

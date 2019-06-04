@@ -954,6 +954,30 @@ Page({
             }
         });
     },
+    //验证是否能使用钱包支付
+    pay(){
+        debugger
+        var that = this;
+        var orderId = this.data.orderId;
+        httpRequst.HttpRequst(false, '/weixin/jctnew/ashx/airTicket.ashx', { action: "payNew", orderId: orderId }, "POST",function(res){
+            if (res.Success) {
+                if (obj.Data == 0) {
+                    //已用钱包支付支付所有费用
+                    that.payOrder(orderId);
+                }
+                else
+                {
+                    //需调用微信支付支付剩余费用
+                    that.createPayPara(orderId);
+                }
+            }else{
+                wx.showToast({
+                    title: res.Msg,
+                    icon: "none"
+                })
+            }
+        });
+    },
     onLoad:function(options){
         // 生命周期函数--监听页面加载
         this.initDate(options);
